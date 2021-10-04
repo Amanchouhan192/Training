@@ -1,0 +1,252 @@
+==========================================LINUX COMMANDS=================================================
+1.pwd ( present work directory): The pwd command is used to display the location of the current working directory.
+	syntax :
+		pwd 
+	output:
+		/home/berylsystems/Desktop
+2.mkdir (make directory ): The mkdir command is used to create a new directory under any directory.
+
+	syntax:
+		mkdir
+	output: 
+		mkdir new_folder
+		
+		new_folder  
+
+3.rmdir (remove directory): delete a directory
+	syntax :
+		rmdir file_name
+	
+4.ls (list) : list all the directory or files present in the working directory.
+	       there are  verity of commands like:
+		1) ls -l - a /var/log
+			command print the all the long information of a files and directories		
+
+		2) ls -l -a -h /var/log	
+			command print all the log information of files including hidden files.
+		3) ls -R <folder>
+			it will show all the files and folder inside the particular folder.
+			
+			syntax : ls -R Downloads // show all the files.
+	syntax : 
+		ls cd new_folder
+berylsystems@berylsystems-Latitude-E6520:~/Desktop/new_folder$  cd new_folder
+berylsystems@berylsystems-Latitude-E6520:~/Desktop/new_folder$ 
+
+
+	output : list of all the files and directory 
+		example : demo.txt  linux.txt  new_folder  readme.txt
+		
+5.cd (change directory ) : It changes the directory to the current to the desire directory.
+	syntax : 
+		cd directory_name
+	output :
+		 cd new_folder
+		berylsystems@berylsystems-Latitude-E6520:~/Desktop/new_folder$ 
+		
+6.touch  (make a multiple text files or document) : It helps t cd new_folder
+berylsystems@berylsystems-Latitude-E6520:~/Desktop/new_folder$ 
+o make multiple text empty files and document.
+	syntax : 
+		touch demo.txt
+	output 
+		demo.txt
+7.Cat (used as a multi purpose utility in linux ): 1.create a file
+						2.display content of a file
+						3.copy the content of  one file to another file.
+						
+	syntax : 
+		1. for creation of file 
+			cat > file.txt
+			// enter content of the file
+		2. for display what is written in the file.
+			cat file.txt
+		3. for copy the content of the files to the other file.
+			cat file.txt > file_new.txt
+8.rm (remove multiple files) : remove command is used to remove the multiple files.\
+	syntax : 
+		rm file_name
+	
+9.cp (copy the file): copy the file and directory
+	syntax : 
+		cp <existing file name><new file name>
+	output : cp old.txt new.txt
+	
+10.mv (move): it move file or directory to one location to another.
+	syntax : mv <file_name> <directory_path>
+
+11.rename( rename the files) : rename command is used to rename large number of files or directory.
+	syntax : rename 's/oldname/new_name/' files
+	output : rename 's/\.txt/\.pdf/'*txt
+		demo.pdf filenew.pdf file.pdf
+12.head  : display a content of a file and display the first 10 lines of a files.
+	syntax : head readme.txt
+	output: 
+		Ruby on Rails is a framework for building web applications. It provides you with tools to speed up your development process (such as generating files and folders for you), facilitate common tasks (such as setting up and communicating with a database), installing gems (self-contained solutions to specific problems, written in ruby) and much more.
+David Heinemeier Hansson extracted Ruby on Rails from his work on the project management tool Basecamp at the web application company also called Basecamp (37Signals at the time).[6] Hansson first released Rails as open source in July 2004, but did not share commit rights to the project until February 2005.[citation needed] In August 2006, the framework reached a milestone when Apple announced that it would ship Ruby on Rails with Mac OS X v10.5 "Leopard",[7] which was released in October 2007.
+
+Rails version 2.3 was released on March 15, 2009, with major new developments in templates, engines, Rack and nested model forms. Templates enable the developer to generate a skeleton application with custom gems and configurations. Engines give developers the ability to reuse application pieces complete with routes, view paths and models. The Rack web server interface and Metal allow one to write optimized pieces of code that route around Action Controller.[8]
+
+On December 23, 2008, Merb, another web application framework, was launched, and Ruby on Rails announced it would work with the Merb project to bring "the best ideas of Merb" into Rails 3, ending the "unnecessary duplication" across both communities.[9] Merb was merged with Rails as part of the Rails 3.0 release.[10][11]
+
+Rails 3.1 was released on August 31, 2011, featuring Reversible Database Migrations, Asset Pipeline, Streaming, jQuery as default JavaScript library and newly introduced CoffeeScript and Sass into the stack.[12]
+
+Rails 3.2 was released on January 20, 2012 with a faster development mode and routing engine (also known as Journey engine), Automatic Query Explain and Tagged Logging.[13] Rails 3.2.x is the last version that supports Ruby 1.8.7.[14] Rails 3.2.12 supports Ruby 2.0.[15]
+
+
+13. tail :display the last 10 lines of a files basicaly it is used for see the error message .
+	syntax : tail filename
+	output : tail readme.txt
+	
+	
+		Rails 4.2 was released on December 19, 2014, introducing Active Job, asynchronous emails, Adequate Record, Web Console, and foreign keys.[18]
+
+Rails 5.0 was released on June 30, 2016, introducing Action Cable, API mode, and Turbolinks 5.[19]
+
+Rails 5.0.0.1 was released on August 10, 2016, with Exclusive use of rails CLI over Rake and support for Ruby version 2.2.2 and above.
+
+Rails 5.1 was released on April 27, 2017, introducing JavaScript integration changes (management of JavaScript dependencies from NPM via Yarn, optional compilation of JavaScript using Webpack, and a rewrite of Rails UJS to use vanilla JavaScript instead of depending on jQuery), system tests using Capybara, encrypted secrets, parameterized mailers, direct & resolved routes, and a unified form_with helper replacing the form_tag/form_for helpers.[20]
+
+Rails 5.2 was released on April 9, 2018, introducing new features that include ActiveStorage, built-in Redis Cache Store, updated Rails Credentials and a new DSL that allows for configuring a Content Security Policy for an application.[21] 
+
+
+14.tac : It display the file content of a file in reverse order.
+	syntax : tac filename 
+	output : tac readme.txt
+	// displayed content in reverse order
+	
+15.more : same as cat but display the screenfull output of a file.
+	syntax : more filename
+	output : more readme.txt
+	example : --MORE--(90%)
+	
+16.less : same as more command but has an additional functionalities to increase and reduce the size of the terminal size.
+	syntax : less file  name 
+	
+17.su(super User) : su command used to give administrative access to another user.
+	syntax :su -s // asking for root permdifference between the commands  cp and cat linuxission
+18.id : display the UId and Group Id.
+	syntax : id 
+	output : uid=1000(berylsystems) gid=1000(berylsystems) groups=1000(berylsyuid=1000(berylsystems) gid=1000(berylsystems) groups=1000(berylsystems),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),120(lpadmin),131(lxd),132(sambashare)stems),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),120(lpadmin),131(lxd),132(sambashare)
+	
+19.passwd : create and change the password for the user.
+	syntax: passwd <user_name>
+	output: asking for user name and password 
+
+20.useradd:  add and remove the user from the linux server.
+	syntax :sudo useradd username
+21:groupadd : group add command is used to create a usergroup.
+	syntax : sudo groupadd Developper
+22.cat (for filter) : cat command is also used as a filter .to filter a file it is used inside pipe.
+	pipe :pipes is used to combine to or more command.
+	
+	syntax : cat <filename> |cat or tac|cat or tac.....
+	
+23.cut :use to select the particular and specific column of a file  '-d' user as a delimeter.
+	syntax : cut -d-(delimeter)  -f(coulumn_number)
+	
+24.grep(global regular expression print) : grep is most powerful and used in linux system.
+
+	syntax : cat filename | grep keyword
+	output : cat readme.txt | grep framework
+25.comm : compare two file streams it displays three columns first column is non-matching item of the first column and second column is non matching item of second and third is matching item.
+
+	syntax : comm <filename1><filename2>
+	compare: comm file1.txt file2.txt
+		1
+			3		
+		2
+				4
+				
+26.sed : stream editor is used  to edit the file not permamnently bot on editor.
+	syntax :echo class10 | sed 's/10/15'
+	output :class15
+27.tee:similar to the cat command but it has some difference is that it puts standard input on standard ouput.
+	syntax : echo class7 | 's/class/aman/'
+	output :aman7
+28.tr : translate the file content lower case to upper case.
+	syntax : command |tr<new><old>
+
+29.Uniq : the uniq command is used to form a sorted list in which every word will occure only one :
+	syntax : uniq textfile|uniq
+	output: get uniq list
+30.wc : word count command count the lines words character in a file.
+	syntax : wc readme.txt
+	output n:  24  536 3537 readme.txt
+31.od :display the content of a file in different order such as hexadecimal,octal and ASCII.
+	syntax :     od -b file1.txt     // Octal format 
+	output :     0000000 061 012 062 012 064 012
+		     0000006
+ 
+    		     od -t x1 file1.txt   // Hexa decimal format  
+    		     0000000 31 0a 32 0a 34 0a
+		     0000006
+		     
+                     od -c file1.txt    // ASCII character format  
+                     0000000   1  \n   2  \n   4  \n
+		      0000006
+32. sort : sort the file in alphabetical order.
+	syntax : sort filename
+		 sort file1
+33. gzip : it truncate the file size it is compressing tool,it replace the original size to the compressed files .gz
+	syntax : gzip filename
+	output : .gz file will get after that
+34.gunzip: it is used in decompressed the file it is reverse of gzip.
+	syntax : gunzip filemname
+	
+34.find : it is used to find the particular file within a directory.
+	syntax : (.) for current directory name
+		 (/) for root
+		 find . -name "*.txt"
+35.locate : it is used to search a file by filename.
+	syntax : locate filename 
+	output : locate first.txt //  it show all the .txt files
+36.date : it show the current date
+	syntax : date 
+	output :  Wednesday 29 September 2021 04:41:15 PM IST
+37.cal : show the calender on terminal
+	syntax : cal
+	output : show cal on terminal
+38.sleep : it hold the terminal for some seconds 
+	syntax : sleep 5 
+	output : it will hold the terminal for 5 seconds .
+39.time : it will show time 
+	syntax : time 
+	output : real	0m0.000s
+	         user	0m0.000s
+		 sys	0m0.000s
+40. df : used to display the disk space of pc.
+	syntax : df 
+	output : show disk space used.
+
+41.man : man is stands for manual command which display the mannual of a particular cammond.
+	  syntax : man <command>
+	  output: man ls
+		  // it will display mannual of the ls command.
+
+42. help : help command is to see the documentation of the command.
+	syntax : <command> --help
+	output : ls --help
+43. aprops: it is same as help but it will show the  related commands which same spelling as your desired command.
+	syntax : apropos "command" 
+	output: apropos "list"
+44.file : determine the file type .
+	syntax : file <filename with extension>
+	output :file myfile.txt	
+	
+	myfile.txt: ASCII text
+45.stat : tell the stats of the file like display,ownership,modification,information etc.
+	syntax : stat <filename with extension>
+	output : stat myfile.txt
+	
+ File: myfile.txt
+  Size: 16        	Blocks: 8          IO Block: 4096   regular file
+Device: 805h/2053d	Inode: 666235      Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/   tarun)   Gid: ( 1000/   tarun)
+Access: 2021-09-30 17:33:10.701489868 +0530
+Modify: 2021-09-30 17:34:40.492344408 +0530
+Change: 2021-09-30 17:34:40.576347088 +0530
+
+==============================================================================================
+
+`
