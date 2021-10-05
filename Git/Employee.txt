@@ -1,3 +1,4 @@
-Hi I am Emplyee:
-1.Technical 
-2.Non-Technical
+Hi I am Employee:
+1.Technical :Engineer
+2.Non-technical : Clerk
+
