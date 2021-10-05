@@ -8,9 +8,17 @@ Ahana also wants to eat orange  and crying for  Iphone by see her brother.
 
 
 
-// Ahana wants new phone at this moment she is not wants iphone now. 
-<<<<<<< HEAD
 
-**Feature1 : she must buy from flipkart....
-=======
->>>>>>> 6295d7adb66fa73ecc73120c0229d3e8c3ab4a43
+
+
+
+
+
+
+
+
+
+
+
+
+**feature2 : she must buy from amazon..Great indian festival.sale.. 
