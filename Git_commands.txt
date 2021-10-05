@@ -1,0 +1,146 @@
+==========================================GIT COMMANDS======================================
+1.git config --global user.name “firstname lastname”
+	this is the command which help to configuration global user name which help to identify the user who commi the changes.
+
+2.git config --global user.email “Email”
+	this is the command which help to configuration global user name which help to identify the user who commi the changes.
+
+3.git config --global color.ui auto
+	set automatic command line coloring for git for easy reviewing.
+
+4.git init 
+	initialize a existing repository as a git repository.
+
+5.git clone [url]
+	clone the entire repository from hosted location via url.
+
+6.git status 
+	show modified files in working directories.
+
+7.git add [file name] 
+	add the file for the next commit.
+	we can add the whole files in one go with the help of one (.) operator.
+	
+	example : 
+		git add .  // it will add all the files.
+8.git commit -m "message" 
+	commit your stage content as a new  commit snapshot.
+
+	git commit can be two ways:
+		1. single file commit as above.
+		2. multiple or all file commit.
+
+			syntax : git commit -a 
+				 git commit -all 
+			above both are same.
+
+9.git branch 
+	list your all branches and "*" represents current active branch.
+
+10.git log 
+	show all the commits in the current branch history.
+
+11. git show 
+	it show all the log in the form of human readable formate
+
+12. git diff 
+	to see the changes in the current file and it should be use before staging.
+
+13.git diff --stage 
+	it will show the all the changes in stage.
+
+14.git mv 
+	for move the file in git from one location to another.
+	syntax : 
+		git file1 "path"
+
+15.git mv
+	for rename the file.
+	syntax : 
+		git file1 file2
+		
+		-rename file2 as file1
+
+16.Compare two commits.
+	git diff "commit id of new commit" "commit id of old commit"
+
+17.git log in one line 
+	it show the all the git commit in one line one after the other.
+	
+	syntax : log --oneline  // all commit logs are seen in one line one after the other.
+	
+output: 280d77b (HEAD -> feature1, origin/main, origin/HEAD, main, feature2) files updated
+348dff6 file added
+f21ecc5 new commit
+3d3022e renamed
+c426303 file 2 deleted
+a0880a4 file 1 is deleted
+d2bb561 Edit in text
+58e6ad9 Add some files
+204fd97 sub folder create
+e102a66 Added commands resources
+85fa733 Initial commit
+
+
+18.undo working directory
+	: it undo the stage file of current working directory.
+	syntax :  git checkout -- <file>
+
+19.Unstage the file.
+	syntax : git reset HEAD <file>
+
+	ex :     git reset HEAD test.txt
+
+20.Amend :
+	Help to change or update the most recent commit message to the new one.
+	
+	syntax : 
+		git commit --amend -m "Descriptive Message" 
+
+21. Remove untracked files.
+	to remove the untracked files which are not in use.
+	syntax : 
+
+		git clean 
+		git clean -n // would remove
+		git clean -f // removing the files.
+
+22. Branch creation : for creattion of the branch.
+	
+	syntax : git branch <branch name>
+
+	example : git branch feature1
+
+23.To view Branch : it show all the branches created till date.
+	
+	syntax :  git branch 
+	output :
+ 		// * denotes the main or master branch 
+  feature-a
+  feature-b
+  feature1
+  feature2
+* main
+  student-a
+  student-b
+	
+ 24.switch to another branch: It helps to switch between the branches.
+	
+	syntax : git checkout <branch name>
+	
+25.git pull : to pull the edits to the master branch from the subranches.
+	
+	syntax : git pull 
+	
+26.ssh : ssh key is an altrnate way to identify yourself that doesnt require you to enter your username and password everytime.
+
+27.Delete a branch : it delete the branch from the working tree.
+	
+	syntax : git branch -D <branch Name> 
+	
+	output: git branch -D feature1 
+	
+
+
+
+	
