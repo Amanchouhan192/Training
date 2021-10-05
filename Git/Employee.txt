@@ -1,4 +1,10 @@
 Hi I am Employee:
 1.Technical :Engineer
 2.Non-technical : Clerk
+#######################
+a.Technical-Job:
 
+
+
+
+b.Non-Technical Job:
