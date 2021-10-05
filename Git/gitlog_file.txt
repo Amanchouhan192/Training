@@ -1,0 +1,73 @@
+tarun@Tarun-hp-probook:~/Desktop/Training$ git log
+commit e7c88f0aeeeddb1fe747744fa583fe2f67db582a (HEAD -> main, origin/main, origin/HEAD)
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 18:50:27 2021 +0530
+
+    Git commands updated
+
+commit 280d77baf9b9e3e290ed0e005575a1d7a5816bec (feature2)
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 17:27:31 2021 +0530
+
+    files updated
+
+commit 348dff68d5a131f1087b4cab97c4a03d3b8cc8fd
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 17:22:27 2021 +0530
+
+    file added
+
+commit f21ecc52d0d199df759ff7f8ad6a8024b998fcbd
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 15:38:27 2021 +0530
+
+    new commit
+
+commit 3d3022ed0c789030e1a4a939624a875ff850405a
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 13:59:35 2021 +0530
+
+    renamed
+
+commit c42630310fa5fe5924a43cf7954f1d8c1b624918
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 13:09:04 2021 +0530
+
+    file 2 deleted
+
+commit a0880a41a09342583233a8481a0da702e1237f18
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 13:03:29 2021 +0530
+
+    file 1 is deleted
+
+commit d2bb561a93a5a06ad79525c0fdc56ec6c19042cc
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 12:51:57 2021 +0530
+
+    Edit in text
+
+commit 58e6ad9b85e3aa90a26865512a1b7836d6c818c4
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 12:37:28 2021 +0530
+
+    Add some files
+
+commit 204fd97f820ab23ba9d7393df9ad5678f546746b
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 12:01:18 2021 +0530
+
+    sub folder create
+
+commit e102a66640b3d223e2be899a4c4b7f0715912c50
+Author: Aman Chouhan <amancgouhan192@gmail.com>
+Date:   Mon Oct 4 10:58:29 2021 +0530
+
+    Added commands resources
+
+commit 85fa7335d816e902fa41c82faaa3800a62bd793a
+Author: Am@n Chouh@n <amanchouhan192@gmail.com>
+Date:   Sat Oct 2 13:05:23 2021 +0530
+
+    Initial commit
+
