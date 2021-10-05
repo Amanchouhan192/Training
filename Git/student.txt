@@ -1,3 +1,5 @@
 Hey this is Green Field School Students Data :
 
 roll num	|	student name	|	phone num
+1.001			Aman			8800267436
+
