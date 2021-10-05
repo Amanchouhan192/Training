@@ -1,8 +1,8 @@
 ==========================================GIT COMMANDS======================================
-1.git config --global user.name “[firstname lastname]”
+1.git config --global user.name “firstname lastname”
 	this is the command which help to configuration global user name which help to identify the user who commi the changes.
 
-2.git config --global user.email “[Email]”
+2.git config --global user.email “Email”
 	this is the command which help to configuration global user name which help to identify the user who commi the changes.
 
 3.git config --global color.ui auto
@@ -105,7 +105,40 @@ e102a66 Added commands resources
 		git clean -n // would remove
 		git clean -f // removing the files.
 
- 
+22. Branch creation : for creattion of the branch.
+	
+	syntax : git branch <branch name>
+
+	example : git branch feature1
+
+23.To view Branch : it show all the branches created till date.
+	
+	syntax :  git branch 
+	output :
+ 		// * denotes the main or master branch 
+  feature-a
+  feature-b
+  feature1
+  feature2
+* main
+  student-a
+  student-b
+	
+ 24.switch to another branch: It helps to switch between the branches.
+	
+	syntax : git checkout <branch name>
+	
+25.git pull : to pull the edits to the master branch from the subranches.
+	
+	syntax : git pull 
+	
+26.ssh : ssh key is an altrnate way to identify yourself that doesnt require you to enter your username and password everytime.
+
+27.Delete a branch : it delete the branch from the working tree.
+	
+	syntax : git branch -D <branch Name> 
+	
+	output: git branch -D feature1 
 	
 
 
