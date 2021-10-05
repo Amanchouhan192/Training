@@ -3,4 +3,10 @@ Rahul wants Orange and apple both..but he wants to  eat orange and buy apple Iph
 
 Ahana and Rahul both are siblings.
 
-Ahana also wants to eat orange  and crying for  Iphone by see her brother. 
+Ahana also wants to eat orange  and crying for  Iphone by see her brother.
+
+
+
+
+
+// Ahana wants new phone at this moment she is not wants iphone now. 
