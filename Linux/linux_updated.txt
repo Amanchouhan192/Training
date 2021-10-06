@@ -159,13 +159,31 @@ Rails 5.2 was released on April 9, 2018, introducing new features that include A
 				4
 				
 26.sed : stream editor is used  to edit the file not permamnently bot on editor.
-	syntax :echo class10 | sed 's/10/15'
+	syntax :echo class10 | sed 's/10/15/'
 	output :class15
-27.tee:similar to the cat command but it has some difference is that it puts standard input on standard ouput.
+
+	example : sed 's/unix/linux/' geekfile.txt
+		
+27.tee :similar to the cat command but it has some difference is that it puts standard input on standard ouput.
 	syntax : echo class7 | 's/class/aman/'
 	output :aman7
 28.tr : translate the file content lower case to upper case.
 	syntax : command |tr<new><old>
+	
+	EX :  cat new3.txt | tr "[a-z]" "[A-Z]"
+	      
+	output : OLD  FILE IS HERE!!
+	
+	or 
+	
+	$cat geekfile | tr “[:lower:]” “[:upper:]”
+	Output:
+	
+	WELCOME TO	
+	GEEKSFORGEEKS
+	
+	// reverse is also true
+
 
 29.Uniq : the uniq command is used to form a sorted list in which every word will occure only one :
 	syntax : uniq textfile|uniq
@@ -178,7 +196,7 @@ Rails 5.2 was released on April 9, 2018, introducing new features that include A
 	output :     0000000 061 012 062 012 064 012
 		     0000006
  
-    		     od -t x1 file1.txt   // Hexa decimal format  
+    		     od -t x1 file1.txt   // Hexa decimal format   x1 is denotes here is bytes x1-> 2^1=2 bytes ans soon..
     		     0000000 31 0a 32 0a 34 0a
 		     0000006
 		     
@@ -188,6 +206,24 @@ Rails 5.2 was released on April 9, 2018, introducing new features that include A
 32. sort : sort the file in alphabetical order.
 	syntax : sort filename
 		 sort file1
+
+sort sorting.txt
+
+03
+1 
+2
+2
+3
+4
+6
+abhishek
+chitransh
+divyam
+harsh
+naveen
+rajan
+satish
+
 33. gzip : it truncate the file size it is compressing tool,it replace the original size to the compressed files .gz
 	syntax : gzip filename
 	output : .gz file will get after that
@@ -195,12 +231,16 @@ Rails 5.2 was released on April 9, 2018, introducing new features that include A
 	syntax : gunzip filemname
 	
 34.find : it is used to find the particular file within a directory.
-	syntax : (.) for current directory name
-		 (/) for root
-		 find . -name "*.txt"
+	syntax :  find ./aman -name new3.txt
+        output: ./aman/new3.txt
+
+		
 35.locate : it is used to search a file by filename.
 	syntax : locate filename 
-	output : locate first.txt //  it show all the .txt files
+	output:locate first.txt 
+		/home/tarun/.local/share/Trash/files/Training/Git/first.txt
+		/home/tarun/Desktop/Training/Git/first.txt
+
 36.date : it show the current date
 	syntax : date 
 	output :  Wednesday 29 September 2021 04:41:15 PM IST
@@ -215,7 +255,7 @@ Rails 5.2 was released on April 9, 2018, introducing new features that include A
 	output : real	0m0.000s
 	         user	0m0.000s
 		 sys	0m0.000s
-40. df : used to display the disk space of pc.
+40.df : used to display the disk space of pc.
 	syntax : df 
 	output : show disk space used.
 
