@@ -1,0 +1,58 @@
+============================VIM Commands======================================================
+Vim commands :
+
+1.vim or vi : vim  cammand is used to create a file with or without filename.
+	syntax : vim filename.txt 
+	output : it will creat the file with .txt file extension format.
+	
+2.q! : this is used to close or exit the file withot save the file.
+	syntax : type Esc then type :q! on the terminal
+3.wq : this is used to save and exit the file in the vim editor
+	syntax : press Esc then type :wq to exit the file.
+
+4.x! : same as wq command in vim editor it save and exit the file.
+	syntax :press Esc then type :x! to exit the file.
+	
+5.i : i stands for Insert into the editor means we can write ,edit and delete the text from the editor.
+	syntax : press i 
+	output : after press you can now start type the text on the editor.
+6.set number : set number set the editor numbering corresponding to the line 
+	syntax : ensure first you are in the normal mode then enter Esc 
+		:set  number 
+	output : you can see the numbering on the editor.
+7.$  : this is use to go to the end of the line if you are dealing with 1000 of line of code and wants to go end of the line 
+	syntax : make sure you are in normal mode press Esc and enter :$
+		:$
+		
+8.dd : dd is used to delete the text line in one go by pressing d two times in normal mode
+	syntax : press dd in normal mode
+9.u : u is used to undo the last change you did in normal mode.
+	syntax : press u in normal mode .
+10.v+right/left : this help to heighlight the text on vim editor 
+	syntax : v + right/left
+11. y : y stands for yank mode it is use to copy the text to the clipboard
+	syntax : select the text v + right/left and press y and create new line press esc and press p(print)
+12. o : it is same as i for insert into the editor below the cursor.
+	syntax :press o in normal mode
+13./<search_keyword> : go in normal mode and press / operator then type keyword this will show you all the recommended keywords.
+	syntax : /"type_keyword"
+14.n : use to find next search keyword by pressing n after search keyword.
+	syntax : press n after search
+15.split : it helps to split the window in two or more windows horizontally.
+	syntax : split filename.txt make sure you are in normal mode.
+16.ctrl + ww : it is use for navigate between the windows.
+17.e : it is use to reach end of the word.
+	syntax : press e in normal mode
+18.A : insert text after the end of the line.
+	syntax : press A 
+19.a : inser textb after the cursor.
+	syntax : press a in normal mode after selecting the word.
+20.O : opens a lines above the cursor.
+	syntax : just press O in normal mode.
+21.gg : to reach start of the file.
+	syntax : press gg in normal mode.
+22.G : to reach the bottom of the file.
+	syntax : press G
+23.ce : delete the word and places in insert mode.
+	syntax : press ce in  normal mode.
+24.0 : to reach starting on the line .
