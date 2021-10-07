@@ -165,8 +165,12 @@ Rails 5.2 was released on April 9, 2018, introducing new features that include A
 	example : sed 's/unix/linux/' geekfile.txt
 		
 27.tee :similar to the cat command but it has some difference is that it puts standard input on standard ouput.
-	syntax : echo class7 | 's/class/aman/'
-	output :aman7
+	it is used to  append and write to a multiple files
+        output:      
+	 echo "class123" |tee -a new3.txt| cat new3.txt
+	 class000
+	 class123
+
 28.tr : translate the file content lower case to upper case.
 	syntax : command |tr<new><old>
 	
