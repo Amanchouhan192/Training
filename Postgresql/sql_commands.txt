@@ -1,0 +1,149 @@
+============================================SQL COMMANDS====================================
+1.Postresql start from the Terminal:
+      step 1. sudo su postgres
+      step 2. psql
+      step 3. Enter password ("root" by default)
+      step 4. you will get postgres# prompt visible on the termianl
+
+
+2.\l : to see the default and available data base.
+	
+	syntax : \l
+	output :          
+                              List of databases
+             Name              |  Owner   | Encoding | Collate | Ctype |   Access privileges   
+-------------------------------+----------+----------+---------+-------+-----------------------
+ Airlines_development          | postgres | UTF8     | en_IN   | en_IN | 
+ checkmate_pos_development     | postgres | UTF8     | en_IN   | en_IN | 
+ employee_api_development      | postgres | UTF8     | en_IN   | en_IN | 
+ employee_development          | postgres | UTF8     | en_IN   | en_IN | 
+ employee_management           | postgres | UTF8     | en_IN   | en_IN | 
+ employee_test                 | postgres | UTF8     | en_IN   | en_IN | 
+ itsacheckmate_development     | postgres | UTF8     | en_IN   | en_IN | 
+ login_development             | postgres | UTF8     | en_IN   | en_IN | 
+ netgym_development            | postgres | UTF8     | en_IN   | en_IN | 
+ netgym_test                   | postgres | UTF8     | en_IN   | en_IN | 
+ postgres                      | postgres | UTF8     | en_IN   | en_IN | 
+ rest_api_employee_development | postgres | UTF8     | en_IN   | en_IN | 
+ scaff_development             | postgres | UTF8     | en_IN   | en_IN | 
+ scaff_test                    | postgres | UTF8     | en_IN   | en_IN | 
+ template0                     | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+                               |          |          |         |       | postgres=CTc/postgres
+ template1                     | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+                               |          |          |         |       | postgres=CTc/postgres
+ test                          | postgres | UTF8     | en_IN   | en_IN | 
+(17 rows)
+
+
+3.\du : for deault users.
+	
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ user_1    |                                                            | {}
+
+4. Alter the user with password :
+
+	syntax : ALTER USER <USER NAME> WITH PASSWORD <PASSWORD>
+	output:  ALTER USER postgres WITH PASSWORD test123
+
+5.Make superuser : to make a super user.
+	syntax : ALTER USER <USER> WITH SUPERUSER
+	output:  ALTER USER user_1 WITH SUPERUSER
+
+6.\q : for quit the postgres.
+	syntax : \q
+
+7.\? : for help
+	syntax : \?
+
+8.creation of data base :
+	syntax : CRAETE DATABASE  <DATABASE NAME>
+	output:  CRAETE DATABASE  test
+
+	 test                          | postgres | UTF8     | en_IN   | en_IN | 
+
+9.psql --help : this is for help.
+	syntax : psql --help
+
+10. \c : for connect the data base with the server and it is used to switch between the database too.
+	
+	syntax : \c <database name>
+	output: \c test
+	
+	postgres=# \c test
+	psql (14.0 (Ubuntu 14.0-1.pgdg18.04+1), server 11.13 (Ubuntu 11.13-1.pgdg18.04+1))
+	You are now connected to database "test" as user "postgres".
+
+11.DROP : Drop database command is the dangerous command it delete the whole data base in one go.
+	
+	syntax : DROP DATABASE <database name>
+
+12.Create a Table : for create a table in the database .
+	syntax : CREATE TABLE <table_name>(
+		column name + data + constraints if any
+)
+
+
+output: postgres=# CREATE TABLE employee(
+id  BIGSERIAL NOT NULL PRIMARY KEY,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+gender VARCHAR(7) NOT NULL,
+date_of_birth DATE NOT NULL,
+email VARCHAR(150));
+CREATE TABLE
+
+13. \d : to see the list of  table or schema.
+	syntax :\d 
+	output:
+
+	           List of relations
+ Schema |          Name           |   Type   |  Owner   
+--------+-------------------------+----------+----------
+ public | person                  | table    | postgres
+ public | person_id_seq           | sequence | postgres
+ public | student                 | table    | postgres
+ public | student_roll_number_seq | sequence | postgres
+(4 rows)
+
+
+14.\d tablename : to see the table overview.
+
+	syntax : \d <table name>
+	output n: \d person
+	
+	test=# \d person;
+                                       Table "public.person"
+    Column     |          Type          | Collation | Nullable |              Default               
+---------------+------------------------+-----------+----------+------------------------------------
+ id            | bigint                 |           | not null | nextval('person_id_seq'::regclass)
+ first_name    | character varying(50)  |           | not null | 
+ last_name     | character varying(50)  |           | not null | 
+ gender        | character varying(7)   |           | not null | 
+ date_of_birth | date                   |           | not null | 
+ email         | character varying(150) |           |          | 
+Indexes:
+    "person_pkey" PRIMARY KEY, btree (id)
+
+
+15.ctrl + l : to clear the screen .
+
+	syntax : ctrl + l
+
+
+16.Display the table :
+
+	syntax : SELECT *FROM <table name> ;
+
+postgres=# SELECT *FROM person ;
+ id | first_name | last_name | gender | date_of_birth | email 
+----+------------+-----------+--------+---------------+-------
+  1 | Aman       | Chouhan   | MALE   | 1997-12-28    | amanchouhan192@gmail.com
+  2 | Ankansha   | sharma    | FEMALE | 1998-11-28    | 
+  3 | Niharika   | kumari    | FEMALE | 1999-09-20    | 
+  4 | Kunal      | kumar     | MALE   | 1999-09-11    | 
+  5 | Neha       | Nagar     | FEMALE | 1997-12-28    | 
+(5 rows)
+
+
