@@ -602,7 +602,18 @@ roll_number | first_name | last_name | gender | date_of_birth |         email   
  		    5
 		(1 row)
 
-39.
+39.SUM () :  used to accumulate the numbers.
+
+	syntax : SELECT SUM(height) FROM student;
+  		sum  
+		-------
+		 117.6
+		(1 row)
+
+
+
+
+
 
 
 
