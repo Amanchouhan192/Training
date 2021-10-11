@@ -146,4 +146,464 @@ postgres=# SELECT *FROM person ;
   5 | Neha       | Nagar     | FEMALE | 1997-12-28    | 
 (5 rows)
 
+===========================================================================================================================
+
+17.\dt : show only the list of table or relation no other things (like id_seq kinf of things)
+
+	syntax : \dt 
+	output : 
+	
+	postgres=# \dt
+          List of relations
+ Schema |   Name   | Type  |  Owner   
+--------+----------+-------+----------
+ public | employee | table | postgres
+ public | person   | table | postgres
+ public | student  | table | postgres
+(3 rows)
+
+18. To see the particular column(s):
+	syntax :    
+			SELECT <Column name 1>,<column name 2>, soon..  FROM <table name>	
+	output:         
+
+postgres=# SELECT first_name ,last_name FROM student;
+ first_name | last_name 
+------------+-----------
+ Anne       | smith
+ kunal      | kumar
+ Anisha     | kumari
+ Parul      | sharma
+ kishor     | sharma
+ shefali    | Malhotra
+ parakriti  | agarwal
+ rohit      | sharma
+ prithvi    | chouhan
+ Agni       | chouhan
+(10 rows)
+
+
+19.ORDER BY : ORDER BY clause is used to sort the data in ascending or descending order, based on one or more columns.
+
+		syntax : SELECT column-list
+			FROM table_name
+			[WHERE condition]
+			[ORDER BY column1, column2, .. columnN] [ASC | DESC];
+
+
+		output :
+		
+postgres=# SELECT *FROM  student ORDER BY first_name;
+ roll_number | first_name | last_name | gender | date_of_birth |        email         
+-------------+------------+-----------+--------+---------------+----------------------
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com
+           7 | parakriti  | agarwal   | FEMALE | 1995-03-08    | prak.a@gmail.com
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com
+(10 rows)
+
+postgres=# SELECT *FROM  student ORDER BY first_name DESC;
+ roll_number | first_name | last_name | gender | date_of_birth |        email         
+-------------+------------+-----------+--------+---------------+----------------------
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com
+           7 | parakriti  | agarwal   | FEMALE | 1995-03-08    | prak.a@gmail.com
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com
+(10 rows)
+
+postgres=# SELECT *FROM  student ORDER BY first_name;
+ roll_number | first_name | last_name | gender | date_of_birth |        email         
+-------------+------------+-----------+--------+---------------+----------------------
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com
+           7 | parakriti  | agarwal   | FEMALE | 1995-03-08    | prak.a@gmail.com
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com
+(10 rows)
+
+postgres=# SELECT *FROM  student ORDER BY id ASC;
+ERROR:  column "id" does not exist
+LINE 1: SELECT *FROM  student ORDER BY id ASC;
+                                       ^
+postgres=# SELECT *FROM  student ORDER BY roll_number ASC;
+ roll_number | first_name | last_name | gender | date_of_birth |        email         
+-------------+------------+-----------+--------+---------------+----------------------
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com
+           7 | parakriti  | agarwal   | FEMALE | 1995-03-08    | prak.a@gmail.com
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com
+(10 rows)
+
+
+20.Distinct : It is used to eliminate all the duplicate records and fetching only unique records.
+	
+	syntax : SELECT DISTINCT column1, column2,.....columnN
+		 FROM table_name
+		 WHERE [condition]
+
+	output:  postgres=# SELECT DISTINCT first_name,last_name FROM student WHERE gender='FEMALE';
+ first_name | last_name 
+------------+-----------
+ Agni       | chouhan
+ Anisha     | kumari
+ Anne       | smith
+ parakriti  | agarwal
+ Parul      | sharma
+ shefali    | Malhotra
+(6 rows)
+
+
+21.WHERE : WHERE clause is used to specify a condition while fetching the data from single table or joining with multiple tables.		
+
+	syntax : SELECT column1, column2, columnN
+	         FROM table_name
+	         WHERE [search_condition]
+
+	output : postgres=# SELECT * FROM student WHERE last_name ='sharma';
+ roll_number | first_name | last_name | gender | date_of_birth |       email        
+-------------+------------+-----------+--------+---------------+--------------------
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com
+(3 rows)
+
+
+postgres=# SELECT * FROM student WHERE last_name ='sharma' OR  last_name = 'chouhan';
+ roll_number | first_name | last_name | gender | date_of_birth |        email         
+-------------+------------+-----------+--------+---------------+----------------------
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com
+(5 rows)
+
+
+22: Comparison Operator : comparison operator compare two condition and return answer in the form of true or false.
+
+	output : 
+postgres=# SELECT 1<2;;
+ ?column? 
+----------
+ t
+(1 row)
+
+postgres=# SELECT 2<2;;
+ ?column? 
+----------
+ f
+(1 row)
+
+postgres=# SELECT 2!=2;
+ ?column? 
+----------
+ f
+(1 row)
+
+23. LIMIT : LIMIT clause is used to limit the data amount returned by the SELECT statement.
+
+	syntax : SELECT column1, column2, columnN
+		 FROM table_name
+		 LIMIT [no of rows]
+	output: postgres=#  SELECT * FROM student LIMIT 5;
+ roll_number | first_name | last_name | gender | date_of_birth |       email        
+-------------+------------+-----------+--------+---------------+--------------------
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com
+(5 rows)
+
+24. OFFSET : OFFSET is tell , where after the start from the row number.
+
+	syntax : SELECT column1, column2, columnN
+		 FROM table_name
+                 LIMIT [no of rows] OFFSET [row num]
+
+	Output: postgres=#  SELECT * FROM student LIMIT 5 OFFSET 5;
+ roll_number | first_name | last_name | gender | date_of_birth |        email         
+-------------+------------+-----------+--------+---------------+----------------------
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com
+           7 | parakriti  | agarwal   | FEMALE | 1995-03-08    | prak.a@gmail.com
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com
+(5 rows)
+
+25. fetch : it wil fetch or display first rows of the table.
+
+	syntax :  SELECT * FROM <table name > OFFSET <row number> FETCH FIRST  <row number> ROW ONLY;
+	
+	output : postgres=# SELECT * FROM student OFFSET 5 FETCH FIRST  5 ROW ONLY;
+ roll_number | first_name | last_name | gender | date_of_birth |        email         
+-------------+------------+-----------+--------+---------------+----------------------
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com
+           7 | parakriti  | agarwal   | FEMALE | 1995-03-08    | prak.a@gmail.com
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com
+(5 rows)
+
+26.IN : combine results two or more arguments.
+	syntax : IN ('Argument1','Argument2','Argument3'....soon)
+
+output: postgres=# SELECT * FROM student WHERE last_name IN('sharma','chouhan','kumar');
+ roll_number | first_name | last_name | gender | date_of_birth |        email         
+-------------+------------+-----------+--------+---------------+----------------------
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com
+          13 | tarushee   | kumar     | FEMALE | 1996-02-07    | tarusee.k@gmail.com
+(7 rows)
+
+27.BETWEEN : it display the result in between the given range .
+
+	syntax : BETWEEN 'start point data' AND 'end point data'
+	
+	output : postgres=# SELECT * FROM student WHERE date_of_birth BETWEEN DATE '1999-01-01' AND '2000-01-01';
+ roll_number | first_name | last_name | gender | date_of_birth |        email         
+-------------+------------+-----------+--------+---------------+----------------------
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com
+          17 | poonam     | pawar     | FEMALE | 1999-02-02    | poonam@gmail.com
+          20 | diksha     | kapoor    | FEMALE | 1999-12-28    | diksha@gmail.com
+          22 | roshni     | valya     | FEMALE | 1999-03-19    | roshni@gmail.com
+(9 rows)
+
+
+28.LIKE : it search the result by matching the pattern .
+
+	syntax :LIKE 'pattern%'
+
+	output : postgres=# SELECT * FROM student WHERE first_name LIKE 'A%'; 
+ roll_number | first_name | last_name | gender | date_of_birth |       email        
+-------------+------------+-----------+--------+---------------+--------------------
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com
+(3 rows)
+
+postgres=# SELECT * FROM student WHERE first_name LIKE 'An%'; 
+ roll_number | first_name | last_name | gender | date_of_birth |       email        
+-------------+------------+-----------+--------+---------------+--------------------
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com
+(2 rows)
+
+postgres=# SELECT * FROM student WHERE first_name LIKE '%n'; 
+ roll_number | first_name | last_name | gender | date_of_birth |       email       
+-------------+------------+-----------+--------+---------------+-------------------
+          11 | karan      | kashyap   | MALE   | 1998-01-07    | 
+          12 | kiran      | prajapati | FEMALE | 1998-12-07    | kiran.p@gmail.com
+          21 | rohan      |           | MALE   | 1996-01-28    | rohan@gmail.com
+(3 rows)
+
+postgres=# SELECT * FROM student WHERE first_name LIKE 'k%n'; 
+ roll_number | first_name | last_name | gender | date_of_birth |       email       
+-------------+------------+-----------+--------+---------------+-------------------
+          11 | karan      | kashyap   | MALE   | 1998-01-07    | 
+          12 | kiran      | prajapati | FEMALE | 1998-12-07    | kiran.p@gmail.com
+(2 rows)
+
+postgres=# SELECT * FROM student WHERE first_name LIKE 'k___n'; 
+ roll_number | first_name | last_name | gender | date_of_birth |       email       
+-------------+------------+-----------+--------+---------------+-------------------
+          11 | karan      | kashyap   | MALE   | 1998-01-07    | 
+          12 | kiran      | prajapati | FEMALE | 1998-12-07    | kiran.p@gmail.com
+(2 rows)
+
+
+
+29.ILIKE : The key word ILIKE can be used instead of LIKE to make the match case-insensitive.
+
+	syntax : ILIKE 'R%'
+
+	Output : 
+postgres=# SELECT * FROM student WHERE first_name LIKE 'R%'; 
+ roll_number | first_name | last_name | gender | date_of_birth | email 
+-------------+------------+-----------+--------+---------------+-------
+(0 rows)
+
+postgres=# SELECT * FROM student WHERE first_name ILIKE 'R%'; 
+ roll_number | first_name | last_name | gender | date_of_birth |      email       
+-------------+------------+-----------+--------+---------------+------------------
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com
+          21 | rohan      |           | MALE   | 1996-01-28    | rohan@gmail.com
+          22 | roshni     | valya     | FEMALE | 1999-03-19    | roshni@gmail.com
+(3 rows)
+
+30.GROUP BY :  used to arrange identical data into groups with the help of some functions
+
+	syntax : postgres=# SELECT last_name,COUNT(*) FROM student GROUP BY last_name;
+	output : 
+ last_name | count 
+-----------+-------
+ valya     |     1
+ kumari    |     1
+ kumar     |     2
+ prajapati |     1
+ seshodiya |     2
+ pawar     |     1
+           |     1
+ chouhan   |     2
+ smith     |     1
+ agarwal   |     1
+ sobti     |     1
+ Malhotra  |     1
+ sharma    |     3
+ heider    |     1
+ kashyap   |     1
+ kapoor    |     1
+ kasyap    |     1
+(17 rows)
+
+
+31. HAVING : A HAVING clause in SQL specifies that an SQL SELECT statement must only return rows where aggregate values meet the specified conditions. 
+
+	syntax : postgres=# SELECT date_of_birth,COUNT(*) FROM student GROUP BY date_of_birth HAVING COUNT(*) >1 ORDER BY date_of_birth;
+	output: 
+ date_of_birth | count 
+---------------+-------
+ 1999-12-28    |     2
+(1 row)
+
+32. ALTER TABLE : used to alter the table i just add the columhns.
+	
+	syntax :  ALTER TABLE student 
+		  postgres-# ADD COLUMN marks_in_percentage FLOAT ;
+	output:	  ALTER TABLE
+
+roll_number | first_name | last_name | gender | date_of_birth |         email         | marks_in_percentage | address | height 
+-------------+------------+-----------+--------+---------------+-----------------------+---------------------+---------+--------
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com        |                     |         |       
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com      |                     |         |       
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com    |                     |         |       
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com     |                     |         |       
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com    |                     |         |       
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com        |                     |         |       
+           7 | parakriti  | agarwal   | FEMALE | 1995-03-08    | prak.a@gmail.com      |                     |         |       
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com      |                     |         |       
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com  |                     |         |       
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com        |                     |         |       
+          11 | karan      | kashyap   | MALE   | 1998-01-07    |                       |                     |         |       
+          12 | kiran      | prajapati | FEMALE | 1998-12-07    | kiran.p@gmail.com     |                     |         |       
+          13 | tarushee   | kumar     | FEMALE | 1996-02-07    | tarusee.k@gmail.com   |                     |         |       
+          14 | priyal     | sobti     | FEMALE | 1998-03-30    | priyalsobti@gmail.com |                     |         |       
+          15 | laeba      | heider    | FEMALE | 1998-02-28    | laeba@gmail.com       |                     |         |       
+          16 | anurag     | kasyap    | MALE   | 1998-02-02    | anurag@gmail.com      |                     |         |       
+          17 | poonam     | pawar     | FEMALE | 1999-02-02    | poonam@gmail.com      |                     |         |       
+          18 | mansi      | seshodiya | FEMALE | 2000-07-17    | mansi@gmail.com       |                     |         |       
+          19 | yashaswini | seshodiya | FEMALE | 2001-12-28    | yashi@gmail.com       |                     |         |       
+          20 | diksha     | kapoor    | FEMALE | 1999-12-28    | diksha@gmail.com      |                     |         |       
+          21 | rohan      |           | MALE   | 1996-01-28    | rohan@gmail.com       |                     |         |       
+          22 | roshni     | valya     | FEMALE | 1999-03-19    | roshni@gmail.com      |                     |         |       
+(22 rows)
+
+
+34. UPDATE and SET : is is used to update the table content.
+	
+	syntax :UPDATE student
+		SET marks_in_percentage = 99.1,
+		address ='kerala',
+		height = 5.6
+		WHERE roll_number = 22;
+		UPDATE 1
+
+	output : 
+postgres=# SELECT * FROM student;
+roll_number | first_name | last_name | gender | date_of_birth |         email         | marks_in_percentage |  address  | height 
+-------------+------------+-----------+--------+---------------+-----------------------+---------------------+-----------+--------
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com        |                  89 | Delhi     |    5.1
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com      |                  90 | Delhi     |    5.2
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com    |                  91 | Noida     |      5
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com     |                  90 | Faridabad |    5.5
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com    |                  80 | Delhi     |    4.9
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com        |                  75 | Gurgaon   |    5.3
+           7 | parakriti  | agarwal   | FEMALE | 1995-03-08    | prak.a@gmail.com      |                  95 | Delhi     |    5.8
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com      |                  94 | Delhi     |    5.6
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com  |                  97 | Kerala    |      5
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com        |                  98 | Assam     |      5
+          11 | karan      | kashyap   | MALE   | 1998-01-07    | karan@gmail.com       |                  99 | Faridabad |    5.1
+          12 | kiran      | prajapati | FEMALE | 1998-12-07    | kiran.p@gmail.com     |                  75 | Faridabad |    5.6
+          13 | tarushee   | kumar     | FEMALE | 1996-02-07    | tarusee.k@gmail.com   |                  65 | Faridabad |    5.7
+          14 | priyal     | sobti     | FEMALE | 1998-03-30    | priyalsobti@gmail.com |                  60 | Gurgaon   |      5
+          15 | laeba      | heider    | FEMALE | 1998-02-28    | laeba@gmail.com       |                  80 | Kerala    |    5.6
+          16 | anurag     | kasyap    | MALE   | 1998-02-02    | anurag@gmail.com      |                  88 | Kerala    |    5.7
+          17 | poonam     | pawar     | FEMALE | 1999-02-02    | poonam@gmail.com      |                  89 | Punjab    |    5.9
+          18 | mansi      | seshodiya | FEMALE | 2000-07-17    | mansi@gmail.com       |                  95 | Noida     |      5
+          19 | yashaswini | seshodiya | FEMALE | 2001-12-28    | yashi@gmail.com       |                  94 | Noida     |      5
+          20 | diksha     | kapoor    | FEMALE | 1999-12-28    | diksha@gmail.com      |                  78 | Gurgaon   |    5.5
+          21 | rohan      | choudhary | MALE   | 1996-01-28    | rohan@gmail.com       |                99.2 | Delhi     |    5.5
+          22 | roshni     | valya     | FEMALE | 1999-03-19    | roshni@gmail.com      |                99.1 | kerala    |    5.6
+(22 rows)
+
+35. MAX() : return the maximum value
+	
+
+	syntax :SELECT MAX(marks_in_percentage) FROM student;
+		max  
+		------
+ 		99.2
+		(1 row)
+
+36.MIN() : return the minimum value.
+	
+	syntax :SELECT MIN(marks_in_percentage) FROM student;
+ 		min 
+		-----
+  		60
+		(1 row)
+
+
+37.AVG() : use to calculate the average .
+
+	syntax :SELECT AVG(height) FROM student;
+       	avg        	
+	------------------
+	 5.34545454545455
+	(1 row)
+
+38.ROUND() : round of the value.
+
+	syntax : SELECT ROUND( AVG(height)) FROM student;
+		 round 
+		-------
+ 		    5
+		(1 row)
+
+39.
+
+
+
 
