@@ -833,5 +833,55 @@ output:
  10 | Brijesh    | Yadav     | MALE   | 1992-03-21    | brij@gmail.com        |        10 |     10 | valkswagen     |         9 | Faridabad
 (10 rows)
 
-47.
+47.Right Join : The RIGHT JOIN keyword returns all records from the right table (table2), and the matching records from the left table (table1). The result is 0 records from the left side, if there is no match.
+
+
+syntax :
+
+	SELECT column_name(s)
+        FROM table1
+	RIGHT JOIN table2
+	ON table1.column_name = table2.column_name;
+
+
+
+SELECT car.car_name,car.cost_lakh,car.purchase_address,person.first_name FROM person RIGHT JOIN car ON person.car_id_fk = car.car_id;
+
+    car_name    | cost_lakh | purchase_address | first_name 
+----------------+-----------+------------------+------------
+ Ford           |        15 | Delhi            | Aman
+ Mercedese Benz |        20 | Gurgaon          | Ankansha
+ Toyota         |         5 | Faridabad        | Niharika
+ Nisan          |         7 | Faridabad        | Kunal
+ Nexa Baleno    |         8 | Uttar Pradesh    | Neha
+ BMW            |        17 | Uttar Pradesh    | kiran
+ Nano           |         5 | Delhi            | krshna
+ Dustor         |         6 | Delhi            | Pawan
+ Swift          |         5 | Faridabad        | Thomas
+ valkswagen     |         9 | Faridabad        | Brijesh
+(10 rows)
+
+48.FULL JOIN :The FULL OUTER JOIN keyword returns all records when there is a match in left (table1) or right (table2) table records.
+
+	syntax : 
+		SELECT column_name(s)
+		FROM table1
+		FULL OUTER JOIN table2
+		ON table1.column_name = table2.column_name
+		WHERE condition;
+
+
+SELECT car.car_name,car.cost_lakh,car.purchase_address,person.first_name FROM person FULL JOIN car ON person.car_id_fk = car.car_id WHERE car.purchase_address = 'Faridabad';
+  car_name  | cost_lakh | purchase_address | first_name 
+------------+-----------+------------------+------------
+ Toyota     |         5 | Faridabad        | Niharika
+ Nisan      |         7 | Faridabad        | Kunal
+ Swift      |         5 | Faridabad        | Thomas
+ valkswagen |         9 | Faridabad        | Brijesh
+(4 rows)
+
+49.
+
+
+
 
