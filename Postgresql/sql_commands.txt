@@ -814,5 +814,24 @@ postgres=# SELECT * FROM person JOIN car ON person.car_id_fk = car.car_id;
 (10 rows)
 
 
+46.Left Join : The LEFT JOIN keyword returns all records from the left table (table1), and the matching records from the right table (table2). The result is 0 records from the right side, if there is no match.
 
+syntax :  SELECT * FROM person LEFT JOIN car ON car.car_id = person.car_id_fk;
+
+output: 
+ id | first_name | last_name | gender | date_of_birth |         email         | car_id_fk | car_id |    car_name    | cost_lakh | purchase_address 
+----+------------+-----------+--------+---------------+-----------------------+-----------+--------+----------------+-----------+------------------
+  1 | Aman       | Chouhan   | MALE   | 1997-12-28    | amanchouhan@gmail.com |         1 |      1 | Ford           |        15 | Delhi
+  2 | Ankansha   | sharma    | FEMALE | 1998-11-28    | niharika@gmail.com    |         2 |      2 | Mercedese Benz |        20 | Gurgaon
+  3 | Niharika   | kumari    | FEMALE | 1999-09-20    | kunal@gmail.com       |         3 |      3 | Toyota         |         5 | Faridabad
+  4 | Kunal      | kumar     | MALE   | 1999-09-11    | neha@gmail.com        |         4 |      4 | Nisan          |         7 | Faridabad
+  5 | Neha       | Nagar     | FEMALE | 1997-12-28    | neha@gmail.com        |         5 |      5 | Nexa Baleno    |         8 | Uttar Pradesh
+  6 | kiran      | sharma    | FEMALE | 1998-12-24    | kiran@gmail.com       |         6 |      6 | BMW            |        17 | Uttar Pradesh
+  7 | krshna     | kapoor    | MALE   | 1995-08-24    | krish@gmail.com       |         7 |      7 | Nano           |         5 | Delhi
+  8 | Pawan      | khanna    | MALE   | 1994-06-20    | pawan@gmail.com       |         8 |      8 | Dustor         |         6 | Delhi
+  9 | Thomas     | smith     | MALE   | 1990-04-20    | thomas@gmail.com      |         9 |      9 | Swift          |         5 | Faridabad
+ 10 | Brijesh    | Yadav     | MALE   | 1992-03-21    | brij@gmail.com        |        10 |     10 | valkswagen     |         9 | Faridabad
+(10 rows)
+
+47.
 
