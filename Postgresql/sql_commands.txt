@@ -761,7 +761,7 @@ Referenced by:
     TABLE "person" CONSTRAINT "person_car_id_fk_fkey" FOREIGN KEY (car_id_fk) REFERENCES person(id)
 
 
-====================================================JOIN INNER ============================
+==========================JOIN ============================
 
 45.INNER JOIN : The INNER JOIN keyword selects records that have matching values in both tables.
 	
