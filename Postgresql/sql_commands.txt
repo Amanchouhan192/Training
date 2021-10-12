@@ -691,8 +691,127 @@ postgres=# SELECT NOW()::TIME;
 (21 rows)
 
 
+=================================================KEY CONSTRAINTS=====================================
+
+44.Foreign key : A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table.
+The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent tab
+
+	syntax : if in the case of create table 
+		
+		CREATE TABLE car (
+    				car_id int NOT NULL,
+   			        OrderNumber int NOT NULL,
+                                PersonID int,
+                                PRIMARY KEY (car_id),
+                                FOREIGN KEY (car_id_fk) REFERENCES Persons(ID)
+				);
+
+		if case of ALTER TABLE 
+		
+		 ALTER TABLE car 
+		 ADD car_id_fk BIGINT REFERENCES person(id);
+
+      Output: 
+postgres=# SELECT * FROM car;
+ car_id |    car_name    | cost_lakh | purchase_address 
+--------+----------------+-----------+------------------
+      1 | Ford           |        15 | Delhi
+      2 | Mercedese Benz |        20 | Gurgaon
+      3 | Toyota         |         5 | Faridabad
+      4 | Nisan          |         7 | Faridabad
+      5 | Nexa Baleno    |         8 | Uttar Pradesh
+      6 | BMW            |        17 | Uttar Pradesh
+      7 | Nano           |         5 | Delhi
+      8 | Dustor         |         6 | Delhi
+      9 | Swift          |         5 | Faridabad
+     10 | valkswagen     |         9 | Faridabad
+(10 rows)
+
+postgres=# SELECT * FROM person;
+ id | first_name | last_name | gender | date_of_birth |         email         | car_id_fk 
+----+------------+-----------+--------+---------------+-----------------------+-----------
+  1 | Aman       | Chouhan   | MALE   | 1997-12-28    | amanchouhan@gmail.com |         1
+  2 | Ankansha   | sharma    | FEMALE | 1998-11-28    | niharika@gmail.com    |         2
+  3 | Niharika   | kumari    | FEMALE | 1999-09-20    | kunal@gmail.com       |         3
+  4 | Kunal      | kumar     | MALE   | 1999-09-11    | neha@gmail.com        |         4
+  5 | Neha       | Nagar     | FEMALE | 1997-12-28    | neha@gmail.com        |         5
+  6 | kiran      | sharma    | FEMALE | 1998-12-24    | kiran@gmail.com       |         6
+  7 | krshna     | kapoor    | MALE   | 1995-08-24    | krish@gmail.com       |         7
+  8 | Pawan      | khanna    | MALE   | 1994-06-20    | pawan@gmail.com       |         8
+  9 | Thomas     | smith     | MALE   | 1990-04-20    | thomas@gmail.com      |         9
+ 10 | Brijesh    | Yadav     | MALE   | 1992-03-21    | brij@gmail.com        |        10
+(10 rows)
+
+postgres=# \d person
+                                       Table "public.person"
+    Column     |          Type          | Collation | Nullable |              Default               
+---------------+------------------------+-----------+----------+------------------------------------
+ id            | bigint                 |           | not null | nextval('person_id_seq'::regclass)
+ first_name    | character varying(50)  |           | not null | 
+ last_name     | character varying(50)  |           | not null | 
+ gender        | character varying(7)   |           | not null | 
+ date_of_birth | date                   |           | not null | 
+ email         | character varying(150) |           |          | 
+ car_id_fk     | bigint                 |           |          | 
+Indexes:
+    "person_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "person_car_id_fk_fkey" FOREIGN KEY (car_id_fk) REFERENCES person(id)
+Referenced by:
+    TABLE "person" CONSTRAINT "person_car_id_fk_fkey" FOREIGN KEY (car_id_fk) REFERENCES person(id)
 
 
+====================================================JOIN INNER ============================
+
+45.INNER JOIN : The INNER JOIN keyword selects records that have matching values in both tables.
+	
+	SYNTAX :  SELECT * FROM person JOIN car ON person.car_id_fk = car.car_id;
+
+
+SELECT * FROM car;
+ car_id |    car_name    | cost_lakh | purchase_address 
+--------+----------------+-----------+------------------
+      1 | Ford           |        15 | Delhi
+      2 | Mercedese Benz |        20 | Gurgaon
+      3 | Toyota         |         5 | Faridabad
+      4 | Nisan          |         7 | Faridabad
+      5 | Nexa Baleno    |         8 | Uttar Pradesh
+      6 | BMW            |        17 | Uttar Pradesh
+      7 | Nano           |         5 | Delhi
+      8 | Dustor         |         6 | Delhi
+      9 | Swift          |         5 | Faridabad
+     10 | valkswagen     |         9 | Faridabad
+(10 rows)
+
+SELECT * FROM person;
+ id | first_name | last_name | gender | date_of_birth |         email         | car_id_fk 
+----+------------+-----------+--------+---------------+-----------------------+-----------
+  1 | Aman       | Chouhan   | MALE   | 1997-12-28    | amanchouhan@gmail.com |         1
+  2 | Ankansha   | sharma    | FEMALE | 1998-11-28    | niharika@gmail.com    |         2
+  3 | Niharika   | kumari    | FEMALE | 1999-09-20    | kunal@gmail.com       |         3
+  4 | Kunal      | kumar     | MALE   | 1999-09-11    | neha@gmail.com        |         4
+  5 | Neha       | Nagar     | FEMALE | 1997-12-28    | neha@gmail.com        |         5
+  6 | kiran      | sharma    | FEMALE | 1998-12-24    | kiran@gmail.com       |         6
+  7 | krshna     | kapoor    | MALE   | 1995-08-24    | krish@gmail.com       |         7
+  8 | Pawan      | khanna    | MALE   | 1994-06-20    | pawan@gmail.com       |         8
+  9 | Thomas     | smith     | MALE   | 1990-04-20    | thomas@gmail.com      |         9
+ 10 | Brijesh    | Yadav     | MALE   | 1992-03-21    | brij@gmail.com        |        10
+(10 rows)
+
+postgres=# SELECT * FROM person JOIN car ON person.car_id_fk = car.car_id;
+ id | first_name | last_name | gender | date_of_birth |         email         | car_id_fk | car_id |    car_name    | cost_lakh | purchase_address 
+----+------------+-----------+--------+---------------+-----------------------+-----------+--------+----------------+-----------+------------------
+  1 | Aman       | Chouhan   | MALE   | 1997-12-28    | amanchouhan@gmail.com |         1 |      1 | Ford           |        15 | Delhi
+  2 | Ankansha   | sharma    | FEMALE | 1998-11-28    | niharika@gmail.com    |         2 |      2 | Mercedese Benz |        20 | Gurgaon
+  3 | Niharika   | kumari    | FEMALE | 1999-09-20    | kunal@gmail.com       |         3 |      3 | Toyota         |         5 | Faridabad
+  4 | Kunal      | kumar     | MALE   | 1999-09-11    | neha@gmail.com        |         4 |      4 | Nisan          |         7 | Faridabad
+  5 | Neha       | Nagar     | FEMALE | 1997-12-28    | neha@gmail.com        |         5 |      5 | Nexa Baleno    |         8 | Uttar Pradesh
+  6 | kiran      | sharma    | FEMALE | 1998-12-24    | kiran@gmail.com       |         6 |      6 | BMW            |        17 | Uttar Pradesh
+  7 | krshna     | kapoor    | MALE   | 1995-08-24    | krish@gmail.com       |         7 |      7 | Nano           |         5 | Delhi
+  8 | Pawan      | khanna    | MALE   | 1994-06-20    | pawan@gmail.com       |         8 |      8 | Dustor         |         6 | Delhi
+  9 | Thomas     | smith     | MALE   | 1990-04-20    | thomas@gmail.com      |         9 |      9 | Swift          |         5 | Faridabad
+ 10 | Brijesh    | Yadav     | MALE   | 1992-03-21    | brij@gmail.com        |        10 |     10 | valkswagen     |         9 | Faridabad
+(10 rows)
 
 
 
