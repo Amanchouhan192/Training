@@ -610,6 +610,85 @@ roll_number | first_name | last_name | gender | date_of_birth |         email   
 		 117.6
 		(1 row)
 
+---------------------------------------------12TH OCT--------------------------------------------------------
+
+40.COALESCE : used to fill the empty space with the default values.
+	syntax : SELECT COALESCE(email , 'email is not valid') FROM student;
+
+
+41. TIME And Date : for time and date .
+
+	syntax : 
+
+SELECT NOW()::DATE;
+    now     
+------------
+ 2021-10-12
+(1 row)
+
+postgres=# SELECT NOW()::TIME;
+       now       
+-----------------
+ 10:59:31.032672
+(1 row)
+
+
+42.Age(): age function give the detail age information.
+	syntax :SELECT first_name ,last_name  , gender,date_of_birth ,AGE(NOW(),date_of_birth) AS age FROM student;
+ first_name | last_name | gender | date_of_birth |                   age                    
+------------+-----------+--------+---------------+------------------------------------------
+ Anne       | smith     | FEMALE | 1998-01-09    | 23 years 9 mons 3 days 11:08:40.836772
+ kunal      | kumar     | MALE   | 1999-01-09    | 22 years 9 mons 3 days 11:08:40.836772
+ Anisha     | kumari    | FEMALE | 1999-12-08    | 21 years 10 mons 4 days 11:08:40.836772
+ Parul      | sharma    | FEMALE | 1997-12-01    | 23 years 10 mons 11 days 11:08:40.836772
+ kishor     | sharma    | MALE   | 1999-08-08    | 22 years 2 mons 4 days 11:08:40.836772
+ shefali    | Malhotra  | FEMALE | 1999-11-08    | 21 years 11 mons 4 days 11:08:40.836772
+ parakriti  | agarwal   | FEMALE | 1995-03-08    | 26 years 7 mons 4 days 11:08:40.836772
+ rohit      | sharma    | MALE   | 1996-10-08    | 25 years 4 days 11:08:40.836772
+ prithvi    | chouhan   | MALE   | 1999-12-28    | 21 years 9 mons 15 days 11:08:40.836772
+ Agni       | chouhan   | FEMALE | 1999-02-28    | 22 years 7 mons 12 days 11:08:40.836772
+ kiran      | prajapati | FEMALE | 1998-12-07    | 22 years 10 mons 5 days 11:08:40.836772
+ tarushee   | kumar     | FEMALE | 1996-02-07    | 25 years 8 mons 5 days 11:08:40.836772
+ priyal     | sobti     | FEMALE | 1998-03-30    | 23 years 6 mons 13 days 11:08:40.836772
+ laeba      | heider    | FEMALE | 1998-02-28    | 23 years 7 mons 12 days 11:08:40.836772
+ anurag     | kasyap    | MALE   | 1998-02-02    | 23 years 8 mons 10 days 11:08:40.836772
+ poonam     | pawar     | FEMALE | 1999-02-02    | 22 years 8 mons 10 days 11:08:40.836772
+ mansi      | seshodiya | FEMALE | 2000-07-17    | 21 years 2 mons 26 days 11:08:40.836772
+ yashaswini | seshodiya | FEMALE | 2001-12-28    | 19 years 9 mons 15 days 11:08:40.836772
+ diksha     | kapoor    | FEMALE | 1999-12-28    | 21 years 9 mons 15 days 11:08:40.836772
+ roshni     | valya     | FEMALE | 1999-03-19    | 22 years 6 mons 24 days 11:08:40.836772
+ karan      | kashyap   | MALE   | 1998-01-07    | 23 years 9 mons 5 days 11:08:40.836772
+ rohan      | choudhary | MALE   | 1996-01-28    | 25 years 8 mons 15 days 11:08:40.836772
+(22 rows)
+
+43. DELETE : for delete a records.
+	syntax : DELETE FROM student WHERE roll_number = 22;
+		DELETE 1
+		SELECT * FROM student;
+ roll_number | first_name | last_name | gender | date_of_birth |         email         | marks_in_percentage |  address  | height 
+-------------+------------+-----------+--------+---------------+-----------------------+---------------------+-----------+--------
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com        |                  89 | Delhi     |    5.1
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com      |                  90 | Delhi     |    5.2
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com    |                  91 | Noida     |      5
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com     |                  90 | Faridabad |    5.5
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com    |                  80 | Delhi     |    4.9
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com        |                  75 | Gurgaon   |    5.3
+           7 | parakriti  | agarwal   | FEMALE | 1995-03-08    | prak.a@gmail.com      |                  95 | Delhi     |    5.8
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com      |                  94 | Delhi     |    5.6
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com  |                  97 | Kerala    |      5
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com        |                  98 | Assam     |      5
+          12 | kiran      | prajapati | FEMALE | 1998-12-07    | kiran.p@gmail.com     |                  75 | Faridabad |    5.6
+          13 | tarushee   | kumar     | FEMALE | 1996-02-07    | tarusee.k@gmail.com   |                  65 | Faridabad |    5.7
+          14 | priyal     | sobti     | FEMALE | 1998-03-30    | priyalsobti@gmail.com |                  60 | Gurgaon   |      5
+          15 | laeba      | heider    | FEMALE | 1998-02-28    | laeba@gmail.com       |                  80 | Kerala    |    5.6
+          16 | anurag     | kasyap    | MALE   | 1998-02-02    | anurag@gmail.com      |                  88 | Kerala    |    5.7
+          17 | poonam     | pawar     | FEMALE | 1999-02-02    | poonam@gmail.com      |                  89 | Punjab    |    5.9
+          18 | mansi      | seshodiya | FEMALE | 2000-07-17    | mansi@gmail.com       |                  95 | Noida     |      5
+          19 | yashaswini | seshodiya | FEMALE | 2001-12-28    | yashi@gmail.com       |                  94 | Noida     |      5
+          20 | diksha     | kapoor    | FEMALE | 1999-12-28    | diksha@gmail.com      |                  78 | Gurgaon   |    5.5
+          11 | karan      | kashyap   | MALE   | 1998-01-07    | karan@gmail.com       |                  99 | Faridabad |    5.1
+          21 | rohan      | choudhary | MALE   | 1996-01-28    | rohan@gmail.com       |                99.2 | Delhi     |    5.5
+(21 rows)
 
 
 
