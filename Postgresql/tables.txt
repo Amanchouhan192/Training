@@ -1,0 +1,97 @@
+===================================TABLES=======================================
+
+1.STUDENT :
+
+ roll_number | first_name | last_name | gender | date_of_birth |         email         | marks_in_percentage |  address  | height 
+-------------+------------+-----------+--------+---------------+-----------------------+---------------------+-----------+--------
+           1 | Anne       | smith     | FEMALE | 1998-01-09    | anne@gmail.com        |                  89 | Delhi     |    5.1
+           2 | kunal      | kumar     | MALE   | 1999-01-09    | kunalk@gmail.com      |                  90 | Delhi     |    5.2
+           3 | Anisha     | kumari    | FEMALE | 1999-12-08    | k.anisha@gmail.com    |                  91 | Noida     |      5
+           4 | Parul      | sharma    | FEMALE | 1997-12-01    | parul.s@gmail.com     |                  90 | Faridabad |    5.5
+           5 | kishor     | sharma    | MALE   | 1999-08-08    | s.kishor@gmail.com    |                  80 | Delhi     |    4.9
+           6 | shefali    | Malhotra  | FEMALE | 1999-11-08    | shef@gmail.com        |                  75 | Gurgaon   |    5.3
+           7 | parakriti  | agarwal   | FEMALE | 1995-03-08    | prak.a@gmail.com      |                  95 | Delhi     |    5.8
+           8 | rohit      | sharma    | MALE   | 1996-10-08    | rohits@gmail.com      |                  94 | Delhi     |    5.6
+           9 | prithvi    | chouhan   | MALE   | 1999-12-28    | prithviraj@gmail.com  |                  97 | Kerala    |      5
+          10 | Agni       | chouhan   | FEMALE | 1999-02-28    | agni@gmail.com        |                  98 | Assam     |      5
+          12 | kiran      | prajapati | FEMALE | 1998-12-07    | kiran.p@gmail.com     |                  75 | Faridabad |    5.6
+          13 | tarushee   | kumar     | FEMALE | 1996-02-07    | tarusee.k@gmail.com   |                  65 | Faridabad |    5.7
+          14 | priyal     | sobti     | FEMALE | 1998-03-30    | priyalsobti@gmail.com |                  60 | Gurgaon   |      5
+          15 | laeba      | heider    | FEMALE | 1998-02-28    | laeba@gmail.com       |                  80 | Kerala    |    5.6
+          16 | anurag     | kasyap    | MALE   | 1998-02-02    | anurag@gmail.com      |                  88 | Kerala    |    5.7
+          17 | poonam     | pawar     | FEMALE | 1999-02-02    | poonam@gmail.com      |                  89 | Punjab    |    5.9
+          18 | mansi      | seshodiya | FEMALE | 2000-07-17    | mansi@gmail.com       |                  95 | Noida     |      5
+          19 | yashaswini | seshodiya | FEMALE | 2001-12-28    | yashi@gmail.com       |                  94 | Noida     |      5
+          20 | diksha     | kapoor    | FEMALE | 1999-12-28    | diksha@gmail.com      |                  78 | Gurgaon   |    5.5
+          11 | karan      | kashyap   | MALE   | 1998-01-07    | karan@gmail.com       |                  99 | Faridabad |    5.1
+          21 | rohan      | choudhary | MALE   | 1996-01-28    | rohan@gmail.com       |                99.2 | Delhi     |    5.5
+(21 rows)
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+2.PERSON : 
+ Note : car_id_fk is the foreign key for child table car. 
+
+id | first_name | last_name | gender | date_of_birth |         email         | car_id_fk 
+----+------------+-----------+--------+---------------+-----------------------+-----------
+  1 | Aman       | Chouhan   | MALE   | 1997-12-28    | amanchouhan@gmail.com |         1
+  2 | Ankansha   | sharma    | FEMALE | 1998-11-28    | niharika@gmail.com    |         2
+  3 | Niharika   | kumari    | FEMALE | 1999-09-20    | kunal@gmail.com       |         3
+  4 | Kunal      | kumar     | MALE   | 1999-09-11    | neha@gmail.com        |         4
+  5 | Neha       | Nagar     | FEMALE | 1997-12-28    | neha@gmail.com        |         5
+  6 | kiran      | sharma    | FEMALE | 1998-12-24    | kiran@gmail.com       |         6
+  7 | krshna     | kapoor    | MALE   | 1995-08-24    | krish@gmail.com       |         7
+  8 | Pawan      | khanna    | MALE   | 1994-06-20    | pawan@gmail.com       |         8
+  9 | Thomas     | smith     | MALE   | 1990-04-20    | thomas@gmail.com      |         9
+ 10 | Brijesh    | Yadav     | MALE   | 1992-03-21    | brij@gmail.com        |        10
+(10 rows)
+
+                                       Table "public.person"
+    Column     |          Type          | Collation | Nullable |              Default               
+---------------+------------------------+-----------+----------+------------------------------------
+ id            | bigint                 |           | not null | nextval('person_id_seq'::regclass)
+ first_name    | character varying(50)  |           | not null | 
+ last_name     | character varying(50)  |           | not null | 
+ gender        | character varying(7)   |           | not null | 
+ date_of_birth | date                   |           | not null | 
+ email         | character varying(150) |           |          | 
+ car_id_fk     | bigint                 |           |          | 
+Indexes:
+    "person_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "person_car_id_fk_fkey" FOREIGN KEY (car_id_fk) REFERENCES person(id)
+Referenced by:
+    TABLE "person" CONSTRAINT "person_car_id_fk_fkey" FOREIGN KEY (car_id_fk) REFERENCES person(id)
+---------------------------------------------------------------------------------------------------------------------------------
+
+3. CAR : 
+
+Note : car_id is the primary key 
+
+car_id |    car_name    | cost_lakh | purchase_address 
+--------+----------------+-----------+------------------
+      1 | Ford           |        15 | Delhi
+      2 | Mercedese Benz |        20 | Gurgaon
+      3 | Toyota         |         5 | Faridabad
+      4 | Nisan          |         7 | Faridabad
+      5 | Nexa Baleno    |         8 | Uttar Pradesh
+      6 | BMW            |        17 | Uttar Pradesh
+      7 | Nano           |         5 | Delhi
+      8 | Dustor         |         6 | Delhi
+      9 | Swift          |         5 | Faridabad
+     10 | valkswagen     |         9 | Faridabad
+(10 rows)
+
+                                          Table "public.car"
+      Column      |         Type          | Collation | Nullable |               Default               
+------------------+-----------------------+-----------+----------+-------------------------------------
+ car_id           | bigint                |           | not null | nextval('car_car_id_seq'::regclass)
+ car_name         | character varying(50) |           |          | 
+ cost_lakh        | bigint                |           |          | 
+ purchase_address | character varying(50) |           |          | 
+Indexes:
+    "car_pkey" PRIMARY KEY, btree (car_id)
+
+
+
+
