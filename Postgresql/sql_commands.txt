@@ -880,7 +880,61 @@ SELECT car.car_name,car.cost_lakh,car.purchase_address,person.first_name FROM pe
  valkswagen |         9 | Faridabad        | Brijesh
 (4 rows)
 
-49.
+==========================================================13th oct=========================================
+49.RENAME table name  : rename person table to emloyee table .
+	
+	syntax :  ALTER TABLE person RENAME TO  employee;
+	Output : ALTER TABLE
+
+postgres=# SELECT * FROM employee;
+ id | first_name | last_name | gender | date_of_birth |         email         | car_id_fk 
+----+------------+-----------+--------+---------------+-----------------------+-----------
+  1 | Aman       | Chouhan   | MALE   | 1997-12-28    | amanchouhan@gmail.com |         1
+  2 | Ankansha   | sharma    | FEMALE | 1998-11-28    | niharika@gmail.com    |         2
+  3 | Niharika   | kumari    | FEMALE | 1999-09-20    | kunal@gmail.com       |         3
+  4 | Kunal      | kumar     | MALE   | 1999-09-11    | neha@gmail.com        |         4
+  5 | Neha       | Nagar     | FEMALE | 1997-12-28    | neha@gmail.com        |         5
+  6 | kiran      | sharma    | FEMALE | 1998-12-24    | kiran@gmail.com       |         6
+  7 | krshna     | kapoor    | MALE   | 1995-08-24    | krish@gmail.com       |         7
+  8 | Pawan      | khanna    | MALE   | 1994-06-20    | pawan@gmail.com       |         8
+  9 | Thomas     | smith     | MALE   | 1990-04-20    | thomas@gmail.com      |         9
+ 10 | Brijesh    | Yadav     | MALE   | 1992-03-21    | brij@gmail.com        |        10
+(10 rows)
+
+
+50.Rename column name : rename the column name departmant od department table to emp_department.
+	
+	syntax :ALTER TABLE department RENAME COLUMN "department" To "emp_department";
+        output: ALTER TABLE
+	postgres=# \d department;
+                                            Table "public.department"
+     Column      |         Type          | Collation | Nullable |                    Default                     
+-----------------+-----------------------+-----------+----------+------------------------------------------------
+ emp_id          | bigint                |           | not null | nextval('department_emp_id_seq'::regclass)
+ emp_salary      | bigint                |           | not null | nextval('department_emp_salary_seq'::regclass)
+ date_of_joining | date                  |           | not null | 
+ emp_department  | character varying(50) |           |          | 
+Indexes:
+    "department_pkey" PRIMARY KEY, btree (emp_id)
+
+
+51. Join operation : 
+postgres=# SELECT employee.id,employee.emp_first_name , department.emp_salary ,department.date_of_joining,department.emp_department FROM employee FULL JOIN department ON employee.id = department.emp_id;
+ id | emp_first_name | emp_salary | date_of_joining | emp_department 
+----+----------------+------------+-----------------+----------------
+  1 | Aman           |      30000 | 2021-07-28      | IT
+  2 | Ankansha       |      20000 | 2021-06-21      | sales
+  3 | Niharika       |      40000 | 2019-06-21      | HR
+  4 | Kunal          |      50000 | 2015-07-22      | IT
+  5 | Neha           |      30000 | 2020-07-22      | Accounts
+  6 | kiran          |      20000 | 2021-08-22      | Finence
+  7 | krshna         |      20000 | 2021-09-21      | Finence
+  8 | Pawan          |      30000 | 2020-09-21      | Accounts
+  9 | Thomas         |      30000 | 2021-08-21      | IT
+ 10 | Brijesh        |      40000 | 2020-05-21      | Management
+(10 rows)
+
+	
 
 
 
