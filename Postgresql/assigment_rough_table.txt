@@ -11,8 +11,9 @@ SELECT * FROM employees;
    6 | Nikita  |  60000  // uncertified pilot
    7 | Richard |  75000  // ---------------------->employee
    8 | Micheal |  79000  // certified pilot
-   9 | Mili    |  65000  // uncertified pilot
+   9 | Mili    |  65000  // certified pilot
   10 | Norah   |   5500  // ----------------------->employee
+  11   kalpana    57000  // uncertified
 (10 rows)
 
 
