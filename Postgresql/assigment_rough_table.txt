@@ -65,16 +65,4 @@ airline=# SELECT * FROM certified;
 
 
 
----------------------------------------------
-ans a) 
-
-airline=# SELECT aircraft.aname  FROM aircraft  INNER JOIN certified ON  aircraft.c_id_fk = certified.aid  
-INNER JOIN employees on certified.eid = employees.eid WHERE employees.salary >80000; 
-  aname   
-----------
- Boeing
- American
- Alaska
-(3 rows)
-
 
