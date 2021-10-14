@@ -935,7 +935,56 @@ postgres=# SELECT employee.id,employee.emp_first_name , department.emp_salary ,d
 (10 rows)
 
 	
+52.  UNION : clause/operator is used to combine the results of two or more SELECT statements without returning any duplicate rows.
 
+syntax : SELECT column1 [, column2 ]
+FROM table1 [, table2 ]
+[WHERE condition]
+
+UNION
+
+SELECT column1 [, column2 ]
+FROM table1 [, table2 ]
+[WHERE condition]
+
+output:  postgres=# SELECT employee.emp_first_name,employee.emp_last_name FROM employee 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ON
+SELECT student.stu_first_name,student.stu_last_name FROM student;
+
+
+emp_first_name | emp_last_name 
+----------------+---------------
+ rohan          | choudhary
+ Niharika       | kumari
+ Anne           | smith
+ Anisha         | kumari
+ Kunal          | kumar
+ Agni           | chouhan
+ Aman           | Chouhan
+ Pawan          | khanna
+ prithvi        | chouhan
+ yashaswini     | seshodiya
+ mansi          | seshodiya
+ shefali        | Malhotra
+ Neha           | Nagar
+ kishor         | sharma
+ diksha         | kapoor
+ krshna         | kapoor
+ kiran          | prajapati
+ parakriti      | agarwal
+ Ankansha       | sharma
+ kiran          | sharma
+ karan          | kashyap
+ kunal          | kumar
+ poonam         | pawar
+ Parul          | sharma
+ priyal         | sobti
+ anurag         | kasyap
+ laeba          | heider
+ Thomas         | smith
+ tarushee       | kumar
+ rohit          | sharma
+ Brijesh        | Yadav
 
 
 

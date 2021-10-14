@@ -1,0 +1,22 @@
+airline=# SELECT aircraft.aid,aircraft.aname ,certified.eid ,certified.aid FROM aircraft INNER JOIN certified ON  aircraft.c_id_fk = certified.Aid;
+ aid |  aname   | eid | aid 
+-----+----------+-----+-----
+ 101 | Boeing   |   1 | 101
+ 102 | Alaska   |   2 | 102
+ 103 | American |   3 | 103
+ 105 | Breeze   |   5 | 105
+ 102 | Alaska   |   8 | 102
+(5 rows)
+
+airline=# SELECT aircraft.aid,aircraft.aname ,certified.eid ,certified.aid FROM aircraft INNER JOIN certified ON  aircraft.c_id_fk = certified.aid;
+ aid |  aname   | eid | aid 
+-----+----------+-----+-----
+ 101 | Boeing   |   1 | 101
+ 102 | Alaska   |   2 | 102
+ 103 | American |   3 | 103
+ 105 | Breeze   |   5 | 105
+ 102 | Alaska   |   8 | 102
+(5 rows)
+
+airline=# SELECT aircraft.aid,aircraft.aname ,certified.eid ,certified.aid FROM aircraft INNER JOIN certified ON  aircraft.c_id_fk = certified.aid ;
+

@@ -1,0 +1,60 @@
+1.Employee:
+
+airline=# SELECT * FROM employees;
+ eid |  ename  | salary 
+-----+---------+--------
+   1 | Ron     |  82000
+   2 | Harry   |  81000
+   3 | Ginni   |  83000
+   4 | shawn   |  81000
+   5 | Gerry   |  70000
+   6 | Nikita  |  60000
+   7 | Richard |  75000
+   8 | Micheal |  79000
+   9 | Mili    |  65000
+  10 | Norah   |   5500
+(10 rows)
+
+
+2.flights:
+
+airline=# SELECT * FROM flights;
+ flno |    from_    |   to_    | distance | departs | arrives | price 
+------+-------------+----------+----------+---------+---------+-------
+  101 | Los Angeles | Honlulu  |     2558 | 5pm     | 7pm     |   410
+  102 | Madison     | New York |      821 | 4pm     | 6pm     |   216
+  103 | Los Angeles | Chicago  |     1740 | 4am     | 8am     |   800
+  105 | Madison     | Chicago  |      148 | 1pm     | 2pm     |   112
+  106 | Chicago     | Honlulu  |     4238 | 5pm     | 9pm     |   679
+  104 | Honlulu     | Madison  |     4166 | 6pm     | 3am     |   742
+(6 rows)
+
+
+3.certified :
+
+airline=# SELECT * FROM certified;
+ eid | aid 
+-----+-----
+   1 | 101
+   2 | 102
+   3 | 103
+   4 | 104
+   5 | 105
+   6 | 106
+   8 | 102
+   9 | 104
+
+4.Aircraft:
+
+airline=# SELECT * FROM aircraft;
+ aid |  aname   | cruisingrange 
+-----+----------+---------------
+ 101 | Boeing   |          3000
+ 102 | Alaska   |          4000
+ 103 | American |          4000
+ 104 | Avelo    |          6000
+ 105 | Breeze   |          1200
+ 106 | Jetblue  |          5000
+(6 rows)
+
+

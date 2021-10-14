@@ -1,0 +1,79 @@
+1.Employees Table :
+
+SELECT * FROM employees;
+ eid |  ename  | salary 
+-----+---------+--------
+   1 | Ron     |  82000  // certified pilot
+   2 | Harry   |  81000  // certified pilot
+   3 | Ginni   |  83000  // certified pilot
+   4 | shawn   |  81000  // uncertified pilot
+   5 | Gerry   |  70000  // certified pilot
+   6 | Nikita  |  60000  // uncertified pilot
+   7 | Richard |  75000  // ---------------------->employee
+   8 | Micheal |  79000  // certified pilot
+   9 | Mili    |  65000  // uncertified pilot
+  10 | Norah   |   5500  // ----------------------->employee
+(10 rows)
+
+
+2.flights :
+
+airline=# SELECT * FROM flights;
+ flno | from_        | to_ 	| distance | departs | arrives | price 
+------+--------------+----------+---------+---------+-------
+101 	Los Angeles    Honlulu    2558		5pm	7pm	  410
+102	Madison	       New York   821		4pm     6pm	  216
+103	Los Angeles    Chicago    1740		4am	8am	  800
+104	Honlulu        Madison	  4166		6pm	3am       742
+105     Madison        Chicago    148		1pm     2pm       112
+106     Chicago        Honlulu    4238		5pm     9am       679
+
+3. Aircraft:
+
+airline=# SELECT * FROM aircraft;
+ aid | aname | cruisingrange 
+-----+-------+---------------
+101   Boeing    3000
+102   Alaska    4000
+103   American  6000
+104   Avelo     5000
+105   Breeze    1200
+106   Jetblue   5000
+
+4. certified :
+
+airline=# SELECT * FROM certified;
+ eid | aid 
+-----+-----
+1	101
+2	102
+3	103
+4	104
+5	105
+6	106
+7	-
+8	102
+9	104
+10	-
+
+
+
+
+
+
+
+
+
+---------------------------------------------
+ans a) 
+
+airline=# SELECT aircraft.aname  FROM aircraft  INNER JOIN certified ON  aircraft.c_id_fk = certified.aid  
+INNER JOIN employees on certified.eid = employees.eid WHERE employees.salary >80000; 
+  aname   
+----------
+ Boeing
+ American
+ Alaska
+(3 rows)
+
+
