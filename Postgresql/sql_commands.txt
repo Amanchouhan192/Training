@@ -833,7 +833,8 @@ output:
  10 | Brijesh    | Yadav     | MALE   | 1992-03-21    | brij@gmail.com        |        10 |     10 | valkswagen     |         9 | Faridabad
 (10 rows)
 
-47.Right Join : The RIGHT JOIN keyword returns all records from the right table (table2), and the matching records from the left table (table1). The result is 0 records from the left side, if there is no match.
+47.Right Join : The RIGHT JOIN keyword returns all records from the right table (table2), 
+and the matching records from the left table (table1). The result is 0 records from the left side, if there is no match.
 
 
 syntax :
@@ -919,7 +920,8 @@ Indexes:
 
 
 51. Join operation : 
-postgres=# SELECT employee.id,employee.emp_first_name , department.emp_salary ,department.date_of_joining,department.emp_department FROM employee FULL JOIN department ON employee.id = department.emp_id;
+postgres=# SELECT employee.id,employee.emp_first_name , department.emp_salary ,
+department.date_of_joining,department.emp_department FROM employee FULL JOIN department ON employee.id = department.emp_id;
  id | emp_first_name | emp_salary | date_of_joining | emp_department 
 ----+----------------+------------+-----------------+----------------
   1 | Aman           |      30000 | 2021-07-28      | IT
@@ -935,6 +937,10 @@ postgres=# SELECT employee.id,employee.emp_first_name , department.emp_salary ,d
 (10 rows)
 
 	
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9c9c137609c57cf3fd15c9ba92e27852e613be99
 52.  UNION : clause/operator is used to combine the results of two or more SELECT statements without returning any duplicate rows.
 
 syntax : SELECT column1 [, column2 ]
