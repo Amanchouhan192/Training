@@ -1,0 +1,112 @@
+// question asked by sir in review 
+postgres=# SELECT employee.emp_first_name ,car.car_name,COUNT(*) from employee inner join car on employee.id = car.car_id GROUP BY employee.emp_first_name,car.car_name;
+ emp_first_name |    car_name    | count 
+----------------+----------------+-------
+ Neha           | Nexa Baleno    |     1
+ krshna         | Nano           |     1
+ Ankansha       | Mercedese Benz |     1
+ Kunal          | Nisan          |     1
+ Thomas         | Swift          |     1
+ Brijesh        | valkswagen     |     1
+ Pawan          | Dustor         |     1
+ Aman           | Ford           |     1
+ kiran          | BMW            |     1
+ Niharika       | Toyota         |     1
+(10 rows)
+
+
+postgres=# SELECT NAME ,SUM(SALARY) FROM COMPANY GROUP BY NAME;
+ name  |  sum  
+-------+-------
+ Teddy | 20000
+ David | 85000
+ james | 10000
+ Paul  | 20000
+ Mark  | 65000
+ Allen | 15000
+ kim   | 45000
+(7 rows)
+
+postgres=# SELECT NAME ,AVG(SALARY) FROM COMPANY GROUP BY NAME;
+ name  |          avg           
+-------+------------------------
+ Teddy |     20000.000000000000
+ David |     85000.000000000000
+ james | 10000.0000000000000000
+ Paul  |     20000.000000000000
+ Mark  |     65000.000000000000
+ Allen | 15000.0000000000000000
+ kim   |     45000.000000000000
+(7 rows)
+
+postgres=# SELECT NAME ,SUM(SALARY) FROM COMPANY GROUP BY NAME ORDER BY NAME;
+ name  |  sum  
+-------+-------
+ Allen | 15000
+ David | 85000
+ james | 10000
+ kim   | 45000
+ Mark  | 65000
+ Paul  | 20000
+ Teddy | 20000
+(7 rows)
+
+===========================================================TATBLE============================================
+New tables :
+
+company=# \dt
+           List of relations
+ Schema |    Name    | Type  |  Owner   
+--------+------------+-------+----------
+ public | department | table | postgres
+ public | employees  | table | postgres
+ public | projects   | table | postgres
+ public | workson    | table | postgres
+(4 rows)
+
+company=# select * from department;
+ code  |      name      | managerid | subdeptof 
+-------+----------------+-----------+-----------
+ ADMIN | Administration |         1 | NULL
+ ACCNT | Accounting     |         2 | ADMIN
+ CNSLT | Consulting     |         4 | ADMIN
+ HDWRE | Hardware       |         3 | CNSLT
+(4 rows)
+
+company=# select * from employees;
+ employeeid | firstname | lastname | deptcode | salary 
+------------+-----------+----------+----------+--------
+          4 | Ritu      | kumari   | CNSLT    |  60000
+          5 | Rishabh   | sharma   | CNSLT    |  30000
+          6 | Herry     | singh    | HDWRE    |  65000
+          1 | Rakesh    | sharma   | ADMIN    |  70000
+          2 | Manoj     | kumar    | ACCNT    |  75000
+          3 | kiran     | kumar    | HDWRE    |  80000
+(6 rows)
+
+company=# select * from projects;
+ projectid | deptcode |   description   | startdate  |  stopdate  | revenue 
+-----------+----------+-----------------+------------+------------+---------
+ P1        | ADMIN    | Employee Moral  | 2002-03-14 | 2022-03-14 |       0
+ P2        | ACCNT    | Mofia Audit     | 2003-07-14 | 2022-11-30 |  100000
+ P3        | CNSLT    | Robotic Spouse  | 2002-07-14 | 2022-11-13 |  242000
+ P4        | CNSLT    | Download Client | 2005-02-03 | 2022-12-13 |   18150
+(4 rows)
+
+
+company=# select * from workson;
+ employeeid | projectid | assiggnedtime 
+------------+-----------+---------------
+          2 | P2        |             1
+          3 | P3        |             2
+          4 | P3        |             2
+          5 | P3        |             1
+          5 | P2        |             1
+          3 | P4        |             2
+(6 rows)
+
+
+
+
+
+

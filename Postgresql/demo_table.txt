@@ -21,11 +21,11 @@ airline=# SELECT * FROM employees;
 airline=# SELECT * FROM flights;
  flno |    from_    |   to_    | distance | departs | arrives | price 
 ------+-------------+----------+----------+---------+---------+-------
-  101 | Los Angeles | Honlulu  |     2558 | 5pm     | 7pm     |   410
-  102 | Madison     | New York |      821 | 4pm     | 6pm     |   216
-  103 | Los Angeles | Chicago  |     1740 | 4am     | 8am     |   800
-  105 | Madison     | Chicago  |      148 | 1pm     | 2pm     |   112
-  106 | Chicago     | Honlulu  |     4238 | 5pm     | 9pm     |   679
+  101 | Los Angeles | Honlulu  |     2558 | 5pm     | 7pm     |   4100
+  102 | Madison     | New York |      821 | 4pm     | 6pm     |   2160
+  103 | Los Angeles | Chicago  |     1740 | 4am     | 8am     |   8000
+  105 | Los Angeles | Honlulu  |      148 | 1pm     | 2pm     |   
+  106 | Los Angeles | Honlulu  |     4238 | 5pm     | 9pm     |   679
   104 | Honlulu     | Madison  |     4166 | 6pm     | 3am     |   742
 (6 rows)
 
@@ -57,4 +57,57 @@ airline=# SELECT * FROM aircraft;
  106 | Jetblue  |          5000
 (6 rows)
 
+================================================================
+---------------------------------------------
+ans a)Find the names of aircraft such that all pilots certified to operate them earn
+more than $80,000.
+
+airline=# SELECT aircraft.aname  FROM aircraft  INNER JOIN certified ON  aircraft.c_id_fk = certified.aid  
+INNER JOIN employees on certified.eid = employees.eid WHERE employees.salary >80000; 
+  aname   
+----------
+ Boeing
+ American
+ Alaska
+(3 rows)
+-----------------------------------------------------
+
+ans B)  SELECT employees.aid, MAX(aircraft.cruisingrange) FROM employees INNER JOIN aircraft ON employees.eid = aircraft.aid INNER JOIN certified ON aircraft.aid = employees.eid   HAVING  COUNT(certified.aid) > 3;
+-----------------------------------------------------------------------------------
+ans c)  SELECT employees.ename FROM employees INNER JOIN flights ON employees.eid = flights.emp_id_fk WHERE employees.salary < MIN(flights.distance);
+---------------------------------------------------------------------------------------------------------------------------
+ans d)
+
+--------------------------------------------------------------------------------------------------------------
+ans e) airline=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_id_fk = certified.aid  
+INNER JOIN employees on certified.eid = employees.eid WHERE aircraft.aname = 'Boeing';
+ ename 
+-------
+ Ron
+(1 row)
+
+----------------------------------------------------------------------------------
+ans f)	airline=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_id_fk = certified.aid  
+INNER JOIN employees on certified.eid = employees.eid WHERE aircraft.cruisingrange >3000 AND (employees.eid=certified.eid);
+  ename  
+---------
+ Harry
+ Ginni
+ Micheal
+ Nikita
+ Mili
+(5 rows)
+-------------------------------------------------------------------------------------------
+ans h : airline=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_id_fk = certified.aid  
+INNER JOIN employees on certified.eid = employees.eid WHERE aircraft.cruisingrange >3000 AND (employees.eid!=certified.eid );
+ ename 
+-------
+(0 rows)
+
+----------------------------------------------------------------------------------------------
+ans i :
+airline=# SELECT employees.ename FROM employees INNER JOIN certified ON employees.eid = certified.emp_id_fk INNER JOIN aircraft On aircraft.c_id_fk = certified.emp_id_fk WHERE aircraft.cruisingrange >1000;
+ename 
+-------
+(0 rows)
 
