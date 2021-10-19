@@ -105,6 +105,997 @@ company=# select * from workson;
           3 | P4        |             2
 (6 rows)
 
+===================================================Created structured tables=================================================================
+postgres=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | car              | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+(5 rows)
+
+postgres=# SELECT * FROM project_
+project_assigned        project_project_id_seq  
+postgres=# SELECT * FROM project_assigned ;
+ eid | project_id 
+-----+------------
+(0 rows)
+
+postgres=# SELECT * FROM project ;
+ project_id |   project_name   
+------------+------------------
+       1001 | web_project
+       1002 | Machine Learning
+       1003 | Android
+       1005 | funds analysis
+       1006 | Cloud service
+       1004 | mutual funds
+(6 rows)
+
+postgres=# \d project;
+postgres=# \d employee;
+                         Table "public.employee"
+     Column     |          Type          | Collation | Nullable | Default 
+----------------+------------------------+-----------+----------+---------
+ emp_first_name | character varying(50)  |           | not null | 
+ emp_last_name  | character varying(50)  |           | not null | 
+ gender         | character varying(7)   |           | not null | 
+ date_of_birth  | date                   |           | not null | 
+ email          | character varying(150) |           |          | 
+ salary         | integer                |           |          | 
+ eid            | character varying(10)  |           |          | 
+
+postgres=# 
+postgres=# ALTER TABLE employee ADD PRIMARY KEY (eid);
+ALTER TABLE
+postgres=# \d employee;
+                         Table "public.employee"
+     Column     |          Type          | Collation | Nullable | Default 
+----------------+------------------------+-----------+----------+---------
+ emp_first_name | character varying(50)  |           | not null | 
+ emp_last_name  | character varying(50)  |           | not null | 
+ gender         | character varying(7)   |           | not null | 
+ date_of_birth  | date                   |           | not null | 
+ email          | character varying(150) |           |          | 
+ salary         | integer                |           |          | 
+ eid            | character varying(10)  |           | not null | 
+Indexes:
+    "employee_pkey" PRIMARY KEY, btree (eid)
+
+postgres=# INSERT INTO project_assigned (eid,project_id)
+postgres-# VALUES('1',1001),
+postgres-# VALUES('2',1002),
+postgres-# VALUES('3',1003);
+ERROR:  syntax error at or near "VALUES"
+LINE 3: VALUES('2',1002),
+        ^
+postgres=# INSERT INTO project_assigned (eid,project_id)
+VALUES('1',1001),('2',1002),('3',1003);
+INSERT 0 3
+postgres=# INSERT INTO project_assigned (eid,project_id)
+VALUES('1',1003),('2',1001),('3',1001);
+ERROR:  duplicate key value violates unique constraint "project_assigned_pkey"
+DETAIL:  Key (eid)=(1) already exists.
+postgres=# ALTER TABLE project_assigned ADD FOREIGN KEY REFERENCES employee(eid);
+ERROR:  syntax error at or near "REFERENCES"
+LINE 1: ALTER TABLE project_assigned ADD FOREIGN KEY REFERENCES empl...
+                                                     ^
+postgres=# ALTER TABLE project_assigned ADD FOREIGN KEY(eid) REFERENCES employee(eid);
+ALTER TABLE
+postgres=# INSERT INTO project_assigned (eid,project_id)
+VALUES('1',1001),('2',1002),('3',1003);
+ERROR:  duplicate key value violates unique constraint "project_assigned_pkey"
+DETAIL:  Key (eid)=(1) already exists.
+postgres=# \d project_assigned;
+                   Table "public.project_assigned"
+   Column   |         Type          | Collation | Nullable | Default 
+------------+-----------------------+-----------+----------+---------
+ eid        | character varying(10) |           | not null | 
+ project_id | character varying(10) |           | not null | 
+Indexes:
+    "project_assigned_pkey" PRIMARY KEY, btree (eid)
+Foreign-key constraints:
+    "project_assigned_eid_fkey" FOREIGN KEY (eid) REFERENCES employee(eid)
+
+postgres=# ALTER TABLE project_assigned  DROP PRIMARY KEY;
+ERROR:  syntax error at or near "PRIMARY"
+LINE 1: ALTER TABLE project_assigned  DROP PRIMARY KEY;
+                                           ^
+postgres=# ALTER TABLE project_assigned  DROP PRIMARY KEY(eid);
+ERROR:  syntax error at or near "PRIMARY"
+LINE 1: ALTER TABLE project_assigned  DROP PRIMARY KEY(eid);
+                                           ^
+postgres=# INSERT INTO project_assigned (eid,project_id)
+VALUES('1',1001),('2',1002),('3',1003);
+ERROR:  duplicate key value violates unique constraint "project_assigned_pkey"
+DETAIL:  Key (eid)=(1) already exists.
+postgres=# INSERT INTO project_assigned (eid,project_id)
+VALUES('1',1002);
+ERROR:  duplicate key value violates unique constraint "project_assigned_pkey"
+DETAIL:  Key (eid)=(1) already exists.
+postgres=# select * from project_assigned ;
+ eid | project_id 
+-----+------------
+ 1   | 1001
+ 2   | 1002
+ 3   | 1003
+(3 rows)
+
+postgres=# drop table project_assigned ;
+
+postgres=# \d project_assined ;
+                   Table "public.project_assined"
+   Column   |         Type          | Collation | Nullable | Default 
+------------+-----------------------+-----------+----------+---------
+ eid        | character varying(10) |           | not null | 
+ project_id | integer               |           | not null | 
+
+\d: extra argument ";" ignored
+postgres=# INSERT INTO project_assigned (eid,project_id)
+VALUES('1',1002);
+
+postgres=# CREATE TABLE project_assigned(
+postgres(# eid VARCHAR(10) NOT NULL,project_id integer NOT NULL);
+CREATE TABLE
+postgres=# \d project_assigned ;
+                   Table "public.project_assigned"
+   Column   |         Type          | Collation | Nullable | Default 
+------------+-----------------------+-----------+----------+---------
+ eid        | character varying(10) |           | not null | 
+ project_id | integer               |           | not null | 
+
+
+postgres=# drop table project_assined ;
+DROP TABLE
+postgres=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | car              | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+(5 rows)
+
+postgres=# INSERT INTO project_assigned (
+postgres(# eid , project_id)
+postgres-# VALUES('1' ,1001);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('2' ,1002);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('3' ,1003);
+INSERT 0 1
+postgres=# select * from project_assigned ;
+ eid | project_id 
+-----+------------
+ 1   |       1001
+ 2   |       1002
+ 3   |       1003
+(3 rows)
+
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('1' ,1002);
+INSERT 0 1
+postgres=# select * from project_assigned ;
+ eid | project_id 
+-----+------------
+ 1   |       1001
+ 2   |       1002
+ 3   |       1003
+ 1   |       1002
+(4 rows)
+
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('1' ,1003);
+INSERT 0 1
+postgres=# select * from project_assigned ;
+ eid | project_id 
+-----+------------
+ 1   |       1001
+ 2   |       1002
+ 3   |       1003
+ 1   |       1002
+ 1   |       1003
+(5 rows)
+
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('2' ,1001);
+INSERT 0 1
+postgres=# select * from project_assigned ;
+ eid | project_id 
+-----+------------
+ 1   |       1001
+ 2   |       1002
+ 3   |       1003
+ 1   |       1002
+ 1   |       1003
+ 2   |       1001
+(6 rows)
+
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('4' ,1005);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('5' ,1006);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('6' ,1003);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('7' ,1001);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('8' ,1004);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('9' ,1005);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('10' ,1002);
+INSERT 0 1
+postgres=# select * from project_assigned ;
+ eid | project_id 
+-----+------------
+ 1   |       1001
+ 2   |       1002
+ 3   |       1003
+ 1   |       1002
+ 1   |       1003
+ 2   |       1001
+ 4   |       1005
+ 5   |       1006
+ 6   |       1003
+ 7   |       1001
+ 8   |       1004
+ 9   |       1005
+ 10  |       1002
+(13 rows)
+
+
+eid VARCHAR(10) NOT NULL PRIMARY KEY ,project_id integer NOT NULL);
+CREATE TABLE
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('1' ,1001);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('1' ,1002);
+ERROR:  duplicate key value violates unique constraint "project_assigned_pkey"
+DETAIL:  Key (eid)=(1) already exists.
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('2' ,1002);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('3' ,1002);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('3' ,1003);
+ERROR:  duplicate key value violates unique constraint "project_assigned_pkey"
+DETAIL:  Key (eid)=(3) already exists.
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('4' ,1004);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('5' ,1001);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('6' ,1003);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('7' ,1006);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('8' ,1005);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('9' ,1006);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('10' ,1003);
+INSERT 0 1
+postgres=# drop table project_assigned ;
+DROP TABLE
+postgres=# select * from project_assigned;
+ERROR:  relation "project_assigned" does not exist
+LINE 1: select * from project_assigned;
+                      ^
+postgres=# \dt
+            List of relations
+ Schema |    Name     | Type  |  Owner   
+--------+-------------+-------+----------
+ public | car         | table | postgres
+ public | departments | table | postgres
+ public | employee    | table | postgres
+ public | project     | table | postgres
+(4 rows)
+
+
+postgres(# eid VARCHAR(10) NOT NULL PRIMARY KEY ,project_id integer NOT NULL);
+CREATE TABLE
+postgres=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | car              | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+(5 rows)
+
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('1' ,1001);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('2' ,1002);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('3' ,1003);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('4' ,1005);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('5' ,1003);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('6' ,1006);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('7' ,1001);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('8' ,1004);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('9' ,1004);
+INSERT 0 1
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('10' ,1001);
+INSERT 0 1
+postgres=# SELECT * FROM project_assigned ;
+ eid | project_id 
+-----+------------
+ 1   |       1001
+ 2   |       1002
+ 3   |       1003
+ 4   |       1005
+ 5   |       1003
+ 6   |       1006
+ 7   |       1001
+ 8   |       1004
+ 9   |       1004
+ 10  |       1001
+(10 rows)
+
+postgres=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | car              | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+(5 rows)
+
+postgres=# ALTER TABLE employee ADD FOREIGN KEY (eid) REFERENCES employee(eid);
+ALTER TABLE
+postgres=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | car              | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+(5 rows)
+
+postgres=# select * from employee;
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid 
+----------------+---------------+--------+---------------+-----------------------+--------+-----
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10
+(10 rows)
+
+postgres=# \d employee;
+                         Table "public.employee"
+     Column     |          Type          | Collation | Nullable | Default 
+----------------+------------------------+-----------+----------+---------
+ emp_first_name | character varying(50)  |           | not null | 
+ emp_last_name  | character varying(50)  |           | not null | 
+ gender         | character varying(7)   |           | not null | 
+ date_of_birth  | date                   |           | not null | 
+ email          | character varying(150) |           |          | 
+ salary         | integer                |           |          | 
+ eid            | character varying(10)  |           | not null | 
+Indexes:
+    "employee_pkey" PRIMARY KEY, btree (eid)
+Foreign-key constraints:
+    "employee_eid_fkey" FOREIGN KEY (eid) REFERENCES employee(eid)
+Referenced by:
+    TABLE "employee" CONSTRAINT "employee_eid_fkey" FOREIGN KEY (eid) REFERENCES employee(eid)
+
+postgres=# INSERT INTO project_assigned (
+eid , project_id)
+VALUES('10' ,1001);^\Quit (core dumped)
+postgres@Tarun-hp-probook:/home/tarun$ psql
+Password for user postgres: 
+psql (14.0 (Ubuntu 14.0-1.pgdg18.04+1), server 11.13 (Ubuntu 11.13-1.pgdg18.04+1))
+Type "help" for help.
+
+postgres=# 
+postgres=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | car              | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+(5 rows)
+
+postgres=# select * from department;
+ERROR:  relation "department" does not exist
+LINE 1: select * from department;
+                      ^
+postgres=# select * from departments;
+ dept_id | dept_name 
+---------+-----------
+ 101IT   | IT
+ 102HR   | HR
+ 103SL   | SALES
+ 104AC   | ACCOUNTS
+ 103RE   | RESEARCH
+(5 rows)
+
+postgres=# ALTER TABLE employee ADD COLUMN dept VARCHAR(10) NOT NULL; 
+ERROR:  column "dept" contains null values
+postgres=# ALTER TABLE employee ADD COLUMN dept VARCHAR(10); 
+ALTER TABLE
+postgres=# select * from departments;
+ dept_id | dept_name 
+---------+-----------
+ 101IT   | IT
+ 102HR   | HR
+ 103SL   | SALES
+ 104AC   | ACCOUNTS
+ 103RE   | RESEARCH
+(5 rows)
+
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid | dept 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | 
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | 
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | 
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | 
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | 
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | 
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | 
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | 
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | 
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | 
+(10 rows)
+
+postgres=# UPDATE employee SET dept='IT' WHERE eid = '1';
+UPDATE 1
+postgres=# UPDATE employee SET dept='IT' WHERE eid = '2';
+UPDATE 1
+postgres=# UPDATE employee SET dept='IT' WHERE eid = '3';
+UPDATE 1
+postgres=# UPDATE employee SET dept='HR' WHERE eid = '4';
+UPDATE 1
+postgres=# UPDATE employee SET dept='SALES' WHERE eid = '5';
+UPDATE 1
+postgres=# UPDATE employee SET dept='SALES' WHERE eid = '6';
+UPDATE 1
+postgres=# UPDATE employee SET dept='SALES' WHERE eid = '7';
+UPDATE 1
+postgres=# UPDATE employee SET dept='ACCOUNTS' WHERE eid = '8';
+UPDATE 1
+postgres=# UPDATE employee SET dept='ACCOUNTS' WHERE eid = '9';
+UPDATE 1
+postgres=# UPDATE employee SET dept='RESEARCH' WHERE eid = '10';
+UPDATE 1
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH
+(10 rows)
+
+postgres=# \DT
+invalid command \DT
+Try \? for help.
+postgres=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | car              | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+(5 rows)
+
+postgres=# \d employee
+                         Table "public.employee"
+     Column     |          Type          | Collation | Nullable | Default 
+----------------+------------------------+-----------+----------+---------
+ emp_first_name | character varying(50)  |           | not null | 
+ emp_last_name  | character varying(50)  |           | not null | 
+ gender         | character varying(7)   |           | not null | 
+ date_of_birth  | date                   |           | not null | 
+ email          | character varying(150) |           |          | 
+ salary         | integer                |           |          | 
+ eid            | character varying(10)  |           | not null | 
+ dept           | character varying(10)  |           |          | 
+Indexes:
+    "employee_pkey" PRIMARY KEY, btree (eid)
+Foreign-key constraints:
+    "employee_eid_fkey" FOREIGN KEY (eid) REFERENCES employee(eid)
+Referenced by:
+    TABLE "employee" CONSTRAINT "employee_eid_fkey" FOREIGN KEY (eid) REFERENCES employee(eid)
+
+postgres=# \d departments;
+                     Table "public.departments"
+  Column   |         Type          | Collation | Nullable | Default 
+-----------+-----------------------+-----------+----------+---------
+ dept_id   | character varying(5)  |           | not null | 
+ dept_name | character varying(10) |           |          | 
+Indexes:
+    "departments_pkey" PRIMARY KEY, btree (dept_id)
+
+postgres=# \d project;
+                                          Table "public.project"
+    Column    |         Type          | Collation | Nullable |                   Default                   
+--------------+-----------------------+-----------+----------+---------------------------------------------
+ project_id   | bigint                |           | not null | nextval('project_project_id_seq'::regclass)
+ project_name | character varying(50) |           | not null | 
+Indexes:
+    "project_pkey" PRIMARY KEY, btree (project_id)
+
+postgres=# 
+postgres=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | car              | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+(5 rows)
+
+
+postgres=# select * from departments;
+ dept_id | dept_name 
+---------+-----------
+ 101IT   | IT
+ 102HR   | HR
+ 103SL   | SALES
+ 104AC   | ACCOUNTS
+ 103RE   | RESEARCH
+(5 rows)
+
+
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH
+(10 rows)
+
+
+postgres=# select * from project;
+ project_id |   project_name   
+------------+------------------
+       1001 | web_project
+       1002 | Machine Learning
+       1003 | Android
+       1005 | funds analysis
+       1006 | Cloud service
+       1004 | mutual funds
+(6 rows)
+
+postgres=# select * from project_assigned;
+ eid | project_id 
+-----+------------
+ 1   |       1001
+ 2   |       1002
+ 3   |       1003
+ 4   |       1005
+ 5   |       1003
+ 6   |       1006
+ 7   |       1001
+ 8   |       1004
+ 9   |       1004
+ 10  |       1001
+(10 rows)
+
+
+postgres=# select employee.eid ,employee.emp_first_name ,project_assigned.project_id FROM employee INNER JOIN project_assigned ON employee.eid = project_assigned.eid WHERE employee.dept = 'IT';
+ eid | emp_first_name | project_id 
+-----+----------------+------------
+ 1   | Aman           |       1001
+ 2   | Ankansha       |       1002
+ 3   | Niharika       |       1003
+(3 rows)
+
+postgres=# select employee.eid ,employee.emp_first_name ,project_assigned.project_id FROM employee INNER JOIN project_assigned ON employee.eid = project_assigned.eid WHERE employee.dept != 'IT';
+ eid | emp_first_name | project_id 
+-----+----------------+------------
+ 4   | Kunal          |       1005
+ 5   | Neha           |       1003
+ 6   | kiran          |       1006
+ 7   | Pawan          |       1001
+ 8   | krshna         |       1004
+ 9   | Thomas         |       1004
+ 10  | Brijesh        |       1001
+(7 rows)
+
+postgres=# select * from project;
+ project_id |   project_name   
+------------+------------------
+       1001 | web_project
+       1002 | Machine Learning
+       1003 | Android
+       1005 | funds analysis
+       1006 | Cloud service
+       1004 | mutual funds
+(6 rows)
+
+postgres=# ALTER TABLE project_assigned ADD FOREIGN KEY (project_id) REFRENCES project(project_id);
+ERROR:  syntax error at or near "REFRENCES"
+LINE 1: ...BLE project_assigned ADD FOREIGN KEY (project_id) REFRENCES ...
+                                                             ^
+postgres=# ALTER TABLE project_assigned ADD FOREIGN KEY (project_id) REFERENCES project(project_id);
+ALTER TABLE
+postgres=# select project_assigned.eid ,project_assigned.project_id ,project.project_name FROM project_assigned INNER JOIN project ON project_assigned.project_id = project.project_id ; 
+postgres=# select project_assigned.eid ,project_assigned.project_id ,project.project_name FROM project_assigned INNER JOIN project ON project_assigned.project_id = project.project_id ; 
+ eid | project_id |   project_name   
+-----+------------+------------------
+ 1   |       1001 | web_project
+ 2   |       1002 | Machine Learning
+ 3   |       1003 | Android
+ 4   |       1005 | funds analysis
+ 5   |       1003 | Android
+ 6   |       1006 | Cloud service
+ 7   |       1001 | web_project
+ 8   |       1004 | mutual funds
+ 9   |       1004 | mutual funds
+ 10  |       1001 | web_project
+(10 rows)
+
+
+
+postgres=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | car              | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+(5 rows)
+
+postgres=# \d departments;
+                     Table "public.departments"
+  Column   |         Type          | Collation | Nullable | Default 
+-----------+-----------------------+-----------+----------+---------
+ dept_id   | character varying(5)  |           | not null | 
+ dept_name | character varying(10) |           |          | 
+Indexes:
+    "departments_pkey" PRIMARY KEY, btree (dept_id)
+
+postgres=# ALTER TABLE employee ADD FOREIGN KEY (eid) REFERENCES departments(dept_id);
+ERROR:  insert or update on table "employee" violates foreign key constraint "employee_eid_fkey1"
+DETAIL:  Key (eid)=(1) is not present in table "departments".
+postgres=# ALTER TABLE employee ADD dept_id_fk VARCHAR REFERENCES departments(dept_id);
+ALTER TABLE
+postgres=# \d departments;
+                     Table "public.departments"
+  Column   |         Type          | Collation | Nullable | Default 
+-----------+-----------------------+-----------+----------+---------
+ dept_id   | character varying(5)  |           | not null | 
+ dept_name | character varying(10) |           |          | 
+Indexes:
+    "departments_pkey" PRIMARY KEY, btree (dept_id)
+Referenced by:
+    TABLE "employee" CONSTRAINT "employee_dept_id_fk_fkey" FOREIGN KEY (dept_id_fk) REFERENCES departments(dept_id)
+
+postgres=# select * from employee;
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 
+(10 rows)
+
+postgres=# ALTER TABLE employee ADD dept_id_fk VARCHAR REFERENCES departments(eid);
+ERROR:  column "dept_id_fk" of relation "employee" already exists
+postgres=# select * from departments;
+ dept_id | dept_name 
+---------+-----------
+ 101IT   | IT
+ 102HR   | HR
+ 103SL   | SALES
+ 104AC   | ACCOUNTS
+ 103RE   | RESEARCH
+(5 rows)
+
+postgres=# UPDATE employee SET dept_id_fk = '1' WHERE eid= '1';
+ERROR:  insert or update on table "employee" violates foreign key constraint "employee_dept_id_fk_fkey"
+DETAIL:  Key (dept_id_fk)=(1) is not present in table "departments".
+postgres=# ALTER TABLE employee DROP COLUMN dept_id_fk;
+ALTER TABLE
+postgres=# select * from departments;
+ dept_id | dept_name 
+---------+-----------
+ 101IT   | IT
+ 102HR   | HR
+ 103SL   | SALES
+ 104AC   | ACCOUNTS
+ 103RE   | RESEARCH
+(5 rows)
+
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH
+(10 rows)
+
+postgres=# ALTER TABLE employee ADD dept_id_fk VARCHAR REFERENCES departments(dept_id);
+ALTER TABLE
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 
+(10 rows)
+
+postgres=# UPDATE employee SET dept_id_fk = '1' WHERE eid= '1';
+ERROR:  insert or update on table "employee" violates foreign key constraint "employee_dept_id_fk_fkey"
+DETAIL:  Key (dept_id_fk)=(1) is not present in table "departments".
+postgres=# UPDATE employee SET dept_id_fk = '101IT' WHERE eid= '1';
+UPDATE 1
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+(10 rows)
+
+postgres=# UPDATE employee SET dept_id_fk = '102IT' WHERE eid= '2';
+ERROR:  insert or update on table "employee" violates foreign key constraint "employee_dept_id_fk_fkey"
+DETAIL:  Key (dept_id_fk)=(102IT) is not present in table "departments".
+postgres=# UPDATE employee SET dept_id_fk = '101IT' WHERE eid= '2';
+UPDATE 1
+postgres=# UPDATE employee SET dept_id_fk = '101IT' WHERE eid= '3';
+UPDATE 1
+postgres=# UPDATE employee SET dept_id_fk = '102HR' WHERE eid= '4';
+UPDATE 1
+postgres=# UPDATE employee SET dept_id_fk = '103HR' WHERE eid= '5';
+ERROR:  insert or update on table "employee" violates foreign key constraint "employee_dept_id_fk_fkey"
+DETAIL:  Key (dept_id_fk)=(103HR) is not present in table "departments".
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+(10 rows)
+
+postgres=# UPDATE employee SET dept_id_fk = '103SL' WHERE eid= '5';
+UPDATE 1
+postgres=# UPDATE employee SET dept_id_fk = '103SL' WHERE eid= '6';
+UPDATE 1
+postgres=# UPDATE employee SET dept_id_fk = '103SL' WHERE eid= '7';
+UPDATE 1
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+(10 rows)
+
+postgres=# UPDATE employee SET dept_id_fk = '104AC' WHERE eid= '8';
+UPDATE 1
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+(10 rows)
+
+postgres=# UPDATE employee SET dept_id_fk = '103SL' WHERE eid= '9';
+UPDATE 1
+postgres=# UPDATE employee SET dept_id_fk = '105RE' WHERE eid= '10';
+ERROR:  insert or update on table "employee" violates foreign key constraint "employee_dept_id_fk_fkey"
+DETAIL:  Key (dept_id_fk)=(105RE) is not present in table "departments".
+postgres=# UPDATE employee SET dept_id_fk = '103RE' WHERE eid= '10';
+UPDATE 1
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(10 rows)
+
+postgres=# select employee.emp_first_name ,departments.dept_name FROM employee INNER JOIN departments ON employee.dept_id_fk = departments.dept_id;
+ emp_first_name | dept_name 
+----------------+-----------
+ Niharika       | IT
+ Ankansha       | IT
+ Aman           | IT
+ Kunal          | HR
+ Thomas         | SALES
+ Pawan          | SALES
+ kiran          | SALES
+ Neha           | SALES
+ krshna         | ACCOUNTS
+ Brijesh        | RESEARCH
+(10 rows)
+
+
+postgres=# select employee.emp_first_name ,departments.dept_name FROM employee INNER JOIN departments ON employee.dept_id_fk = departments.dept_id;
+ emp_first_name | dept_name 
+----------------+-----------
+ Niharika       | IT
+ Ankansha       | IT
+ Aman           | IT
+ Kunal          | HR
+ Thomas         | SALES
+ Pawan          | SALES
+ kiran          | SALES
+ Neha           | SALES
+ krshna         | ACCOUNTS
+ Brijesh        | RESEARCH
+(10 rows)
+
+postgres=# select employee.emp_first_name ,departments.dept_name,employee.salary FROM employee INNER JOIN departments ON employee.dept_id_fk = departments.dept_id WHERE employee.salary >30000;
+
+ emp_first_name | dept_name | salary 
+----------------+-----------+--------
+ Kunal          | HR        |  50000
+ Pawan          | SALES     |  35000
+ krshna         | ACCOUNTS  |  35000
+(3 rows)
+
+postgres=# 
+
 
 
 
