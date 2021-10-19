@@ -51,7 +51,7 @@ postgres=# SELECT NAME ,SUM(SALARY) FROM COMPANY GROUP BY NAME ORDER BY NAME;
  Teddy | 20000
 (7 rows)
 
-===========================================================TATBLE============================================
+===========================================================TABLE============================================
 New tables :
 
 company=# \dt
@@ -1098,6 +1098,99 @@ postgres=#
 
 
 
+===================================================19th oct======================
+Join three tables : employee,project,project_assigned
 
+postgres=# select employee.emp_first_name ,employee.salary ,project.project_name,project_assigned.project_id 
+	          FROM employee INNER JOIN project_assigned ON employee.eid = project_assigned.eid  
+	          INNER JOIN project ON project.project_id = project_assigned.project_id;
+ emp_first_name | salary |   project_name   | project_id 
+----------------+--------+------------------+------------
+ Aman           |  30000 | web_project      |       1001
+ Ankansha       |  30000 | Machine Learning |       1002
+ Niharika       |  20000 | Android          |       1003
+ Kunal          |  50000 | funds analysis   |       1005
+ Neha           |  25000 | Android          |       1003
+ kiran          |  30000 | Cloud service    |       1006
+ Pawan          |  35000 | web_project      |       1001
+ krshna         |  35000 | mutual funds     |       1004
+ Thomas         |  30000 | mutual funds     |       1004
+ Brijesh        |  25000 | web_project      |       1001
+(10 rows)
+
+postgres=# select employee.emp_first_name ,employee.salary,departments.dept_name ,project.project_name,project_assigned.project_id 
+           FROM employee 
+           INNER JOIN project_assigned ON employee.eid = project_assigned.eid  
+	   INNER JOIN project ON project.project_id = project_assigned.project_id 
+           INNER JOIN departments ON departments.dept_id = employee.dept_id_fk;
+
+ emp_first_name | salary | dept_name |   project_name   | project_id 
+----------------+--------+-----------+------------------+------------
+ Niharika       |  20000 | IT        | Android          |       1003
+ Ankansha       |  30000 | IT        | Machine Learning |       1002
+ Aman           |  30000 | IT        | web_project      |       1001
+ Kunal          |  50000 | HR        | funds analysis   |       1005
+ Thomas         |  30000 | SALES     | mutual funds     |       1004
+ Pawan          |  35000 | SALES     | web_project      |       1001
+ kiran          |  30000 | SALES     | Cloud service    |       1006
+ Neha           |  25000 | SALES     | Android          |       1003
+ krshna         |  35000 | ACCOUNTS  | mutual funds     |       1004
+ Brijesh        |  25000 | RESEARCH  | web_project      |       1001
+(10 rows)
+
+
+Join 5 tables :
+
+postgres=# select employee.emp_first_name ,employee.salary,departments.dept_name ,project.project_name,project_assigned.project_id ,COUNT(*) 
+           FROM employee 
+           INNER JOIN project_assigned ON employee.eid = project_assigned.eid  
+           INNER JOIN project ON project.project_id = project_assigned.project_id 
+           INNER JOIN departments ON departments.dept_id = employee.dept_id_fk
+           INNER JOIN through ON project_assigned.eid  = through.eidpk GROUP BY                               employee.emp_first_name,employee.salary,departments.dept_name ,project.project_name,project_assigned.project_id;
+ emp_first_name | salary | dept_name |   project_name   | project_id | count 
+----------------+--------+-----------+------------------+------------+-------
+ Aman           |  30000 | IT        | web_project      |       1001 |     1
+ Ankansha       |  30000 | IT        | Machine Learning |       1002 |     1
+ Brijesh        |  25000 | RESEARCH  | web_project      |       1001 |     1
+ kiran          |  30000 | SALES     | Cloud service    |       1006 |     1
+ krshna         |  35000 | ACCOUNTS  | mutual funds     |       1004 |     1
+ Kunal          |  50000 | HR        | funds analysis   |       1005 |     1
+ Neha           |  25000 | SALES     | Android          |       1003 |     1
+ Niharika       |  20000 | IT        | Android          |       1003 |     1
+ Pawan          |  35000 | SALES     | web_project      |       1001 |     1
+ Thomas         |  30000 | SALES     | mutual funds     |       1004 |     1
+(10 rows)
+
+
+count the number of projects count:
+
+postgres=# select project.project_name,COUNT(*) FROM project INNER JOIN project_assigned ON project_assigned.project_id = project.project_id INNER JOIN through ON through.eidpk = project_assigned.eid GROUP BY project.project_name; 
+   project_name   | count 
+------------------+-------
+ mutual funds     |     2
+ funds analysis   |     1
+ Android          |     2
+ Cloud service    |     1
+ Machine Learning |     1
+ web_project      |     3
+(6 rows)
+
+
+Assigned project to the employeeds:
+
+postgres=# select employee.emp_first_name , project.project_name,COUNT(*) FROM project INNER JOIN project_assigned ON project_assigned.project_id = project.project_id INNER JOIN through ON through.eidpk = project_assigned.eid INNER JOIN employee On employee.eid = project_assigned.eid  GROUP BY employee.emp_first_name, project.project_name; 
+ emp_first_name |   project_name   | count 
+----------------+------------------+-------
+ krshna         | mutual funds     |     1
+ Ankansha       | Machine Learning |     1
+ Brijesh        | web_project      |     1
+ Neha           | Android          |     1
+ Aman           | web_project      |     1
+ Pawan          | web_project      |     1
+ Niharika       | Android          |     1
+ kiran          | Cloud service    |     1
+ Thomas         | mutual funds     |     1
+ Kunal          | funds analysis   |     1
+(10 rows)
 
 
