@@ -1194,3 +1194,85 @@ postgres=# select employee.emp_first_name , project.project_name,COUNT(*) FROM p
 (10 rows)
 
 
+----------------------------final tables------------------------
+postgres=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | clientprojects   | table | postgres
+ public | clients          | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+ public | through          | table | postgres
+(7 rows)
+
+
+postgres=# select * from departments;
+ dept_id | dept_name 
+---------+-----------
+ 101IT   | IT
+ 102HR   | HR
+ 103SL   | SALES
+ 104AC   | ACCOUNTS
+ 103RE   | RESEARCH
+(5 rows)
+
+postgres=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(10 rows)
+
+postgres=# select * from project;
+ project_id |   project_name   
+------------+------------------
+       1001 | web_project
+       1002 | Machine Learning
+       1003 | Android
+       1005 | funds analysis
+       1006 | Cloud service
+       1004 | mutual funds
+(6 rows)
+
+postgres=# select * from project_assigned;
+ eid | project_id 
+-----+------------
+ 1   |       1001
+ 2   |       1002
+ 3   |       1003
+ 4   |       1005
+ 5   |       1003
+ 6   |       1006
+ 7   |       1001
+ 8   |       1004
+ 9   |       1004
+ 10  |       1001
+(10 rows)
+
+postgres=# select * from through;
+ eid | project_id | eidpk 
+-----+------------+-------
+ 1   |       1001 | 1
+ 1   |       1002 | 2
+ 2   |       1001 | 3
+ 2   |       1003 | 4
+ 3   |       1002 | 5
+ 3   |       1003 | 6
+ 5   |       1004 | 7
+ 5   |       1005 | 8
+ 6   |       1004 | 9
+ 10  |       1001 | 10
+(10 rows)
+
+
