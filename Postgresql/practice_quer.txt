@@ -812,10 +812,8 @@ postgres=# select * from project;
        1004 | mutual funds
 (6 rows)
 
-postgres=# ALTER TABLE project_assigned ADD FOREIGN KEY (project_id) REFRENCES project(project_id);
-ERROR:  syntax error at or near "REFRENCES"
-LINE 1: ...BLE project_assigned ADD FOREIGN KEY (project_id) REFRENCES ...
-                                                             ^
+
+                                                            
 postgres=# ALTER TABLE project_assigned ADD FOREIGN KEY (project_id) REFERENCES project(project_id);
 ALTER TABLE
 postgres=# select project_assigned.eid ,project_assigned.project_id ,project.project_name FROM project_assigned INNER JOIN project ON project_assigned.project_id = project.project_id ; 
@@ -1319,5 +1317,80 @@ postgres=# SELECT * FROM employee WHERE eid IN (select eid FROM employee where s
  Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
  Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
 (9 rows)
+
+
+postgres=# select employee.emp_first_name ,departments.dept_name,project.project_name 
+FROM employee 
+INNER JOIN departments ON employee.dept_id_fk = departments.dept_id
+INNER JOIN project_assigned ON project_assigned.eid = employee.eid 
+INNER JOIN project ON project.project_id = project_assigned.project_id;
+ emp_first_name | dept_name |   project_name   
+----------------+-----------+------------------
+ Niharika       | IT        | Android
+ Ankansha       | IT        | Machine Learning
+ Aman           | IT        | web_project
+ Kunal          | HR        | funds analysis
+ Thomas         | SALES     | mutual funds
+ Pawan          | SALES     | web_project
+ kiran          | SALES     | Cloud service
+ Neha           | SALES     | Android
+ krshna         | ACCOUNTS  | mutual funds
+ Brijesh        | RESEARCH  | web_project
+(10 rows)
+
+
+postgres=# select p.project_name , COUNT(*) from project as p ,project_assigned as pa,through as t WHERE pa.project_id = p.project_id AND t.eidpk = pa.eid GROUP BY p.project_name; 
+   project_name   | count 
+------------------+-------
+ mutual funds     |     2
+ funds analysis   |     1
+ Android          |     2
+ Cloud service    |     1
+ Machine Learning |     1
+ web_project      |     3
+(6 rows)
+
+
+airline=# select e.ename ,e.salary from employees as e WHERE e.eid NOT IN  (select e.salary from employees e ,certified as c where c.emp_id_fk = e.eid)AND e.salary >(select AVG(e.salary) from employees as e,certified as c where c.emp_id_fk = e.eid);
+  ename  | salary 
+---------+--------
+ Ron     |  82000
+ Harry   |  81000
+ Ginni   |  83000
+ shawn   |  81000
+ Micheal |  79000
+(5 rows)
+
+postgres=# select e.emp_first_name ,d.dept_name,p.project_name FROM employee as e,departments as d ,project_assigned as pa, project as p  WHERE  e.dept_id_fk = d.dept_id AND  pa.eid = e.eid  AND  p.project_id = pa.project_id;
+ emp_first_name | dept_name |   project_name   
+----------------+-----------+------------------
+ Niharika       | IT        | Android
+ Ankansha       | IT        | Machine Learning
+ Aman           | IT        | web_project
+ Kunal          | HR        | funds analysis
+ Thomas         | SALES     | mutual funds
+ Pawan          | SALES     | web_project
+ kiran          | SALES     | Cloud service
+ Neha           | SALES     | Android
+ krshna         | ACCOUNTS  | mutual funds
+ Brijesh        | RESEARCH  | web_project
+(10 rows)
+
+postgres=# select employee.emp_first_name ,departments.dept_name,project.project_name FROM employee INNER JOIN departments ON employee.dept_id_fk = departments.dept_id INNER JOIN project_assigned ON project_assigned.eid = employee.eid INNER JOIN project ON project.project_id = project_assigned.project_id;
+ emp_first_name | dept_name |   project_name   
+----------------+-----------+------------------
+ Niharika       | IT        | Android
+ Ankansha       | IT        | Machine Learning
+ Aman           | IT        | web_project
+ Kunal          | HR        | funds analysis
+ Thomas         | SALES     | mutual funds
+ Pawan          | SALES     | web_project
+ kiran          | SALES     | Cloud service
+ Neha           | SALES     | Android
+ krshna         | ACCOUNTS  | mutual funds
+ Brijesh        | RESEARCH  | web_project
+(10 rows)
+
+
 
 

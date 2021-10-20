@@ -57,60 +57,6 @@ airline=# SELECT * FROM aircraft;
  106 | Jetblue  |          5000
 (6 rows)
 
-================================================================
----------------------------------------------
-ans a)Find the names of aircraft such that all pilots certified to operate them earn
-more than $80,000.
-
-airline=# SELECT aircraft.aname  FROM aircraft  INNER JOIN certified ON  aircraft.c_id_fk = certified.aid  
-INNER JOIN employees on certified.eid = employees.eid WHERE employees.salary >80000; 
-  aname   
-----------
- Boeing
- American
- Alaska
-(3 rows)
------------------------------------------------------
-
-ans B)  SELECT employees.aid, MAX(aircraft.cruisingrange) FROM employees INNER JOIN aircraft ON employees.eid = aircraft.aid INNER JOIN certified ON aircraft.aid = employees.eid   HAVING  COUNT(certified.aid) > 3;
------------------------------------------------------------------------------------
-ans c)  SELECT employees.ename FROM employees INNER JOIN flights ON employees.eid = flights.emp_id_fk WHERE employees.salary < MIN(flights.distance);
----------------------------------------------------------------------------------------------------------------------------
-ans d)
-
---------------------------------------------------------------------------------------------------------------
-ans e) airline=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_id_fk = certified.aid  
-INNER JOIN employees on certified.eid = employees.eid WHERE aircraft.aname = 'Boeing';
- ename 
--------
- Ron
-(1 row)
-
-----------------------------------------------------------------------------------
-ans f)	airline=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_id_fk = certified.aid  
-INNER JOIN employees on certified.eid = employees.eid WHERE aircraft.cruisingrange >3000 AND (employees.eid=certified.eid);
-  ename  
----------
- Harry
- Ginni
- Micheal
- Nikita
- Mili
-(5 rows)
--------------------------------------------------------------------------------------------
-ans h : airline=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_id_fk = certified.aid  
-INNER JOIN employees on certified.eid = employees.eid WHERE aircraft.cruisingrange >3000 AND (employees.eid!=certified.eid );
- ename 
--------
-(0 rows)
-
-----------------------------------------------------------------------------------------------
-ans i :
-airline=# SELECT employees.ename FROM employees INNER JOIN certified ON employees.eid = certified.emp_id_fk INNER JOIN aircraft On aircraft.c_id_fk = certified.emp_id_fk WHERE aircraft.cruisingrange >1000;
-ename 
--------
-(0 rows)
-
 =======================================airlinenew db=================================================================
 ans a ) airlinenew=#                
 SELECT aircraft.aname  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = certified.cpk INNER JOIN employees on certified.cpk = employees.eid WHERE employees.salary >80000; 
@@ -123,12 +69,6 @@ SELECT aircraft.aname  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = c
 (4 rows)
 
 ------------------------
-
-SELECT C.eid, MAX (A.cruisingrange)
-FROM Certified C, Aircraft A
-WHERE C.aid = A.aid
-GROUP BY C.eid
-HAVING COUNT (*) > 3 
 
 ans b)airlinenew=#  SELECT employees.eid, MAX(aircraft.cruisingrange) FROM employees INNER JOIN aircraft ON employees.eid = aircraft.c_fk INNER JOIN certified ON aircraft.c_fk = employees.eid GROUP BY employees.eid,certified.eid  HAVING COUNT(certified.eid)>3;
  eid | max  
@@ -149,7 +89,17 @@ ans c)airlinenew=# SELECT employees.ename FROM employees WHERE employees.salary<
 (1 row)
 
 ----------------
-ans d)
+d)For all aircraft with cruisingrange over 1000 miles, find the name of the aircraft and the average salary of all pilots certified for this aircraft.
+ 
+select a.aname,AVG(e.salary) from aircraft as a ,employees as e ,certified as c WHERE a.c_id_fk = c.aid AND c.emp_id_fk = e.eid GROUP BY a.aname ,a.cruisingrange  HAVING (a.cruisingrange>1000);
+  aname   |        avg         
+----------+--------------------
+ Alaska   | 73333.333333333333
+ Breeze   | 70000.000000000000
+ Boeing   | 82000.000000000000
+ American | 83000.000000000000
+(4 rows)
+
 
 ------------
 ans e) airlinenew=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = certified.cpk  
@@ -171,7 +121,6 @@ ans f)airlinenew=# SELECT aircraft.aid FROM aircraft WHERE aircraft.cruisingrang
 
 ------------------
 ans g)
-
 -------------------
 ans h ) airlinenew=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = certified.cpk  
 INNER JOIN employees on certified.eid = employees.eid WHERE aircraft.cruisingrange >3000 AND (employees.eid=certified.eid);
@@ -188,7 +137,12 @@ ans i)
 -----------------------------
 ans j)
 -----------------------------
-ans k)
+ans k)Print the name and salary of every nonpilot whose salary is more than the average salary for pilots.
+
+
+
+
+
 -------------------------------
 ans l)
 -------------------------------
