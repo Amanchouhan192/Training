@@ -105,13 +105,16 @@ airlinenew=# SELECT employees.ename FROM employees WHERE employees.salary<(SELEC
  karan
 (1 row)
 ----------------------------------------------------
-d)d. Observe that aid is the key for Aircraft, but the question asks for aircraft names; we deal with this
-complication by using an intermediate relation Temp:
-SELECT Temp.name, Temp.AvgSalary
-FROM ( SELECT A.aid, A.aname AS name, AVG (E.salary) AS AvgSalary
- FROM Aircraft A, Certified C, Employees E
- WHERE A.aid = C.aid AND C.eid = E.eid AND A.cruisingrange > 1000
- GROUP BY A.aid, A.aname ) AS Temp
+d)For all aircraft with cruisingrange over 1000 miles, find the name of the aircraft and the average salary of all pilots certified for this aircraft.
+ 
+select a.aname,AVG(e.salary) from aircraft as a ,employees as e ,certified as c WHERE a.c_id_fk = c.aid AND c.emp_id_fk = e.eid GROUP BY a.aname ,a.cruisingrange  HAVING (a.cruisingrange>1000);
+  aname   |        avg         
+----------+--------------------
+ Alaska   | 73333.333333333333
+ Breeze   | 70000.000000000000
+ Boeing   | 82000.000000000000
+ American | 83000.000000000000
+(4 rows)
 ------------
 e)  Find the names of pilots certified for some Boeing aircraft.
 
