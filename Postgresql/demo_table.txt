@@ -111,3 +111,107 @@ ename
 -------
 (0 rows)
 
+=======================================airlinenew db=================================================================
+ans a ) airlinenew=#                
+SELECT aircraft.aname  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = certified.cpk INNER JOIN employees on certified.cpk = employees.eid WHERE employees.salary >80000; 
+  aname   
+----------
+ Boeing
+ Alaska
+ American
+ Avelo
+(4 rows)
+
+------------------------
+
+SELECT C.eid, MAX (A.cruisingrange)
+FROM Certified C, Aircraft A
+WHERE C.aid = A.aid
+GROUP BY C.eid
+HAVING COUNT (*) > 3 
+
+ans b)airlinenew=#  SELECT employees.eid, MAX(aircraft.cruisingrange) FROM employees INNER JOIN aircraft ON employees.eid = aircraft.c_fk INNER JOIN certified ON aircraft.c_fk = employees.eid GROUP BY employees.eid,certified.eid  HAVING COUNT(certified.eid)>3;
+ eid | max  
+-----+------
+   4 | 6000
+   1 | 3000
+   6 | 5000
+   3 | 4000
+   5 | 1200
+   2 | 4000
+(6 rows)
+
+-----------------------------
+ans c)airlinenew=# SELECT employees.ename FROM employees WHERE employees.salary<(SELECT MIN(flights.price) FROM flights WHERE flights.from_ = 'Los Angeles' AND flights.to_ = 'Honlulu' ) ;
+ ename 
+-------
+ karan
+(1 row)
+
+----------------
+ans d)
+
+------------
+ans e) airlinenew=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = certified.cpk  
+INNER JOIN employees on certified.cpk = employees.eid WHERE aircraft.aname = 'Boeing';
+ ename 
+-------
+ Ron
+(1 row)
+--------------------
+ans f)airlinenew=# SELECT aircraft.aid FROM aircraft WHERE aircraft.cruisingrange>(SELECT MIN(flights.distence) FROM flights WHERE flights.from_ = 'Los Angeles' AND flights.to_ = 'Chicago');
+ aid 
+-----
+ 101
+ 102
+ 103
+ 104
+ 106
+(5 rows)
+
+------------------
+ans g)
+
+-------------------
+ans h ) airlinenew=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = certified.cpk  
+INNER JOIN employees on certified.eid = employees.eid WHERE aircraft.cruisingrange >3000 AND (employees.eid=certified.eid);
+ ename 
+-------
+ Harry
+ Ginni
+ Gerry
+ Mili
+(4 rows)
+-------------------------------
+ans i) 
+
+-----------------------------
+ans j)
+-----------------------------
+ans k)
+-------------------------------
+ans l)
+-------------------------------
+ans m)airlinenew=#SELECT employees.ename FROM employees,certified,aircraft WHERE certified.cpk = aircraft.c_fk AND employees.eid = certified.cpk GROUP BY employees.eid ,employees.ename,aircraft.cruisingrange HAVING (aircraft.cruisingrange>1000) AND COUNT(*)>=1;
+ ename  
+--------
+ Gerry
+ shawn
+ Ginni
+ Ron
+ Harry
+ Nikita
+(6 rows)
+
+-----------------------------
+ans n) airlinenew=#  SELECT employees.ename FROM employees,certified,aircraft WHERE certified.cpk = aircraft.c_fk AND employees.eid = certified.cpk GROUP BY employees.eid ,employees.ename,aircraft.cruisingrange ,certified.cpk,aircraft.c_fk HAVING  (certified.cpk=aircraft.c_fk)AND (aircraft.cruisingrange>1000) AND COUNT(*)>=1;
+ ename  
+--------
+ Gerry
+ Nikita
+ Ron
+ shawn
+ Ginni
+ Harry
+(6 rows)
+
