@@ -115,7 +115,8 @@ select a.aname,AVG(e.salary) from aircraft as a ,employees as e ,certified as c 
  Boeing   | 82000.000000000000
  American | 83000.000000000000
 (4 rows)
-------------
+
+---------------------------------------------------------------------------------------------------
 e)  Find the names of pilots certified for some Boeing aircraft.
 
 airlinenew=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = certified.cpk  
