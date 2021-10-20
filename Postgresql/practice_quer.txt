@@ -1275,4 +1275,49 @@ postgres=# select * from through;
  10  |       1001 | 10
 (10 rows)
 
+============================================================================================================================
+
+postgres=# select e.emp_first_name,e.emp_last_name,e.salary ,d.dept_name FROM employee AS e,departments AS d WHERE e.dept_id_fk = d.dept_id;
+ emp_first_name | emp_last_name | salary | dept_name 
+----------------+---------------+--------+-----------
+ Niharika       | kumari        |  20000 | IT
+ Ankansha       | sharma        |  30000 | IT
+ Aman           | Chouhan       |  30000 | IT
+ Kunal          | kumar         |  50000 | HR
+ Thomas         | smith         |  30000 | SALES
+ Pawan          | khanna        |  35000 | SALES
+ kiran          | sharma        |  30000 | SALES
+ Neha           | Nagar         |  25000 | SALES
+ krshna         | kapoor        |  35000 | ACCOUNTS
+ Brijesh        | Yadav         |  25000 | RESEARCH
+
+postgres=# select emp_first_name,emp_last_name,AGE(NOW(),date_of_birth) FROM employee;
+ emp_first_name | emp_last_name |                   age                    
+----------------+---------------+------------------------------------------
+ Aman           | Chouhan       | 23 years 9 mons 22 days 16:36:16.400458
+ Ankansha       | sharma        | 22 years 10 mons 21 days 16:36:16.400458
+ Niharika       | kumari        | 22 years 29 days 16:36:16.400458
+ Kunal          | kumar         | 22 years 1 mon 8 days 16:36:16.400458
+ Neha           | Nagar         | 23 years 9 mons 22 days 16:36:16.400458
+ kiran          | sharma        | 22 years 9 mons 26 days 16:36:16.400458
+ Pawan          | khanna        | 27 years 3 mons 29 days 16:36:16.400458
+ krshna         | kapoor        | 26 years 1 mon 26 days 16:36:16.400458
+ Thomas         | smith         | 31 years 5 mons 29 days 16:36:16.400458
+ Brijesh        | Yadav         | 29 years 6 mons 29 days 16:36:16.400458
+(10 rows)
+
+postgres=# SELECT * FROM employee WHERE eid IN (select eid FROM employee where salary<=35000);
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(9 rows)
+
 
