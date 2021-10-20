@@ -104,8 +104,14 @@ airlinenew=# SELECT employees.ename FROM employees WHERE employees.salary<(SELEC
 -------
  karan
 (1 row)
-
-
+----------------------------------------------------
+d)d. Observe that aid is the key for Aircraft, but the question asks for aircraft names; we deal with this
+complication by using an intermediate relation Temp:
+SELECT Temp.name, Temp.AvgSalary
+FROM ( SELECT A.aid, A.aname AS name, AVG (E.salary) AS AvgSalary
+ FROM Aircraft A, Certified C, Employees E
+ WHERE A.aid = C.aid AND C.eid = E.eid AND A.cruisingrange > 1000
+ GROUP BY A.aid, A.aname ) AS Temp
 ------------
 e)  Find the names of pilots certified for some Boeing aircraft.
 
@@ -116,6 +122,7 @@ INNER JOIN employees on certified.cpk = employees.eid WHERE aircraft.aname = 'Bo
  Ron
 (1 row)
 --------------------
+
 
 f) Find the aids of all aircraft that can be used on routes from Los Angeles to Chicago
 
