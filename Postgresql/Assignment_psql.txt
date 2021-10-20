@@ -1,0 +1,166 @@
+Tables :
+
+ Schema |   Name    | Type  |  Owner   
+--------+-----------+-------+----------
+ public | aircraft  | table | postgres
+ public | certified | table | postgres
+ public | employees | table | postgres
+ public | flights   | table | postgres
+
+
+
+1. aircraft;
+ aid |  aname   | cruisingrange | c_fk 
+-----+----------+---------------+------
+ 101 | Boeing   |          3000 |    1
+ 102 | Alaska   |          4000 |    2
+ 103 | American |          4000 |    3
+ 104 | Avelo    |          6000 |    4
+ 105 | Breeze   |          1200 |    5
+ 106 | Jetblue  |          5000 |    6
+(6 rows)
+
+2. certified;
+ eid | aid | cpk 
+-----+-----+-----
+   1 | 101 |   1
+   2 | 102 |   2
+   3 | 103 |   3
+   5 | 104 |   4
+   8 | 105 |   5
+   9 | 102 |   6
+   2 | 106 |   7
+   2 | 105 |   8
+   3 | 103 |   9
+   3 | 104 |  10
+   3 | 101 |  11
+(11 rows)
+
+
+3. employees;
+ eid |  ename  | salary 
+-----+---------+--------
+   1 | Ron     |  82000
+   2 | Harry   |  81000
+   3 | Ginni   |  83000
+   4 | shawn   |  81000
+   5 | Gerry   |  70000
+   6 | Nikita  |  60000
+   7 | Richard |  75000
+   8 | Micheal |  79000
+   9 | Mili    |  65000
+  10 | Norha   |   5500
+  11 | kalpana |  57000
+  12 | karan   |    600
+(12 rows)
+
+4.flights;
+ flno |    from_    |   to_    | distence | departs | arrives | price | emp_fk 
+------+-------------+----------+----------+---------+---------+-------+--------
+  101 | Los Angeles | Honlulu  |     2558 | 5pm     | 7pm     |  4100 |      1
+  102 | Madison     | New York |      821 | 4pm     | 6pm     |  2160 |      2
+  103 | Los Angeles | Chicago  |     1740 | 4pm     | 8pm     |  8000 |      3
+  104 | Los Angeles | Honlulu  |      148 | 1pm     | 2pm     |  5000 |      4
+  106 | Los Angeles | Honlulu  |     4238 | 5pm     | 9pm     |   679 |      5
+  105 | Honlulu     | Madison  |     4166 | 6pm     | 3am     |   742 |      6
+(6 rows)
+
+
+===================================================Answers==========================================
+=======================================airlinenew db=================================================================
+a ) Find the names of aircraft such that all pilots certified to operate them earn
+more than $80,000.
+            
+SELECT aircraft.aname  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = certified.cpk INNER JOIN employees on certified.cpk = employees.eid WHERE employees.salary >80000; 
+  aname   
+----------
+ Boeing
+ Alaska
+ American
+ Avelo
+(4 rows)
+
+-----------------------
+
+b) For each pilot who is certified for more than three aircraft, find the eid and the maximum cruisingrange of the aircraft for which she or he is certified.
+
+
+airlinenew=#  SELECT employees.eid, MAX(aircraft.cruisingrange) FROM employees INNER JOIN aircraft ON employees.eid = aircraft.c_fk INNER JOIN certified ON aircraft.c_fk = employees.eid GROUP BY employees.eid,certified.eid  HAVING COUNT(certified.eid)>3;
+ eid | max  
+-----+------
+   4 | 6000
+   1 | 3000
+   6 | 5000
+   3 | 4000
+   5 | 1200
+   2 | 4000
+(6 rows)
+
+-----------------------------
+c)Find the names of pilots whose salary is less than the price of the cheapest route from Los Angeles to Honolulu
+
+airlinenew=# SELECT employees.ename FROM employees WHERE employees.salary<(SELECT MIN(flights.price) FROM flights WHERE flights.from_ = 'Los Angeles' AND flights.to_ = 'Honlulu' ) ;
+ ename 
+-------
+ karan
+(1 row)
+
+
+------------
+e)  Find the names of pilots certified for some Boeing aircraft.
+
+airlinenew=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = certified.cpk  
+INNER JOIN employees on certified.cpk = employees.eid WHERE aircraft.aname = 'Boeing';
+ ename 
+-------
+ Ron
+(1 row)
+--------------------
+
+f) Find the aids of all aircraft that can be used on routes from Los Angeles to Chicago
+
+airlinenew=# SELECT aircraft.aid FROM aircraft WHERE aircraft.cruisingrange>(SELECT MIN(flights.distence) FROM flights WHERE flights.from_ = 'Los Angeles' AND flights.to_ = 'Chicago');
+ aid 
+-----
+ 101
+ 102
+ 103
+ 104
+ 106
+(5 rows)
+
+-------------------
+ h )Print the enames of pilots who can operate planes with cruisingrange greater than 3000 miles but are not certified on any Boeing aircraft.
+
+airlinenew=# SELECT employees.ename  FROM aircraft  INNER JOIN certified ON  aircraft.c_fk = certified.cpk  
+INNER JOIN employees on certified.eid = employees.eid WHERE aircraft.cruisingrange >3000 AND (employees.eid=certified.eid);
+ ename 
+-------
+ Harry
+ Ginni
+ Gerry
+ Mili
+(4 rows)
+-------------------------------
+m) Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles, but on at least two such aircrafts
+
+airlinenew=#SELECT employees.ename FROM employees,certified,aircraft WHERE certified.cpk = aircraft.c_fk AND employees.eid = certified.cpk GROUP BY employees.eid ,employees.ename,aircraft.cruisingrange HAVING (aircraft.cruisingrange>1000) AND COUNT(*)>=1;
+ ename  
+--------
+ Gerry
+ shawn
+ Ginni
+ Ron
+ Harry
+ Nikita
+(6 rows)
+
+-----------------------------
+n) Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some Boeing aircraft
+
+SELECT employees.ename FROM employees,certified,aircraft WHERE certified.cpk = aircraft.c_fk AND employees.eid = certified.cpk GROUP BY employees.eid,employees.ename ,aircraft.cruisingrange,aircraft.aname HAVING (aircraft.cruisingrange>1000)AND (aircraft.aname='Boeing');
+ ename 
+-------
+ Ron
+(1 row)
+
