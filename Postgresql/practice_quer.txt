@@ -1391,6 +1391,269 @@ postgres=# select employee.emp_first_name ,departments.dept_name,project.project
  Brijesh        | RESEARCH  | web_project
 (10 rows)
 
+------------------------------------------------21th oct--------------------------------
+postgres=# select d.dept_name,AVG(e.salary) as AvgSalary from employee as e , departments as d GROUP BY d.dept_name,e.dept_id_fk,d.dept_id HAVING ( e.dept_id_fk = d.dept_id);
+ dept_name |     avgsalary      
+-----------+--------------------
+ IT        | 26666.666666666667
+ HR        | 50000.000000000000
+ RESEARCH  | 25000.000000000000
+ SALES     | 30000.000000000000
+ ACCOUNTS  | 35000.000000000000
+(5 rows)
+
+
+postgres=# select DISTINCT(project_name) from project;
+   project_name   
+------------------
+ mutual funds
+ funds analysis
+ Android
+ Cloud service
+ Machine Learning
+ web_project
+
+--------------------------------------Queries-----------------------------------
+1. Write an SQL query to fetch the count of employees working in project ‘web_project’.
+
+select COUNT(*) FROM employee as e ,project as p ,project_assigned as pa  where e.eid = pa.eid AND pa.project_id = p.project_id AND p.project_name = 'web_project'; 
+ count 
+-------
+     3
+(1 row)
+
+2.who got the  'web_project' in the database.
+
+postgres=# select e.emp_first_name, COUNT(*) FROM employee as e ,project as p ,project_assigned as pa  GROUP BY e.emp_first_name,e.eid,pa.project_id,p.project_id,pa.eid  HAVING e.eid = pa.eid AND pa.project_id = p.project_id AND p.project_name = 'web_project'; 
+ emp_first_name | count 
+----------------+-------
+ Aman           |     1
+ Brijesh        |     1
+ Pawan          |     1
+(3 rows)
+
+
+3.. Write an SQL query to find the maximum, minimum, and average salary of the employees.
+
+select MAX(salary),Min(salary),AVG(salary) from employee;
+  max  |  min  |        avg         
+-------+-------+--------------------
+ 50000 | 20000 | 31000.000000000000
+(1 row)
+
+
+4. Write an SQL query to find the employee id whose salary lies in the range of 20000 and 25000.
+
+select eid , salary from employee where salary BETWEEN 20000 AND 25000;
+ eid | salary 
+-----+--------
+ 3   |  20000
+ 5   |  25000
+ 10  |  25000
+(3 rows)
+
+
+5. Write an SQL query to fetch those projects  and employee name and count the number of project assigned to the employee;
+
+select p.project_name,e.emp_first_name , COUNT(*) from project as p ,project_assigned as pa,through as t,employee as e GROUP BY
+t.eidpk,pa.eid,e.eid, e.emp_first_name, p.project_name,pa.project_id,p.project_id,pa.project_id,t.eidpk,pa.eid having COUNT(*)>=1 AND  pa.project_id = p.project_id AND t.eidpk = pa.eid AND e.eid = pa.eid;
+   project_name   | emp_first_name | count 
+------------------+----------------+-------
+ web_project      | Brijesh        |     1
+ Android          | Neha           |     1
+ funds analysis   | Kunal          |     1
+ Android          | Niharika       |     1
+ web_project      | Aman           |     1
+ mutual funds     | Thomas         |     1
+ Machine Learning | Ankansha       |     1
+ mutual funds     | krshna         |     1
+ web_project      | Pawan          |     1
+ Cloud service    | kiran          |     1
+(10 rows)
+
+
+6.Write an sql query to fetch  employee name who is working on 'web project'.
+
+select p.project_name,e.emp_first_name  from project as p ,project_assigned as pa,through as t,employee as e GROUP BY t.eidpk,pa.eid,e.eid, e.emp_first_name, p.project_name,pa.project_id,p.project_id,pa.project_id,t.eidpk,pa.eid having  pa.project_id = p.project_id AND t.eidpk = pa.eid AND e.eid = pa.eid AND p.project_name='web_project';
+ project_name | emp_first_name 
+--------------+----------------
+ web_project  | Aman
+ web_project  | Brijesh
+ web_project  | Pawan
+(3 rows)
+
+
+6.Write an sql query to fetch  employee name who is not working  'web project'.
+
+select e.emp_first_name  from project as p ,project_assigned as pa,through as t,employee as e GROUP BY t.eidpk,pa.eid,e.eid, e.emp_first_name, p.project_name,pa.project_id,p.project_id,pa.project_id,t.eidpk,pa.eid having  pa.project_id = p.project_id AND t.eidpk = pa.eid AND e.eid = pa.eid AND p.project_name<>'web_project';
+ emp_first_name 
+----------------
+ Ankansha
+ Niharika
+ Kunal
+ Neha
+ kiran
+ krshna
+ Thomas
+(7 rows)
+
+
+7.Write an SQL query to display the total salary of each employee adding the Salary with Variable value 5000.
+
+
+
+select eid ,salary + 5000 as Totalsalary from employee;
+ eid | totalsalary 
+-----+-------------
+ 1   |       35000
+ 2   |       35000
+ 3   |       25000
+ 4   |       55000
+ 5   |       30000
+ 6   |       35000
+ 7   |       40000
+ 8   |       40000
+ 9   |       35000
+ 10  |       30000
+
+
+8. Write an SQL query to fetch the employees whose name begins with any two characters, followed by a text “a” and ending with any sequence of characters.
+
+select emp_first_name from employee where emp_first_name  LIKE  '%a'; 
+emp_first_name 
+----------------
+ Ankansha
+ Niharika
+ Neha
+ krshna
+(4 rows)
+
+
+9. Write an SQL query to fetch all the eid which are present in either of the tables – ‘employees’ and ‘project_assigned’.
+
+select eid from employee 
+UNION
+select eid from project_assigned;
+ eid 
+-----
+ 2
+ 10
+ 6
+ 8
+ 9
+ 4
+ 3
+ 5
+ 1
+ 7
+(10 rows)
+
+
+10. Write an SQL query to fetch common records between two tables.
+
+select * from project INTERSECT select * from project;
+ project_id |   project_name   
+------------+------------------
+       1006 | Cloud service
+       1003 | Android
+       1001 | web_project
+       1002 | Machine Learning
+       1005 | funds analysis
+       1004 | mutual funds
+(6 rows)
+
+
+11.Write an SQL query to fetch records that are present in one table but not in another table.
+
+select * from   project_assigned LEFT JOIN project on project_assigned.project_id = project.project_id ;
+ eid | project_id | project_id |   project_name   
+-----+------------+------------+------------------
+ 1   |       1001 |       1001 | web_project
+ 2   |       1002 |       1002 | Machine Learning
+ 3   |       1003 |       1003 | Android
+ 4   |       1005 |       1005 | funds analysis
+ 5   |       1003 |       1003 | Android
+ 6   |       1006 |       1006 | Cloud service
+ 7   |       1001 |       1001 | web_project
+ 8   |       1004 |       1004 | mutual funds
+ 9   |       1004 |       1004 | mutual funds
+ 10  |       1001 |       1001 | web_project
+(10 rows)
+
+12. Write an SQL query to fetch the eid that are present in employees but not in certified.
+
+select c.eid from employees as e ,certified as c where c.eid NOT IN (select e.eid from employees);  
+
+eid 
+-----
+   2
+   2
+   2
+   2
+   2
+   2
+   2
+   2
+   2
+   2
+   3
+   3
+   3
+   3
+   3
+   3
+   :
+60 rows:
+
+13.Write an SQL query to display both the eid and dept_id_fk together
+
+select CONCAT(eid,dept_id_fk) as NewIdn from employee;
+ newidn  
+---------
+ 1101IT
+ 2101IT
+ 3101IT
+ 4102HR
+ 5103SL
+ 6103SL
+ 7103SL
+ 8104AC
+ 9103SL
+ 10103RE
+(10 rows)
+
+
+14. Write an SQL query to upper case the name of the employee.
+
+elect UPPER(emp_first_name) from employee;
+  upper   
+----------
+ AMAN
+ ANKANSHA
+ NIHARIKA
+ KUNAL
+ NEHA
+ KIRAN
+ PAWAN
+
+15.Write an SQL query to find the current date-time.
+
+              now               
+---------------------------------
+ 2021-10-21 17:01:34.03337+05:30
+(1 row)
+
+16. Write an SQL query to fetch which project is assigned more then 1 person  employee records from project (without considering the primary key – project_id).
+
+select p.project_name , COUNT(*) from project as p ,project_assigned as pa,through as t WHERE pa.project_id = p.project_id AND t.eidpk = pa.eid GROUP BY p.project_name HAVING COUNT(*)>1;
+ project_name | count 
+--------------+-------
+ mutual funds |     2
+ Android      |     2
+ web_project  |     3
+(3 rows)
+
+16.Write an SQL query to fetch only even rows from the table employee.
 
 
 
