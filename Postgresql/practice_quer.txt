@@ -1653,7 +1653,25 @@ select p.project_name , COUNT(*) from project as p ,project_assigned as pa,throu
  web_project  |     3
 (3 rows)
 
-16.Write an SQL query to fetch only even rows from the table employee.
+16.Write an SQL query to display a project count with employee name and their project assigned.
+
+select e.emp_first_name ,COUNT(t.eid) as ProjectAssigned from employee as e,project as p,project_assigned as pa,through as t where (e.eid = pa.eid) and (pa.project_id = p.project_id) and (t.eid = pa.eid)  GROUP BY e.emp_first_name; 
+
+ emp_first_name | projectassigned 
+----------------+-----------------
+ Neha           |               2
+ Niharika       |               2
+ Aman           |               2
+ Pawan          |               1
+ kiran          |               1
+ Ankansha       |               2
+ Thomas         |               1
+ krshna         |               1
+ Brijesh        |               1
+(9 rows)
+
+
+
 
 
 
