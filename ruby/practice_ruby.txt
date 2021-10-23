@@ -1,0 +1,58 @@
+===========================================================Ruby Practice====================================================
+1. Object oriented programming language:
+
+    Data Encapsulation
+    Data Abstraction
+    Polymorphism
+    Inheritance
+
+
+3.variable :
+
+	1.Local variable: define in a methods,not available outside the methods,begine with lowercase letter or '_'
+	2.instance variable:available across the methods for any particular instance that means instance variable change object to object.
+					denoted like : @variablename
+	3.class variable:Class variables are available across different objects. A class variable belongs to the class and is a characteristic of a cl                        ass. They are preceded by the sign @@ and are followed by the variable name.
+	4.global variable: Class variables are not available across classes. If you want to have a single variable, which is available across classes,				 you need to define a global variable. The global variables are always preceded by the dollar sign ($).
+
+
+2.Methods:
+ 
+how to define :
+
+ class Sample
+    def hello                     #this is the definition of a methods. 
+        puts "method learning"
+    end
+end                               #termination of class.
+
+object  = Sample. new
+object.hello
+
+output : ruby classcust.rb
+method learning
+
+
+3.Methods and class 
+
+$global_variable = 10
+class Class1
+  def print_global
+    puts "Global variable in class 1 is #$global_variable"
+  end
+end
+
+class Class2
+  def print_global
+    puts "Global variable in class 2 #$global_varible is #$global_variable"
+  end
+end
+
+class1Object = Class1.new
+class1Object.print_global
+class2Object = Class2.new
+class2Object.print_global
+
+
+
+
