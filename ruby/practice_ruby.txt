@@ -54,5 +54,65 @@ class2Object = Class2.new
 class2Object.print_global
 
 
+4.classes and object practice :
+  variable practice:
+
+code : 
+
+$globalVariable = 10            # global variable defination here
+
+class Sample                      # class is deinfined here
+
+  @@class_variable = 100          # class variable
+  def methodscall(val1,val2,val3)
+    @value_call_first = val1
+    @value_call_second = val2
+    @value_call_third = val3
+    puts "methods var "
+    local_variable = "I am local" # local variable is here
+    puts "local variable data :  #local_variable"
+  end
+
+end
+
+object = Sample.new
+object.methodscall(1,"calling","Great")
+puts "global variable : #$globalVariable"
+
+output : ruby program.rb 
+methods var 
+local variable data :  #local_variable
+global variable : 10
+
+
+5. Method calling 
+
+code : class Sample                      # class is deinfined here
+   
+  # instance variable example how I can call them
+  def methodscall(val1,val2,val3)
+    @value_call_first = val1
+    @value_call_second = val2
+    @value_call_third = val3
+
+  puts "value for val1 : #@value_call_first"
+  puts "value for val2 : #@value_call_second"
+  puts "value for val2 : #@value_call_third"
+  end
+  
+end
+
+object = Sample.new
+object.methodscall("1","calling","Great")
+
+
+output : 
+
+ruby customclass.rb 
+value for val1 : 1
+value for val2 : calling
+value for val2 : Great
+
+
 
 
