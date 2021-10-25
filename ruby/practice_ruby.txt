@@ -114,5 +114,379 @@ value for val2 : calling
 value for val2 : Great
 
 
+6. class variable
 
+class Customer
+   @@no_of_customers = 0
+   def initialize(id, name, addr)
+      @cust_id = id
+      @cust_name = name
+      @cust_addr = addr
+   end
+   def display_details()
+      puts "Customer id #@cust_id"
+      puts "Customer name #@cust_name"
+      puts "Customer address #@cust_addr"
+   end
+   def total_no_of_customers()
+      @@no_of_customers += 1
+      puts "Total number of customers: #@@no_of_customers"
+   end
+end
+
+# Create Objects
+cust1 = Customer.new("1", "John", "Wisdom Apartments, Ludhiya")
+cust2 = Customer.new("2", "Poul", "New Empire road, Khandala")
+
+# Call Methods
+cust1.total_no_of_customers()
+cust2.total_no_of_customers()
+
+output : 
+ruby classvariable.rb 
+Total number of customers: 1
+Total number of customers: 2
+
+
+7. Instance Variable 
+
+class Customer
+   def initialize(id, name, addr)
+      @cust_id = id
+      @cust_name = name
+      @cust_addr = addr
+   end
+   def display_details()
+      puts "Customer id #@cust_id"
+      puts "Customer name #@cust_name"
+      puts "Customer address #@cust_addr"
+   end
+end
+
+# Create Objects
+cust1 = Customer.new("1", "Aman", "Faridabad")
+cust2 = Customer.new("2", "Neha", "Delhi")
+
+# Call Methods
+cust1.display_details()
+cust2.display_details()
+
+output : 
+
+ruby instancevariable.rb 
+Customer id 1
+Customer name Aman
+Customer address Faridabad
+Customer id 2
+Customer name Neha
+Customer address Delhi
+
+8. Global variable :
+
+code :
+
+$global_variable = 10
+class Class1
+   def print_global
+      puts "Global variable in Class1 is #$global_variable"
+   end
+end
+class Class2
+   def print_global
+      puts "Global variable in Class2 is #$global_variable"
+   end
+end
+
+class1obj = Class1.new
+class1obj.print_global
+class2obj = Class2.new
+class2obj.print_global
+
+ruby globalvar.rb 
+Global variable in class 1 is 10
+Global variable in class 2  is 10
+
+=========================================================Conditional statements=============================================================
+
+1.If statement: 
+syntax : 
+
+	if conditional [then]
+   		code...
+	[elsif conditional [then]
+   		code...]...	
+	[else
+   		code...]
+	end
+example : x = 1
+if x > 2
+   puts "x is greater than 2"
+elsif x <= 2 and x!=0
+   puts "x is 1"
+else
+   puts "I can't guess the number"
+end
+
+
+2. if modifier:
+
+syntax : code if condition
+
+code : 
+$debug = 1
+print "debug\n" if $debug
+
+
+3.Ruby Unless statement:
+
+syntax : 
+
+unless conditional [then]
+   code
+[else
+   code ]
+end
+
+code : 
+
+x = 1
+unless x>=2
+ puts "x is less than 2"
+else
+ puts "x is greater than 2"
+ 
+ 4.switch statement:
+ 
+ syntax : 
+ case expr0
+when expr1, expr2
+   stmt1
+when expr3, expr4
+   stmt2
+else
+   stmt3
+end
+
+code : 
+
+$age =  5
+case $age
+when 0 .. 2
+   puts "baby"
+when 3 .. 6
+   puts "little child"
+when 7 .. 12
+   puts "child"
+when 13 .. 18
+   puts "youth"
+else
+   puts "adult"
+end
+
+
+output : little child
+
+============================================================loop=======================================================
+1.while loop:
+
+syntax : 
+while conditional [do]
+   code
+end
+
+code : 
+
+$i = 0
+$num = 5
+
+while $i < $num  do
+   puts("Inside the loop i = #$i" )
+   $i +=1
+end
+
+2.while modifier:
+
+syntax : 
+
+code while condition
+
+OR
+
+begin nu
+  code 
+end while conditional
+
+code : 
+$i = 0
+$num = 5
+begin
+   puts("Inside the loop i = #$i" )
+   $i +=1
+end while $i < $num
+
+3. Untill statement:
+
+syntax : 
+until conditional [do]
+   code
+end
+
+code : 
+
+$i = 0
+$num = 5
+
+until $i>$num
+  puts "inside the loop until i = #$i"
+  $i+=1
+end
+
+=begin 
+output:
+inside the loop until i = 0
+inside the loop until i = 1
+inside the loop until i = 2
+inside the loop until i = 3
+inside the loop until i = 4
+inside the loop until i = 5
+
+=end
+
+4.until modifier:
+
+syntax :
+
+code until conditional
+
+OR
+
+begin
+   code
+end until conditional
+
+code : 
+$i=0
+$num = 10
+
+begin
+  puts "inside the loop i = #$i"
+  $i+=1
+end until $i>$num
+
+=begin 
+
+output: 
+
+inside the loop i = 0
+inside the loop i = 1
+inside the loop i = 2
+inside the loop i = 3
+inside the loop i = 4
+inside the loop i = 5
+inside the loop i = 6
+inside the loop i = 7
+inside the loop i = 8
+inside the loop i = 9
+inside the loop i = 10
+=end
+
+5.Ruby statements:
+
+syntax : 
+for variable [, variable ...] in expression [do]
+   code
+end
+
+code :
+ for i in 0..10
+  puts "values of local variable is #{i}"
+end
+
+=begin 
+output :
+
+values of local variable is 0
+values of local variable is 1
+values of local variable is 2
+values of local variable is 3
+values of local variable is 4
+values of local variable is 5
+values of local variable is 6
+values of local variable is 7
+values of local variable is 8
+values of local variable is 9
+values of local variable is 10
+
+
+=end 
+6.Break statement:
+
+syntax : break 
+
+code : 
+for i in 0..5
+  if i > 2 then
+    break
+  end
+  puts"values of local variable is #{i}"
+end
+
+=begin 
+output:
+
+values of local variable is 0
+values of local variable is 1
+values of local variable is 2
+
+=end
+7.next : Jumps to the next iteration of the most internal loop. Terminates execution of a block if called within a block (with yield or call returning nil).
+
+syntax : next
+
+code : 
+for i in 0..5
+  if i<3 then
+    next
+  end
+  puts "value of local variable is #{i}"
+end
+
+=begin
+output:
+
+value of local variable is 3
+value of local variable is 4
+value of local variable is 5
+
+=end
+
+8.redo : Restarts this iteration of the most internal loop, without checking loop condition. Restarts yield or call if called within a block.
+
+syntax : redo 
+
+code :
+
+for i in 0..5
+  if i<2 then
+    puts"vale of local variable is #{i}"
+    redo
+  end
+end
+
+=begin
+output :
+
+vale of local variable is 0
+vale of local variable is 0
+vale of local variable is 0
+vale of local variable is 0
+vale of local variable is 0
+.......................... infinite loop
+=end
+
+9.retry : If retry appears in rescue clause of begin expression, restart from the beginning of the begin body.
+
+syntax : retry
+
+code : 
 
