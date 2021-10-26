@@ -490,3 +490,420 @@ syntax : retry
 
 code : 
 
+for i in 0..10
+        begin
+                puts "VALUE OF i #{i}"
+                raise if i >=9
+                rescue
+                retry
+        end
+end
+
+=begin
+output: 
+
+infinite loop
+=end
+
+=================================================Ruby Methods================================================= 
+Ruby methods are very similar to functions in any other programming language. Ruby methods are used to bundle one or more repeatable statements into a single unit.
+
+Method names should begin with a lowercase letter. If you begin a method name with an uppercase letter, Ruby might think that it is a constant and hence can parse the call incorrectly.
+
+Methods should be defined before calling them, otherwise Ruby will raise an exception for undefined method invoking.
+
+Syntax :
+
+1.simple method syntax With no parameter :
+ 
+	def method_name 
+          expr..
+	end
+
+2.You can represent a method that accepts parameters like this :
+	
+	def method_name (var1, var2)
+  	  expr..
+	end
+3.You can set default values for the parameters, which will be used if method is called without passing the required parameters :
+
+	def method_name (var1 = value1, var2 = value2)
+	   expr..
+	end
+	
+4.Whenever you call the simple method, you write only the method name as follows:
+	
+	method_name
+	
+5.when you call a method with parameters, you write the method name along with the parameters, such as 
+
+	method_name 25, 30
+
+
+6.Return Values from Methods:
+
+Every method in Ruby returns a value by default. This returned value will be the value of the last statement. For example
+
+methdo: 
+
+def return_method
+  i = 1
+  j = 2
+  k =100
+end
+
+will return the last declare variable k
+
+7.Ruby return Statement: The return statement in ruby is used to return one or more values from a Ruby Method.
+
+syntax : return [expr[`,' expr...]]
+
+
+If more than two expressions are given, the array containing these values will be the return value. If no expression given, nil will be the return value.
+
+
+Example : return   or   return 1,2,3    or  return 13
+
+
+8.Variable Number of Parameters
+
+def sample(*test)
+  puts"the number of parameter is : #{test.length}"
+  for i in 0...test.length
+    puts "The parameters are : #{test[i]}"
+  end
+end
+sample "Aman","6","M"
+sample "Niharika","7","F"
+
+=begin
+output:
+ruby  variable_num_parameter.rb
+the number of parameter is : 3
+The parameters are : Aman
+The parameters are : 6
+The parameters are : M
+the number of parameter is : 3
+The parameters are : Niharika
+The parameters are : 7
+The parameters are : F
+
+=end
+
+13.class Methods:When a method is defined outside of the class definition, the method is marked as private by default. On the other hand, the methods defined in the class definition are marked as public by default. The default visibility and the private mark of the methods can be changed by public or private of the Module.
+
+Whenever you want to access a method of a class, you first need to instantiate the class. Then, using the object, you can access any member of the class.
+
+Ruby gives you a way to access a method without instantiating a class. Let us see how a class method is declared and accessed 
+
+
+code : 
+
+class Accounts
+   def reading_charge
+   end
+   def Accounts.return_date
+   end
+end
+
+
+See how the method return_date is declared. It is declared with the class name followed by a period, which is followed by the name of the method. You can access this class method directly as follows −
+
+							Accounts.return_date
+
+To access this method, you need not create objects of the class Accounts.
+
+=========================================================Blocks========================================
+A block consists of chunks of code.
+You assign a name to a block.
+The code in the block is always enclosed within braces ({}).
+A block is always invoked from a function with the same name as that of the block. This means that if you have a block with the name test, then you use the function test to invoke this block.
+You invoke a block by using the yield statement.
+
+
+Syntax : 
+
+block_name {
+   statement1
+   statement2
+   ..........
+}
+
+
+example :
+ def test
+  puts"you are in the method"
+  yield
+  puts"you are again in the method"
+  yield
+end
+test {
+  puts"you are in the block"
+}
+
+
+=begin
+output:
+
+you are in the method
+you are in the block
+you are again in the method
+you are in the block
+
+=end
+
+Example :
+
+def test
+  yield 5
+  puts "You are in the method test"
+  yield 100
+end
+test{
+  |i| puts"You are in the block #{i}"
+}
+
+=begin
+output :
+
+ruby yieldtest.rb
+You are in the block 5
+You are in the method test
+You are in the block 100
+
+=end
+
+
+Example :
+If you want to pass more than one parameters, then the yield statement becomes −
+
+yield a, b
+
+and the block is −
+
+test {|a, b| statement}
+
+
+1.Blocks and Methods:
+
+def test
+  yield
+end
+test{
+
+  puts "Hello world"
+}
+test{
+  puts "HI another block"
+}
+
+=begin 
+output:
+
+ruby  block_and_methods.rb
+Hello world
+HI another block
+=end
+
+2.Begin and End block : Every Ruby source file can declare blocks of code to be run as the file is being loaded (the BEGIN blocks) and after the program has finished executing (the END blocks).
+
+
+
+BEGIN {
+  # begin block code
+  puts "BEGIN code block"
+}
+END {
+  
+  #END block code
+  puts "END code block"
+  
+}
+
+#MAIN block code
+puts "MAIN code block"
+
+
+=begin
+output :
+
+BEGIN code block
+MAIN code block
+END code block
+
+=end
+
+
+======================================================================Modules=========================================================
+1.Modules are a way of grouping together methods, classes, and constants. Modules give you two major benefits.
+
+    Modules provide a namespace and prevent name clashes.
+
+    Modules implement the mixin facility.
+
+Modules define a namespace, a sandbox in which your methods and constants can play without having to worry about being stepped on by other methods and constants.
+Syntax
+
+module Identifier
+   statement1
+   statement2
+   ...........
+end
+
+2.Ruby require Statement
+
+The require statement is similar to the include statement of C and C++ and the import statement of Java. If a third program wants to use any defined module, it can simply load the module files using the Ruby require statement −
+Syntax
+
+require filename
+
+3.Ruby include Statement
+
+You can embed a module in a class. To embed a module in a class, you use the include statement in the class −
+Syntax
+
+include modulename
+
+If a module is defined in a separate file, then it is required to include that file using require statement before embedding module in a class.
+
+
+module.rb
+
+module Usefull
+  def sayhi(name)
+    puts"Hello How are you #{name}"
+  end
+  def saybye(name)
+    puts"By By see you again #{name}"
+  end
+end
+
+require.rb
+
+require_relative "module.rb"
+include Usefull
+
+Usefull.sayhi("Aman")
+Usefull.saybye("Rohit")
+=begin 
+output:
+
+Hello How are you Aman
+By By see you again Rohit
+
+=end 
+
+4.Mixin : ruby does't support multiple inheritence directly but we can using mixin It is a concept not keyword.
+
+#module A
+module A
+  def a1
+    puts "we are in a1 method of module A"
+  end
+
+  def a2
+    puts "we are in a2 method of module B"
+  end
+
+end
+#module B
+module B
+  def b1
+    puts "we are in b1 module of B"
+  end
+
+  def b2
+    puts "we are in b2 module of B"
+  end
+
+end
+
+class Sample
+  include A
+  include B
+end
+
+s = Sample.new
+s.a1
+s.a2
+s.b1
+s.b2
+                                                                                                                                    1,1           Top
+
+
+ruby mixin.rb
+we are in a1 method of module A
+we are in a2 method of module B
+we are in b1 module of B
+we are in b2 module of B
+
+==============================String==================================
+1.Expression Substitution
+x,y,z = 12,36,72
+puts "The value of x is #{x}"
+puts "The value of x and y is #{x + y}"
+puts "The average was #{(x+y+z)/3}"
+
+=begin 
+ruby expression.rb
+
+The value of x is 12
+The value of x and y is 48
+The average was 40
+
+=end
+
+2.General Delimited Strings
+
+%{Ruby is fun.}  equivalent to "Ruby is fun."
+%Q{ Ruby is fun. } equivalent to " Ruby is fun. "
+%q[Ruby is fun.]  equivalent to a single-quoted string
+%x!ls! equivalent to back tick command output `ls`
+
+
+2.string builtin:
+
+We need to have an instance of String object to call a String method. Following is the way to create an instance of String object −
+
+new [String.new(str = "")]
+
+code : 
+myStr = String.new("THIS IS TEST")
+foo = myStr.downcase
+
+puts "#{foo}"
+
+output : this is test
+
+====================================================Array================================================
+1.Declaring and defining of Array 
+
+#calculating size of the array and learning 
+#and creating and defining of array 
+
+name  =  Array.new(20)
+puts name.size #this return 20
+puts name.length #this also returns 20
+
+
+2.Assigning values through array '
+
+names = Array.new(4,"mac")
+puts "#{names}"
+
+=begin 
+ruby assigning_values.rb
+["mac", "mac", "mac", "mac"]
+=end 
+--------------------------------
+nums  =Array.new(10) { |e| e = e*2}
+puts "#{nums}"
+
+=begin 
+[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+=end
+
+3.
+
+
