@@ -906,4 +906,110 @@ puts "#{nums}"
 
 3.
 
+=========================================27th October==============================================================
+
+1.Hashes : Hash is the collection of key and value pair.
+
+syntax :			 months = Hash.new
+
+You can also use new to create a hash with a default value, which is otherwise just nil −
+
+			    months = Hash.new( "month" )
+
+					or
+
+			    months = Hash.new "month"
+
+When you access any key in a hash that has a default value, if the key or value doesn't exist, accessing the hash will return the default value 
+
+2.Time and Date : to show date and time in ruby there is multiple functionality available in  ruby.
+
+3.Ranges:Ranges occur everywhere: January to December, 0 to 9, lines 50 through 67, and so on. Ruby supports ranges and allows us to use ranges in a variety of ways −
+
+    Ranges as Sequences
+    Ranges as Conditions
+    Ranges as Intervals
+ 
+ example:    
+ (1..5)        #==> 1, 2, 3, 4, 5
+(1...5)       #==> 1, 2, 3, 4
+('a'..'d')    #==> 'a', 'b', 'c', 'd'
+
+
+
+4.Iterators:terators are nothing but methods supported by collections. Objects that store a group of data members are called collections. In Ruby, arrays and hashes can be termed collections.
+Syntax
+
+1.each iterator:
+		collection.each do |variable|
+   			code
+		end
+
+2.Collect iterator:
+syntax :
+	collection = collection.collect
+
+
+
+5.File I/O: Ruby provides a whole set of I/O-related methods implemented in the Kernel module. All the I/O methods are derived from the class IO.
+
+1.puts : The puts statement instructs the program to display the value stored in the variable. This will add a new line at the end of each line it writes.
+Example
+
+
+#!/usr/bin/ruby
+
+val1 = "This is variable one"
+val2 = "This is variable two"
+puts val1
+puts val2
+ 
+output:
+
+This is variable one
+This is variable two
+2.get : The gets statement can be used to take any input from the user from standard screen called STDIN.
+Example
+
+The following code shows you how to use the gets statement. This code will prompt the user to enter a value, which will be stored in a variable val and finally will be printed on STDOUT.
+
+
+
+puts "Enter a value :"
+val = gets
+puts val
+
+This will produce the following result −
+
+Enter a value :
+This is entered value
+This is entered value
+
+3.putc :Unlike the puts statement, which outputs the entire string onto the screen, the putc statement can be used to output one character at a time.
+Example
+
+The output of the following code is just the character H −
+Live Demo
+
+
+
+str = "Hello Ruby!"
+putc str
+
+This will produce the following result −
+
+H
+
+4.print :The print statement is similar to the puts statement. The only difference is that the puts statement goes to the next line after printing the contents, whereas with the print statement the cursor is positioned on the same line.
+Example
+
+
+print "Hello World"
+print "Good Morning"
+
+This will produce the following result −
+
+Hello WorldGood Morning
+
+
 
