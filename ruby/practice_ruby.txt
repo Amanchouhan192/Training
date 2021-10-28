@@ -1011,5 +1011,566 @@ This will produce the following result −
 
 Hello WorldGood Morning
 
+=========================================28th oct ========================================================
+-------------------------------Exception Handling------------------------------------------------------
+The execution and the exception always go together. If you are opening a file, which does not exist, then if you did not handle this situation properly, then your program is considered to be of bad quality.
+
+The program stops if an exception occurs. So exceptions are used to handle various type of errors, which may occur during a program execution and take appropriate action instead of halting program completely.
+
+Syntax :
+
+begin  
+# -  
+rescue OneTypeOfException  
+# -  
+rescue AnotherTypeOfException  
+# -  
+else  
+# Other exceptions
+ensure
+# Always will be executed
+end
+
+example :
+
+begin
+   file = open("/unexistant_file")
+   if file
+      puts "File opened successfully"
+   end
+rescue
+      file = STDIN
+end
+print file, "==", STDIN, "\n"
+
+output: #<IO:0xb7d16f84>==#<IO:0xb7d16f84>
+
+2.Using retry Statement
+
+You can capture an exception using rescue block and then use retry statement to execute begin block from the beginning.
+Syntax
+
+begin
+   # Exceptions raised by this code will 
+   # be caught by the following rescue clause
+rescue
+   # This block will capture all types of exceptions
+   retry  # This will move control to the beginning of begin
+end
+
+Example
+
+
+
+begin
+   file = open("/unexistant_file")
+   if file
+      puts "File opened successfully"
+   end
+rescue
+   fname = "existant_file"
+   retry
+end
+
+3.Using raise Statement
+
+You can use raise statement to raise an exception. The following method raises an exception whenever it's called. It's second message will be printed.
+Syntax
+
+raise 
+
+OR
+
+raise "Error Message" 
+
+OR
+
+raise ExceptionType, "Error Message"
+
+OR
+
+raise ExceptionType, "Error Message" condition
+
+
+
+example :
+
+begin  
+   puts 'I am before the raise.'  
+   raise 'An error has occurred.'  
+   puts 'I am after the raise.'  
+rescue  
+   puts 'I am rescued.'  
+end  
+puts 'I am after the begin block.'  
+
+This will produce the following result −
+
+I am before the raise.  
+I am rescued.  
+I am after the begin block.  
+
+4.Using ensure Statement
+
+Sometimes, you need to guarantee that some processing is done at the end of a block of code, regardless of whether an exception was raised. For example, you may have a file open on entry to the block and you need to make sure it gets closed as the block exits.
+
+Syntax
+
+begin 
+   #.. process 
+   #..raise exception
+rescue 
+   #.. handle error 
+ensure 
+   #.. finally ensure execution
+   #.. This will always execute.
+end
+
+Example
+
+begin
+   raise 'A test exception.'
+rescue Exception => e
+   puts e.message
+   puts e.backtrace.inspect
+ensure
+   puts "Ensuring execution"
+end
+
+output −
+
+A test exception.
+["main.rb:4"]
+Ensuring execution
+
+5.Using else Statement
+
+If the else clause is present, it goes after the rescue clauses and before any ensure.
+
+The body of an else clause is executed only if no exceptions are raised by the main body of code.
+Syntax
+
+begin 
+   #.. process 
+   #..raise exception
+rescue 
+   # .. handle error
+else
+   #.. executes if there is no exception
+ensure 
+   #.. finally ensure execution
+   #.. This will always execute.
+end
+
+Example
+
+
+begin
+   # raise 'A test exception.'
+   puts "I'm not raising exception"
+rescue Exception => e
+   puts e.message
+   puts e.backtrace.inspect
+else
+   puts "Congratulations-- no errors!"
+ensure
+   puts "Ensuring execution"
+end
+
+output −
+
+I'm not raising exception
+Congratulations-- no errors!
+Ensuring execution
+
+6.Catch and Throw
+
+While the exception mechanism of raise and rescue is great for abandoning the execution when things go wrong, it's sometimes nice to be able to jump out of some deeply nested construct during normal processing. This is where catch and throw come in handy.
+
+The catch defines a block that is labeled with the given name (which may be a Symbol or a String). The block is executed normally until a throw is encountered.
+
+Syntax
+
+throw :lablename
+#.. this will not be executed
+catch :lablename do
+#.. matching catch will be executed after a throw is encountered.
+end
+
+OR
+
+throw :lablename condition
+#.. this will not be executed
+catch :lablename do
+#.. matching catch will be executed after a throw is encountered.
+end
+
+Example
+
+The following example uses a throw to terminate interaction with the user if '!' is typed in response to any prompt.
+
+def promptAndGet(prompt)
+   print prompt
+   res = readline.chomp
+   throw :quitRequested if res == "!"
+   return res
+end
+
+catch :quitRequested do
+   name = promptAndGet("Name: ")
+   age = promptAndGet("Age: ")
+   sex = promptAndGet("Sex: ")
+   # ..
+   # process information
+end
+promptAndGet("Name:")
+
+output:
+Name: Aman
+Age: 23
+Sex: Male
+Name:Ruby
+======================================Hash Class Methods==========================================
+1.any :Returns true if any element satisfies a given criterion; false otherwise.
+With no argument and no block, returns true if self is non-empty; false if empty.
+With argument object and no block, returns true if for any key key h.assoc(key) == object:
+
+any? → true or false click to toggle source
+any?(object) → true or false
+any? {|key, value| ... } → true or false
+
+
+
+3.0.2 :002 > h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :003 > h.any?
+ => true 
+3.0.2 :004 > h.any?([:bar,1])
+ => true 
+3.0.2 :005 > h.any?([:bar,0])
+ => false 
+3.0.2 :006 > h.any?([:bar,1])
+ => true 
+3.0.2 :007 > h.any?{|key,value|value<3}
+ => true 
+3.0.2 :008 > h.any?{|key,value|value>3}
+ => false 
+
+2. assoc(key) → new_array or nil click to toggle source
+
+If the given key is found, returns a 2-element Array containing that key and its value:
+
+3.0.2 :001 > h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :002 > h.assoc(:bar)
+ => [:bar, 1] 
+3.0.2 :003 > h.assoc(:foo)
+ => [:foo, 0] 
+3.0.2 :004 > h.assoc(:baz)
+ => [:baz, 2] 
+
+Returns nil if key key is not found.
+
+3.clear - self : remove all hash entries; returns self.
+
+
+4.compact - new_hash
+Returns a copy of self with all nil-valued entries removed:
+
+3.0.2 :005 > h = {foo:0,bar:nil,baz:2,bat:nil}
+ => {:foo=>0, :bar=>nil, :baz=>2, :bat=>nil} 
+3.0.2 :006 > h1 = h.compact
+ => {:foo=>0, :baz=>2} 
+3.0.2 :007 > h1
+ => {:foo=>0, :baz=>2} 
+ 
+5.compact!->selft or nil
+
+Returns a copy of self with all nil-valued entries removed:
+
+h = {foo:0,bar:nil,baz:2,bat:nil}
+ => {:foo=>0, :bar=>nil, :baz=>2, :bat=>nil} 
+3.0.2 :009 > h.compact!
+ => {:foo=>0, :baz=>2}
+ 
+ 6. compare_by_identity → self
+
+Sets self to consider only identity in comparing keys; two keys are considered the same only if they are the same object; returns self.
+
+By default, these two object are considered to be the same key, so s1 will overwrite s0:
+
+ h = {foo:0,bar:nil,baz:2,bat:nil}
+3.0.2 :009 > h.compact!
+3.0.2 :010 > s0 = 'x'
+3.0.2 :011 > s1 = 'x'
+3.0.2 :012 > h = {}
+3.0.2 :013 > h.compare_by_identity?
+3.0.2 :014 > h[s0] = 0
+3.0.2 :015 > h[s1] = 1
+3.0.2 :016 > #
+3.0.2 :017 > h = {}
+ => {} 
+3.0.2 :018 > h.compare_by_identity
+ => {} 
+3.0.2 :019 > h.compare_by_identity?
+ => true 
+3.0.2 :020 > h[s0] = 0
+ => 0 
+3.0.2 :021 > h[s1] = 1
+
+7.default : default(key) → object
+
+Returns the default value for the given key. The returned value will be determined either by the default proc or by the default value. See Default Values.
+
+With no argument, returns the current default value:
+
+If key is given, returns the default value for key, regardless of whether that key exists:
+
+h = {}
+ => {} 
+3.0.2 :023 > h.default
+ => nil 
+3.0.2 :024 > h = Hash.new{|hash,key|hash[key] = "No key #{key}"}
+ => {} 
+3.0.2 :025 > h[:foo] = "Hello"
+ => "Hello" 
+3.0.2 :026 > h.default(:foo)
+ => "No key foo" 
+
+8. default = value → object click to toggle source
+
+Sets the default value to value; returns value:
+
+h = {}
+ => {} 
+3.0.2 :067 > h.default
+ => nil 
+3.0.2 :068 > h.default = false
+ => false 
+3.0.2 :069 > h.default 
+ => false 
+
+9.default_proc → proc or nil
+
+Returns the default proc for self (see Default Values):
+
+
+h = {}
+ => {} 
+3.0.2 :071 > h.default_proc
+ => nil 
+3.0.2 :072 > h.default_proc = proc {|hash,key|"Default value for #{key}"}
+ => #<Proc:0x0000561185b879e0 (irb):72> 
+3.0.2 :073 > h.default_proc.class
+ => Proc 
+
+
+10.default_proc = proc → proc click to toggle source
+
+Sets the default proc for self to proc: (see Default Values):
+
+h = {}
+ => {} 
+3.0.2 :075 > h.default_proc
+ => nil 
+3.0.2 :076 > h.default_proc = proc {|hash,key|"Default value for #{key}"}
+ => #<Proc:0x0000561185da7680 (irb):76> 
+3.0.2 :077 > h.default_proc.class
+ => Proc 
+3.0.2 :078 > h.default_proc = nil
+ => nil 
+3.0.2 :079 > h.default_proc 
+ => nil 
+
+11.delete(key) → value or nil
+delete(key) {|key| ... } → object
+
+Deletes the entry for the given key and returns its associated value.
+
+If no block is given and key is found, deletes the entry and returns the associated value:
+
+h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :081 > h.delete(:bar)
+ => 1 
+3.0.2 :082 > h
+ => {:foo=>0, :baz=>2} 
+ 
+ 
+ If no block given and key is not found, returns nil.
+
+If a block is given and key is found, ignores the block, deletes the entry, and returns the associated value:
+
+h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :084 > h.delete(:baz) {|key|raise 'Will never happen'}
+ => 2 
+3.0.2 :085 > h
+ => {:foo=>0, :bar=>1} 
+
+If a block is given and key is not found, calls the block and returns the block's return value:
+
+h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :087 > h.delete(:nosuch){|key| "key #{key} not found"}
+ => "key nosuch not found" 
+3.0.2 :088 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+ 
+12. delete_if {|key, value| ... } → self click to toggle source
+delete_if → new_enumerator
+
+If a block given, calls the block with each key-value pair; deletes each entry for which the block returns a truthy value; returns self:
+
+h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :092 > h.delete_if{|key,value|value>0}
+ => {:foo=>0} 
+
+If no block given, returns a new Enumerator:
+
+h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :096 > e = h.delete_if
+ => #<Enumerator: ...> 
+3.0.2 :097 > e.each{|key,value|value>0}
+ => {:foo=>0} 
+
+13.dig(key, *identifiers) → object click to toggle source
+
+Finds and returns the object in nested objects that is specified by key and identifiers. The nested objects may be instances of various classes. See Dig Methods.
+
+h = {foo:{bar:{baz:2}}}
+ => {:foo=>{:bar=>{:baz=>2}}} 
+3.0.2 :111 > h.dig(:foo)
+ => {:bar=>{:baz=>2}} 
+3.0.2 :112 > h.dig(:foo,:bar)
+ => {:baz=>2} 
+3.0.2 :113 > h.dig(:foo,:bar,:baz)
+ => 2 
+3.0.2 :114 > h.dig(:foo,:bar,:BAZ)
+ => nil 
+
+Nested Hashes and Arrays:
+
+ h = {foo:{bar:[:a,:b,:c]}}
+ => {:foo=>{:bar=>[:a, :b, :c]}} 
+3.0.2 :116 > h.dig(:foo,:bar,2)
+ => :c 
+This method will use the default values for keys that are not present:
+
+h = {foo:{bar:{baz:2}}}
+3.0.2 :112 > h.dig(:foo,:bar)
+3.0.2 :113 > h.dig(:foo,:bar,:baz)
+ => nil 
+h.default_proc
+ => nil 
+3.0.2 :122 > h.default_proc = ->(hash,_key){hash}
+ => #<Proc:0x0000561185be8c68 (irb):122 (lambda)> 
+3.0.2 :123 > h.dig(:hello,:world)
+ => {:foo=>{:bar=>[:a, :b, :c]}} 
+3.0.2 :124 > h.dig(:hello,:world)
+ => {:foo=>{:bar=>[:a, :b, :c]}} 
+3.0.2 :125 > h.dig(:hello,:world,:foo,:bar,2)
+ => :c 
+
+
+14. each {|key, value| ... } → self click to toggle source
+each_pair {|key, value| ... } → self
+each → new_enumerator
+each_pair → new_enumerator
+
+#each is an alias for #each_pair.
+
+Calls the given block with each key-value pair; returns self:
+
+h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :127 > h.each_pair {|key,value|puts "#{key}: #{value}"}
+foo: 0
+bar: 1
+baz: 2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+
+Returns a new Enumerator if no block given:
+
+h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :166 > e = h.each_pair
+ => #<Enumerator: ...> 
+3.0.2 :167 > h1 = e.each{|key,value|puts "#{key}: #{value}"}
+foo: 0
+bar: 1
+baz: 2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :168 > h1
+ => {:foo=>0, :bar=>1, :baz=>2} 
+
+15. each_key {|key| ... } → self
+each_key → new_enumerator
+
+Calls the given block with each key; returns self:
+
+h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :174 > h.each_key{|key|puts key}
+foo
+bar
+baz
+ => {:foo=>0, :bar=>1, :baz=>2} 
+
+16. each_pair {|key, value| ... } → self click to toggle source
+each_pair → new_enumerator
+
+#each is an alias for #each_pair.
+
+Calls the given block with each key-value pair; returns self:
+
+
+h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :002 > h.each_pair{|key,value|puts "#{key}: #{value}"}
+foo: 0
+bar: 1
+baz: 2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+
+h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :011 > e = h.each_pair
+ => #<Enumerator: ...> 
+3.0.2 :012 > h1 = e.each{|key,value|puts "#{key}:#{value}"}
+foo:0
+bar:1
+baz:2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :013 > h1
+ => {:foo=>0, :bar=>1, :baz=>2} 
+ 
+
+17. empty? → true or false click to toggle source
+
+Returns true if there are no hash entries, false otherwise:
+
+{}.empty?
+ => true 
+3.0.2 :018 > {foo:0,bar:1,baz:2}.empty?
+ => false 
+ 
+ 
+18. eql? object → true or false click to toggle source
+
+Returns true if all of the following are true:
+
+    object is a Hash object.
+
+    hash and object have the same keys (regardless of order).
+
+    For each key key, h[key] eql? object[key].
+
+Otherwise, returns false.
+
+Equal:
+
 
 
