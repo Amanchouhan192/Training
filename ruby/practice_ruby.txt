@@ -1558,19 +1558,7 @@ Returns true if there are no hash entries, false otherwise:
  => false 
  
  
-18. eql? object → true or false click to toggle source
 
-Returns true if all of the following are true:
-
-    object is a Hash object.
-
-    hash and object have the same keys (regardless of order).
-
-    For each key key, h[key] eql? object[key].
-
-Otherwise, returns false.
-
-Equal:
 
 
 
