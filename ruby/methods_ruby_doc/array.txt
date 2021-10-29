@@ -1,0 +1,52 @@
+=====================================ARRAY METHODS===================================
+1.ary = [1,"two",3.0]
+ => [1, "two", 3.0] 
+ 
+2.ary = Array.new
+ => [] 
+ Array.new(3)
+ => [nil, nil, nil] 
+ Array.new(3,true)
+ => [true, true, true] 
+ 
+3.empty_table = Array.new(3) {Array.new(3)}
+ => [[nil, nil, nil], [nil, nil, nil], [nil, nil, nil]] 
+
+4.Array({:a=>"a",:b=>"b"})
+ => [[:a, "a"], [:b, "b"]] 
+ 
+5.arr = [1, 2, 3, 4, 5, 6]
+ => [1, 2, 3, 4, 5, 6] 
+arr[2]
+ => 3 
+arr[100]
+ => nil 
+arr[-3]
+ => 4 
+arr[2,3]
+ => [3, 4, 5] 
+arr[2..4]
+ => [3, 4, 5] 
+ arr[1..-3]
+ => [2, 3, 4] 
+
+6.arr.at(0)
+ => 1 
+
+7. a = Array.new([:foo,'bar',2])
+ => [:foo, "bar", 2] 
+ a.class
+ => Array 
+Array.new(3)
+ => [nil, nil, nil] 
+ 
+8.Array.[](1,'a',/^A/)
+ => [1, "a", /^A/] 
+Array[1,'a',/^A/]
+ => [1, "a", /^A/] 
+ 
+
+ 
+
+
+ 
