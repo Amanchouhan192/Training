@@ -1,0 +1,653 @@
+s = String.new
+3.0.2 :002 > s
+3.0.2 :003 > s.encoding 
+3.0.2 :004 > s = String.new("Que veut dire \u{e7}a?")
+3.0.2 :005 > s = String.new('foo',encoding:'ASCII')
+3.0.2 :006 > s.encoding
+3.0.2 :007 > s0 = String.new(capacity:1)
+3.0.2 :008 > s1 = 'foo'.force_encoding('ASCII')
+3.0.2 :009 > s0.encoding == s1.encoding
+3.0.2 :010 > s1 = 'foo'.force_encoding('ASCII')
+3.0.2 :011 > String.new(capacity:1)
+3.0.2 :012 > String.new(capacity:4096)
+3.0.2 :013 > String.new('hello',encoding:'UTF-8',capacity:25)
+3.0.2 :014 > "05d" %123
+3.0.2 :015 > "%-5s: %016x" % [ "ID", self.object_id ]
+3.0.2 :016 > "foo = %{foo}" % {foo: 'bar'} 
+3.0.2 :017 > "foo = %{foo}, baz = %{baz}" % {foo: 'bar', baz: 'bat'}
+3.0.2 :018 > "Ho! "*3
+3.0.2 :019 > "Ho! "*0
+3.0.2 :020 > "Hello from "+self.to_s
+3.0.2 :021 > s = 'foo'
+3.0.2 :022 > s<<33
+3.0.2 :023 > s<<56
+3.0.2 :024 > s<<65
+3.0.2 :025 > s = 'food'
+3.0.2 :026 > s<<65
+3.0.2 :027 > 'foo'<=>'foo'
+3.0.2 :028 > 'foo'<=>'food'
+3.0.2 :029 > 'FOO'<=>'foo'
+3.0.2 :030 > 'foo'<=>'FOO'
+3.0.2 :031 > 'foo'<=>1
+ => nil 
+3.0.2 :032 > S = 'foo'
+ => "foo" 
+3.0.2 :033 > s=='foo'
+ => false 
+3.0.2 :034 > s == 'food'
+ => false 
+3.0.2 :035 > s == 'FOO'
+ => false 
+3.0.2 :036 > "\u{e4 f6 fc}".encode("ISO-8859-1") == ("\u{c4 d6 dc}") # => false
+ => false 
+ => 0 
+ => 1 
+ => nil 
+ => nil 
+ => 4 
+ => nil 
+ => 4 
+ => "9" 
+ => "r" 
+3.0.2 :101 > 'foo'[-3]
+3.0.2 :102 > 'foo'[3]
+3.0.2 :103 > 'foo'[-4]
+3.0.2 :104 > 'foo'[0,2]
+3.0.2 :105 > 
+ => "" 
+ => "oo" 
+ => "" 
+ => nil 
+ => nil 
+ => "oo" 
+ => nil 
+ => "o" 
+ => nil 
+3.0.2 :116 > s[/[aeiou](.)\1/]
+3.0.2 :117 > s[/[aeiou](.)\1/,0]
+3.0.2 :118 > s = 'hello there'
+3.0.2 :119 > s[/[aeiou](.)\1/, 1] # => "l"
+3.0.2 :120 > s[/(?<vowel>[aeiou])(?<non_vowel>[^aeiou])/, "non_vowel"] # => "l"
+ => "l" 
+ => "e" 
+ => "oo" 
+ => nil 
+ => true 
+ => false 
+ => 4 
+ => 5 
+ => "e" 
+ => "o" 
+ => "el" 
+ => "ell" 
+ => "ell" 
+ => "Hello" 
+ => "Hello" 
+ => "123abc" 
+ => "hello" 
+ => "Hello" 
+ => "Hello" 
+ => "Hello" 
+ => nil 
+ => 0 
+ => 0 
+ => 1 
+ => 0 
+ => 0 
+ => nil 
+ => true 
+ => false 
+ => false 
+3.0.2 :150 > 'food'.casecmp?('foo')
+ => false 
+3.0.2 :151 > 'FOO'.casecmp('foo')
+ => 0 
+3.0.2 :152 > 'FOO'.casecmp?('foo')
+ => true 
+3.0.2 :153 > 'foo'.casecmp?('FOO')
+ => true 
+3.0.2 :154 > 'FOO'.casecmp?(1)
+ => nil 
+3.0.2 :155 > 
+ "hello".center(4)
+3.0.2 :177 > "hello".center(20)
+3.0.2 :178 > "hello".center(20,'123')
+3.0.2 :179 > #----------------chomp-----------------------#
+3.0.2 :180 > "hello".chomp
+3.0.2 :181 > "hello\n".chomp
+3.0.2 :182 > "hello\r\n".chomp
+3.0.2 :183 > "hello\n\r".chomp
+3.0.2 :184 > "hello\r".chomp
+ => "hello" 
+3.0.2 :185 > "hello \n there".chomp
+ => "hello \n there" 
+3.0.2 :186 > "hello".chomp("llo")
+ => "he" 
+3.0.2 :187 > "hello\r\n\r\r\n".chomp('')
+ => "hello\r\n\r" 
+3.0.2 :188 > "hello\r\n\r\r\n".chomp('')
+ => "hello\r\n\r" 
+3.0.2 :189 > #----------------------------chop-----------------------------------
+ => nil 
+3.0.2 :211 > "string\r\n".chop   #=> "string"
+ => "string" 
+3.0.2 :212 > "string\r\n".chop   
+ => "string" 
+3.0.2 :213 > "string\n".chop    
+ => "string" 
+3.0.2 :214 > "string".chop
+ => "strin" 
+3.0.2 :215 > "x".chop.chop
+#--------------------------------chr--------------------------------
+ => "" 
+3.0.2 :216 > a = "abcde"
+ => "abcde" 
+3.0.2 :217 > a.chr
+ => "a" 
+3.0.2 :218 > a.clear
+ => "" 
+ #---------------------------concat-----------------------------------
+3.0.2 :219 > s = 'foo'
+ => "foo" 
+3.0.2 :220 > s.concat('bar','baz')
+ => "foobarbaz" 
+3.0.2 :221 > s = 'foo'
+ => "foo" 
+3.0.2 :222 > s.concat(32,'bar',32,'baz')
+ => "foo bar baz" 
+#--------------------------count------------------------------------------
+3.0.2 :224 > a = "hello world"
+ => "hello world" 
+3.0.2 :225 > a.count "lo"
+ => 5 
+3.0.2 :226 > a.count "l"
+ => 3 
+3.0.2 :227 > a.count " "
+ => 1 
+3.0.2 :228 > a.count "lo","o"
+ => 2 
+3.0.2 :229 > a.count "hello","^l"
+ => 4 
+3.0.2 :230 > 
+3.0.2 :231 > a.count "ej-m"
+ => 4 
+3.0.2 :232 > a
+ => "hello world" 
+3.0.2 :233 > "hello^world".count "\\^aeiou" 
+> 4
+ => 4 
+3.0.2 :234 > "hello-world".count "a\\-eo"   
+> 4
+ => 4 
+3.0.2 :235 > c = "hello world\\r\\n"
+ => "hello world\\r\\n" 
+3.0.2 :236 > c.count "\\"                   
+> 2
+ => 2						 
+3.0.2 :237 > c.count "\\A"                  
+> 0
+ => 0 
+3.0.2 :238 > c.count "X-\\w"               
+> 3
+ => 3 
+3.0
+#------------delete------------------
+ => nil 
+3.0.2 :251 > "hello".delete "l","lo"
+ => "heo" 
+3.0.2 :252 > "hello".delete "l","lo","h"
+ => "hello" 
+3.0.2 :253 > "hello".delete "l","lo"
+ => "heo" 
+3.0.2 :254 > "hello".delete "lo"
+ => "he" 
+3.0.2 :255 > "hello".delete "aeiou","^e"
+ => "hell" 
+3.0.2 :256 > "hello".delete "ej-m"
+ => "ho" 
+3.0.2 :257 > "hello".delete_prefix("hel") #=> "lo"
+ => "lo" 
+3.0.2 :258 > "hello".delete_prefix("llo") #=> "hello"
+ => "hello" 
+3.0.2 :259 > "hello".delete_prefix!("hel") #=> "lo"
+ => "lo" 
+3.0.2 :260 > "hello".delete_prefix!("llo") #=> nil
+ => nil 
+3.0.2 :261 > "hello".delete_suffix("llo") #=> "he"
+ => "he" 
+3.0.2 :262 > "hello".delete_suffix("hel") #=> "hello"
+ => "hello" 
+3.0.2 :263 > "hello".delete_suffix!("llo") 
+ => "he" 
+3.0.2 :264 > "hello".delete_suffix!("hel") 
+ => nil 
+#-------------------each_byte-------------
+ => nil 
+3.0.2 :275 > "hello".each_byte {|c| print c, ' ' }
+104 101 108 108 111  => "hello" 
+3.0.2 :276 > "hello".each_char {|c| print c, ' ' }
+h e l l o  => "hello" 
+3.0.2 :277 > "hello\u0639".each_codepoint {|c| print c, ' ' }
+104 101 108 108 111 1593  => "helloع" 
+3.0.2 :278 > "a\u0300".each_char.to_a.size #=> 2
+ => 2 
+3.0.2 :279 > "a\u0300".each_grapheme_cluster.to_a.size #=> 1
+ => 1 
+3.0.2 :280 > "hello\nworld".each_line {|s| p s}
+"hello\n"
+"world"
+ => "hello\nworld" 
+3.0.2 :281 > "hello\nworld".each_line('l') {|s| p s}
+"hel"
+"l"
+"o\nworl"
+"d"
+ => "hello\nworld" 
+3.0.2 :282 > "hello\n\n\nworld".each_line('') {|s| p s}
+"hello\n\n"
+"world"
+ => "hello\n\n\nworld" 
+3.0.2 :283 > "hello\nworld".each_line(chomp: true) {|s| p s}
+"hello"
+"world"
+ => "hello\nworld" 
+3.0.2 :284 > "hello\nworld".each_line('l', chomp: true) {|s| p s}
+
+"he"
+""
+"o\nwor"
+"d"
+ => "hello\nworld" 
+3.0.2 :285 > 
+#---------------------dump------------------------------
+3.0.2 :286 > "hello \n ''".dump     #=> "\"hello \\n ''\""
+ => "\"hello \\n ''\"" 
+3.0.2 :287 > "\f\x00\xff\\\"".dump  #=> "\"\\f\\x00\\xFF\\\\\\\"\
+""
+ => "\"\\f\\x00\\xFF\\\\\\\"\"" 
+3.0.2 :288 > "hello".each_byte {|c| print c, ' ' }
+104 101 108 108 111  => "hello" 
+3.0.2 :289 > "hello".each_char {|c| print c, ' ' }
+h e l l o  => "hello" 
+3.0.2 :290 > "hello\u0639".each_codepoint {|c| print c, ' ' }
+104 101 108 108 111 1593  => "helloع" 
+3.0.2 :291 > "a\u0300".each_char.to_a.size #=> 2
+ => 2 
+3.0.2 :292 > "a\u0300".each_grapheme_cluster.to_a.size #=> 1
+ => 1 
+3.0.2 :293 > "hello\nworld".each_line {|s| p s}
+"hello\n"
+"world"
+ => "hello\nworld" 
+3.0.2 :294 > "hello\nworld".each_line('l') {|s| p s}
+"hel"
+"l"
+"o\nworl"
+"d"
+ => "hello\nworld" 
+3.0.2 :295 > "hello\n\n\nworld".each_line('') {|s| p s}
+"hello\n\n"
+"world"
+ => "hello\n\n\nworld" 
+3.0.2 :296 > "hello\nworld".each_line(chomp: true) {|s| p s}
+"hello"
+"world"
+ => "hello\nworld" 
+3.0.2 :297 > "hello\nworld".each_line('l', chomp: true) {|s| p s}
+
+"he"
+""
+"o\nwor"
+"d"
+ => "hello\nworld" 
+3.0.2 :298 > 
+#------------------------empty------------------------
+ => nil 
+3.0.2 :350 > "hello".empty?
+ => false 
+3.0.2 :351 > " ".empty?
+ => false 
+3.0.2 :352 > "".empty?
+ => true 
+#---------end_with----------------
+ => nil 
+3.0.2 :354 > "hello".end_with?("ello")             
+ => true 
+3.0.2 :355 > "hello".end_with?("heaven", "ello")     
+ => true 
+3.0.2 :356 > "hello".end_with?("heaven", "paradise") #=> false
+ => false 
+#-----------eql-----------------
+ => nil 
+3.0.2 :358 > s = 'foo'
+ => "foo" 
+3.0.2 :359 > s.eql?('foo')
+ => true 
+3.0.2 :360 > s.eql?('food')
+ => false 
+3.0.2 :361 > s.eql?('FOO')
+ => false 
+3.0.2 :362 > "\u{e4 f6 fc}".encode("ISO-8859-1").eql?("\u{c4 d6 d
+c}") 
+ => false 
+
+#------------------force encoding----------------
+ => nil 
+3.0.2 :364 > "hello".gsub(/[aeiou]/, '*')                
+*ll*"
+ => "h*ll*" 
+3.0.2 :365 > "hello".gsub(/([aeiou])/, '<\1>')            
+ => "h<e>ll<o>" 
+3.0.2 :366 > "hello".gsub(/./) {|s| s.ord.to_s + ' '}     
+ => "104 101 108 108 111 " 
+3.0.2 :367 > "hello".gsub(/(?<foo>[aeiou])/, '{\k<foo>}') 
+ => "h{e}ll{o}" 
+3.0.2 :368 > 'hello'.gsub(/[eo]/, 'e' => 3, 'o' => '*')   
+ => "h3ll*" 
+3.0.2 :369 > "0x0a".hex    
+ => 10 
+3.0.2 :370 > "-1234".hex   
+ => -4660 
+3.0.2 :371 > "0".hex       
+ => 0 
+3.0.2 :372 > "wombat".hex  
+ => 0 
+ 
+ #-----------include---------------------------
+ => nil 
+3.0.2 :374 > "hello".include? "lo"
+ => true 
+3.0.2 :375 > "hello".include? "ol"
+ => false 
+3.0.2 :376 > "hello".include? ?h
+ => true 
+#-----------------------index-------------
+ => nil 
+3.0.2 :416 > 'foo'.index('f') 
+ => 0 
+3.0.2 :417 > 'foo'.index('o') 
+ => 1 
+3.0.2 :418 > 'foo'.index('oo') 
+ => 1 
+3.0.2 :419 > 'foo'.index('ooo') 
+ => nil 
+3.0.2 :420 > 'foo'.index('/f/') 
+ => nil 
+3.0.2 :421 > 'foo'.index('/o/') 
+ => nil 
+3.0.2 :422 > 'foo'.index('/oo/') 
+ => nil 
+3.0.2 :423 > 'foo'.index('/ooo/') 
+ => nil 
+3.0.2 :424 > 'foo'.index('o', 1) 
+ => 1 
+3.0.2 :425 > 'foo'.index('o', 2) 
+ => 2 
+3.0.2 :426 > 'foo'.index('o', 3)
+ => nil 
+3.0.2 :427 > 'foo'.index('o', -1) 
+ => 2 
+3.0.2 :428 > 'foo'.index('o', -2) # => 1
+ => 1 
+3.0.2 :429 > 'foo'.index('o', -3) 
+ => 1 
+3.0.2 :430 > 'foo'.index('o', -4) 
+ => nil 
+#--------------------replace------------
+ => nil 
+3.0.2 :468 > s = "hello"
+ => "hello" 
+3.0.2 :469 > s.replace "world"
+ => "world" 
+3.0.2 :470 > s
+ => "world" 
+
+ #-----------inspect--------------------
+ => nil 
+3.0.2 :472 > str = "hello"
+ => "hello" 
+3.0.2 :473 > str[3] = "\b"
+ => "\b" 
+3.0.2 :474 > str.inspect       #=> "\"hel\\bo\""
+ => "\"hel\\bo\"" 
+3.0.2 :475 > 
+ #--------------Insert----------------------
+ => nil 
+3.0.2 :478 > 'foo'.insert(1, 'bar') 
+ => "fbaroo" 
+3.0.2 :479 > 'foo'.insert(-2, 'bar')
+ => "fobaro" 
+#-------------------intern------------------------
+ => nil 
+3.0.2 :481 > "Koala".intern
+ => :Koala 
+3.0.2 :482 > s = 'cat'.to_sym
+ => :cat 
+3.0.2 :483 > s == :cat
+ => true 
+3.0.2 :484 > s = '@cat'.to_sym
+ => :@cat 
+3.0.2 :485 > s == @cat
+ => false 
+3.0.2 :486 > 'cat and dog'.to_sym
+ => :"cat and dog" 
+#----------------length--------------
+ => nil 
+3.0.2 :488 > "\x80\u3042".length 
+ => 2 
+3.0.2 :489 > "hello".length # => 5
+ => 5 
+ #-----------line separator----------------
+ => nil 
+3.0.2 :491 > "hello\nworld\n".lines              #=> ["hello\n", "w
+orld\n"]
+ => ["hello\n", "world\n"] 
+3.0.2 :492 > "hello\nworld\n".lines(chomp: true) #=> ["hello", "wor
+ld"]
+ => ["hello", "world"] 
+ 
+ #------------Ijust----------------
+ => nil 
+3.0.2 :494 > "hello".ljust(4)           
+ => "hello" 
+3.0.2 :495 > "hello".ljust(20)          
+ => "hello               " 
+3.0.2 :496 > "hello".ljust(20, '1234')
+ => "hello123412341234123" 
+3.0.2 :497 > #------lstrip----------------------------
+ => nil 
+3.0.2 :498 > "  hello  ".lstrip  
+ => "hello  " 
+3.0.2 :499 > "hello".lstrip     
+ => "hello" 
+3.0.2 :500 > #-------lstrip!--------------------
+ => nil 
+3.0.2 :501 > "  hello  ".lstrip!  
+ => "hello  " 
+3.0.2 :502 > "hello  ".lstrip!
+ => nil 
+3.0.2 :503 > "hello".lstrip!     
+ => nil 
+#-----------match-----------------------------
+ => nil 
+3.0.2 :547 > 'foo'.match('f')
+ => #<MatchData "f"> 
+3.0.2 :548 > 'foo'.match('o')
+ => #<MatchData "o"> 
+3.0.2 :549 > 'foo'.match('x')
+ => nil 
+3.0.2 :550 > 'foo'.match('f',1)
+ => nil 
+3.0.2 :551 > 'foo'.match('o',1)
+ => #<MatchData "o"> 
+3.0.2 :552 > 'foo'.match(/o/) {|matchdata| matchdata } 
+ => #<MatchData "o"> 
+3.0.2 :553 > 'foo'.match(/x/) {|matchdata| matchdata }
+ => nil 
+3.0.2 :554 > 'foo'.match(/f/, 1) {|matchdata| matchdata } 
+ => nil 
+3.0.2 :555 > regexp = Regexp.new(pattern)
+(irb):555:in `<main>': undefined local variable or method `pattern' for main:Object (NameError)
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/lib/ruby/gems/3.0.0/gems/irb-1.3.5/exe/irb:11:in `<top (required)>'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `load'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `<main>'
+3.0.2 :556 > 'foo'.match?(/o/)
+ => true 
+3.0.2 :557 > 'foo'.match?('o') 
+ => true 
+3.0.2 :558 > 'foo'.match?(/x/) 
+ => false 
+3.0.2 :559 > 'foo'.match?('f', 1) 
+ => false 
+3.0.2 :560 > 'foo'.match?('o', 1)
+ => true 
+ #----------succ-----------------------
+ => nil 
+3.0.2 :570 > 'THX1138'.succ # => "THX1139"
+ => "THX1139" 
+3.0.2 :571 > '<<koala>>'.succ # => "<<koalb>>"
+ => "<<koalb>>" 
+3.0.2 :572 > '***'.succ # => '**+'
+ => "**+" 
+3.0.2 :573 > '00'.succ # => "01"
+ => "01" 
+3.0.2 :574 > '09'.succ # => "10"
+ => "10" 
+3.0.2 :575 > '99'.succ 
+ => "100" 
+3.0.2 :576 > 'aa'.succ
+ => "ab" 
+3.0.2 :577 > 'az'.succ
+ => "ba" 
+3.0.2 :578 > 'zz'.succ
+ => "aaa" 
+3.0.2 :579 > 'AA'.succ
+ => "AB" 
+3.0.2 :580 > 'AZ'.succ
+ => "BA" 
+3.0.2 :581 > 'ZZ'.succ
+ => "AAA" 
+3.0.2 :582 > s = 0.chr * 3
+ => "\x00\x00\x00" 
+3.0.2 :583 > S
+ => "foo" 
+3.0.2 :584 > s.succ
+ => "\x00\x00\x01" 
+3.0.2 :585 > s
+ => "\x00\x00\x00" 
+3.0.2 :586 > s.succ
+ => "\x00\x00\x01" 
+ #----------oct--------------------
+ => nil 
+3.0.2 :588 > "123".oct
+ => 83 
+3.0.2 :589 > "-377".oct
+ => -255 
+3.0.2 :590 > "bad".oct
+ => 0 
+3.0.2 :591 > "0377bad".oct
+ => 255 
+#----------ord--------------------------
+ => nil 
+3.0.2 :593 > "a".ord
+ => 97 
+3.0.2 :594 > #---------partition-----------------
+ => nil 
+3.0.2 :595 > "hello".partition("l")        
+ => ["he", "l", "lo"] 
+3.0.2 :596 > "hello".partition("l")  
+ => ["he", "l", "lo"] 
+3.0.2 :597 > "hello".partition(/.l/)     
+ => ["h", "el", "lo"] 
+3.0.2 :598 > #---------------prepend---------------------
+ => nil 
+3.0.2 :002 > s = 'foo'
+ => "foo" 
+3.0.2 :003 > s.prepend('bar','baz')
+ => "barbazfoo" 
+3.0.2 :004 > #-------------replace-----------------
+ => nil 
+3.0.2 :005 > s = "hello"
+ => "hello" 
+3.0.2 :006 > s.replace "world"
+ => "world" 
+3.0.2 :007 > #--------------reverse-------------------------
+ => nil 
+3.0.2 :008 > s = "hello"
+ => "hello" 
+3.0.2 :009 > s.reverse
+ => "olleh" 
+3.0.2 :010 > s.reverse!
+ => "olleh" 
+#-----------------rindex-------------------
+ => nil 
+3.0.2 :012 > 'foo'.rindex('f')
+ => 0 
+3.0.2 :013 > 'foo'.rindex('o') 
+ => 2 
+3.0.2 :014 > 'foo'.rindex('oo') 
+ => 1 
+3.0.2 :015 > 'foo'.rindex('ooo') 
+ => nil 
+3.0.2 :016 > 
+3.0.2 :017 > 'foo'.rindex(/f/) 
+ => 0 
+3.0.2 :018 > 'foo'.rindex(/o/) 
+ => 2 
+3.0.2 :019 > 'foo'.rindex(/oo/) 
+ => 1 
+3.0.2 :020 > 'foo'.rindex(/ooo/) 
+ => nil 
+3.0.2 :021 >  'foo'.rindex('o', 0) # => nil
+ => nil 
+3.0.2 :022 >  'foo'.rindex('o', 1) # => 1
+ => 1 
+3.0.2 :023 > 'foo'.rindex('o',2)
+ => 2 
+3.0.2 :024 >  'foo'.rindex('o', 3)
+ => 2 
+3.0.2 :025 > 'foo'.rindex('o', -1)
+ => 2 
+3.0.2 :026 > 'foo'.rindex('o', -2) 
+ => 1 
+3.0.2 :027 > 'foo'.rindex('o', -3) 
+ => nil 
+3.0.2 :028 > 'foo'.rindex('o', -4) 
+ => nil 
+#-------------rjust------------------
+ => nil 
+3.0.2 :030 > "hello".rjust(4)
+ => "hello" 
+3.0.2 :031 > "hello".rjust(4,12)
+(irb):31:in `rjust': no implicit conversion of Integer into String (TypeError)
+	from (irb):31:in `<main>'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/lib/ruby/gems/3.0.0/gems/irb-1.3.5/exe/irb:11:in `<top (required)>'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `load'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `<main>'
+3.0.2 :032 > "hello".rjust(4,'12')
+ => "hello" 
+3.0.2 :033 > "hello".rjust(20)          
+ => "               hello" 
+3.0.2 :034 > "hello".rjust(20, '1234')  
+ => "123412341234123hello" 
+3.0.2 :035 > #--------------rpartition-----------------
+ => nil 
+3.0.2 :036 > "hello".rpartition("l")     
+ => ["hel", "l", "o"] 
+3.0.2 :037 > "hello".rpartition("x")         
+ => ["", "", "hello"] 
+3.0.2 :038 > "hello".rpartition(/.l/)     
+ => ["he", "ll", "o"] 
+3.0.2 :039 > 
+ #----------rsrtrip--------------
+ => nil 
+3.0.2 :040 > "  hello  ".rstrip!  
+ => "  hello" 
+3.0.2 :041 > "  hello".rstrip!    
+ => nil 
+3.0.2 :042 > "hello".rstrip!    
+ => nil 
+
+
+
+
