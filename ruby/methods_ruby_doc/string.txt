@@ -647,7 +647,202 @@ ld"]
  => nil 
 3.0.2 :042 > "hello".rstrip!    
  => nil 
+ #--------scan-----------------
+ => nil 
+3.0.2 :002 > a = "cruel world"
+ => "cruel world" 
+3.0.2 :003 > a.scan(/\w+/)      
+ => ["cruel", "world"] 
+3.0.2 :004 > a.scan(/.../)      
+ => ["cru", "el ", "wor"] 
+3.0.2 :005 > a.scan(/(...)/)     
+ => [["cru"], ["el "], ["wor"]] 
+3.0.2 :006 > a.scan(/(..)(..)/)   
+ => [["cr", "ue"], ["l ", "wo"]] 
+3.0.2 :007 > a.scan(/\w+/) {|w| print "<<#{w}>> " }
+<<cruel>> <<world>>  => "cruel world" 
+3.0.2 :008 > print "\n"
 
+ => nil 
+3.0.2 :009 > a.scan(/(.)(.)/) {|x,y| print y, x }
+rceu lowlr => "cruel world" 
+3.0.2 :010 > print "\n"
+
+ => nil 
+3.0.2 :011 > #---------scrub------------
+ => nil 
+3.0.2 :012 > "abc\u3042\x81".scrub
+ => "abcあ�" 
+3.0.2 :013 > "abc\u3042\x81".scrub("*") 
+ => "abcあ*" 
+3.0.2 :014 > "abc\u3042\xE3\x80".scrub{|bytes| '<'+bytes.unpac
+k('H*')[0]+'>' }
+ => "abcあ<e380>" 
+3.0.2 :015 > "abc\u3042\x81".scrub! 
+ => "abcあ�" 
+#------------string------------------
+ => nil 
+3.0.2 :021 > 'bar'[2]
+ => "r" 
+3.0.2 :022 > 'foo'[-3]
+ => "f" 
+3.0.2 :023 > 'foo'[-4]
+ => nil 
+3.0.2 :024 > 'foo'[0,2]
+ => "fo" 
+3.0.2 :025 > 'foo'[0,0]
+ => "" 
+3.0.2 :026 > 'foo'[-2,2]
+ => "oo" 
+3.0.2 :027 > 'foo'[3,2]
+ => "" 
+3.0.2 :028 > 'foo'[/o/] 
+ => "o" 
+3.0.2 :029 > 'foo'[/x/] 
+ => nil 
+3.0.2 :030 > s = 'hello there'
+ => "hello there" 
+3.0.2 :031 > s[/[aeiou](.)\1/] # => "ell"
+ => "ell" 
+3.0.2 :032 > s[/[aeiou](.)\1/, 0] # => "ell"
+ => "ell" 
+#----------------slice-----------------
+string = "this is a string"
+ => "this is a string" 
+3.0.2 :002 > string.slice!(2)
+ => "i" 
+3.0.2 :003 > string.slice!(3..6)    
+ => " is " 
+3.0.2 :004 > string.slice!(/s.*t/)   
+ => "sa st" 
+3.0.2 :005 > string.slice!("r")    
+ => "r" 
+3.0.2 :006 > string
+ => "thing" 
+#-----------split------------------
+ => nil 
+3.0.2 :008 > " now's  the time ".split     
+ => ["now's", "the", "time"] 
+3.0.2 :009 > " now's  the time ".split(' ')  
+ => ["now's", "the", "time"] 
+3.0.2 :010 > " now's  the time".split(/ /)   #=> ["", "now's",
+ "", "the", "time"]
+ => ["", "now's", "", "the", "time"] 
+3.0.2 :011 > "1, 2.34,56, 7".split(%r{,\s*}) 
+ => ["1", "2.34", "56", "7"] 
+3.0.2 :012 > "hello".split(//)           
+ => ["h", "e", "l", "l", "o"] 
+3.0.2 :013 > "hello".split(//, 3)        
+ => ["h", "e", "llo"] 
+3.0.2 :014 > "hi mom".split(%r{\s*})        
+ => ["h", "i", "m", "o", "m"] 
+3.0.2 :015 > "mellow yellow".split("ello")  
+ => ["m", "w y", "w"] 
+3.0.2 :016 > "1,2,,3,4,,".split(',')      
+ => ["1", "2", "", "3", "4"] 
+3.0.2 :017 > "1,2,,3,4,,".split(',', 4)    
+ => ["1", "2", "", "3,4,,"] 
+3.0.2 :018 > "1,2,,3,4,,".split(',', -4)     
+ => ["1", "2", "", "3", "4", "", ""] 
+3.0.2 :019 > "1:2:3".split(/(:)()()/, 2)   
+ => ["1", ":", "", "", "2:3"] 
+3.0.2 :020 > "".split(',', -1)       
+ => [] 
+ #-----------sqeeze------------------
+ => nil 
+3.0.2 :022 > "yellow moon".squeeze               
+ => "yelow mon" 
+3.0.2 :023 > "  now   is  the".squeeze(" ")        
+ => " now is the" 
+3.0.2 :024 > "putters shoot balls".squeeze("m-z")  
+ => "puters shot balls" 
+3.0.2 :025 > "hello".start_with?("hell")       
+ => true 
+3.0.2 :026 > "hello".start_with?(/H/i)         
+ => true 
+3.0.2 :027 > "hello".start_with?("heaven", "hell")  
+ => true 
+3.0.2 :028 > "hello".start_with?("heaven", "paradise")
+ => false 
+ #----------strip----------------------
+ => nil 
+3.0.2 :030 > "    hello    ".strip  
+ => "hello" 
+3.0.2 :031 > "\tgoodbye\r\n".strip  
+ => "goodbye" 
+3.0.2 :032 > "\x00\t\n\v\f\r ".strip
+ => "" 
+3.0.2 :033 > "hello".strip     
+ => "hello" 
+3.0.2 :034 > "  hello  ".strip!  
+ => "hello" 
+3.0.2 :035 > "hello".strip!   
+ => nil 
+#----------------sub-------------------------
+ => nil 
+3.0.2 :037 > "hello".sub(/[aeiou]/, '*')      
+ => "h*llo" 
+3.0.2 :038 > "hello".sub(/([aeiou])/, '<\1>')            
+ => "h<e>llo" 
+3.0.2 :039 > "hello".sub(/./) {|s| s.ord.to_s + ' ' }  
+ => "104 ello" 
+3.0.2 :040 > "hello".sub(/(?<foo>[aeiou])/, '*\k<foo>*') 
+ => "h*e*llo" 
+3.0.2 :041 > 'Is SHELL your preferred shell?'.sub(/[[:upper:]]
+{2,}/, ENV)
+ => "Is /bin/bash your preferred shell?" 
+#-----------to_c---------------------
+ => nil 
+3.0.2 :062 > '9'.to_c         
+ => (9+0i) 
+3.0.2 :063 > '2.5'.to_c         
+ => (2.5+0i) 
+3.0.2 :064 > '2.5/1'.to_c   
+ => ((5/2)+0i) 
+3.0.2 :065 > '-3/2'.to_c        
+ => ((-3/2)+0i) 
+3.0.2 :066 > '-i'.to_c          
+ => (0-1i) 
+3.0.2 :067 > '45i'.to_c        
+ => (0+45i) 
+3.0.2 :068 > '3-4i'.to_c       
+ => (3-4i) 
+3.0.2 :069 > '-4e2-4e-2i'.to_c
+ => (-400.0-0.04i) 
+3.0.2 :070 > '-0.0-0.0i'.to_c   
+ => (-0.0-0.0i) 
+3.0.2 :071 > '1/2+3/4i'.to_c   
+ => ((1/2)+(3/4)*i) 
+ #--------------to_r-----------------
+ => nil 
+
+3.0.2 :092 > '  2  '.to_r
+ => (2/1) 
+3.0.2 :093 > '300/2'.to_r    
+ => (150/1) 
+3.0.2 :094 > '-9.2'.to_r      
+ => (-46/5) 
+3.0.2 :095 > '-9.2e2'.to_r      
+ => (-920/1) 
+3.0.2 :096 > '1_234_567'.to_r  
+ => (1234567/1) 
+
+ #-----------------upcase-------------------
+ => nil 
+3.0.2 :098 > "hEllO".upcase 
+ => "HELLO" 
+#------------------valid_encoding----------------
+-
+ => nil 
+3.0.2 :100 > "\xc2\xa1".force_encoding("UTF-8").valid_encoding
+? 
+ => true 
+3.0.2 :101 > "\xc2".force_encoding("UTF-8").valid_encoding?   
+ 
+ => false 
+3.0.2 :102 > "\x80".force_encoding("UTF-8").valid_encoding?   
+  
+ => false 
 
 
 
