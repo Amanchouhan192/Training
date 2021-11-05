@@ -1,0 +1,645 @@
+#-----------------hash Methods-------------------------
+h = {:foo => 0,:bar => 1, :baz => 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :006 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :007 > h = {'foo': 0, 'bar': 1, 'baz': 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :008 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :009 > h = {foo: 0,:bar => 1, 'baz': 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :010 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :011 > person = {name: 'Matz',language: 'Ruby'}
+ => {:name=>"Matz", :language=>"Ruby"} 
+3.0.2 :012 > person
+ => {:name=>"Matz", :language=>"Ruby"} 
+3.0.2 :013 > #--------method------------
+ => nil 
+3.0.2 :014 > def some_method(hash)
+3.0.2 :015 >   p hash
+3.0.2 :016 > end
+ => :some_method 
+3.0.2 :017 > some_method({foo:0,bar:1,baz:2})
+{:foo=>0, :bar=>1, :baz=>2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :018 > some_method(foo: 0, bar: 1, baz: 2)
+{:foo=>0, :bar=>1, :baz=>2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+ #--------class----------------
+ => nil 
+3.0.2 :020 > class Dev
+3.0.2 :021 >   attr_accessor :name,language
+3.0.2 :022 >   def initialize(hash)
+3.0.2 :023 >     self.name = hash[:name]
+3.0.2 :024 >     self.language = hash[:language]
+3.0.2 :025 >   end
+3.0.2 :026 > end
+(irb):21:in `<class:Dev>': undefined local variable or method `language' for Dev:Class (NameError)
+	from (irb):20:in `<main>'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/lib/ruby/gems/3.0.0/gems/irb-1.3.5/exe/irb:11:in `<top (required)>'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `load'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `<main>'
+3.0.2 :027 > class Dev
+3.0.2 :028 >   attr_accessor :name,:language
+3.0.2 :029 >   def initialize(hash)
+3.0.2 :030 >     self.name = hash[:name]
+3.0.2 :031 >     self.language = hash[:language]
+3.0.2 :032 >   end
+3.0.2 :033 > end
+ => :initialize 
+3.0.2 :034 > matz = Dev.new(name: 'Matz',language: 'Ruby')
+ => #<Dev:0x000056327128b9b0 @language="Ruby", @name="Matz"> 
+3.0.2 :035 > matz
+ => #<Dev:0x000056327128b9b0 @language="Ruby", @name="Matz"> 
+ #-------------creating Hash-----------------
+ => nil 
+3.0.2 :037 > h = Hash.new
+ => {} 
+3.0.2 :038 > h
+ => {} 
+3.0.2 :039 > h.class
+ => Hash 
+3.0.2 :040 > h = Hash[]
+ => {} 
+3.0.2 :041 > h
+ => {} 
+3.0.2 :042 > h = Hash[foo:0,bar:1,baz:2]
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :043 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :044 > h={}
+ => {} 
+3.0.2 :045 > h
+ => {} 
+3.0.2 :046 > h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :047 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :048 > #-------------hash value Basics-----------
+ => nil 
+3.0.2 :049 > h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :050 > h[:foo]
+ => 0 
+#-------------Entry Order------------------
+ => nil 
+3.0.2 :061 > h = Hash[foo:0,bar:1]
+ => {:foo=>0, :bar=>1} 
+3.0.2 :062 > h
+ => {:foo=>0, :bar=>1} 
+3.0.2 :063 > h[:baz] = 2
+ => 2 
+3.0.2 :064 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :065 > h[:foo] = 3
+ => 3 
+3.0.2 :066 > h
+ => {:foo=>3, :bar=>1, :baz=>2} 
+3.0.2 :067 > h.delete(:foo)
+ => 3 
+3.0.2 :068 > h[:foo] = 5
+ => 5 
+3.0.2 :069 > h
+ => {:bar=>1, :baz=>2, :foo=>5} 
+3.0.2 :070 > 
+#------------------Hash Keys----------------
+ => nil 
+3.0.2 :071 > a0 = [:foo,:bar]
+ => [:foo, :bar] 
+3.0.2 :072 > a1 = [:baz,:bat]
+ => [:baz, :bat] 
+3.0.2 :073 > h = {a0 =>0,a1 => 1}
+ => {[:foo, :bar]=>0, [:baz, :bat]=>1} 
+3.0.2 :074 > h.include?(a0)
+ => true 
+3.0.2 :075 > h[a0]
+ => 0 
+3.0.2 :076 > a0.hash
+ => -1151392660210606238 
+3.0.2 :077 > a0[0] = :bam
+ => :bam 
+3.0.2 :078 > a0.hash
+ => 1890298752003033426 
+3.0.2 :079 > h.include?(a0)
+ => false 
+3.0.2 :080 > h[a0]
+ => nil 
+3.0.2 :081 > h.refresh
+(irb):81:in `<main>': undefined method `refresh' for {[:bam, :bar]=>0, [:baz, :bat]=>1}:Hash (NoMethodError)
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/lib/ruby/gems/3.0.0/gems/irb-1.3.5/exe/irb:11:in `<top (required)>'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `load'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `<main>'
+3.0.2 :082 > h.rehash
+ => {[:bam, :bar]=>0, [:baz, :bat]=>1} 
+3.0.2 :083 > h.include?(a0)
+ => true 
+3.0.2 :084 > h[a0]
+ => 0 
+3.0.2 :085 > 
+a0.hash
+ => 1890298752003033426 
+3.0.2 :087 > a0.hash
+ => 1890298752003033426 
+3.0.2 :088 > h.include?(a0)
+ => true 
+3.0.2 :089 > h[a0]
+ => 0 
+3.0.2 :090 > h.rehash
+ => {[:bam, :bar]=>0, [:baz, :bat]=>1} 
+3.0.2 :091 > h.include
+(irb):91:in `<main>': undefined method `include' for {[:bam, :bar]=>0, [:baz, :bat]=>1}:Hash (NoMethodError)
+Did you mean?  include?
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/lib/ruby/gems/3.0.0/gems/irb-1.3.5/exe/irb:11:in `<top (required)>'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `load'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `<main>'
+3.0.2 :092 > h.include?(a0)
+ => true 
+3.0.2 :093 > h[a0]
+ => 0 
+3.0.2 :094 > s = 'foo'
+ => "foo" 
+3.0.2 :095 > s.frozen?
+ => false 
+3.0.2 :096 > h = {s => 0}
+ => {"foo"=>0} 
+3.0.2 :097 > first_key = h.keys.first
+ => "foo" 
+3.0.2 :098 > first_key.frozen?
+ #---------------Default Values-----------
+ => nil 
+3.0.2 :100 > h = Hash.new
+ => {} 
+3.0.2 :101 > h.default
+ => nil 
+3.0.2 :102 > h=Hash.new(-1)
+ => {} 
+3.0.2 :103 > h.default
+ => -1 
+3.0.2 :104 > h.default = 0
+ => 0 
+3.0.2 :105 > 
+3.0.2 :106 > h.default
+ => 0 
+3.0.2 :107 > counts = {foo:42}
+ => {:foo=>42} 
+3.0.2 :108 > counts.default
+ => nil 
+3.0.2 :109 > counts[:foo] = 42
+ => 42 
+3.0.2 :110 > counts[:bar]
+ => nil 
+3.0.2 :111 > 
+3.0.2 :112 > counts.default = 0
+ => 0 
+3.0.2 :113 > counts[:bar]
+ => 0 
+3.0.2 :114 > counts.values_at(:foo, :bar, :baz) 
+ => [42, 0, 0] 
+3.0.2 :115 > counts.dig(:bar)
+ => 0 
+3.0.2 :117 > synonyms = Hash.new([])
+ => {} 
+3.0.2 :118 > synonyms[:hello] 
+ => [] 
+3.0.2 :119 > synonyms[:hello] << :hi 
+ => [:hi] 
+3.0.2 :120 > synonyms.default
+ => [:hi] 
+3.0.2 :121 > synonyms[:world] << :universe
+ => [:hi, :universe] 
+3.0.2 :122 > synonyms[:world] 
+ => [:hi, :universe] 
+3.0.2 :123 > synonyms.keys 
+ => [] 
+3.0.2 :124 > #------------Default Proc--------------
+ => nil 
+3.0.2 :125 > h = Hash.new
+ => {} 
+3.0.2 :126 > h.default_proc
+ => nil 
+3.0.2 :127 > h = Hash.new { |hash, key| "Default value for #{key}" 
+}
+ => {} 
+3.0.2 :128 > h.default_proc.class
+ => Proc 
+3.0.2 :129 > h.default_proc = proc { |hash, key| "Default value for
+ #{key.inspect}" }
+ => #<Proc:0x00005632712ca570 (irb):129> 
+3.0.2 :130 > h.default_proc.class 
+ => Proc 
+3.0.2 :131 > h = Hash.new { |hash, key| "Default value for #{key}" 
+}
+ => {} 
+3.0.2 :132 > h[:nosuch] 
+ => "Default value for nosuch" 
+3.0.2 :133 > 
+h.include?(:nosuch) 
+ => false 
+3.0.2 :135 > synonyms = Hash.new { |hash, key| hash[key] = [] }
+ => {} 
+3.0.2 :136 > synonyms.include?(:hello) # => false
+ => false 
+3.0.2 :137 > synonyms[:hello] << :hi 
+ => [:hi] 
+3.0.2 :138 > synonyms[:world] << :universe 
+ => [:universe] 
+3.0.2 :139 > synonyms.keys 
+ => [:hello, :world] 
+#----------------Public Class Methods-----------
+3.0.2 :142 > Hash[h] 
+3.0.2 :143 > Hash[ [ [:foo, 0], [:bar, 1] ] ] 
+3.0.2 :144 > Hash[:foo, 0, :bar, 1] 
+ => {:foo=>0, :bar=>1} 
+3.0.2 :145 > h = Hash.new(false)
+ => {} 
+3.0.2 :146 > h.default
+ => false 
+3.0.2 :147 > h.default_proc
+ => nil 
+3.0.2 :148 > h = Hash.new {|hash, key| "Default value for #{key}" }
+
+ => {} 
+3.0.2 :149 > h.default 
+ => nil 
+3.0.2 :150 > h.default_proc.class 
+ => Proc 
+3.0.2 :151 > h[:nosuch] 
+ => "Default value for nosuch" 
+3.0.2 :152 > #-----------ruby2_keyword hash-----------------
+ => nil 
+3.0.2 :153 > h = {k:1} 
+ => {:k=>1} 
+3.0.2 :154 > h = Hash.ruby2_keywords_hash(h)
+ => {:k=>1} 
+3.0.2 :155 > def foo(k:42)
+3.0.2 :156 >   k
+3.0.2 :157 > end
+ => :foo 
+3.0.2 :158 > foo(*[h])
+ => 1 
+3.0.2 :159 > ruby2_keywords def foo(*args)
+3.0.2 :160 >   Hash.ruby2_keywords_hash?(args.last)
+3.0.2 :161 > end
+ => nil 
+3.0.2 :162 > foo(k:1)
+ => true 
+3.0.2 :163 > foo(k:1)
+ => true 
+3.0.2 :164 > 
+#----------Public Instance Variable-----------------
+#------------hash < other_hash--> true or false---------
+=> nil 
+ => nil 
+3.0.2 :167 > h1 = {foo: 0, bar: 1}
+ => {:foo=>0, :bar=>1} 
+3.0.2 :168 > h2 = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :169 > h1 < h2 
+ => true 
+3.0.2 :170 > h2 < h1 
+ => false 
+3.0.2 :171 > h1 < h1
+ => false 
+3.0.2 :172 > h1 <= h1 
+ => true 
+3.0.2 :173 > #-----hash<=other_hash -->true or false-----
+ => nil 
+3.0.2 :174 > h1 = {foo: 0, bar: 1}
+ => {:foo=>0, :bar=>1} 
+3.0.2 :175 > h2 = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :176 > h1 <= h2 # => true
+ => true 
+3.0.2 :177 > h2 <= h1 
+ => false 
+3.0.2 :178 > h1 <= h1 
+ => true 
+3.0.2 :179 > #---------hash==object-->true or false----------
+ => nil 
+3.0.2 :180 > h1 = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :181 > h2 = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :182 > h1==h2
+ => true 
+3.0.2 :183 > h3 = {baz: 2, bar: 1, foo: 0}
+ => {:baz=>2, :bar=>1, :foo=>0} 
+3.0.2 :184 > h1 == h3 # => true
+ => true 
+3.0.2 :185 > 
+ #----------hash > other_hash --> true or false-----
+ => nil 
+3.0.2 :192 > h1 = {foo: 0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :193 > h2 = {foo:0,bar:1}
+ => {:foo=>0, :bar=>1} 
+3.0.2 :194 > h1>h2
+ => true 
+3.0.2 :195 > h2>h1
+ => false 
+3.0.2 :196 > h1>h1
+ => false 
+3.0.2 :197 > #--------hash>=other_hash --> true or false---------
+ => nil 
+3.0.2 :198 > h1 = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :199 > h2 = {foo: 0, bar: 1}
+ => {:foo=>0, :bar=>1} 
+3.0.2 :200 > h1 >= h2 
+ => true 
+3.0.2 :201 > h2 >= h1 
+ => false 
+3.0.2 :202 > h1 >= h1 
+ => true 
+ #---------------hash[key]->value------------
+ => nil 
+3.0.2 :230 > h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :231 > h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :232 > h[:foo]
+ => 0 
+3.0.2 :233 > h = {foo:0,bar:1,baz:2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :234 > h[:nosuch]
+ => nil 
+#-------hash[key]= value ->value--------
+ => nil 
+3.0.2 :002 > h = {foo: 0, bar: 1}
+ => {:foo=>0, :bar=>1} 
+3.0.2 :003 > h[:foo] =2
+ => 2 
+3.0.2 :004 > h.store(:bar, 3) 
+ => 3 
+3.0.2 :005 > h
+ => {:foo=>2, :bar=>3} 
+3.0.2 :006 > h = {foo: 0, bar: 1}
+ => {:foo=>0, :bar=>1} 
+3.0.2 :007 > h[:baz] = 2
+ => 2 
+3.0.2 :008 > h.store(:bat, 3) 
+ => 3 
+3.0.2 :009 > h
+ => {:foo=>0, :bar=>1, :baz=>2, :bat=>3} 
+3.0.2 :010 > #----------any----------------------------
+ => nil 
+3.0.2 :011 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :012 > h.any?([:bar, 1]) 
+ => true 
+3.0.2 :013 > h.any?([:bar, 0]) 
+ => false 
+3.0.2 :014 > h.any?([:baz, 1]) 
+ => false 
+3.0.2 :015 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :016 > h.any? {|key, value| value < 3 } 
+ => true 
+3.0.2 :017 > h.any? {|key, value| value > 3 } 
+ => false 
+#-------------assoc(key)--------------------
+ => nil 
+3.0.2 :019 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :020 > h.assoc(:bar) 
+ => [:bar, 1] 
+3.0.2 :021 > #-----------compact--------------------------
+ => nil 
+3.0.2 :022 > h = {foo: 0, bar: nil, baz: 2, bat: nil}
+ => {:foo=>0, :bar=>nil, :baz=>2, :bat=>nil} 
+3.0.2 :023 > h1 = h.compact
+ => {:foo=>0, :baz=>2} 
+3.0.2 :024 > h1
+ => {:foo=>0, :baz=>2} 
+3.0.2 :025 > #----------------compact-------------------
+ => nil 
+3.0.2 :026 > h = {foo: 0, bar: nil, baz: 2, bat: nil}
+ => {:foo=>0, :bar=>nil, :baz=>2, :bat=>nil} 
+3.0.2 :027 > h.compact?
+(irb):27:in `<main>': undefined method `compact?' for {:foo=>0, :bar=>nil, :baz=>2, :bat=>nil}:Hash (NoMethodError)
+Did you mean?  compact
+               compact!
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/lib/ruby/gems/3.0.0/gems/irb-1.3.5/exe/irb:11:in `<top (required)>'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `load'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `<main>'
+3.0.2 :028 > h.compact!
+ => {:foo=>0, :baz=>2} 
+ 
+#-----------compare by identities------------------
+=> "x" 
+ => "x" 
+ => {} 
+ => false 
+ => 0 
+ => 1 
+ => {"x"=>1} 
+3.0.2 :043 > h = {}
+ => {} 
+3.0.2 :044 > h.compare_by_identity
+ => {} 
+3.0.2 :045 > h.compare_by_identity? 
+ => true 
+3.0.2 :046 > h[s0] = 0
+ => 0 
+3.0.2 :047 > h[s1] = 1
+ => 1 
+3.0.2 :048 > h
+ => {"x"=>0, "x"=>1} 
+3.0.2 :049 > #--------compare_by_identity? → true or false------
+ => nil 
+3.0.2 :050 > h = {}
+ => {} 
+3.0.2 :051 > h.default
+ => nil 
+3.0.2 :052 > h = Hash.new { |hash, key| hash[key] = "No key #{key
+}"}
+ => {} 
+3.0.2 :053 > h[:foo] = "Hello"
+ => "Hello" 
+3.0.2 :054 > h.default(:foo) # => "No key foo"
+ => "No key foo" 
+3.0.2 :055 > #---------default = value -> object-----------
+ => nil 
+3.0.2 :056 > h = {}
+ => {} 
+3.0.2 :057 > h.default
+ => nil 
+3.0.2 :058 > h.default = false
+ => false 
+3.0.2 :059 > h.default 
+ => false 
+3.0.2 :060 > 
+#------default proc = proc->proc----------------
+ => nil 
+3.0.2 :078 > h = {}
+ => {} 
+ => nil 
+or #{key}" }
+3.0.2 :081 > h.default_proc.class 
+ => Proc 
+3.0.2 :082 > h.default_proc = nil
+ => nil 
+3.0.2 :083 > h.default_proc
+ => nil 
+3.0.2 :084 > #-----------delete(key) ->value or nil-----
+ => nil 
+3.0.2 :085 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :086 > h.delete(:bar)
+ => 1 
+3.0.2 :087 > h
+ => {:foo=>0, :baz=>2} 
+3.0.2 :088 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :089 > h.delete(:baz) { |key| raise 'Will never happen'} 
+ => 2 
+3.0.2 :090 > h
+ => {:foo=>0, :bar=>1} 
+3.0.2 :091 > h.delete(:baz) { |key| raise 'Will never happen'}
+(irb):91:in `block in <main>': Will never happen (RuntimeError)
+	from (irb):91:in `delete'
+	from (irb):91:in `<main>'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/lib/ruby/gems/3.0.0/gems/irb-1.3.5/exe/irb:11:in `<top (required)>'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `load'
+	from /home/beryl/.rvm/rubies/ruby-3.0.2/bin/irb:23:in `<main>'
+3.0.2 :092 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :093 > h.delete(:nosuch) { |key| "Key #{key} not found"}
+ => "Key nosuch not found" 
+3.0.2 :094 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :095 > 
+
+#---------delete_if-----------------
+ => nil 
+3.0.2 :104 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :105 > h.delete_if {|key, value| value > 0 } 
+ => {:foo=>0} 
+3.0.2 :106 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :107 > e = h.delete_if
+ => #<Enumerator: ...> 
+3.0.2 :108 > e.each { |key, value| value > 0 } 
+ => {:foo=>0} 
+h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :232 > h.each_key {|key| puts key }  
+foo
+bar
+baz
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :233 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :234 > e = h.each_key 
+ => #<Enumerator: ...> 
+3.0.2 :235 > h1 = e.each {|key| puts key }
+foo
+bar
+baz
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :236 > h1
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :237 > h1
+ => {:foo=>0, :bar=>1, :baz=>2} 
+ 
+ #-----------each_pair----------------
+ => nil 
+3.0.2 :241 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :242 > h.each_pair {|key, value| puts "#{key}: #{value}"} 
+foo: 0
+bar: 1
+baz: 2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :243 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :244 > e = h.each_pair 
+ => #<Enumerator: ...> 
+3.0.2 :245 > h1 = e.each {|key, value| puts "#{key}: #{value}"}
+foo: 0
+bar: 1
+baz: 2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :246 > h1
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :247 > #-----------each_value------------------
+ => nil 
+3.0.2 :248 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :249 > h.each_value {|value| puts value }
+0
+1
+2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :250 > 
+#-----------each_pair----------------
+ => nil 
+3.0.2 :241 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :242 > h.each_pair {|key, value| puts "#{key}: #{value}"} 
+foo: 0
+bar: 1
+baz: 2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :243 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :244 > e = h.each_pair 
+ => #<Enumerator: ...> 
+3.0.2 :245 > h1 = e.each {|key, value| puts "#{key}: #{value}"}
+foo: 0
+bar: 1
+baz: 2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :246 > h1
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :247 > #-----------each_value------------------
+ => nil 
+3.0.2 :248 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :249 > h.each_value {|value| puts value }
+0
+1
+2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :250 > 
+h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :254 > e = h.each_value 
+ => #<Enumerator: ...> 
+3.0.2 :255 > h1 = e.each {|value| puts value }
+0
+1
+2
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :256 > h1
+ => {:foo=>0, :bar=>1, :baz=>2} 
+#------------empty? ->true or false------------
+ => nil 
+3.0.2 :267 > {}.empty?
+ => true 
+3.0.2 :268 > {foo: 0, bar: 1, baz: 2}.empty? 
+ => false 
+3.0.2 :269 > #--------------eql? object -> true or false-------
+ => nil 
+3.0.2 :270 > h1 = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :271 > h2 = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.2 :272 > h1.eql? h2 
+ => true 
+3.0.2 :273 > h3 = {baz: 2, bar: 1, foo: 0}
+ => {:baz=>2, :bar=>1, :foo=>0} 
+3.0.2 :274 > h1.eql? h3 # => true
+ => true 
+#-------------except(*keys)------------------
+ => nil 
+3.0.2 :282 > h = { a: 100, b: 200, c: 300 }
+ => {:a=>100, :b=>200, :c=>300} 
+3.0.2 :283 > h.except(:a)         
+ => {:b=>200, :c=>300} 
+
+
+
