@@ -1,0 +1,15 @@
+Installation of rails:
+	command : gem install rails
+	
+Gem : 
+
+Bundler: 
+Gem version : for check the current gem verison
+	command : gem --version
+		  3.2.22
+
+rails version : check the rails version 
+
+		command : rails -v
+			Rails 6.1.4.1
+
