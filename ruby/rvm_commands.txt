@@ -1,0 +1,70 @@
+=======================================RVM BASIC COMMANDS==================================
+1.rvm list : list the current version of ruby is using.
+	command: rvm list 
+	output:  rvm list
+			=* ruby-3.0.2 [ x86_64 ]
+
+			# => - current
+			# =* - current && default
+			#  * - default
+			
+2.rvm use <version> : it use to set the  version of ruby you wants to work.
+	command : rvm use <version>  # it will set the ruby version to the current version of ruby
+	
+3.rvm get stable: This command will update your RVM with the latest stable version of RVM. It will require internet connection.
+	command : rvm get stable
+	output:
+	
+	
+	 rvm get stable
+Downloading https://get.rvm.io
+Downloading https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer.asc
+Verifying /home/beryl/.rvm/archives/rvm-installer.asc
+gpg: Signature made Wednesday 24 July 2019 03:29:45 AM IST
+gpg:                using RSA key 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+gpg: Good signature from "Piotr Kuczynski <piotr.kuczynski@gmail.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 7D2B AF1C F37B 13E2 069D  6956 105B D0E7 3949 9BDB
+GPG verified '/home/beryl/.rvm/archives/rvm-installer'
+Downloading https://github.com/rvm/rvm/archive/1.29.12.tar.gz
+Downloading https://github.com/rvm/rvm/releases/download/1.29.12/1.29.12.tar.gz.asc
+gpg: Signature made Saturday 16 January 2021 12:16:22 AM IST
+gpg:                using RSA key 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+gpg: Good signature from "Piotr Kuczynski <piotr.kuczynski@gmail.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 7D2B AF1C F37B 13E2 069D  6956 105B D0E7 3949 9BDB
+GPG verified '/home/beryl/.rvm/archives/rvm-1.29.12.tgz'
+Upgrading the RVM installation in /home/beryl/.rvm/
+    RVM PATH line found in /home/beryl/.mkshrc /home/beryl/.profile /home/beryl/.bashrc /home/beryl/.zshrc.
+    RVM sourcing line found in /home/beryl/.profile /home/beryl/.bash_profile /home/beryl/.zlogin.
+Upgrade of RVM in /home/beryl/.rvm/ is complete.
+
+Thanks for installing RVM 🙏
+Please consider donating to our open collective to help us maintain RVM.
+
+👉  Donate: https://opencollective.com/rvm/donate
+
+
+RVM reloaded!
+
+
+4.rvm upgrade <ruby_version> : it will upgrade the ruby version installed in your machine with the updated version.
+	commands: rvm upgrade <version>
+
+5.rvm requirements : this commands check the current rvm requirements of machine.
+		command : rvm requirement
+				
+			Checking requirements for ubuntu.
+			Requirements installation successful.	
+6.rvm disk-usage: it tell the how much disk is using ruby packges.
+	command : rvm disk-usage
+	
+	
+7.rvm repair : it repair and fix the rvm and ruby files.
+	command: rvm repair
+
+8.rvm help : it will list all the rvm commands.
+	command: rvm help
+	// list all the commands of rvm 
