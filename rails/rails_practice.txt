@@ -19,4 +19,4 @@
 7.rails server: start the server.
 	command : rails server
 		// your rails server will start automaticaly at localhost : http://127.0.0.1:3000
-	
+8.
