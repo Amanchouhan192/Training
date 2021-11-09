@@ -46,4 +46,35 @@ Tasks: TOP => db:create
 
 
 
-3.
+3.data type error : error was generated when run command of genration migration.
+	command applied : rails db:migrate
+	Error explanation:
+	
+== 20211109112006 DoNothingYet: migrating =====================================
+== 20211109112006 DoNothingYet: migrated (0.0000s) ============================
+
+rails aborted!
+SyntaxError: /home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211109113538_create_users.rb:4: syntax error, unexpected symbol literal, expecting `do' or '{' or '('
+      t.String,last_name :first_name
+                         ^
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+	
+
+solution : 
+class CreateUsers < ActiveRecord::Migration[6.1]
+  def change
+    create_table :users do |t|
+      t.String :last_name   // change t.String to t.string 
+      t.String :first_name  // change t.String to t.string 
+      t.String :email       // change t.String to t.string 
+
+      t.timestamps # generated automatically which tells created_at and updated_at
+    end
+  end
+end
+
+
