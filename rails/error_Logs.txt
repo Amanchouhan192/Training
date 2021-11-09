@@ -1,0 +1,24 @@
+================================Detailed Explanation of Erros and Its solution================================
+1.when i created a rails project(in my case) :
+	
+	commmand applied : rails new simple_cms -d postgresql
+	
+
+Error : An error occurred while installing pg (1.2.3), and Bundler cannot continue.
+Make sure that `gem install pg -v '1.2.3' --source 'https://rubygems.org/'` succeeds before bundling.
+
+In Gemfile:
+  pg
+         run  bundle binstubs bundler
+Could not find gem 'pg (~> 1.1)' in rubygems repository https://rubygems.org/ or installed locally.
+The source does not contain any versions of 'pg'
+       rails  webpacker:install
+Could not find gem 'pg (~> 1.1)' in rubygems repository https://rubygems.org/ or installed locally.
+The source does not contain any versions of 'pg'
+Run `bundle install` to install missing gems.
+
+	solution : 1. run :	sudo apt-get install libpq-dev
+	           2. run :	bundle install // bcs project already created no need to create again simple install webpacker as shown below
+		   3. run :	rails webpacker:install
+		   4. run : 	rails server // it will start running
+2.
