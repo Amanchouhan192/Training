@@ -1,15 +1,22 @@
-Installation of rails:
+1.Installation of rails:
 	command : gem install rails
 	
-Gem : 
+2.Gem : 
 
-Bundler: 
-Gem version : for check the current gem verison
+3.Bundler: provides a constant environment for Ruby projects by tracking and installing suitable gems that are needed.
+4.Gem version : for check the current gem verison
 	command : gem --version
 		  3.2.22
 
-rails version : check the rails version 
+5.rails version : check the rails version 
 
 		command : rails -v
 			Rails 6.1.4.1
 
+6.rails new <project_name> : for creating new rails project in local machine .
+	command : rails new <project_name>
+	
+7.rails server: start the server.
+	command : rails server
+		// your rails server will start automaticaly at localhost : http://127.0.0.1:3000
+	
