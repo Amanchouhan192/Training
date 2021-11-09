@@ -21,4 +21,29 @@ Run `bundle install` to install missing gems.
 	           2. run :	bundle install // bcs project already created no need to create again simple install webpacker as shown below
 		   3. run :	rails webpacker:install
 		   4. run : 	rails server // it will start running
-2.
+2.not able to connect with the database :
+	command  : rails db:create
+	
+	Error explanation : 
+
+FATAL:  Peer authentication failed for user "aman"
+Couldn't create 'simple_cms_development' database. Please check your configuration.
+rails aborted!
+ActiveRecord::ConnectionNotEstablished: FATAL:  Peer authentication failed for user "aman"
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+
+Caused by:
+PG::ConnectionBad: FATAL:  Peer authentication failed for user "aman"
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+Tasks: TOP => db:create
+(See full trace by running task with --trace)
+
+	solution : uncommented the port: 5432  host and make sure you entered the right password of database user in file database.yml 
+
+
+
+3.
