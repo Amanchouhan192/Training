@@ -1,0 +1,94 @@
+================================================Active Records(DataBase In Rails) Basics=======================================
+1.rail console : to start the rail console 
+	command : rails c
+
+2.Insertion of data : 
+	command :
+
+ user = User.new
+ => #<User:0x000056242b2ae180 id: nil, last_name: nil, first_name: nil, email: nil, created_at: nil, updated_at: nil> 
+3.0.2 :002 > user.first_name = "kevin"
+ => "kevin" 
+3.0.2 :003 > user.last_name = "smith"
+ => "smith" 
+3.0.2 :004 > user.email = "kevin11@gmail.com"
+ => "kevin11@gmail.com" 
+
+3.Save the data : update the table 
+	command : user.save
+	output:
+	
+3.0.2 :005 > user.save
+  TRANSACTION (0.5ms)  BEGIN
+  User Create (1.7ms)  INSERT INTO "users" ("last_name", "first_name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["last_name", "smith"], ["first_name", "kevin"], ["email", "kevin11@gmail.com"], ["created_at", "2021-11-09 12:55:26.151935"], ["updated_at", "2021-11-09 12:55:26.151935"]]
+  TRANSACTION (33.8ms)  COMMIT
+ => true 
+ 
+ psql : table Users:
+ simple_cms_development=# select * from users;
+ id | last_name | first_name |       email       |         created_at         |         updated_at         
+----+-----------+------------+-------------------+----------------------------+----------------------------
+  1 | smith     | kevin      | kevin11@gmail.com | 2021-11-09 12:55:26.151935 | 2021-11-09 12:55:26.151935
+(1 row)
+
+
+3.see all data : 
+	command: class_name.all
+	output:User.all
+User.all
+  User Load (1.1ms)  SELECT "users".* FROM "users"
+ => 
+[#<User:0x000056242b3ed848
+  id: 1,
+  last_name: "smith",
+  first_name: "kevin",
+  email: "kevin11@gmail.com",
+  created_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00>,
+ #<User:0x000056242b3ed6b8
+  id: 2,
+  last_name: "jung",
+  first_name: "David",
+  email: "david@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00>,
+ #<User:0x000056242b3ed5a0
+  id: 3,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00>,
+ #<User:0x000056242b3ed4d8
+  id: 4,
+  last_name: "chang",
+  first_name: "Hanry",
+  email: "hanry@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00>] 
+3.0.2 :023 > 
+
+4.Insert into table: 
+	command : User.create(first_name:"Komal",last_name:"kumari",email:"komal@gmail.com")
+	output: 
+User.create(first_name:"Hanry",last_name:"chang",email:"hanry@gmail.com")
+  TRANSACTION (0.5ms)  BEGIN
+  User Create (0.7ms)  INSERT INTO "users" ("last_name", "first_name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["last_name", "chang"], ["first_name", "Hanry"], ["email", "hanry@gmail.com"], ["created_at", "2021-11-09 13:09:44.335389"], ["updated_at", "2021-11-09 13:09:44.335389"]]
+  TRANSACTION (19.3ms)  COMMIT
+ => 
+ 
+ Table :
+
+simple_cms_development=# select * from users;
+ id | last_name | first_name |       email       |         created_at         |         updated_at         
+----+-----------+------------+-------------------+----------------------------+----------------------------
+  1 | smith     | kevin      | kevin11@gmail.com | 2021-11-09 12:55:26.151935 | 2021-11-09 12:55:26.151935
+  2 | jung      | David      | david@gmail.com   | 2021-11-09 13:08:16.845347 | 2021-11-09 13:08:16.845347
+  3 | kumari    | Komal      | komal@gmail.com   | 2021-11-09 13:09:22.585753 | 2021-11-09 13:09:22.585753
+  4 | chang     | Hanry      | hanry@gmail.com   | 2021-11-09 13:09:44.335389 | 2021-11-09 13:09:44.335389
+(4 rows)
+
+
+
+
+
