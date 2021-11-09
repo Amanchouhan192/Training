@@ -1,7 +1,7 @@
 1.Installation of rails:
 	command : gem install rails
 	
-2.Gem : 
+2.Gem : Gems in Rails are libraries that allow any Ruby on Rails developer to add functionalities without writing code.
 
 3.Bundler: provides a constant environment for Ruby projects by tracking and installing suitable gems that are needed.
 4.Gem version : for check the current gem verison
