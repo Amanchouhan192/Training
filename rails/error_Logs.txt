@@ -76,5 +76,23 @@ class CreateUsers < ActiveRecord::Migration[6.1]
     end
   end
 end
+------------------------------------------------10th Nov-----------------------------------------------------------------
+4.No method error:
+
+command:  user.update(name: 'Dave')
+Error explanation: 
+
+(irb):101:in `<main>': undefined method `update' for nil:NilClass (NoMethodError)
+3.0.2 :102 > 
+
+solution : error was due to the "user" which i was run with non matching column value i.e empty class value thats why it was showing nilclass (NoMthodError)
+see below :
+
+3.0.2 :100 > user = User.find_by(first_name: "komal")
+  User Load (0.7ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "komal"], ["LIMIT", 1]]
+ => nil 
+
+3.0.2 :106 > user
+ => nil 
 
 
