@@ -5,6 +5,8 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :first_name
       t.string :email
 
+      #validates :first_name,:last_name, presence: true
+
       t.timestamps # generated automatically which tells created_at and updated_at
     end
   end
