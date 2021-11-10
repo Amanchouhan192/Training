@@ -1,0 +1,95 @@
+=========================================Migration=========================================
+##################################Creating Migrations###########################################################
+
+1.generate Migration :
+
+bin/rails generate migration AddPartNumberToProducts
+Running via Spring preloader in process 4738
+      invoke  active_record
+      create    db/migrate/20211110113839_add_part_number_to_products.rb
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration AddPartNumberToProducts
+Running via Spring preloader in process 4749
+      invoke  active_record
+   identical    db/migrate/20211110113839_add_part_number_to_products.rb
+
+2.Added column :
+rails generate migration AddPartNumberToProducts part_number:string
+Running via Spring preloader in process 5354
+      invoke  active_record
+      create    db/migrate/20211110114954_add_part_number_to_products.rb
+
+bin/rails generate migration AddPartNumberToProducts
+Running via Spring preloader in process 4738
+      invoke  active_record
+      create    db/migrate/20211110113839_add_part_number_to_products.rb
+      
+      
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration AddPartNumberToProducts
+Running via Spring preloader in process 4749
+      invoke  active_record
+   identical    db/migrate/20211110113839_add_part_number_to_products.rb
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ generate migration AddPartNumberToProducts part_number:string
+generate: command not found
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration AddPartNumberToProducts part_number:string
+Running via Spring preloader in process 5187
+      invoke  active_record
+    conflict    db/migrate/20211110114505_add_part_number_to_products.rb
+Another migration is already named add_part_number_to_products: /home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211110113839_add_part_number_to_products.rb. Use --force to replace this migration or --skip to ignore conflicted file.
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails --skip
+invalid option: --skip
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration AddPartNumberToProducts
+Running via Spring preloader in process 5296
+      invoke  active_record
+      create    db/migrate/20211110114839_add_part_number_to_products.rb
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration AddPartNumberToProducts part_number:string
+Running via Spring preloader in process 5308
+      invoke  active_record
+    conflict    db/migrate/20211110114918_add_part_number_to_products.rb
+Another migration is already named add_part_number_to_products: /home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211110114839_add_part_number_to_products.rb. Use --force to replace this migration or --skip to ignore conflicted file.
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration AddPartNumberToProducts part_number:string
+Running via Spring preloader in process 5354
+      invoke  active_record
+      create    db/migrate/20211110114954_add_part_number_to_products.rb
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration AddPartNumberToProducts part_number:string:index
+Running via Spring preloader in process 5419
+      invoke  active_record
+    conflict    db/migrate/20211110115203_add_part_number_to_products.rb
+Another migration is already named add_part_number_to_products: /home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211110114954_add_part_number_to_products.rb. Use --force to replace this migration or --skip to ignore conflicted file.
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ 
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration RemovePartNumberFromProducts part_number:string
+Running via Spring preloader in process 5446
+      invoke  active_record
+      create    db/migrate/20211110115407_remove_part_number_from_products.rb
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration AddDetailsToProducts part_number:string price:decimal
+Running via Spring preloader in process 5483
+      invoke  active_record
+      create    db/migrate/20211110115456_add_details_to_products.rb
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration CreateProducts name:string part_number:string
+Running via Spring preloader in process 5516
+      invoke  active_record
+      create    db/migrate/20211110115659_create_products.rb
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ bin/rails generate migration AddUserRefToProducts user:references
+Running via Spring preloader in process 5587
+      invoke  active_record
+      create    db/migrate/20211110120102_add_user_ref_to_products.rb
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate migration CreateJoinTableCustomerProduct customer product
+Running via Spring preloader in process 5648
+      invoke  active_record
+      create    db/migrate/20211110120419_create_join_table_customer_product.rb
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ 
+
+############################################################# Model Generators####################################################33
+rails generate model Product name:string description:text
+Running via Spring preloader in process 6053
+      invoke  active_record
+    conflict    db/migrate/20211110122751_create_products.rb
+Another migration is already named create_products: /home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211110115659_create_products.rb. Use --force to replace this migration or --skip to ignore conflicted file.
+
+rails generate migration AddDetailsToProducts 'price:decimal{5,2}' supplier:references{polymorphic}
+Running via Spring preloader in process 6204
+      invoke  active_record
+    conflict    db/migrate/20211110123736_add_details_to_products.rb
+Another migration is already named add_details_to_products: /home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211110115456_add_details_to_products.rb. Use --force to replace this migration or --skip to ignore conflicted file.
+
