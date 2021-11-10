@@ -198,7 +198,639 @@ simple_cms_development=# select * from users;
 (4 rows)
 
 
+3.0.2 :001 > User.all
+ => 
+  id: 1,
+  last_name: "smith",
+  first_name: "kevin",
+  email: "kevin11@gmail.com",
+  created_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00>,
+ #<User:0x000055b78fc7ae38
+  id: 2,
+  last_name: "jung",
+  email: "komal@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00>,
+ #<User:0x000055b78fc7ab40
+  id: 4,
+  last_name: "chang",
+  first_name: "Hanry",
+  email: "hanry@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00>,
+ #<User:0x000055b78fc7a988
+  id: 5,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:18:07.751279000 UTC +00:00,
+ => Class 
+3.0.2 :003 > User.first
+  User Load (0.7ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1  [["LIMIT", 1]]
+ => 
+#<User:0x000055b790a20b28
+ id: 1,
+ last_name: "smith",
+ first_name: "kevin",
+ email: "kevin11@gmail.com",
+ updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00> 
+3.0.2 :004 > 
+3.0.2 :005 > 
+3.0.2 :006 > 
+3.0.2 :007 > 
+3.0.2 :008 > 
+3.0.2 :009 > 
+3.0.2 :010 > 
+3.0.2 :011 > 
+3.0.2 :012 > user = User.create(first_name:"Rahul",last_name:"Sharma",email:"ra
+hul@gmail.com")
+  TRANSACTION (0.5ms)  BEGIN
+  User Create (69.0ms)  INSERT INTO "users" ("last_name", "first_name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["last_name", "Sharma"], ["first_name", "Rahul"], ["email", "rahul@gmail.com"], ["created_at", "2021-11-10 05:34:39.274021"], ["updated_at", "2021-11-10 05:34:39.274021"]]
+  TRANSACTION (13.7ms)  COMMIT
+ => 
+#<User:0x000055b790dbe1e0
+... 
+3.0.2 :013 > User.all
+  User Load (0.9ms)  SELECT "users".* FROM "users"
+ => 
+[#<User:0x000055b790e77758
+  id: 1,
+  last_name: "smith",
+  first_name: "kevin",
+  email: "kevin11@gmail.com",
+  created_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00>,
+ #<User:0x000055b790e77690
+  id: 2,
+  last_name: "jung",
+  first_name: "David",
+  email: "david@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00>,
+ #<User:0x000055b790e775c8
+  id: 3,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00,
+  id: 4,
+  last_name: "chang",
+  email: "hanry@gmail.com",
+  id: 5,
+  last_name: "kumari",
+  email: "komal@gmail.com",
+  updated_at: Tue, 09 Nov 2021 13:18:07.751279000 UTC +00:00>,
+  id: 6,
+  first_name: "Rahul",
+  email: "rahul@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00>] 
+3.0.2 :014 > User.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `save' for User:Class (NoMethodError)
+3.0.2 :015 > Users.save
+(irb):15:in `<main>': uninitialized constant Users (NameError)
+3.0.2 :016 > 
+3.0.2 :017 > user = User.new
+ => 
+#<User:0x000055b78fff8358
+... 
+3.0.2 :018 > user.first_name = "Karan"
+ => "Karan" 
+3.0.2 :019 > user.last_name = "Bhardwaj"
+ => "Bhardwaj" 
+3.0.2 :020 > user.email = "karan@gmail.com"
+ => "karan@gmail.com" 
+3.0.2 :021 > user.save
+  TRANSACTION (0.4ms)  BEGIN
+  User Create (0.7ms)  INSERT INTO "users" ("last_name", "first_name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["last_name", "Bhardwaj"], ["first_name", "Karan"], ["email", "karan@gmail.com"], ["created_at", "2021-11-10 05:39:44.224637"], ["updated_at", "2021-11-10 05:39:44.224637"]]
+  TRANSACTION (22.5ms)  COMMIT
+ => true 
+3.0.2 :022 > user.all
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `all' for #<User id: 7, last_name: "Bhardwaj", first_name: "Karan", email: "karan@gmail.com", created_at: "2021-11-10 05:39:44.224637000 +0000", updated_at: "2021-11-10 05:39:44.224637000 +0000"> (NoMethodError)
+3.0.2 :023 > User.all
+  User Load (0.5ms)  SELECT "users".* FROM "users"
+ => 
+[#<User:0x000055b78ff32838
+  id: 1,
+  last_name: "smith",
+  first_name: "kevin",
+  email: "kevin11@gmail.com",
+  created_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00>,
+ #<User:0x000055b78ff32608
+  id: 2,
+  last_name: "jung",
+  first_name: "David",
+  email: "david@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00>,
+ #<User:0x000055b78ff32540
+  id: 3,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00>,
+ #<User:0x000055b78ff32388
+  id: 4,
+  last_name: "chang",
+  first_name: "Hanry",
+  email: "hanry@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00>,
+ #<User:0x000055b78ff321d0
+  id: 6,
+  last_name: "Sharma",
+  updated_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00>,
+  id: 7,
+  last_name: "Bhardwaj",
+  first_name: "Karan",
+  email: "karan@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00>] 
+3.0.2 :024 > 
+3.0.2 :026 > 
+3.0.2 :027 > user = User.new do |u|
+3.0.2 :028 >   u.first_name = "Shefali"
+3.0.2 :029 >   u.last_name = "Saini"
+3.0.2 :030 > end
+ => 
+#<User:0x000055b790bb6c08
+... 
+3.0.2 :031 > User.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `save' for User:Class (NoMethodError)
+3.0.2 :032 > user.save
+  TRANSACTION (0.6ms)  BEGIN
+  User Create (1.0ms)  INSERT INTO "users" ("last_name", "first_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["last_name", "Saini"], ["first_name", "Shefali"], ["created_at", "2021-11-10 05:43:31.345885"], ["updated_at", "2021-11-10 05:43:31.345885"]]
+  TRANSACTION (26.7ms)  COMMIT
+ => true 
+3.0.2 :033 > User.all
+  User Load (0.7ms)  SELECT "users".* FROM "users"
+ => 
+[#<User:0x000055b790ede4d0
+  id: 1,
+  last_name: "smith",
+  first_name: "kevin",
+  email: "kevin11@gmail.com",
+  created_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00>,
+ #<User:0x000055b790ede408
+  id: 2,
+  last_name: "jung",
+  first_name: "David",
+  email: "david@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00>,
+ #<User:0x000055b790ede340
+  id: 3,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  id: 4,
+  last_name: "chang",
+  first_name: "Hanry",
+  email: "hanry@gmail.com",
+  updated_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00>,
+ #<User:0x000055b790ede1b0
+  id: 5,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:18:07.751279000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:18:07.751279000 UTC +00:00>,
+  created_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00,
+ #<User:0x000055b790ede020
+  id: 7,
+  last_name: "Bhardwaj",
+  first_name: "Karan",
+  created_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00,
+ #<User:0x000055b790eddf58
+  id: 8,
+  last_name: "Saini",
+  first_name: "Shefali",
+  email: nil,
+  created_at: Wed, 10 Nov 2021 05:43:31.345885000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:43:31.345885000 UTC +00:00>] 
+3.0.2 :034 > 
+3.0.2 :035 > 
+3.0.2 :036 > david = User.find_by(first_name:"David")
+  User Load (1.3ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "David"], ["LIMIT", 1]]
+ => 
+#<User:0x000055b790b77198
+... 
+ => 
+ id: 2,
+ first_name: "David",
+(irb):53:in `<main>': undefined method `update' for nil:NilClass (NoMethodError)
+3.0.2 :062 > 
+3.0.2 :063 > 
+3.0.2 :065 > 
+3.0.2 :067 > 
+3.0.2 :069 > 
+3.0.2 :070 > 
+3.0.2 :072 > 
+3.0.2 :074 > 
+3.0.2 :076 > 
+3.0.2 :077 > 
+3.0.2 :078 > 
+3.0.2 :080 > 
+3.0.2 :082 > 
+3.0.2 :084 > 
+3.0.2 :086 > 
+3.0.2 :087 > 
+3.0.2 :088 > 
 
+3.0.2 :090 > 
+3.0.2 :092 > 
+3.0.2 :093 > 
+3.0.2 :094 > 
+3.0.2 :095 > 
+3.0.2 :097 > user = User.find_by(first_name: "komal")
+  User Load (0.8ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "komal"], ["LIMIT", 1]]
+ => nil 
+3.0.2 :098 > user.update(first_name:"Riya")
+(irb):98:in `<main>': undefined method `update' for nil:NilClass (NoMethodError)
+3.0.2 :099 > user.class
+ => NilClass 
+3.0.2 :100 > user = User.find_by(first_name: "komal")
+  User Load (0.7ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "komal"], ["LIMIT", 1]]
+ => nil 
+3.0.2 :101 > user.update(name: 'Dave')
+(irb):101:in `<main>': undefined method `update' for nil:NilClass (NoMethodError)
+3.0.2 :102 > user.all
+(irb):102:in `<main>': undefined method `all' for nil:NilClass (NoMethodError)
+3.0.2 :103 > User.update(name: 'Dave')
+  User Load (1.0ms)  SELECT "users".* FROM "users"
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_assignment.rb:51:in `_assign_attribute': unknown attribute 'name' for User. (ActiveModel::UnknownAttributeError)
+3.0.2 :104 > user.update(name: 'Dave')
+(irb):104:in `<main>': undefined method `update' for nil:NilClass (NoMethodError)
+3.0.2 :105 > User
+ => User(id: integer, last_name: string, first_name: string, email: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :106 > user
+ => nil 
+3.0.2 :107 > User.update(name: 'Dave')
+  User Load (1.0ms)  SELECT "users".* FROM "users"
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_assignment.rb:51:in `_assign_attribute': unknown attribute 'name' for User. (ActiveModel::UnknownAttributeError)
+3.0.2 :108 > user = User.find_by(first_name: "komal")
+  User Load (0.7ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "komal"], ["LIMIT", 1]]
+ => nil 
+3.0.2 :109 > user = User.all
+  User Load (0.8ms)  SELECT "users".* FROM "users"
+ => 
+[#<User:0x000055b78fe096a0
+... 
+3.0.2 :110 > user
+ => 
+[#<User:0x000055b78fe096a0
+  id: 1,
+  last_name: "smith",
+  first_name: "kevin",
+  email: "kevin11@gmail.com",
+  created_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00>,
+ #<User:0x000055b78fe09560
+  id: 2,
+  last_name: "jung",
+  first_name: "David",
+  email: "david@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00>,
+ #<User:0x000055b78fe09498
+  id: 3,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  updated_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00>,
+ #<User:0x000055b78fe09330
+  id: 4,
+  last_name: "chang",
+  email: "hanry@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00>,
+ #<User:0x000055b78fe08a70
+  id: 5,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  updated_at: Tue, 09 Nov 2021 13:18:07.751279000 UTC +00:00>,
+ #<User:0x000055b78fe084a8
+  id: 6,
+  last_name: "Sharma",
+  email: "rahul@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00>,
+ #<User:0x000055b78fe082a0
+  id: 7,
+  first_name: "Karan",
+  created_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00>,
+ #<User:0x00007fb88c007f70
+  id: 8,
+  last_name: "Saini",
+  first_name: "Shefali",
+  email: "shef@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:43:31.345885000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:55:59.703713000 UTC +00:00>] 
+3.0.2 :111 > user = User.find_by(first_name: "Komal")
+  User Load (0.6ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "Komal"], ["LIMIT", 1]]
+ => 
+#<User:0x000055b790d4ecc8
+... 
+3.0.2 :112 > user
+ => 
+#<User:0x000055b790d4ecc8
+ id: 3,
+ last_name: "kumari",
+ first_name: "Komal",
+ email: "komal@gmail.com",
+ created_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00,
+ updated_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00> 
+3.0.2 :113 > user = User.find_by(first_name: "Komal")
+  User Load (0.5ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "Komal"], ["LIMIT", 1]]
+ => 
+#<User:0x000055b790e54168
+... 
+3.0.2 :114 > user.update(first_name: "Dave")
+  TRANSACTION (0.4ms)  BEGIN
+  User Update (0.8ms)  UPDATE "users" SET "first_name" = $1, "updated_at" = $2 WHERE "users"."id" = $3  [["first_name", "Dave"], ["updated_at", "2021-11-10 06:26:16.479742"], ["id", 3]]
+  TRANSACTION (21.3ms)  COMMIT
+ => true 
+3.0.2 :115 > User
+ => User(id: integer, last_name: string, first_name: string, email: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :116 > User.all
+  User Load (0.7ms)  SELECT "users".* FROM "users"
+ => 
+[#<User:0x000055b790aa7e70
+  id: 1,
+  last_name: "smith",
+  first_name: "kevin",
+  email: "kevin11@gmail.com",
+  created_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00>,
+ #<User:0x000055b790aa7da8
+  id: 2,
+  last_name: "jung",
+  first_name: "David",
+  email: "david@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00>,
+ #<User:0x000055b790aa7ce0
+  id: 4,
+  last_name: "chang",
+  first_name: "Hanry",
+  email: "hanry@gmail.com",
+  updated_at: Tue, 09 Nov 2021 13:18:07.751279000 UTC +00:00>,
+ #<User:0x000055b790aa7b50
+  id: 6,
+  last_name: "Sharma",
+  first_name: "Rahul",
+  email: "rahul@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00>,
+ #<User:0x000055b790aa7a88
+  id: 7,
+  last_name: "Bhardwaj",
+  first_name: "Karan",
+  email: "karan@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00>,
+ #<User:0x000055b790aa79c0
+  id: 8,
+  last_name: "Saini",
+  email: "shef@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:43:31.345885000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:55:59.703713000 UTC +00:00>,
+ #<User:0x000055b790aa78f8
+  id: 3,
+  first_name: "Dave",
+  email: "komal@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 06:26:16.479742000 UTC +00:00>] 
+3.0.2 :117 > 
+3.0.2 :118 > 
+3.0.2 :119 > 
+3.0.2 :120 > 
+3.0.2 :121 > 
+3.0.2 :122 > 
+3.0.2 :123 > 
+... 
+3.0.2 :126 > user.destroy
+  TRANSACTION (0.4ms)  BEGIN
+  TRANSACTION (47.3ms)  COMMIT
+ => 
+#<User:0x000055b78f0ef8e8
+ id: 3,
+ last_name: "kumari",
+ email: "komal@gmail.com",
+ created_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00,
+ updated_at: Wed, 10 Nov 2021 06:26:16.479742000 UTC +00:00> 
+3.0.2 :128 > 
+3.0.2 :129 > 
+3.0.2 :130 > 
+3.0.2 :131 > 
+3.0.2 :132 > user = User.new
+#<User:0x000055b790ca5538
+3.0.2 :133 > user.save
+  TRANSACTION (0.5ms)  BEGIN
+  User Create (0.7ms)  INSERT INTO "users" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2021-11-10 06:51:55.860277"], ["updated_at", "2021-11-10 06:51:55.860277"]]
+  TRANSACTION (23.3ms)  COMMIT
+ => true 
+3.0.2 :134 > user = User.new
+ => 
+#<User:0x000055b790e3d8c8
+... 
+3.0.2 :135 > user.save
+  TRANSACTION (0.3ms)  BEGIN
+  User Create (0.6ms)  INSERT INTO "users" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2021-11-10 06:54:22.428451"], ["updated_at", "2021-11-10 06:54:22.428451"]]
+  TRANSACTION (25.9ms)  COMMIT
+ => true 
+3.0.2 :136 > user.save!
+ => true 
+3.0.2 :137 > User.all
+  User Load (0.8ms)  SELECT "users".* FROM "users"
+ => 
+[#<User:0x000055b78f0df8f8
+  id: 1,
+  last_name: "smith",
+  first_name: "kevin",
+  email: "kevin11@gmail.com",
+  created_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00>,
+ #<User:0x000055b78f0df830
+  id: 2,
+  last_name: "jung",
+  first_name: "David",
+  email: "david@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00>,
+ #<User:0x000055b78f0dedb8
+  id: 4,
+  last_name: "chang",
+  first_name: "Hanry",
+  email: "hanry@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00>,
+ #<User:0x000055b78f0de408
+  id: 5,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:18:07.751279000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:18:07.751279000 UTC +00:00>,
+ #<User:0x000055b78f0dd620
+  id: 6,
+  last_name: "Sharma",
+  first_name: "Rahul",
+  email: "rahul@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00>,
+ #<User:0x000055b78f0dd170
+  id: 7,
+  last_name: "Bhardwaj",
+  first_name: "Karan",
+  email: "karan@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00>,
+ #<User:0x000055b78f0dce28
+  id: 8,
+  first_name: "Shefali",
+  email: "shef@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:43:31.345885000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:55:59.703713000 UTC +00:00>,
+ #<User:0x000055b78f0dcce8
+  id: 9,
+  last_name: nil,
+  first_name: nil,
+  email: nil,
+  created_at: Wed, 10 Nov 2021 06:51:55.860277000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 06:51:55.860277000 UTC +00:00>,
+ #<User:0x000055b78f0dc9a0
+  id: 10,
+  last_name: nil,
+  first_name: nil,
+  email: nil,
+  created_at: Wed, 10 Nov 2021 06:54:22.428451000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 06:54:22.428451000 UTC +00:00>] 
+3.0.2 :138 > 5%1
+ => 0 
+3.0.2 :139 > 
+[1]+  Stopped                 rails c
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails c
+Running via Spring preloader in process 6179
+Loading development environment (Rails 6.1.4.1)
+3.0.2 :001 > 
+[2]+  Stopped                 rails c
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails generate model employee name:String,occupation:String,email:String
+Running via Spring preloader in process 6676
+      invoke  active_record
+      create    db/migrate/20211110073059_create_employees.rb
+      create    app/models/employee.rb
+      invoke    test_unit
+      create      test/models/employee_test.rb
+      create      test/fixtures/employees.yml
+
+rails db:migrate
+rails aborted!
+SyntaxError: /home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211110073059_create_employees.rb:4: syntax error, unexpected ':', expecting `end'
+      t.String :occupation :name
+-input
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate
+== 20211110073059 CreateEmployees: migrating ==================================
+-- create_table(:employees)
+   -> 0.4346s
+== 20211110073059 CreateEmployees: migrated (0.4347s) =========================
+Running via Spring preloader in process 6879
+Loading development environment (Rails 6.1.4.1)
+3.0.2 :001 > e = Employees.all
+(irb):1:in `<main>': uninitialized constant Employees (NameError)
+3.0.2 :002 > e = employees.all
+(irb):2:in `<main>': undefined local variable or method `employees' for main:Object (NameError)
+3.0.2 :003 > e = Employees.all
+(irb):4:in `<main>': uninitialized constant Employees (NameError)
+3.0.2 :005 > e = employees.new
+(irb):5:in `<main>': undefined local variable or method `employees' for main:Object (NameError)
+3.0.2 :006 > e = Employee.new
+ => #<Employee:0x000055b790e551d0 id: nil, occupation: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :007 > e.
+3.0.2 :008 > add = Employee.create(name:"Ruby",occupation:"Manager")
+  Employee Create (2.1ms)  INSERT INTO "employees" ("occupation", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["occupation", "Manager"], ["name", "Ruby"], ["created_at", "2021-11-10 07:50:06.053238"], ["updated_at", "2021-11-10 07:50:06.053238"]]
+  TRANSACTION (27.3ms)  COMMIT
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `add=' for #<Employee id: nil, occupation: nil, name: nil, created_at: nil, updated_at: nil> (NoMethodError)
+3.0.2 :009 > e.
+3.0.2 :010 > d = Employee.all
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `d=' for #<Employee id: nil, occupation: nil, name: nil, created_at: nil, updated_at: nil> (NoMethodError)
+3.0.2 :011 > Employee.all
+  Employee Load (0.9ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x000055b790c2bf30
+  id: 1,
+  occupation: "Manager",
+  name: "Ruby",
+  created_at: Wed, 10 Nov 2021 07:50:06.053238000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 07:50:06.053238000 UTC +00:00>] 
+3.0.2 :012 > 
+3.0.2 :013 > add = Employee.create(name:"Ruby",occupation:"Manager")
+["occupation", "Manager"], ["name", "Ruby"], ["created_at", "2021-11-10 07:51:16.606385"], ["updated_at", "2021-11-10 07:51:16.606385"]]
+  TRANSACTION (16.4ms)  COMMIT
+ => 
+#<Employee:0x000055b790dde468
+... 
+3.0.2 :014 > 
+3.0.2 :015 > add = Employee.create(name:"Shefali",occupation:"Clerk")
+  TRANSACTION (0.3ms)  BEGIN
+  Employee Create (0.5ms)  INSERT INTO "employees" ("occupation", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["occupation", "Clerk"], ["name", "Shefali"], ["created_at", "2021-11-10 07:51:43.469957"], ["updated_at", "2021-11-10 07:51:43.469957"]]
+  TRANSACTION (22.8ms)  COMMIT
+ => 
+#<Employee:0x000055b7909ee470
+... 
+3.0.2 :016 > Employee.all
+  Employee Load (0.6ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x000055b790af1b60
+  id: 1,
+  occupation: "Manager",
+  name: "Ruby",
+  created_at: Wed, 10 Nov 2021 07:50:06.053238000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 07:50:06.053238000 UTC +00:00>,
+ #<Employee:0x000055b790af1a98
+  id: 2,
+  occupation: "Manager",
+  name: "Ruby",
+  created_at: Wed, 10 Nov 2021 07:51:16.606385000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 07:51:16.606385000 UTC +00:00>,
+ #<Employee:0x000055b790af19d0
+  id: 3,
+  occupation: "Clerk",
+  name: "Shefali",
+  created_at: Wed, 10 Nov 2021 07:51:43.469957000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 07:51:43.469957000 UTC +00:00>] 
+3.0.2 :017 > 
+3.0.2 :018 > Employee.create(name:"Riya",occupation:"Receptionist")
+  TRANSACTION (0.4ms)  BEGIN
+  Employee Create (1.3ms)  INSERT INTO "employees" ("occupation", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["occupation", "Receptionist"], ["name", "Riya"], ["created_at", "2021-11-10 07:52:32.877402"], ["updated_at", "2021-11-10 07:52:32.877402"]]
+  TRANSACTION (26.4ms)  COMMIT
+ => 
+#<Employee:0x000055b790bc2e90
+ id: 4,
+ occupation: "Receptionist",
+ name: "Riya",
+ created_at: Wed, 10 Nov 2021 07:52:32.877402000 UTC +00:00,
+ updated_at: Wed, 10 Nov 2021 07:52:32.877402000 UTC +00:00> 
+3.0.2 :019 > 
 
 
 
