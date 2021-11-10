@@ -88,7 +88,244 @@ simple_cms_development=# select * from users;
   4 | chang     | Hanry      | hanry@gmail.com   | 2021-11-09 13:09:44.335389 | 2021-11-09 13:09:44.335389
 (4 rows)
 
+----------------------------------------10th Nov-------------------------------------------------------------------------------------
+======================================CRUD: Reading and Writing Data===================================
+
+-----------------------------------------Insertion------------------------------
+1.Insertion: 
+	command : user = User.create(first_name:"Rahul",last_name:"Sharma",email:"rahul@gmail.com")
+  TRANSACTION (0.5ms)  BEGIN
+  User Create (69.0ms)  INSERT INTO "users" ("last_name", "first_name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["last_name", "Sharma"], ["first_name", "Rahul"], ["email", "rahul@gmail.com"], ["created_at", "2021-11-10 05:34:39.274021"], ["updated_at", "2021-11-10 05:34:39.274021"]]
+  TRANSACTION (13.7ms)  COMMIT
+ => 
+#<User:0x000055b790dbe1e0
+
+2.Insertion using new method:
+	user = User.new
+ => 
+#<User:0x000055b78fff8358
+... 
+3.0.2 :018 > user.first_name = "Karan"
+ => "Karan" 
+3.0.2 :019 > user.last_name = "Bhardwaj"
+ => "Bhardwaj" 
+3.0.2 :020 > user.email = "karan@gmail.com"
+ => "karan@gmail.com" 
+3.0.2 :021 > user.save
+  TRANSACTION (0.4ms)  BEGIN
+  User Create (0.7ms)  INSERT INTO "users" ("last_name", "first_name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["last_name", "Bhardwaj"], ["first_name", "Karan"], ["email", "karan@gmail.com"], ["created_at", "2021-11-10 05:39:44.224637"], ["updated_at", "2021-11-10 05:39:44.224637"]]
+  TRANSACTION (22.5ms)  COMMIT
+ => true 
 
 
+3.Insertion with new method with do :
+3.0.2 :027 > user = User.new do |u|
+3.0.2 :028 >   u.first_name = "Shefali"
+3.0.2 :029 >   u.last_name = "Saini"
+3.0.2 :030 > end
+ => 
+#<User:0x000055b790bb6c08
+... 
+3.0.2 :031 > User.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `save' for User:Class (NoMethodError)
+3.0.2 :032 > user.save
+  TRANSACTION (0.6ms)  BEGIN
+  User Create (1.0ms)  INSERT INTO "users" ("last_name", "first_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["last_name", "Saini"], ["first_name", "Shefali"], ["created_at", "2021-11-10 05:43:31.345885"], ["updated_at", "2021-11-10 05:43:31.345885"]]
+  TRANSACTION (26.7ms)  COMMIT
+ => true 
+3.0.2 :033 > 
 
+-------------------Read Operation--------------------------------
+1.1.User.first :
+ User.first
+  User Load (0.7ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1  [["LIMIT", 1]]
+ => 
+#<User:0x000055b790a20b28
+ id: 1,
+ last_name: "smith",
+ first_name: "kevin",
+ email: "kevin11@gmail.com",
+ created_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00,
+ updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00> 
+
+2.User.all to show all the data in a table :
+
+3.0.2 :033 > User.all
+  User Load (0.7ms)  SELECT "users".* FROM "users"
+ => 
+[#<User:0x000055b790ede4d0
+  id: 1,
+  last_name: "smith",
+  first_name: "kevin",
+  email: "kevin11@gmail.com",
+  created_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 12:55:26.151935000 UTC +00:00>,
+ #<User:0x000055b790ede408
+  id: 2,
+  last_name: "jung",
+  first_name: "David",
+  email: "david@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00>,
+ #<User:0x000055b790ede340
+  id: 3,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00>,
+ #<User:0x000055b790ede278
+  id: 4,
+  last_name: "chang",
+  first_name: "Hanry",
+  email: "hanry@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:09:44.335389000 UTC +00:00>,
+ #<User:0x000055b790ede1b0
+  id: 5,
+  last_name: "kumari",
+  first_name: "Komal",
+  email: "komal@gmail.com",
+  created_at: Tue, 09 Nov 2021 13:18:07.751279000 UTC +00:00,
+  updated_at: Tue, 09 Nov 2021 13:18:07.751279000 UTC +00:00>,
+ #<User:0x000055b790ede0e8
+  id: 6,
+  last_name: "Sharma",
+  first_name: "Rahul",
+  email: "rahul@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:34:39.274021000 UTC +00:00>,
+ #<User:0x000055b790ede020
+  id: 7,
+  last_name: "Bhardwaj",
+  first_name: "Karan",
+  email: "karan@gmail.com",
+  created_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:39:44.224637000 UTC +00:00>,
+ #<User:0x000055b790eddf58
+  id: 8,
+  last_name: "Saini",
+  first_name: "Shefali",
+  email: nil,
+  created_at: Wed, 10 Nov 2021 05:43:31.345885000 UTC +00:00,
+  updated_at: Wed, 10 Nov 2021 05:43:31.345885000 UTC +00:00>] 
+3.0.2 :034 > 
+
+3.find_by : find the data in a table :
+ david = User.find_by(first_name:"David")
+  User Load (1.3ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "David"], ["LIMIT", 1]]
+ => 
+#<User:0x000055b790b77198
+... 
+3.0.2 :037 > david
+ => 
+#<User:0x000055b790b77198
+ id: 2,
+ last_name: "jung",
+ first_name: "David",
+ email: "david@gmail.com",
+ created_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00,
+ updated_at: Tue, 09 Nov 2021 13:08:16.845347000 UTC +00:00> 
+
+---------------------------------------Update the table----------------------------
+1.find_by:
+user = find_by(first_name:"Shefali")
+
+(irb):42:in `<main>': undefined method `find_by' for main:Object (NoMethodError)
+3.0.2 :043 > user = User.find_by(first_name:"Shefali")
+  User Load (0.7ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "Shefali"], ["LIMIT", 1]]
+ => 
+#<User:0x000055b78fddbcc8
+... 
+
+3.0.2 :044 > user.email ="shef@gmail.com"
+ => "shef@gmail.com" 
+3.0.2 :045 > user.save
+  TRANSACTION (0.3ms)  BEGIN
+  User Update (0.7ms)  UPDATE "users" SET "email" = $1, "updated_at" = $2 WHERE "users"."id" = $3  [["email", "shef@gmail.com"], ["updated_at", "2021-11-10 05:55:59.703713"], ["id", 8]]
+  TRANSACTION (26.2ms)  COMMIT
+ => true 
+ 
+ 2.update a raw:
+ 
+ user = User.find_by(first_name: "Komal")
+  User Load (0.5ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "Komal"], ["LIMIT", 1]]
+ => 
+#<User:0x000055b790e54168
+... 
+3.0.2 :114 > user.update(first_name: "Dave")
+  TRANSACTION (0.4ms)  BEGIN
+  User Update (0.8ms)  UPDATE "users" SET "first_name" = $1, "updated_at" = $2 WHERE "users"."id" = $3  [["first_name", "Dave"], ["updated_at", "2021-11-10 06:26:16.479742"], ["id", 3]]
+  TRANSACTION (21.3ms)  COMMIT
+ => true 
+---------------------------------------------Delete-----------------------------------------
+1.destroy :
+
+user = User.find_by(first_name:"Dave")
+  User Load (0.7ms)  SELECT "users".* FROM "users" WHERE "users"."first_name" = $1 LIMIT $2  [["first_name", "Dave"], ["LIMIT", 1]]
+ => 
+#<User:0x000055b78f0ef8e8
+... 
+3.0.2 :126 > user.destroy
+  TRANSACTION (0.4ms)  BEGIN
+  User Destroy (0.7ms)  DELETE FROM "users" WHERE "users"."id" = $1  [["id", 3]]
+  TRANSACTION (47.3ms)  COMMIT
+ => 
+#<User:0x000055b78f0ef8e8
+ id: 3,
+ last_name: "kumari",
+ first_name: "Dave",
+ email: "komal@gmail.com",
+ created_at: Tue, 09 Nov 2021 13:09:22.585753000 UTC +00:00,
+ updated_at: Wed, 10 Nov 2021 06:26:16.479742000 UTC +00:00> 
+3.0.2 :127 > 
+
+Table : Postgresql
+
+simple_cms_development=# select * from users;
+ id | last_name | first_name |       email       |         created_at         |         updated_at         
+----+-----------+------------+-------------------+----------------------------+----------------------------
+  1 | smith     | kevin      | kevin11@gmail.com | 2021-11-09 12:55:26.151935 | 2021-11-09 12:55:26.151935
+  2 | jung      | David      | david@gmail.com   | 2021-11-09 13:08:16.845347 | 2021-11-09 13:08:16.845347
+  4 | chang     | Hanry      | hanry@gmail.com   | 2021-11-09 13:09:44.335389 | 2021-11-09 13:09:44.335389
+  5 | kumari    | Komal      | komal@gmail.com   | 2021-11-09 13:18:07.751279 | 2021-11-09 13:18:07.751279
+  6 | Sharma    | Rahul      | rahul@gmail.com   | 2021-11-10 05:34:39.274021 | 2021-11-10 05:34:39.274021
+  7 | Bhardwaj  | Karan      | karan@gmail.com   | 2021-11-10 05:39:44.224637 | 2021-11-10 05:39:44.224637
+  8 | Saini     | Shefali    | shef@gmail.com    | 2021-11-10 05:43:31.345885 | 2021-11-10 05:55:59.703713
+  3 | kumari    | Dave       | komal@gmail.com   | 2021-11-09 13:09:22.585753 | 2021-11-10 06:26:16.479742
+(8 rows)
+
+simple_cms_development=# select * from users;
+ id | last_name | first_name |       email       |         created_at         |         updated_at         
+----+-----------+------------+-------------------+----------------------------+----------------------------
+  1 | smith     | kevin      | kevin11@gmail.com | 2021-11-09 12:55:26.151935 | 2021-11-09 12:55:26.151935
+  2 | jung      | David      | david@gmail.com   | 2021-11-09 13:08:16.845347 | 2021-11-09 13:08:16.845347
+  4 | chang     | Hanry      | hanry@gmail.com   | 2021-11-09 13:09:44.335389 | 2021-11-09 13:09:44.335389
+  5 | kumari    | Komal      | komal@gmail.com   | 2021-11-09 13:18:07.751279 | 2021-11-09 13:18:07.751279
+  6 | Sharma    | Rahul      | rahul@gmail.com   | 2021-11-10 05:34:39.274021 | 2021-11-10 05:34:39.274021
+  7 | Bhardwaj  | Karan      | karan@gmail.com   | 2021-11-10 05:39:44.224637 | 2021-11-10 05:39:44.224637
+  8 | Saini     | Shefali    | shef@gmail.com    | 2021-11-10 05:43:31.345885 | 2021-11-10 05:55:59.703713
+(7 rows)
+
+-----------------------Validate-------------------------------------------------------
+1. valid or not : used to check the entry  in database is valid or not 
+
+user = User.new
+#<User:0x000055b790ca5538
+3.0.2 :133 > user.save
+  TRANSACTION (0.5ms)  BEGIN
+  User Create (0.7ms)  INSERT INTO "users" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2021-11-10 06:51:55.860277"], ["updated_at", "2021-11-10 06:51:55.860277"]]
+  TRANSACTION (23.3ms)  COMMIT
+ => true 
+3.0.2 :134 > user = User.new
+ => 
+#<User:0x000055b790e3d8c8
+... 
+3.0.2 :135 > user.save
+  TRANSACTION (0.3ms)  BEGIN
+  User Create (0.6ms)  INSERT INTO "users" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2021-11-10 06:54:22.428451"], ["updated_at", "2021-11-10 06:54:22.428451"]]
+  TRANSACTION (25.9ms)  COMMIT
+ => true 
+3.0.2 :136 > user.save!
+ => true 
 
