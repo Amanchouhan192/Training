@@ -93,3 +93,47 @@ Running via Spring preloader in process 6204
     conflict    db/migrate/20211110123736_add_details_to_products.rb
 Another migration is already named add_details_to_products: /home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211110115456_add_details_to_products.rb. Use --force to replace this migration or --skip to ignore conflicted file.
 
+
+==========Always follow this for generating migration and table:===================================================================
+combine command for creation of modela and migration simultanously:
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails g model Student fname:String,lname:String,email:String
+Running via Spring preloader in process 4540
+      invoke  active_record
+      create    db/migrate/20211110185420_create_students.rb
+      create    app/models/student.rb
+      invoke    test_unit
+      create      test/models/student_test.rb
+      create      test/fixtures/students.yml
+      
+separate commands for creation of migration and Model:
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails g migration CreateCat name:String,color:String
+Running via Spring preloader in process 4993
+      invoke  active_record
+      create    db/migrate/20211110191405_create_cat.rb
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate
+== 20211110191405 CreateCat: migrating ========================================
+-- create_table(:cats)
+   -> 0.1114s
+== 20211110191405 CreateCat: migrated (0.1116s) ===============================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ 
+
+==================================================================================================================================
+Redo command in db:migration: 
+rails db:migrate:redo
+== 20211110191405 CreateCat: reverting ========================================
+-- drop_table(:cats)
+   -> 0.0042s
+== 20211110191405 CreateCat: reverted (0.0072s) ===============================
+
+== 20211110191405 CreateCat: migrating ========================================
+-- create_table(:cats)
+   -> 0.1214s
+== 20211110191405 CreateCat: migrated (0.1216s) ===============================
+
+
+
+
+
