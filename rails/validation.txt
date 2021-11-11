@@ -1,0 +1,83 @@
+=======================================================Validation======================================================
+1 Validations Overview
+	example : 
+	class Person < ApplicationRecord
+  		validates :name, presence: true // syntax 
+	end
+
+a = Animal.new
+ => 
+#<Animal:0x000055e31b1f4330
+... 
+3.0.2 :030 > a.errors.size
+ => 0 
+3.0.2 :031 > 
+(irb):32:in `<main>': undefined method `valid?' for nil:NilClass (NoMethodError)
+ => true 
+(irb):34:in `<main>': undefined method `errors' for nil:NilClass (NoMethodError)
+(irb):35:in `<main>': undefined method `full_message' for nil:NilClass (NoMethodError)
+(irb):36:in `<main>': undefined method `full_message' for nil:NilClass (NoMethodError)
+(irb):37:in `<main>': undefined method `full_message' for nil:NilClass (NoMethodError)
+3.0.2 :038 > a = Animal.create
+  TRANSACTION (0.5ms)  BEGIN
+  Animal Create (0.8ms)  INSERT INTO "animals" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "
+  TRANSACTION (19.3ms)  COMMIT
+ => 
+#<Animal:0x000055e31bb43f80
+... 
+3.0.2 :039 > a.errors.objects.first.full_message
+(irb):39:in `<main>': undefined method `full_message' for nil:NilClass (NoMethodError)
+3.0.2 :040 > a.errors.objects.first.full_message
+(irb):40:in `<main>': undefined method `full_message' for nil:NilClass (NoMethodError)
+3.0.2 :041 > a.save
+ => true 
+3.0.2 :042 > a.save!
+ => true 
+3.0.2 :043 > #------------1.5-Errors-------------------------------------
+
+Animal.new.errors[:animal_type].any?
+ => false 
+
+Animal.create.errors[:animal_type].any?
+  TRANSACTION (0.4ms)  BEGIN
+  Animal Create (0.8ms)  INSERT INTO "animals" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2021-11-11 11:39:50.706734"], ["updated_at", "2021-11-11 11:39:50.706734"]]
+  TRANSACTION (20.0ms)  COMMIT
+ => false 
+3.0.2 :055 > 
+
+#-------------allow Blank--------------------------
+ => nil 
+3.0.2 :057 > Animal.create(animal_type:" ").valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Animal Create (0.6ms)  INSERT INTO "animals" ("animal_type", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["animal_type", " "], ["created_at", "2021-11-11 12:23:00.275936"], ["updated_at", "2021-11-11 12:23:00.275936"]]
+  TRANSACTION (24.2ms)  COMMIT
+ => true 
+3.0.2 :058 > Animal.create(animal_type:nil).valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Animal Create (0.7ms)  INSERT INTO "animals" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2021-11-11 12:23:22.696698"], ["updated_at", "2021-11-11 12:23:22.696698"]]
+  TRANSACTION (22.5ms)  COMMIT
+ => true 
+3.0.2 :059 > 
+
+-----------------------------------------------------
+person = Person.new(address:"Delhi")
+3.0.2 :089 > person.valid?
+ => true 
+3.0.2 :090 > person = Person.new(:address)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_assignment.rb:30:in `assign_attributes': When assigning attributes, you must pass a hash as an argument, Symbol passed. (ArgumentError)
+3.0.2 :091 > person = Person.valid?(:address)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `valid?' for Person:Class (NoMethodError)
+Did you mean?  validate
+3.0.2 :092 > person.valid?(:address)
+ => true 
+3.0.2 :093 > person = Person.new(:address)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_assignment.rb:30:in `assign_attributes': When assigning attributes, you must pass a hash as an argument, Symbol passed. (ArgumentError)
+3.0.2 :094 > person = Person.new(address:"Delhi")
+ => #<Person:0x000055e31b5d28d0 id: nil, name: nil, email: nil, address: "Delhi", created_at: nil, updated_at: nil> 
+3.0.2 :095 > person.valid?(:address)
+ => true 
+3.0.2 :096 > person.errors.messages
+ => {} 
+3.0.2 :097 > 
+
+
