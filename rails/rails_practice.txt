@@ -831,6 +831,686 @@ Loading development environment (Rails 6.1.4.1)
  created_at: Wed, 10 Nov 2021 07:52:32.877402000 UTC +00:00,
  updated_at: Wed, 10 Nov 2021 07:52:32.877402000 UTC +00:00> 
 3.0.2 :019 > 
+======================================11th Nov==============================================================
+ rails db:migrate
+== 20211111061312 Department: migrating =======================================
+== 20211111061312 Department: migrated (0.0000s) ==============================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+   up     20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+   up     20211110185420  Create students
+   up     20211110191405  Create cat
+   up     20211111061312  Department
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate VERSION=20211110184235 
+rails aborted!
+ActiveRecord::UnknownMigrationVersionError: 
+
+No migration with version number 20211110184235.
+
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate VERSION=20211110191405
+== 20211111061312 Department: reverting =======================================
+== 20211111061312 Department: reverted (0.0256s) ==============================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+   up     20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+   up     20211110185420  Create students
+   up     20211110191405  Create cat
+  down    20211111061312  Department
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate VERSION=20211110191405
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+   up     20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+   up     20211110185420  Create students
+   up     20211110191405  Create cat
+  down    20211111061312  Department
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate VERSION=0
+== 20211110191405 CreateCat: reverting ========================================
+-- drop_table(:cats)
+   -> 0.2030s
+== 20211110191405 CreateCat: reverted (0.2050s) ===============================
+
+== 20211110185420 CreateStudents: reverting ===================================
+-- drop_table(:students)
+   -> 0.0045s
+== 20211110185420 CreateStudents: reverted (0.0047s) ==========================
+
+== 20211110073059 CreateEmployees: reverting ==================================
+-- drop_table(:employees)
+   -> 0.0062s
+== 20211110073059 CreateEmployees: reverted (0.0064s) =========================
+
+== 20211109113538 CreateUsers: reverting ======================================
+-- drop_table(:users)
+   -> 0.0067s
+== 20211109113538 CreateUsers: reverted (0.0070s) =============================
+
+== 20211109112006 DoNothingYet: reverting =====================================
+== 20211109112006 DoNothingYet: reverted (0.0000s) ============================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+  down    20211109112006  Do nothing yet
+  down    20211109113538  Create users
+  down    20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+  down    20211110185420  Create students
+  down    20211110191405  Create cat
+  down    20211111061312  Department
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate VERSION = 20211109113538
+== 20211109112006 DoNothingYet: migrating =====================================
+== 20211109112006 DoNothingYet: migrated (0.0000s) ============================
+
+== 20211109113538 CreateUsers: migrating ======================================
+-- create_table(:users)
+   -> 0.2669s
+== 20211109113538 CreateUsers: migrated (0.2670s) =============================
+
+== 20211110073059 CreateEmployees: migrating ==================================
+-- create_table(:employees)
+   -> 0.0873s
+== 20211110073059 CreateEmployees: migrated (0.0874s) =========================
+
+== 20211110185420 CreateStudents: migrating ===================================
+-- create_table(:students)
+   -> 0.0862s
+== 20211110185420 CreateStudents: migrated (0.0864s) ==========================
+
+== 20211110191405 CreateCat: migrating ========================================
+-- create_table(:cats)
+   -> 0.0789s
+== 20211110191405 CreateCat: migrated (0.0790s) ===============================
+
+== 20211111061312 Department: migrating =======================================
+== 20211111061312 Department: migrated (0.0000s) ==============================
+
+rails aborted!
+Don't know how to build task 'VERSION' (See the list of available tasks with `rails --tasks`)
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+   up     20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+   up     20211110185420  Create students
+   up     20211110191405  Create cat
+   up     20211111061312  Department
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate 
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate :redo
+rails aborted!
+Don't know how to build task ':redo' (See the list of available tasks with `rails --tasks`)
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+(See full trace by running task with --trace)
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:redo
+== 20211111061312 Department: reverting =======================================
+== 20211111061312 Department: reverted (0.0020s) ==============================
+
+== 20211111061312 Department: migrating =======================================
+== 20211111061312 Department: migrated (0.0000s) ==============================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails c
+Running via Spring preloader in process 13224
+Loading development environment (Rails 6.1.4.1)
+3.0.2 :001 > reload
+(irb):1:in `<main>': undefined local variable or method `reload' for main:Object (NameError)
+Did you mean?  reload!
+               load
+3.0.2 :002 > reload!
+Reloading...
+ => true 
+3.0.2 :003 > 
+3.0.2 :004 > 
+[2]+  Stopped                 rails c
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:rollback
+== 20211111061312 Department: reverting =======================================
+== 20211111061312 Department: reverted (0.0026s) ==============================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+   up     20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+   up     20211110185420  Create students
+   up     20211110191405  Create cat
+  down    20211111061312  Department
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:rolleback
+rails aborted!
+Don't know how to build task 'db:rolleback' (See the list of available tasks with `rails --tasks`)
+Did you mean?  db:rollback
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+(See full trace by running task with --trace)
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:rollback
+== 20211110191405 CreateCat: reverting ========================================
+-- drop_table(:cats)
+   -> 0.0051s
+== 20211110191405 CreateCat: reverted (0.0082s) ===============================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+   up     20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+   up     20211110185420  Create students
+  down    20211110191405  Create cat
+  down    20211111061312  Department
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate VERSION=20211111061312
+== 20211110191405 CreateCat: migrating ========================================
+-- create_table(:cats)
+   -> 0.1122s
+== 20211110191405 CreateCat: migrated (0.1124s) ===============================
+
+== 20211111061312 Department: migrating =======================================
+== 20211111061312 Department: migrated (0.0000s) ==============================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+   up     20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+   up     20211110185420  Create students
+   up     20211110191405  Create cat
+   up     20211111061312  Department
+
+ rails db:migrate:up  VERSION=20211111072338
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+   up     20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+   up     20211110185420  Create students
+   up     20211110191405  Create cat
+   up     20211111061312  Department
+   up     20211111072338  Create animals
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:redo
+== 20211111072338 CreateAnimals: reverting ====================================
+-- drop_table(:animals)
+   -> 0.0068s
+== 20211111072338 CreateAnimals: reverted (0.0102s) ===========================
+
+== 20211111072338 CreateAnimals: migrating ====================================
+-- create_table(:animals)
+   -> 0.1053s
+== 20211111072338 CreateAnimals: migrated (0.1054s) ===========================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:redo
+== 20211111072338 CreateAnimals: reverting ====================================
+-- drop_table(:animals)
+   -> 0.0059s
+== 20211111072338 CreateAnimals: reverted (0.0092s) ===========================
+
+== 20211111072338 CreateAnimals: migrating ====================================
+-- create_table(:animals)
+-- animals(:species, :string)
+rails aborted!
+StandardError: An error has occurred, this and all later migrations canceled:
+
+undefined method `animals' for #<CreateAnimals:0x00005633a54750e8 @name="CreateAnimals", @version=20211111072338, @connection=nil>
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:6:in `block in change'
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:3:in `change'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+
+Caused by:
+NoMethodError: undefined method `animals' for #<CreateAnimals:0x00005633a54750e8 @name="CreateAnimals", @version=20211111072338, @connection=nil>
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:6:in `block in change'
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:3:in `change'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:redo
+== 20211111061312 Department: reverting =======================================
+== 20211111061312 Department: reverted (0.0022s) ==============================
+
+== 20211111061312 Department: migrating =======================================
+== 20211111061312 Department: migrated (0.0000s) ==============================
+
+== 20211111072338 CreateAnimals: migrating ====================================
+-- create_table(:animals)
+-- add_column(:species, :string)
+rails aborted!
+StandardError: An error has occurred, this and all later migrations canceled:
+
+wrong number of arguments (given 2, expected 3)
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:6:in `block in change'
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:3:in `change'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+
+Caused by:
+ArgumentError: wrong number of arguments (given 2, expected 3)
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:6:in `block in change'
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:3:in `change'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:redo
+== 20211111061312 Department: reverting =======================================
+== 20211111061312 Department: reverted (0.0046s) ==============================
+== 20211111061312 Department: migrating =======================================
+
+-- create_table(:animals)
+-- add_column(:animals, :species, :string)
+rails aborted!
+
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:6:in `block in change'
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:3:in `change'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+
+Caused by:
+ActiveRecord::StatementInvalid: PG::UndefinedTable: ERROR:  relation "animals" does not exist
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:6:in `block in change'
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:3:in `change'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+
+Caused by:
+PG::UndefinedTable: ERROR:  relation "animals" does not exist
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:6:in `block in change'
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:3:in `change'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails c
+Running via Spring preloader in process 15807
+Loading development environment (Rails 6.1.4.1)
+3.0.2 :001 > animals.all
+(irb):1:in `<main>': undefined local variable or method `animals' for main:Object (NameError)
+3.0.2 :002 > Animals.all
+(irb):2:in `<main>': uninitialized constant Animals (NameError)
+3.0.2 :003 > Animal.all
+  Animal Load (1.1ms)  SELECT "animals".* FROM "animals"
+(Object doesn't support #inspect)
+ =>  
+3.0.2 :004 > Animal
+ => Animal(Table doesn't exist) 
+3.0.2 :005 > Animals
+(irb):5:in `<main>': uninitialized constant Animals (NameError)
+3.0.2 :006 > animals.all
+[3]+  Stopped                 rails c
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+   up     20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+   up     20211110185420  Create students
+   up     20211110191405  Create cat
+   up     20211111061312  Department
+  down    20211111072338  Create animals
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:up  VERSION=20211111072338
+== 20211111072338 CreateAnimals: migrating ====================================
+-- create_table(:animals)
+   -> 0.1378s
+== 20211111072338 CreateAnimals: migrated (0.1380s) ===========================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:status
+
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20211109112006  Do nothing yet
+   up     20211109113538  Create users
+   up     20211110073059  Create employees
+   up     20211110184235  ********** NO FILE **********
+   up     20211110185420  Create students
+   up     20211110191405  Create cat
+   up     20211111061312  Department
+   up     20211111072338  Create animals
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:redo
+== 20211111072338 CreateAnimals: reverting ====================================
+-- drop_table(:animals)
+   -> 0.0061s
+== 20211111072338 CreateAnimals: reverted (0.0092s) ===========================
+
+== 20211111072338 CreateAnimals: migrating ====================================
+-- create_table(:animals)
+   -> 0.1161s
+== 20211111072338 CreateAnimals: migrated (0.1162s) ===========================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:redo
+== 20211111072338 CreateAnimals: reverting ====================================
+-- drop_table(:animals)
+   -> 0.0057s
+== 20211111072338 CreateAnimals: reverted (0.0092s) ===========================
+
+== 20211111072338 CreateAnimals: migrating ====================================
+-- create_table(:animals)
+-- add_column(:animals, :species, :string)
+rails aborted!
+StandardError: An error has occurred, this and all later migrations canceled:
+
+PG::UndefinedTable: ERROR:  relation "animals" does not exist
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:6:in `block in change'
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:3:in `change'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+
+Caused by:
+ActiveRecord::StatementInvalid: PG::UndefinedTable: ERROR:  relation "animals" does not exist
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:6:in `block in change'
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:3:in `change'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+
+Caused by:
+PG::UndefinedTable: ERROR:  relation "animals" does not exist
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:6:in `block in change'
+/home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211111072338_create_animals.rb:3:in `change'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate:redo
+== 20211111061312 Department: reverting =======================================
+== 20211111061312 Department: reverted (0.0027s) ==============================
+
+== 20211111061312 Department: migrating =======================================
+== 20211111061312 Department: migrated (0.0000s) ==============================
+
+== 20211111072338 CreateAnimals: migrating ====================================
+-- create_table(:animals)
+   -> 0.1103s
+== 20211111072338 CreateAnimals: migrated (0.1106s) ===========================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ 
+
+==============================Database created using rails migration and models generated tables======================
+simple_cms_development=# \dt
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | ar_internal_metadata | table | aman1
+ public | cats                 | table | aman1
+ public | employees            | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(6 rows)
+
+simple_cms_development=# \c cats;
+FATAL:  database "cats" does not exist
+Previous connection kept
+simple_cms_development=# select * from cats;
+ id | color | name | created_at | updated_at 
+----+-------+------+------------+------------
+(0 rows)
+
+simple_cms_development=# select * from employees;
+simple_cms_development=# 
+simple_cms_development=# select * from students;
+ id | lname  | fname |         created_at         |         updated_at         
+----+--------+-------+----------------------------+----------------------------
+  1 | sharma | Ron   | 2021-11-10 19:07:12.559322 | 2021-11-10 19:07:12.559322
+(1 row)
+
+simple_cms_development=# select * from users;
+simple_cms_development=# select * from users;
+ id | last_name | first_name |       email       |         created_at         |         updated_at         
+----+-----------+------------+-------------------+----------------------------+----------------------------
+  1 | smith     | kevin      | kevin11@gmail.com | 2021-11-09 12:55:26.151935 | 2021-11-09 12:55:26.151935
+  2 | jung      | David      | david@gmail.com   | 2021-11-09 13:08:16.845347 | 2021-11-09 13:08:16.845347
+  4 | chang     | Hanry      | hanry@gmail.com   | 2021-11-09 13:09:44.335389 | 2021-11-09 13:09:44.335389
+  5 | kumari    | Komal      | komal@gmail.com   | 2021-11-09 13:18:07.751279 | 2021-11-09 13:18:07.751279
+  6 | Sharma    | Rahul      | rahul@gmail.com   | 2021-11-10 05:34:39.274021 | 2021-11-10 05:34:39.274021
+  7 | Bhardwaj  | Karan      | karan@gmail.com   | 2021-11-10 05:39:44.224637 | 2021-11-10 05:39:44.224637
+  8 | Saini     | Shefali    | shef@gmail.com    | 2021-11-10 05:43:31.345885 | 2021-11-10 05:55:59.703713
+  9 |           |            |                   | 2021-11-10 06:51:55.860277 | 2021-11-10 06:51:55.860277
+ 10 |           |            |                   | 2021-11-10 06:54:22.428451 | 2021-11-10 06:54:22.428451
+(9 rows)
+
+simple_cms_development=# select * from users;
+ERROR:  relation "users" does not exist
+LINE 1: select * from users;
+                      ^
+simple_cms_development=# select * from users;
+ERROR:  relation "users" does not exist
+LINE 1: select * from users;
+                      ^
+simple_cms_development=# select * from users;
+ id | last_name | first_name | email | created_at | updated_at 
+----+-----------+------------+-------+------------+------------
+(0 rows)
+
+simple_cms_development=# select * from employees;
+ id | occupation | name | created_at | updated_at 
+----+------------+------+------------+------------
+(0 rows)
+
+simple_cms_development=# select * from animals;
+ id | animal_type | name | vaccinated | keeper | created_at | updated_at 
+----+-------------+------+------------+--------+------------+------------
+(0 rows)
+
+simple_cms_development=# select * from animals;
+ id | animal_type | name | vaccinated | keeper | created_at | updated_at 
+----+-------------+------+------------+--------+------------+------------
+(0 rows)
+
+simple_cms_development=# select * from animals;
+ id | animal_type | name  | vaccinated |  keeper  |         created_at         |         updated_at         
+----+-------------+-------+------------+----------+----------------------------+----------------------------
+  1 | Panda       | Polly | Yes        | Mr Jones | 2021-11-11 09:32:44.003996 | 2021-11-11 09:32:44.003996
+(1 row)
+
+simple_cms_development=# select * from animals;
+ id | animal_type |  name  | vaccinated |   keeper    |         created_at         |         updated_at         
+----+-------------+--------+------------+-------------+----------------------------+----------------------------
+  1 | Panda       | Polly  | Yes        | Mr Jones    | 2021-11-11 09:32:44.003996 | 2021-11-11 09:32:44.003996
+  2 | Snake       | Sandra | Yes        | Mr Cooper   | 2021-11-11 09:34:11.6134   | 2021-11-11 09:34:11.6134
+  3 | Penguin     | Pingu  | No         | Mr Smith    | 2021-11-11 09:37:40.865395 | 2021-11-11 09:37:40.865395
+  4 | Monkey      | Molly  | Yes        | Mr Jonathan | 2021-11-11 09:38:16.793681 | 2021-11-11 09:38:16.793681
+  5 | Elephant    | Tegan  | Yes        | Mr Jones    | 2021-11-11 09:39:10.881244 | 2021-11-11 09:39:10.881244
+  6 | Zebra       | Gina   | Yes        | Mr Gregson  | 2021-11-11 09:39:59.346607 | 2021-11-11 09:39:59.346607
+  7 | Zebra       | Ziggy  | Yes        | Mr Hanry    | 2021-11-11 09:40:33.710989 | 2021-11-11 09:40:33.710989
+  8 | Snake       | Dover  | No         | Mr Pointing | 2021-11-11 09:41:20.991998 | 2021-11-11 09:41:20.991998
+  9 | Snake       | Wonda  | No         | Mrs Gregson | 2021-11-11 09:41:52.143579 | 2021-11-11 09:41:52.143579
+ 10 | Koala       | Coca   | Yes        | Mrs Smith   | 2021-11-11 09:42:27.487487 | 2021-11-11 09:42:27.487487
+ 11 | Dog         | Ruby   | Yes        | Mrs Sharma  | 2021-11-11 09:42:53.089751 | 2021-11-11 09:42:53.089751
+(11 rows)
+
+simple_cms_development=# select * from animals;
+ERROR:  relation "animals" does not exist
+LINE 1: select * from animals;
+                      ^
+simple_cms_development=# select * from animals;
+ERROR:  relation "animals" does not exist
+LINE 1: select * from animals;
+                      ^
+simple_cms_development=# select * from animals;
+ id | animal_type | name | vaccinated | keeper | created_at | updated_at 
+----+-------------+------+------------+--------+------------+------------
+(0 rows)
+
+simple_cms_development=# 
+simple_cms_development=# select * from animals;
+ id | animal_type |  name  | vaccinated |   keeper    |         created_at         |         updated_at         
+----+-------------+--------+------------+-------------+----------------------------+----------------------------
+  1 | Panda       | Polly  | Yes        | Mr Jones    | 2021-11-11 10:28:18.288136 | 2021-11-11 10:28:18.288136
+  2 | Snake       | Sandra | Yes        | Mr Cooper   | 2021-11-11 10:29:03.118352 | 2021-11-11 10:29:03.118352
+  3 | Penguin     | Pingu  | No         | Mr Smith    | 2021-11-11 10:30:17.642415 | 2021-11-11 10:30:17.642415
+  4 | Monkey      | Molly  | Yes        | Mr Jonathan | 2021-11-11 10:31:05.704534 | 2021-11-11 10:31:05.704534
+  5 | Elephant    | Togan  | Yes        | Mr Jones    | 2021-11-11 10:31:40.312568 | 2021-11-11 10:31:40.312568
+  6 | Zebra       | Gina   | Yes        | Mr Gregson  | 2021-11-11 10:32:43.097339 | 2021-11-11 10:32:43.097339
+  7 | Zebra       | Ziggy  | Yes        | Mr Hanry    | 2021-11-11 10:33:08.809077 | 2021-11-11 10:33:08.809077
+  8 | Snake       | Dover  | No         | Mr Hanry    | 2021-11-11 10:33:50.537626 | 2021-11-11 10:33:50.537626
+  9 | Snake       | Wonda  | No         | Mr Gregson  | 2021-11-11 10:34:35.607559 | 2021-11-11 10:34:35.607559
+ 10 | Koala       | Coca   | Yes        | Mr Smith    | 2021-11-11 10:35:08.719809 | 2021-11-11 10:35:08.719809
+ 11 | Dog         | Ruby   | Yes        | Mrs Sharma  | 2021-11-11 10:35:37.861938 | 2021-11-11 10:35:37.861938
+(11 rows)
+
+simple_cms_development=# select * from animals;
+ id | animal_type |  name  | vaccinated |   keeper    |         created_at         |         updated_at         
+----+-------------+--------+------------+-------------+----------------------------+----------------------------
+  1 | Panda       | Polly  | Yes        | Mr Jones    | 2021-11-11 10:28:18.288136 | 2021-11-11 10:28:18.288136
+  2 | Snake       | Sandra | Yes        | Mr Cooper   | 2021-11-11 10:29:03.118352 | 2021-11-11 10:29:03.118352
+  3 | Penguin     | Pingu  | No         | Mr Smith    | 2021-11-11 10:30:17.642415 | 2021-11-11 10:30:17.642415
+  4 | Monkey      | Molly  | Yes        | Mr Jonathan | 2021-11-11 10:31:05.704534 | 2021-11-11 10:31:05.704534
+  5 | Elephant    | Togan  | Yes        | Mr Jones    | 2021-11-11 10:31:40.312568 | 2021-11-11 10:31:40.312568
+  6 | Zebra       | Gina   | Yes        | Mr Gregson  | 2021-11-11 10:32:43.097339 | 2021-11-11 10:32:43.097339
+  7 | Zebra       | Ziggy  | Yes        | Mr Hanry    | 2021-11-11 10:33:08.809077 | 2021-11-11 10:33:08.809077
+  8 | Snake       | Dover  | No         | Mr Hanry    | 2021-11-11 10:33:50.537626 | 2021-11-11 10:33:50.537626
+  9 | Snake       | Wonda  | No         | Mr Gregson  | 2021-11-11 10:34:35.607559 | 2021-11-11 10:34:35.607559
+ 10 | Koala       | Coca   | Yes        | Mr Smith    | 2021-11-11 10:35:08.719809 | 2021-11-11 10:35:08.719809
+ 11 | Dog         | Ruby   | Yes        | Mrs Sharma  | 2021-11-11 10:35:37.861938 | 2021-11-11 10:35:37.861938
+ 12 |             |        |            |             | 2021-11-11 11:21:49.086971 | 2021-11-11 11:21:49.086971
+(12 rows)
+
+simple_cms_development=# select * from animals;
+ id | animal_type |  name  | vaccinated |   keeper    |         created_at         |         updated_at         
+----+-------------+--------+------------+-------------+----------------------------+----------------------------
+  1 | Panda       | Polly  | Yes        | Mr Jones    | 2021-11-11 10:28:18.288136 | 2021-11-11 10:28:18.288136
+  2 | Snake       | Sandra | Yes        | Mr Cooper   | 2021-11-11 10:29:03.118352 | 2021-11-11 10:29:03.118352
+  3 | Penguin     | Pingu  | No         | Mr Smith    | 2021-11-11 10:30:17.642415 | 2021-11-11 10:30:17.642415
+  4 | Monkey      | Molly  | Yes        | Mr Jonathan | 2021-11-11 10:31:05.704534 | 2021-11-11 10:31:05.704534
+  5 | Elephant    | Togan  | Yes        | Mr Jones    | 2021-11-11 10:31:40.312568 | 2021-11-11 10:31:40.312568
+  6 | Zebra       | Gina   | Yes        | Mr Gregson  | 2021-11-11 10:32:43.097339 | 2021-11-11 10:32:43.097339
+  7 | Zebra       | Ziggy  | Yes        | Mr Hanry    | 2021-11-11 10:33:08.809077 | 2021-11-11 10:33:08.809077
+  8 | Snake       | Dover  | No         | Mr Hanry    | 2021-11-11 10:33:50.537626 | 2021-11-11 10:33:50.537626
+  9 | Snake       | Wonda  | No         | Mr Gregson  | 2021-11-11 10:34:35.607559 | 2021-11-11 10:34:35.607559
+ 10 | Koala       | Coca   | Yes        | Mr Smith    | 2021-11-11 10:35:08.719809 | 2021-11-11 10:35:08.719809
+ 11 | Dog         | Ruby   | Yes        | Mrs Sharma  | 2021-11-11 10:35:37.861938 | 2021-11-11 10:35:37.861938
+ 12 |             |        |            |             | 2021-11-11 11:21:49.086971 | 2021-11-11 11:21:49.086971
+ 13 |             |        |            |             | 2021-11-11 11:39:50.706734 | 2021-11-11 11:39:50.706734
+ 14 |             |        |            |             | 2021-11-11 12:21:48.158543 | 2021-11-11 12:21:48.158543
+ 15 |             |        |            |             | 2021-11-11 12:23:00.275936 | 2021-11-11 12:23:00.275936
+ 16 |             |        |            |             | 2021-11-11 12:23:22.696698 | 2021-11-11 12:23:22.696698
+(16 rows)
+
+simple_cms_development=# \dt
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | animals              | table | aman1
+ public | ar_internal_metadata | table | aman1
+ public | cats                 | table | aman1
+ public | employees            | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(7 rows)
+
+simple_cms_development=# \dt
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | animals              | table | aman1
+ public | ar_internal_metadata | table | aman1
+ public | cats                 | table | aman1
+ public | employees            | table | aman1
+ public | people               | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(8 rows)
+
+simple_cms_development=# select * from people;
+ id | name | email | address | created_at | updated_at 
+----+------+-------+---------+------------+------------
+(0 rows)
+
+simple_cms_development=# select * from people;
+ id |  name  |      email       |  address  |         created_at         |         updated_at         
+----+--------+------------------+-----------+----------------------------+----------------------------
+  1 | Arnav  | arnav@gmail.com  | Delhi     | 2021-11-11 12:45:16.441119 | 2021-11-11 12:45:16.441119
+  2 | Pawan  | pawan@gmail.com  | Delhi     | 2021-11-11 12:45:32.652593 | 2021-11-11 12:45:32.652593
+  3 | Kiran  | kiran@gmail.com  | Punjab    | 2021-11-11 12:45:58.198184 | 2021-11-11 12:45:58.198184
+  4 | Rohit  | rohit@gmail.com  | Faridabad | 2021-11-11 12:46:20.925467 | 2021-11-11 12:46:20.925467
+  5 | Garima | garima@gmail.com | Mumbai    | 2021-11-11 12:46:54.380355 | 2021-11-11 12:46:54.380355
+(5 rows)
+
+simple_cms_development=# 
 
 
 
