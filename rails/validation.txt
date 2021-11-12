@@ -80,4 +80,116 @@ Did you mean?  validate
  => {} 
 3.0.2 :097 > 
 
+--------------------------------------Validation Methods-----------------------------------------------
+Validation Methods
+1.new_record?:
+
+syntax : 
+p = Person.new(name:"Aaditya")
+ => 
+#<Person:0x0000558c111e22e0
+... 
+3.0.2 :003 > p.new_record?
+ => true 
+
+2.save
+  TRANSACTION (0.3ms)  BEGIN
+  Person Create (24.6ms)  INSERT INTO "people" ("name", "email", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Arnav"], ["email", "arnav@gmail.com"], ["address", "Delhi"], ["created_at", "2021-11-12 05:29:52.617850"], ["updated_at", "2021-11-12 05:29:52.617850"]]
+  TRANSACTION (13.1ms)  COMMIT
+ => true 
+3.0.2 :016 > p.new_record?
+ => false 
+3.Validation triggers:
+1.create
+create! raises an exception while create returns the object (unsaved object if it does not pass validations)
+2.create!
+create! raises an exception while create returns the object (unsaved object if it does not pass validations)
+3.save
+save saves the data into the database
+example : p.save
+ true
+
+4.save! 
+
+save! won't just return true or false but only true on success and raise an exception if it fails.
+5.update
+update is used to update the data in database.
+using find_by method.
+
+6.update!
+
+which are stricter in that they raise the exception ActiveRecord::RecordInvalid if validation fails.
+
+
+4 valid? and invalid?
+ p = Person.create(name:"Kanika").valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Person Create (0.7ms)  INSERT INTO "people" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Kanika"], ["created_at", "2021-11-12 06:10:47.069071"], ["updated_at", "2021-11-12 06:10:47.069071"]]
+  TRANSACTION (22.2ms)  COMMIT
+ => true 
+
+5.errors.size
+
+p = Person.new
+ => #<Person:0x0000558c11309470 id: nil, name: nil, email: nil, address: nil, created_at: nil, updated_at: nil> 
+
+3.0.2 :052 > p.errors.size
+ => 0 
+
+6.errors[]
+To verify whether or not a particular attribute of an object is valid, you can use errors[:attribute]. It returns an array of all the error messages for :attribute. If there are no errors on the specified attribute, an empty array is returned.
+
+Person.create.errors[:name].any?
+  TRANSACTION (0.4ms)  BEGIN
+  Person Create (0.6ms)  INSERT INTO "people" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2021-11-12 07:40:43.195724"], ["updated_at", "2021-11-12 07:40:43.195724"]]
+  TRANSACTION (27.5ms)  COMMIT
+ => false 
+
+
+2 Validation Helpers
+
+
+2.1 acceptance
+
+
+This method validates that a checkbox on the user interface was checked when a form was submitted. This is typically used when the user needs to agree to your application's terms of service, confirm that some text is read, or any similar concept.
+
+class Person < ApplicationRecord
+  validates :terms_of_service, acceptance: true
+end
+
+
+
+
+2.2 confirmation
+
+You should use this helper when you have two text fields that should receive exactly the same content. For example, you may want to confirm an email address or a password. This validation creates a virtual attribute whose name is the name of the field that has to be confirmed with "_confirmation" appended.
+
+
+class Person < ApplicationRecord
+  validates :email, confirmation: true
+end
+
+
+
+
+2.9 presence
+
+This helper validates that the specified attributes are not empty. It uses the blank? method to check if the value is either nil or a blank string, that is, a string that is either empty or consists of whitespace.
+
+class Person < ApplicationRecord
+  validates :name, :login, :email, presence: true
+end
+
+
+2.10 absence
+
+This helper validates that the specified attributes are absent. It uses the present? method to check if the value is not either nil or a blank string, that is, a string that is either empty or consists of whitespace.
+
+class Person < ApplicationRecord
+  validates :name, :login, :email, absence: true
+end
+
+
+
 
