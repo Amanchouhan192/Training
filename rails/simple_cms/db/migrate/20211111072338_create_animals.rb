@@ -6,7 +6,7 @@ class CreateAnimals < ActiveRecord::Migration[6.1]
       t.string :vaccinated
       t.string :keeper
 
-      validates :animal_type, presence: true
+      #validates :animal_type, presence: true
       
       t.timestamps
     end
