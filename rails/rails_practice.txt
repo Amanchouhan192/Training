@@ -1512,5 +1512,17 @@ simple_cms_development=# select * from people;
 
 simple_cms_development=# 
 
+===============================================12th Nov=============================================
+rails db:migrate:redo
+== 20211111123811 CreatePeople: reverting =====================================
+-- drop_table(:people)
+   -> 0.1444s
+== 20211111123811 CreatePeople: reverted (0.1484s) ============================
+
+== 20211111123811 CreatePeople: migrating =====================================
+-- create_table(:people)
+   -> 0.2547s
+== 20211111123811 CreatePeople: migrated (0.2548s) ============================
+
 
 
