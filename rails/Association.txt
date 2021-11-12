@@ -1,0 +1,99 @@
+===============================================Associations=============================================
+in Rails, an association is a connection between two Active Record models. Why do we need associations between models? Because they make common operations simpler and easier in your code. For example, consider a simple Rails application that includes a model for authors and a model for books. Each author can have many books. Without associations, the model declarations would look like this:
+
+class Author < ApplicationRecord
+end
+
+class Book < ApplicationRecord
+end
+
+2. The Types of Associations
+
+
+Rails supports six types of associations: 
+
+belongs_to
+has_one
+has_many
+has_many :through
+has_one :through
+has_and_belongs_to_many
+Lets discuss one by one:
+
+2.1 The belongs_to Association
+A belongs_to association sets up a connection with another model, such that each instance of the declaring model "belongs to" one instance of the other model. For example, if your application includes authors and books, and each book can be assigned to exactly one author, you'd declare the book model this way:
+
+class CreateBooks < ActiveRecord::Migration[6.1]
+  def change
+    create_table :books do |t|
+
+      belongs_to :author   #this is belongs to author 
+      t.timestamps
+    end
+  end
+end
+
+belongs_to associations must use the singular term
+
+
+2.2 The has_one Association
+
+A has_one association indicates that one other model has a reference to this model. That model can be fetched through this association.
+
+
+For example, if each supplier in your application has only one account, you'd declare the supplier model like this:
+
+class Supplier < ApplicationRecord
+  has_one :account
+end
+
+
+2.3 The has_one
+
+A has_one association indicates that one other model has a reference to this model. That model can be fetched through this association.
+
+
+For example, if each supplier in your application has only one account, you'd declare the supplier model like this:
+
+
+
+class Author < ApplicationRecord
+   has_one :account
+end
+
+
+class CreateAuthors < ActiveRecord::Migration[6.0]
+  def change
+    create_table :authors do |t|
+      t.string :name
+      t.timestamps
+    end
+
+    create_table :books do |t|
+      t.belongs_to :author
+      t.datetime :published_at
+      t.timestamps
+    end
+  end
+end
+
+
+
+2.7 Choosing Between belongs_to and has_one
+
+If you want to set up a one-to-one relationship between two models, you'll need to add belongs_to to one, and has_one to the other. 
+
+class Supplier < ApplicationRecord
+  has_one :account
+end
+
+class Account < ApplicationRecord
+  belongs_to :supplier
+end
+
+
+3.2 Avoiding Name Collisions
+
+You are not free to use just any name for your associations. Because creating an association adds a method with that name to the model, it is a bad idea to give an association a name that is already used for an instance method of ActiveRecord::Base. The association method would override the base method and break things. For instance, attributes or connection are bad names for associations.
+
+
