@@ -1525,4 +1525,1096 @@ rails db:migrate:redo
 == 20211111123811 CreatePeople: migrated (0.2548s) ============================
 
 
+=========================================13th Nov=================================================
+Database: 
+
+postgres=# \c simple_cms_development 
+You are now connected to database "simple_cms_development" as user "postgres".
+simple_cms_development=# \dt
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | animals              | table | aman1
+ public | ar_internal_metadata | table | aman1
+ public | authors              | table | aman1
+ public | books                | table | aman1
+ public | cats                 | table | aman1
+ public | employees            | table | aman1
+ public | people               | table | aman1
+ public | publisher            | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(11 rows)
+
+simple_cms_development=# select * from employees;
+ id | occupation | name | created_at | updated_at 
+----+------------+------+------------+------------
+(0 rows)
+
+simple_cms_development=# \c employee_management_system 
+You are now connected to database "employee_management_system" as user "postgres".
+employee_management_system=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | clientprojects   | table | postgres
+ public | clients          | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+ public | through          | table | postgres
+(7 rows)
+
+employee_management_system=# select * from employee ;
+employee_management_system=# select * from employee ;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(10 rows)
+
+employee_management_system=# \c simple_cms_development 
+You are now connected to database "simple_cms_development" as user "postgres".
+simple_cms_development=# \dt
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | animals              | table | aman1
+ public | ar_internal_metadata | table | aman1
+ public | authors              | table | aman1
+ public | books                | table | aman1
+ public | cats                 | table | aman1
+ public | employees            | table | aman1
+ public | people               | table | aman1
+ public | publisher            | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(11 rows)
+
+simple_cms_development=# select * from employee
+simple_cms_development-# ^Z
+[1]+  Stopped                 psql
+postgres@beryl-HP-ProBook-6460b:/home/beryl/Desktop/Training$ psql
+psql (12.9 (Ubuntu 12.9-0ubuntu0.20.04.1))
+Type "help" for help.
+
+postgres=# \c simple_cms_development ;
+You are now connected to database "simple_cms_development" as user "postgres".
+simple_cms_development=# \dt
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | animals              | table | aman1
+ public | ar_internal_metadata | table | aman1
+ public | authors              | table | aman1
+ public | books                | table | aman1
+ public | cats                 | table | aman1
+ public | employees            | table | aman1
+ public | people               | table | aman1
+ public | publisher            | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(11 rows)
+
+simple_cms_development=# select * from employees;
+ id | dept | fname | created_at | updated_at | lname | date_of_birth | email | salary 
+----+------+-------+------------+------------+-------+---------------+-------+--------
+(0 rows)
+
+simple_cms_development=# select * from employees;
+ id | dept | fname | created_at | updated_at | lname | date_of_birth | email | salary | gender 
+----+------+-------+------------+------------+-------+---------------+-------+--------+--------
+(0 rows)
+
+simple_cms_development=# select * from employees;
+simple_cms_development=# select * from employees;
+simple_cms_development=# select * from employees;
+simple_cms_development=# select * from employees;
+simple_cms_development=# select * from employees;
+simple_cms_development=# select * from employees;
+simple_cms_development=# select * from employees;
+ id |   dept   |  fname  |         created_at         |         updated_at         |  lname  | date_of_birth |       email       | salary | gender 
+----+----------+---------+----------------------------+----------------------------+---------+---------------+-------------------+--------+--------
+  1 | IT       | Aman    | 2021-11-13 05:43:26.419445 | 2021-11-13 05:44:55.564479 | Chouhan | 1997-12-28    | aman@gmail.com    | 30000  | Male
+  2 | IT       | Akansha | 2021-11-13 05:47:12.686036 | 2021-11-13 05:57:58.633445 | Sharma  | 1998-11-28    | akansha@gmail.com | 30000  | Female
+  4 | SALES    | Kiran   | 2021-11-13 05:50:00.223418 | 2021-11-13 05:59:58.615209 | Sharma  | 1998-09-24    | kiran@gmail.com   | 30000  | Female
+  3 | IT       | Neha    | 2021-11-13 05:48:52.727475 | 2021-11-13 06:01:40.502623 | Nagar   | 1997-12-28    | neha@gmail.com    | 25000  | Female
+  5 | SALES    | Pawan   | 2021-11-13 06:07:14.962867 | 2021-11-13 06:07:14.962867 | Khanna  | 1994-06-20    | pawan@gmail.com   | 35000  | Male
+  6 | ACCOUNTS | Krishna | 2021-11-13 06:10:09.292505 | 2021-11-13 06:10:09.292505 | Yadav   | 1995-08-24    | krishna@gmail.com | 35000  | Male
+  7 | RESEARCH | Brijesh | 2021-11-13 06:11:34.784036 | 2021-11-13 06:11:34.784036 | Yadav   | 1992-03-21    | brij@gmail.com    | 25000  | Male
+  8 | ACCOUNTS | Prithvi | 2021-11-13 06:15:06.522628 | 2021-11-13 06:15:06.522628 | Singh   | 1990-03-21    | prithvi@gmail.com | 40000  | Male
+  9 | HR       | Kunal   | 2021-11-13 06:16:31.518224 | 2021-11-13 06:16:31.518224 | Sharma  | 1990-01-22    | kunal@gmail.com   | 50000  | Male
+ 10 | SALES    | Bhavya  | 2021-11-13 06:17:54.954527 | 2021-11-13 06:17:54.954527 | Sharma  | 1998-01-22    | bsharma@gmail.com | 25000  | Female
+(10 rows)
+
+simple_cms_development=# select * from employees;
+ id |   dept   |  fname  |         created_at         |         updated_at         |  lname  | date_of_birth |       email       | salary | gender 
+----+----------+---------+----------------------------+----------------------------+---------+---------------+-------------------+--------+--------
+  1 | IT       | Aman    | 2021-11-13 05:43:26.419445 | 2021-11-13 05:44:55.564479 | Chouhan | 1997-12-28    | aman@gmail.com    | 30000  | Male
+  2 | IT       | Akansha | 2021-11-13 05:47:12.686036 | 2021-11-13 05:57:58.633445 | Sharma  | 1998-11-28    | akansha@gmail.com | 30000  | Female
+  4 | SALES    | Kiran   | 2021-11-13 05:50:00.223418 | 2021-11-13 05:59:58.615209 | Sharma  | 1998-09-24    | kiran@gmail.com   | 30000  | Female
+  3 | IT       | Neha    | 2021-11-13 05:48:52.727475 | 2021-11-13 06:01:40.502623 | Nagar   | 1997-12-28    | neha@gmail.com    | 25000  | Female
+  5 | SALES    | Pawan   | 2021-11-13 06:07:14.962867 | 2021-11-13 06:07:14.962867 | Khanna  | 1994-06-20    | pawan@gmail.com   | 35000  | Male
+  6 | ACCOUNTS | Krishna | 2021-11-13 06:10:09.292505 | 2021-11-13 06:10:09.292505 | Yadav   | 1995-08-24    | krishna@gmail.com | 35000  | Male
+  7 | RESEARCH | Brijesh | 2021-11-13 06:11:34.784036 | 2021-11-13 06:11:34.784036 | Yadav   | 1992-03-21    | brij@gmail.com    | 25000  | Male
+  8 | ACCOUNTS | Prithvi | 2021-11-13 06:15:06.522628 | 2021-11-13 06:15:06.522628 | Singh   | 1990-03-21    | prithvi@gmail.com | 40000  | Male
+  9 | HR       | Kunal   | 2021-11-13 06:16:31.518224 | 2021-11-13 06:16:31.518224 | Sharma  | 1990-01-22    | kunal@gmail.com   | 50000  | Male
+ 10 | SALES    | Bhavya  | 2021-11-13 06:17:54.954527 | 2021-11-13 06:17:54.954527 | Sharma  | 1998-01-22    | bsharma@gmail.com | 25000  | Female
+(10 rows)
+
+simple_cms_development=# \dt;
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | animals              | table | aman1
+ public | ar_internal_metadata | table | aman1
+ public | authors              | table | aman1
+ public | books                | table | aman1
+ public | cats                 | table | aman1
+ public | departments          | table | aman1
+ public | employees            | table | aman1
+ public | people               | table | aman1
+ public | publisher            | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(12 rows)
+
+simple_cms_development=# select * from departments;
+ id | dept_name |         created_at         |         updated_at         
+----+-----------+----------------------------+----------------------------
+  1 | IT        | 2021-11-13 06:37:07.859094 | 2021-11-13 06:37:07.859094
+(1 row)
+
+simple_cms_development=# \d departments;
+                                          Table "public.departments"
+   Column   |              Type              | Collation | Nullable |                 Default                 
+------------+--------------------------------+-----------+----------+-----------------------------------------
+ id         | bigint                         |           | not null | nextval('departments_id_seq'::regclass)
+ dept_name  | character varying              |           |          | 
+ created_at | timestamp(6) without time zone |           | not null | 
+ updated_at | timestamp(6) without time zone |           | not null | 
+Indexes:
+    "departments_pkey" PRIMARY KEY, btree (id)
+
+simple_cms_development=# select * from departments;
+ id | dept_name |         created_at         |         updated_at         
+----+-----------+----------------------------+----------------------------
+  1 | IT        | 2021-11-13 06:37:07.859094 | 2021-11-13 06:37:07.859094
+  2 | ACCOUNTS  | 2021-11-13 06:38:03.846906 | 2021-11-13 06:38:03.846906
+  3 | SALES     | 2021-11-13 06:38:18.153407 | 2021-11-13 06:38:18.153407
+  4 | RESEARCH  | 2021-11-13 06:38:40.833696 | 2021-11-13 06:38:40.833696
+  5 | HR        | 2021-11-13 06:39:00.239417 | 2021-11-13 06:39:00.239417
+(5 rows)
+
+simple_cms_development=# \dt
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | animals              | table | aman1
+ public | ar_internal_metadata | table | aman1
+ public | authors              | table | aman1
+ public | books                | table | aman1
+ public | cats                 | table | aman1
+ public | departments          | table | aman1
+ public | employees            | table | aman1
+ public | people               | table | aman1
+ public | projects             | table | aman1
+ public | publisher            | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(13 rows)
+
+simple_cms_development=# select * from p;
+people            pg_catalog.       pg_toast.         projects          public.           publisher_id_seq  
+people_id_seq     pg_temp_1.        pg_toast_temp_1.  projects_id_seq   publisher         
+simple_cms_development=# select * from projects;
+ id |     project_name      | project_id |         created_at         |         updated_at         
+----+-----------------------+------------+----------------------------+----------------------------
+  1 | web development       | 1001       | 2021-11-13 06:52:20.592373 | 2021-11-13 06:52:20.592373
+  2 | Machine Learning      | 1002       | 2021-11-13 06:52:36.323712 | 2021-11-13 06:52:36.323712
+  3 | Android               | 1003       | 2021-11-13 06:52:49.323034 | 2021-11-13 06:52:49.323034
+  4 | fund analysis         | 1004       | 2021-11-13 06:53:25.868439 | 2021-11-13 06:53:25.868439
+  5 | cloud service         | 1005       | 2021-11-13 06:53:46.05015  | 2021-11-13 06:53:46.05015
+  6 | mutual funds analysis | 1006       | 2021-11-13 06:54:31.153995 | 2021-11-13 06:54:31.153995
+(6 rows)
+
+simple_cms_development=# \c employee_management_system 
+You are now connected to database "employee_management_system" as user "postgres".
+employee_management_system=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | clientprojects   | table | postgres
+ public | clients          | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+ public | through          | table | postgres
+(7 rows)
+
+employee_management_system=# \d project_
+project_assigned        project_assigned_pkey   project_pkey            project_project_id_seq  
+employee_management_system=# \d project_assigned
+                   Table "public.project_assigned"
+   Column   |         Type          | Collation | Nullable | Default 
+------------+-----------------------+-----------+----------+---------
+ eid        | character varying(10) |           | not null | 
+ project_id | integer               |           | not null | 
+Indexes:
+    "project_assigned_pkey" PRIMARY KEY, btree (eid)
+Foreign-key constraints:
+    "project_assigned_eid_fkey" FOREIGN KEY (eid) REFERENCES through(eidpk)
+    "project_assigned_project_id_fkey" FOREIGN KEY (project_id) REFERENCES project(project_id)
+
+employee_management_system=# \c simple_cms_development ;
+You are now connected to database "simple_cms_development" as user "postgres".
+simple_cms_development=# select * from project
+simple_cms_development-# ^Z
+[2]+  Stopped                 psql
+postgres@beryl-HP-ProBook-6460b:/home/beryl/Desktop/Training$ psql
+psql (12.9 (Ubuntu 12.9-0ubuntu0.20.04.1))
+Type "help" for help.
+
+postgres=# \c simple_cms_development 
+You are now connected to database "simple_cms_development" as user "postgres".
+simple_cms_development=# select * from project;
+ERROR:  relation "project" does not exist
+LINE 1: select * from project;
+                      ^
+simple_cms_development=# select * from projects;
+ id |     project_name      | project_id |         created_at         |         updated_at         
+----+-----------------------+------------+----------------------------+----------------------------
+  1 | web development       | 1001       | 2021-11-13 06:52:20.592373 | 2021-11-13 06:52:20.592373
+  2 | Machine Learning      | 1002       | 2021-11-13 06:52:36.323712 | 2021-11-13 06:52:36.323712
+  3 | Android               | 1003       | 2021-11-13 06:52:49.323034 | 2021-11-13 06:52:49.323034
+  4 | fund analysis         | 1004       | 2021-11-13 06:53:25.868439 | 2021-11-13 06:53:25.868439
+  5 | cloud service         | 1005       | 2021-11-13 06:53:46.05015  | 2021-11-13 06:53:46.05015
+  6 | mutual funds analysis | 1006       | 2021-11-13 06:54:31.153995 | 2021-11-13 06:54:31.153995
+(6 rows)
+
+simple_cms_development=# \dt 
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | animals              | table | aman1
+ public | ar_internal_metadata | table | aman1
+ public | authors              | table | aman1
+ public | books                | table | aman1
+ public | cats                 | table | aman1
+ public | departments          | table | aman1
+ public | employees            | table | aman1
+ public | people               | table | aman1
+ public | project_assigneds    | table | aman1
+ public | projects             | table | aman1
+ public | publisher            | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(14 rows)
+
+simple_cms_development=# select * from projects;
+ id |     project_name      | project_id |         created_at         |         updated_at         
+----+-----------------------+------------+----------------------------+----------------------------
+  1 | web development       | 1001       | 2021-11-13 06:52:20.592373 | 2021-11-13 06:52:20.592373
+  2 | Machine Learning      | 1002       | 2021-11-13 06:52:36.323712 | 2021-11-13 06:52:36.323712
+  3 | Android               | 1003       | 2021-11-13 06:52:49.323034 | 2021-11-13 06:52:49.323034
+  4 | fund analysis         | 1004       | 2021-11-13 06:53:25.868439 | 2021-11-13 06:53:25.868439
+  5 | cloud service         | 1005       | 2021-11-13 06:53:46.05015  | 2021-11-13 06:53:46.05015
+  6 | mutual funds analysis | 1006       | 2021-11-13 06:54:31.153995 | 2021-11-13 06:54:31.153995
+(6 rows)
+
+simple_cms_development=# \dt 
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | animals              | table | aman1
+ public | ar_internal_metadata | table | aman1
+ public | authors              | table | aman1
+ public | books                | table | aman1
+ public | cats                 | table | aman1
+ public | departments          | table | aman1
+ public | employees            | table | aman1
+ public | people               | table | aman1
+ public | project_assigned     | table | aman1
+ public | projects             | table | aman1
+ public | publisher            | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(14 rows)
+
+simple_cms_development=# \dt 
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | animals              | table | aman1
+ public | ar_internal_metadata | table | aman1
+ public | authors              | table | aman1
+ public | books                | table | aman1
+ public | cats                 | table | aman1
+ public | departments          | table | aman1
+ public | employees            | table | aman1
+ public | people               | table | aman1
+ public | project_assigned     | table | aman1
+ public | projects             | table | aman1
+ public | publisher            | table | aman1
+ public | schema_migrations    | table | aman1
+ public | students             | table | aman1
+ public | users                | table | aman1
+(14 rows)
+
+simple_cms_development=# 
+----------------------------------------------------
+Rails :console:
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate
+== 20211113063247 CreateDepartments: migrating ================================
+-- create_table(:departments)
+   -> 0.3156s
+== 20211113063247 CreateDepartments: migrated (0.3158s) =======================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails g model Project project_id:String,project_name:String
+Running via Spring preloader in process 12271
+      invoke  active_record
+      create    db/migrate/20211113064552_create_projects.rb
+      create    app/models/project.rb
+      invoke    test_unit
+      create      test/models/project_test.rb
+      create      test/fixtures/projects.yml
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate
+== 20211113064552 CreateProjects: migrating ===================================
+-- create_table(:projects)
+   -> 0.1174s
+== 20211113064552 CreateProjects: migrated (0.1176s) ==========================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ ActiveRecord::Base.connection.tables
+ActiveRecord::Base.connection.tables: command not found
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails g model ProjectAssigned eid:integer,project_id:integer
+Running via Spring preloader in process 13153
+      invoke  active_record
+      create    db/migrate/20211113071533_create_project_assigneds.rb
+      create    app/models/project_assigned.rb
+      invoke    test_unit
+      create      test/models/project_assigned_test.rb
+      create      test/fixtures/project_assigneds.yml
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate
+== 20211113071533 CreateProjectAssigneds: migrating ===========================
+-- create_table(:project_assigneds)
+   -> 0.0597s
+== 20211113071533 CreateProjectAssigneds: migrated (0.0598s) ==================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails g migration Rename_Table_Name
+Running via Spring preloader in process 13442
+      invoke  active_record
+      create    db/migrate/20211113072201_rename_table_name.rb
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate
+rails aborted!
+SyntaxError: /home/beryl/Desktop/Training/rails/simple_cms/db/migrate/20211113072201_rename_table_name.rb:3: syntax error, unexpected ':'
+...ame_table :project_assigneds, : project_assigned
+...                              ^
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate
+== 20211113072201 RenameTableName: migrating ==================================
+-- rename_table(:project_assigneds, :project_assigned)
+   -> 0.0619s
+== 20211113072201 RenameTableName: migrated (0.0620s) =========================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrat:redo
+rails aborted!
+Don't know how to build task 'db:migrat:redo' (See the list of available tasks with `rails --tasks`)
+Did you mean?  db:migrate:redo
+               db:migrate
+               db:migrate:reset
+/home/beryl/Desktop/Training/rails/simple_cms/bin/rails:5:in `<top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:10:in `block in <top (required)>'
+/home/beryl/Desktop/Training/rails/simple_cms/bin/spring:7:in `<top (required)>'
+(See full trace by running task with --trace)
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rake db:migrate:redo
+== 20211113072201 RenameTableName: reverting ==================================
+-- rename_table(:project_assigned, :project_assigneds)
+   -> 0.0148s
+== 20211113072201 RenameTableName: reverted (0.0286s) =========================
+
+== 20211113072201 RenameTableName: migrating ==================================
+-- rename_table(:project_assigneds, :project_assigned)
+   -> 0.0167s
+== 20211113072201 RenameTableName: migrated (0.0168s) =========================
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails db:migrate
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ 
+
+---------------------------------------------------------------------------
+rals Terminal console:
+
+Running via Spring preloader in process 8333
+3.0.2 :001 > Employee.all
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees"
+ => [] 
+3.0.2 :002 > Employee
+ => Employee(id: integer, occupation: string, name: string, created_at: datetime, updated_at: datetime) 
+Reloading...
+ => true 
+3.0.2 :004 > Employee.al
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `metho
+Did you mean?  all
+3.0.2 :005 > Employee.all
+ => [] 
+ => [] 
+3.0.2 :008 > Employee
+3.0.2 :009 > Employee
+3.0.2 :010 > Employee
+ => Employee(id: integer, dept: string, fname: string, created_at: datetime, updated_at: datetime, lname: string, date_of_birth: date, email: string, salary: string) 
+3.0.2 :011 > reload!
+Reloading...
+ => true 
+3.0.2 :012 > reload!
+Reloading...
+ => true 
+3.0.2 :013 > Employee
+ => Employee(id: integer, dept: string, fname: string, created_at: datetime, updated_at: datetime, lname: string, date_of_birth: date, email: string, salary: string, gender: string) 
+3.0.2 :014 > e = Employee.new(fname:"Aman",lname:"Chouhan",email:"aman@gmail.com",dept:"IT",gender:"Male",date_of_birth:1997-12-28).save
+  Employee Create (20.7ms)  INSERT INTO "employees" ("dept", "fname", "created_at", "updated_at", "lname", "date_of_birth", "email", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["dept", "IT"], ["fname", "Aman"], ["created_at", "2021-11-13 05:40:11.327343"], ["updated_at", "2021-11-13 05:40:11.327343"], ["lname", "Chouhan"], ["date_of_birth", 1957], ["email", "aman@gmail.com"], ["gender", "Male"]]
+  TRANSACTION (0.3ms)  ROLLBACK
+alid input syntax for type date: "1957" (ActiveRecord::StatementInvalid)
+date: "1957" (PG::InvalidDatetimeFormat)
+3.0.2 :015 > e = Employee.new(fname:"Aman",lname:"Chouhan",email:"aman@gmail.com",dept:"IT",gender:"Male",date_of_birth:"1997-12-28").save
+  TRANSACTION (0.2ms)  BEGIN
+  Employee Create (51.9ms)  INSERT INTO "employees" ("dept", "fname", "created_at", "updated_at", "lname", "date_of_birth", "email", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["dept", "IT"], ["fname", "Aman"], ["created_at", "2021-11-13 05:43:26.419445"], ["updated_at", "2021-11-13 05:43:26.419445"], ["lname", "Chouhan"], ["date_of_birth", "1997-12-28"], ["email", "aman@gmail.com"], ["gender", "Male"]]
+  TRANSACTION (13.9ms)  COMMIT
+ => true 
+3.0.2 :016 > e
+ => true 
+3.0.2 :017 > e.valid?
+(irb):17:in `<main>': undefined method `valid?' for true:TrueClass (NoMethodError)
+3.0.2 :018 > e.date_of_birth.valid?
+(irb):18:in `<main>': undefined method `date_of_birth' for true:TrueClass (NoMethodError)
+3.0.2 :019 > Employee.all
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x00005569621adbe8
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: nil,
+  gender: "Male">] 
+3.0.2 :020 > e = Employee.find_by(id:1)
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+#<Employee:0x0000556962c7d9d8
+... 
+3.0.2 :021 > e.salary=30000
+ => 30000 
+3.0.2 :022 > e.save
+  TRANSACTION (0.4ms)  BEGIN
+  Employee Update (0.7ms)  UPDATE "employees" SET "updated_at" = $1, "salary" = $2 WHERE "employees"."id" = $3  [["updated_at", 
+ => true 
+3.0.2 :023 > e = Employee.new(fname:"Akansha",lname:"Sharma",email:"akansha@gmail.com",dept:"IT",gender:"Fem
+ale",date_of_birth:"1998-11-28").save
+  TRANSACTION (0.3ms)  BEGIN
+  Employee Create (0.8ms)  INSERT INTO "employees" ("dept", "fname", "created_at", "updated_at", "lname", "date_of_birth", "email", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["dept", "IT"], ["fname", "Akansha"], ["created_at", "2021-11-13 05:47:12.686036"], ["updated_at", "2021-11-13 05:47:12.686036"], ["lname", "Sharma"], ["date_of_birth", "1998-11-28"], [
+ => true 
+3.0.2 :024 > e = Employee.new(fname:"Neha",lname:"Nagar",email:"neha@gmail.com",dept:"IT",gender:"Female",date_of_birth:"1997-12
+-28").save
+  TRANSACTION (0.4ms)  BEGIN
+  Employee Create (0.8ms)  INSERT INTO "employees" ("dept", "fname", "created_at", "updated_at", "lname", "date_of_birth", "email", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["dept", "IT"], ["fname", "Neha"], ["created_at", "2021-11-13 05:48:52.727475"], ["updated_at", "2021-11-13 05:48:52.727475"], ["lname", "Nagar"], ["date_of_birth", "1997-12-28"], ["ema
+  TRANSACTION (28.2ms)  COMMIT
+ => true 
+998-09-24").save
+  TRANSACTION (0.3ms)  BEGIN
+  Employee Create (0.8ms)  INSERT INTO "employees" ("dept", "fname", "created_at", "updated_at", "lname", "date_of_birth", "email", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["dept", "SALES"], ["fname", "Kiran"], ["created_at", "2021-11-13 05:50:00.223418"], ["updated_at", "2021-11-13 05:50:00.223418"], ["lname", "Sharma"], ["date_of_birth", "1998-09-24"], ["email", "kiran@gmail.com"], ["gender", "Female"]]
+  TRANSACTION (20.1ms)  COMMIT
+ => true 
+3.0.2 :026 > Employee
+ => Employee(id: integer, dept: string, fname: string, created_at: datetime, updated_at: datetime, lname: string, date_of_birth: date, email: string, salary: string, gender: string) 
+3.0.2 :027 > Employee.all
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x0000556961f076c8
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male">,
+ #<Employee:0x0000556961f074c0
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: nil,
+  gender: "Female">,
+ #<Employee:0x0000556961f073a8
+  id: 3,
+  dept: "IT",
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: nil,
+ #<Employee:0x0000556961f07218
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: nil,
+  gender: "Female">] 
+3.0.2 :028 > Employee.all
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x00005569629f5e40
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male">,
+ #<Employee:0x00005569629f5d50
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: nil,
+  gender: "Female">,
+ #<Employee:0x00005569629f5c88
+  id: 3,
+  dept: "IT",
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: nil,
+ #<Employee:0x00005569629f5b98
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: nil,
+  gender: "Female">] 
+3.0.2 :029 > Employee.all
+  Employee Load (0.6ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x0000556962c5b630
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male">,
+ #<Employee:0x0000556962c5b568
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: nil,
+  gender: "Female">,
+ #<Employee:0x0000556962c5b4a0
+  id: 3,
+  dept: "IT",
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: nil,
+ #<Employee:0x0000556962c5b3d8
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  updated_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: nil,
+  gender: "Female">] 
+3.0.2 :030 > e = Employee.find_by(id:2)
+  Employee Load (0.9ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => 
+#<Employee:0x0000556962f95c88
+... 
+3.0.2 :031 > e
+#<Employee:0x0000556962f95c88
+ dept: "IT",
+ fname: "Akansha",
+ created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+ lname: "Sharma",
+ email: "akansha@gmail.com",
+ salary: nil,
+ gender: "Female"> 
+3.0.2 :032 > e.salary=30000
+3.0.2 :033 > e.save
+  TRANSACTION (0.5ms)  BEGIN
+  Employee Update (0.9ms)  UPDATE "employees" SET "updated_at" = $1, "salary" = $2 WHERE "employees"."id" = $3  [["updated_at", "2021-11-13 05:57:58.633445"], ["salary", "30000"], ["id", 2]]
+ => true 
+3.0.2 :034 > e = Employee.find_by(id:3)
+  Employee Load (0.6ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+ => 
+#<Employee:0x00005569621ff5d8
+... 
+3.0.2 :035 > e = Employee.find_by(id:3)
+  Employee Load (0.6ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+ => 
+#<Employee:0x0000556962ac48d0
+... 
+3.0.2 :036 > e
+#<Employee:0x0000556962ac48d0
+ dept: "IT",
+ fname: "Neha",
+ created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+ date_of_birth: Sun, 28 Dec 1997,
+ email: "neha@gmail.com",
+ salary: nil,
+ gender: "Female"> 
+3.0.2 :037 > e.salary=25000
+ => 25000 
+3.0.2 :038 > e = Employee.find_by(id:4)
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+ => 
+#<Employee:0x0000556962e44050
+... 
+3.0.2 :039 > e
+#<Employee:0x0000556962e44050
+ dept: "SALES",
+ fname: "Kiran",
+ created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+ lname: "Sharma",
+ email: "kiran@gmail.com",
+ salary: nil,
+ gender: "Female"> 
+3.0.2 :040 > e.salary=30000
+ => 30000 
+3.0.2 :041 > e.save
+  TRANSACTION (0.4ms)  BEGIN
+  Employee Update (0.9ms)  UPDATE "employees" SET "updated_at" = $1, "salary" = $2 WHERE "employees"."id" = $3  [["updated_at", "2021-11-13 05:59:58.615209"], ["salary", "30000"], ["id", 4]]
+  TRANSACTION (22.3ms)  COMMIT
+ => true 
+3.0.2 :042 > Employee.all
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x000055696179bbc8
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male">,
+ #<Employee:0x000055696179b128
+  id: 3,
+  dept: "IT",
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: nil,
+  gender: "Female">,
+ #<Employee:0x000055696179a2f0
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:57:58.633445000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: "30000",
+ #<Employee:0x0000556961799760
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  updated_at: Sat, 13 Nov 2021 05:59:58.615209000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: "30000",
+  gender: "Female">] 
+3.0.2 :043 > e = Employee.find_by(id:2)
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => 
+#<Employee:0x0000556962a9eab8
+... 
+3.0.2 :044 > e
+#<Employee:0x0000556962a9eab8
+ id: 2,
+ dept: "IT",
+ fname: "Akansha",
+ updated_at: Sat, 13 Nov 2021 05:57:58.633445000 UTC +00:00,
+ lname: "Sharma",
+ date_of_birth: Sat, 28 Nov 1998,
+ email: "akansha@gmail.com",
+ gender: "Female"> 
+3.0.2 :045 > e = Employee.find_by(id:3)
+  Employee Load (0.6ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+ => 
+#<Employee:0x0000556962c505a0
+... 
+3.0.2 :046 > e = Employee.find_by(id:4)
+  Employee Load (0.6ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+ => 
+#<Employee:0x0000556962d57db8
+... 
+3.0.2 :047 > e
+#<Employee:0x0000556962d57db8
+ id: 4,
+ dept: "SALES",
+ fname: "Kiran",
+ updated_at: Sat, 13 Nov 2021 05:59:58.615209000 UTC +00:00,
+ lname: "Sharma",
+ date_of_birth: Thu, 24 Sep 1998,
+ email: "kiran@gmail.com",
+ salary: "30000",
+ gender: "Female"> 
+3.0.2 :048 > e = Employee.find_by(id:3)
+  Employee Load (0.6ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+ => 
+#<Employee:0x0000556962edec18
+... 
+3.0.2 :049 > e
+#<Employee:0x0000556962edec18
+ dept: "IT",
+ fname: "Neha",
+ created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+ lname: "Nagar",
+ email: "neha@gmail.com",
+ salary: nil,
+ gender: "Female"> 
+3.0.2 :050 > e.salary= 25000
+ => 25000 
+3.0.2 :051 > e.save
+  TRANSACTION (0.5ms)  BEGIN
+  Employee Update (0.6ms)  UPDATE "employees" SET "updated_at" = $1, "salary" = $2 WHERE "employees"."id" = $3  [["updated_at", "2021-11-13 06:01:40.502623"], ["salary", "25000"], ["id", 3]]
+  TRANSACTION (19.4ms)  COMMIT
+ => true 
+3.0.2 :052 > Employee.all
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x00005569629d1bd0
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+  lname: "Chouhan",
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male">,
+ #<Employee:0x00005569629d1ae0
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:57:58.633445000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: "30000",
+  gender: "Female">,
+ #<Employee:0x00005569629d1978
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:59:58.615209000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: "30000",
+  gender: "Female">,
+ #<Employee:0x00005569629d1838
+  id: 3,
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:01:40.502623000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: "25000",
+3.0.2 :053 > e = Employee.new(fname:"Kiran",lname:"Sharma",email:"kiran@gmail.com",dept:"SALES",gender:"Female",date_of_birth:"
+  TRANSACTION (0.4ms)  BEGIN
+  Employee Create (0.7ms)  INSERT INTO "employees" ("dept", "fname", "created_at", "updated_at", "lname", "date_of_birth", "email", "salary", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["dept", "SALES"], ["fname", "Pawan"], ["
+, "1994-06-20"], ["email", "pawan@gmail.com"], ["salary", "35000"], ["gender", "Male"]]
+  TRANSACTION (22.6ms)  COMMIT
+ => true 
+3.0.2 :054 > e
+ => true 
+3.0.2 :055 > e = Employee.new(fname:"Pawan",lname:"Khanna",email:"pawan@gmail.com",dept:"SALES",gender:"Male",salary:35000,date
+_of_birth:"1994-06-20")
+ => 
+#<Employee:0x0000556961ee3a70
+... 
+3.0.2 :056 > e
+ => 
+ dept: "SALES",
+ fname: "Pawan",
+ created_at: nil,
+ updated_at: nil,
+ lname: "Khanna",
+ date_of_birth: Mon, 20 Jun 1994,
+ email: "pawan@gmail.com",
+3.0.2 :057 > e = Employee.new(fname:"Krishna",lname:"Yadav",email:"krishna@gmail.com",dept:"ACCOUNTS",gender:"Male",salary:3500
+0,date_of_birth:"1995-08-24").save
+  TRANSACTION (0.3ms)  BEGIN
+  Employee Create (0.7ms)  INSERT INTO "employees" ("dept", "fname", "created_at", "updated_at", "lname", "date_of_birth", "email", "salary", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["dept", "ACCOUNTS"], ["fname", "Krishna"], ["created_at", "2021-11-13 06:10:09.292505"], ["updated_at", "2021-11-13 06:10:09.292505"], ["lname", "Yadav"], ["date_of_birth", "1995-08-24"], ["email", "krishna@gmail.com"], ["salary", "35000"], ["gender", "Male"]]
+3.0.2 :058 > e = Employee.new(fname:"Brijesh",lname:"Yadav",email:"brij@gmail.com",dept:"RESEARCH",gender:"Male",salary:25000,d
+ate_of_birth:"1992-03-21").save
+  TRANSACTION (0.3ms)  BEGIN
+  Employee Create (0.8ms)  INSERT INTO "employees" ("dept", "fname", "created_at", "updated_at", "lname", "date_of_birth", "email", "salary", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["dept", "RESEARCH"], ["fname", "Brijesh"], ["created_at", "2021-11-13 06:11:34.784036"], ["updated_at", "2021-11-13 06:11:34.784036"], ["lname", "Yadav"], ["date_of_birth", "1992-03-21"], ["email", "brij@gmail.com"], ["salary", "25000"], ["gender", "Male"]]
+3.0.2 :059 > e = Employee.new(fname:"Prithvi",lname:"Singh",email:"prithvi@gmail.com",dept:"ACCOUNTS",gender:"Male",salary:4000
+0,date_of_birth:"1990-03-21").save
+  TRANSACTION (0.4ms)  BEGIN
+  Employee Create (0.6ms)  INSERT INTO "employees" ("dept", "fname", "created_at", "updated_at", "lname", "date_of_birth", "email", "salary", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["dept", "ACCOUNTS"], ["fname", "Prithvi"], ["created_at", "2021-11-13 06:15:06.522628"], ["updated_at", "2021-11-13 06:15:06.522628"], ["lname", "Singh"], ["date_of_birth", "1990-03-21"], ["email", "prithvi@gmail.com"], ["salary", "40000"], ["gender", "Male"]]
+3.0.2 :060 > e = Employee.new(fname:"Kunal",lname:"Sharma",email:"kunal@gmail.com",dept:"HR",gender:"Male",salary:50000,date_of
+_birth:"1990-01-22").save
+  TRANSACTION (0.4ms)  BEGIN
+  Employee Create (0.7ms)  INSERT INTO "employees" ("dept", "fname", "created_at", "updated_at", "lname", "date_of_birth", "email", "salary", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["dept", "HR"], ["fname", "Kunal"], ["created_at", "2021-11-13 06:16:31.518224"], ["updated_at", "2021-11-13 06:16:31.518224"], ["lname", "Sharma"], ["date_of_birth", "1990-01-22"], ["email", "kunal@gmail.com"], ["salary", "50000"], ["gender", "Male"]]
+ => true 
+,date_of_birth:"1998-01-22").save
+  TRANSACTION (0.3ms)  BEGIN
+il", "salary", "gender") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["dept", "SALES"], ["fname", "Bhavya"], ["created_at", "2021-11-13 06:17:54.954527"], ["updated_at", "2021-11-13 06:17:54.954527"], ["lname", "Sharma"], ["date_of_birth
+  TRANSACTION (25.1ms)  COMMIT
+ => true 
+3.0.2 :062 > Department.all
+(irb):62:in `<main>': uninitialized constant Department (NameError)
+3.0.2 :063 > reload!
+ => true 
+3.0.2 :064 > Department.all
+  Department Load (1.0ms)  SELECT "departments".* FROM "departments"
+ => [] 
+3.0.2 :065 > d = Department.new(dept_name:"IT").save
+  Department Create (1.2ms)  INSERT INTO "departments" ("dept_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["dept_name", "IT"], ["created_at", "2021-11-13 06:37:07.859094"], ["updated_at", "2021-11-13 06:37:07.859094"]]
+  TRANSACTION (31.5ms)  COMMIT
+ => true 
+3.0.2 :066 > d = Department.new(dept_name:"ACCOUNTS").save
+  Department Create (0.6ms)  INSERT INTO "departments" ("dept_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["dept_name", "ACCOUNTS"], ["created_at", "2021-11-13 06:38:03.846906"], ["updated_at", "2021-11-13 06:38:03.846906"]]
+  TRANSACTION (23.9ms)  COMMIT
+ => true 
+3.0.2 :067 > d = Department.new(dept_name:"SALES").save
+  Department Create (0.9ms)  INSERT INTO "departments" ("dept_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["dept_name", "SALES"], ["created_at", "2021-11-13 06:38:18.153407"], ["updated_at", "2021-11-13 06:38:18.153407"]]
+  TRANSACTION (26.6ms)  COMMIT
+ => true 
+3.0.2 :068 > d = Department.new(dept_name:"RESEARCH").save
+  Department Create (0.6ms)  INSERT INTO "departments" ("dept_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["dept_name", "RESEARCH"], ["created_at", "2021-11-13 06:38:40.833696"], ["updated_at", "2021-11-13 06:38:40.833696"]]
+  TRANSACTION (23.3ms)  COMMIT
+ => true 
+3.0.2 :069 > d = Department.new(dept_name:"HR").save
+  TRANSACTION (0.4ms)  BEGIN
+  Department Create (0.7ms)  INSERT INTO "departments" ("dept_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["dept_name", "HR"], ["created_at", "2021-11-13 06:39:00.239417"], ["updated_at", "2021-11-13 06:39:00.239417"]]
+  TRANSACTION (19.0ms)  COMMIT
+ => true 
+3.0.2 :070 > Department.all
+  Department Load (0.7ms)  SELECT "departments".* FROM "departments"
+ => 
+[#<Department:0x0000556962cceb30
+  id: 1,
+  dept_name: "IT",
+  created_at: Sat, 13 Nov 2021 06:37:07.859094000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:37:07.859094000 UTC +00:00>,
+ #<Department:0x0000556962ccea18
+  id: 2,
+  dept_name: "ACCOUNTS",
+  created_at: Sat, 13 Nov 2021 06:38:03.846906000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:38:03.846906000 UTC +00:00>,
+ #<Department:0x0000556962cce950
+  id: 3,
+  dept_name: "SALES",
+  created_at: Sat, 13 Nov 2021 06:38:18.153407000 UTC +00:00,
+ #<Department:0x0000556962cce888
+  id: 4,
+  created_at: Sat, 13 Nov 2021 06:38:40.833696000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:38:40.833696000 UTC +00:00>,
+  id: 5,
+  created_at: Sat, 13 Nov 2021 06:39:00.239417000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:39:00.239417000 UTC +00:00>] 
+3.0.2 :071 > reload!
+Reloading...
+ => true 
+3.0.2 :072 > Project.all
+ => [] 
+3.0.2 :073 > Project
+ => Project(id: integer, project_name: string, project_id: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :074 > p = Project.new(project_name:"web development",project_id:1001).save
+  TRANSACTION (0.3ms)  BEGIN
+  Project Create (1.0ms)  INSERT INTO "projects" ("project_name", "project_id", "created_at", "updated_at") VALUES ($1, $2, $3,
+, ["updated_at", "2021-11-13 06:52:20.592373"]]
+  TRANSACTION (29.2ms)  COMMIT
+ => true 
+3.0.2 :075 > p = Project.new(project_name:"Machine Learning",project_id:1002).save
+  TRANSACTION (0.4ms)  BEGIN
+  Project Create (0.8ms)  INSERT INTO "projects" ("project_name", "project_id", "created_at", "updated_at") VALUES ($1, $2, $3,
+], ["updated_at", "2021-11-13 06:52:36.323712"]]
+  TRANSACTION (24.7ms)  COMMIT
+ => true 
+3.0.2 :076 > p = Project.new(project_name:"Android",project_id:1003).save
+  TRANSACTION (0.6ms)  BEGIN
+  Project Create (1.8ms)  INSERT INTO "projects" ("project_name", "project_id", "created_at", "updated_at") VALUES ($1, $2, $3,
+ted_at", "2021-11-13 06:52:49.323034"]]
+  TRANSACTION (23.7ms)  COMMIT
+ => true 
+3.0.2 :077 > p = Project.new(project_name:"fund analysis",project_id:1004).save
+  TRANSACTION (0.4ms)  BEGIN
+  Project Create (0.6ms)  INSERT INTO "projects" ("project_name", "project_id", "created_at", "updated_at") VALUES ($1, $2, $3,
+["updated_at", "2021-11-13 06:53:25.868439"]]
+  TRANSACTION (25.7ms)  COMMIT
+ => true 
+3.0.2 :078 > p = Project.new(project_name:"cloud service",project_id:1005).save
+  TRANSACTION (0.4ms)  BEGIN
+  Project Create (0.7ms)  INSERT INTO "projects" ("project_name", "project_id", "created_at", "updated_at") VALUES ($1, $2, $3,
+["updated_at", "2021-11-13 06:53:46.050150"]]
+  TRANSACTION (28.8ms)  COMMIT
+ => true 
+3.0.2 :079 > p = Project.new(project_name:"mutual funds analysis",project_id:1006).save
+  TRANSACTION (0.3ms)  BEGIN
+  Project Create (0.6ms)  INSERT INTO "projects" ("project_name", "project_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["project_name", "mutual funds analysis"], ["project_id", "1006"], ["created_at", "2021-11-13 06:54:31.153995"], ["updated_at", "2021-11-13 06:54:31.153995"]]
+  TRANSACTION (28.8ms)  COMMIT
+ => true 
+3.0.2 :080 > Project.all
+  Project Load (0.9ms)  SELECT "projects".* FROM "projects"
+ => 
+[#<Project:0x0000556962a5f048
+  id: 1,
+  project_name: "web development",
+  project_id: "1001",
+  created_at: Sat, 13 Nov 2021 06:52:20.592373000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:52:20.592373000 UTC +00:00>,
+ #<Project:0x0000556962a5eeb8
+  id: 2,
+  project_name: "Machine Learning",
+  project_id: "1002",
+  created_at: Sat, 13 Nov 2021 06:52:36.323712000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:52:36.323712000 UTC +00:00>,
+ #<Project:0x0000556962a5ed78
+  id: 3,
+  project_name: "Android",
+  project_id: "1003",
+  created_at: Sat, 13 Nov 2021 06:52:49.323034000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:52:49.323034000 UTC +00:00>,
+ #<Project:0x0000556962a5ea80
+  id: 4,
+  project_id: "1004",
+  created_at: Sat, 13 Nov 2021 06:53:25.868439000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:53:25.868439000 UTC +00:00>,
+ #<Project:0x0000556962a5e918
+  id: 6,
+  project_id: "1006",
+  created_at: Sat, 13 Nov 2021 06:54:31.153995000 UTC +00:00,
+3.0.2 :081 > 
+3.0.2 :084 > 
+3.0.2 :085 > 
+3.0.2 :086 > p = Project_assigned.new(eid:1,project_id:1001).save
+3.0.2 :087 > reload!
+Reloading...
+3.0.2 :088 > p = Project_assigned.new(eid:1,project_id:1001).save
+Did you mean?  ProjectAssigned
+3.0.2 :089 > p = ProjectAssigned.new(eid:1,project_id:1001).save
+t_assigneds" does not exist (ActiveRecord::StatementInvalid)
+LINE 8:  WHERE a.attrelid = '"project_assigneds"'::regclass
+                            ^
+t exist (PG::UndefinedTable)
+LINE 8:  WHERE a.attrelid = '"project_assigneds"'::regclass
+3.0.2 :090 > p = ProjectAssigned.new(eid:1,project_id:1001).save
+t_assigneds" does not exist (ActiveRecord::StatementInvalid)
+LINE 8:  WHERE a.attrelid = '"project_assigneds"'::regclass
+                            ^
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/rack-mini-profiler-2.3.3/lib/patches/db/pg.rb:110:in `exec': ERROR:  relation "project_assigneds" does not exist (PG::UndefinedTable)
+LINE 8:  WHERE a.attrelid = '"project_assigneds"'::regclass
+                            ^
+3.0.2 :091 > p = ProjectAssigned.new(eid:1,project_id:1001).save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/rack-mini-profiler-2.3.3/lib/patches/db/pg.rb:110:in `exec': PG::UndefinedTable: ERROR:  relation "project_assigneds" does not exist (ActiveRecord::StatementInvalid)
+LINE 8:  WHERE a.attrelid = '"project_assigneds"'::regclass
+                            ^
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/rack-mini-profiler-2.3.3/lib/patches/db/pg.rb:110:in `exec': ERROR:  relation "project_assigneds" does not exist (PG::UndefinedTable)
+LINE 8:  WHERE a.attrelid = '"project_assigneds"'::regclass
+                            ^
+3.0.2 :092 > reload
+(irb):92:in `<main>': undefined local variable or method `reload' for main:Object (NameError)
+Did you mean?  reload!
+               load
+3.0.2 :093 > reload!
+Reloading...
+ => true 
+3.0.2 :094 > ProjectAssigned.all
+  ProjectAssigned Load (0.8ms)  SELECT "project_assigneds".* FROM "project_assigneds"
+(Object doesn't support #inspect)
+ =>  
+3.0.2 :095 > reload
+(irb):95:in `<main>': undefined local variable or method `reload' for main:Object (NameError)
+Did you mean?  reload!
+               load
+3.0.2 :096 > reload!
+Reloading...
+ => true 
+3.0.2 :097 >  ProjectAssigned
+ => ProjectAssigned(Table doesn't exist) 
+3.0.2 :098 > ProjectAssigneds.all
+(irb):98:in `<main>': uninitialized constant ProjectAssigneds (NameError)
+3.0.2 :099 > 
+
 
