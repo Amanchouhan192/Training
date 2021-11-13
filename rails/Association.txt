@@ -95,5 +95,360 @@ end
 3.2 Avoiding Name Collisions
 
 You are not free to use just any name for your associations. Because creating an association adds a method with that name to the model, it is a bad idea to give an association a name that is already used for an instance method of ActiveRecord::Base. The association method would override the base method and break things. For instance, attributes or connection are bad names for associations.
+--------------------------------------------13th Nov-----------------------------------------------------------------
+3.0.2 :099 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich")
+(irb):99:in `<main>': uninitialized constant Post (NameError)
+3.0.2 :100 > reload!
+Reloading...
+ => true 
+3.0.2 :101 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich")
+ => 
+#<Post:0x0000556961d78690
+... 
+ => 
+ id: nil,
+ content: "get rich",
+ author_id: nil,
+ category_id: nil,
+ created_at: nil,
+ updated_at: nil> 
+ => #<Authorr:0x0000556962df7020 id: nil, name: "Aryan", created_at: nil, updated_at: nil> 
+ => #<Authorr:0x0000556962df7020 id: nil, name: "Aryan", created_at: nil, updated_at: nil> 
+3.0.2 :105 > p.authorr
+ined method `authorr' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil, created_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  authorrs
+               authorrs=
+3.0.2 :106 > p.authorrs
+3.0.2 :107 > p.authorrs = a
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/inheritance.rb:237:in `compute_type': uninitialized constant Post::Authorrs (NameError)
+3.0.2 :108 > p.authorr
+ined method `authorr' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil,
+Did you mean?  authorrs
+3.0.2 :109 > p.author
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `author' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil, created_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  authorrs
+3.0.2 :110 > p.authorrs
+ => nil 
+3.0.2 :111 > a
+ => #<Authorr:0x0000556962df7020 id: nil, name: "Aryan", created_at: nil, updated_at: nil> 
+ => 
+#<Post:0x0000556961d78690
+ title: "Buy Gamestop Stocks",
+ author_id: nil,
+ created_at: nil,
+ updated_at: nil> 
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/inheritance.rb:237:in `compute_type': uninitializ
+3.0.2 :114 > a
+3.0.2 :115 > Authorrs.all
+3.0.2 :116 > Authorr.all
+  Authorr Load (1.1ms)  SELECT "authorrs".* FROM "authorrs"
+ => [] 
+3.0.2 :117 > a
+ => #<Authorr:0x0000556962df7020 id: nil, name: "Aryan", created_at: nil, updated_at: nil> 
+3.0.2 :118 > a = Authorr.new(name:"Aryan")
+ => #<Authorr:0x0000556962f05138 id: nil, name: "Aryan", created_at: nil, updated_at: nil> 
+3.0.2 :119 > a
+ => #<Authorr:0x0000556962f05138 id: nil, name: "Aryan", created_at: nil, updated_at: nil> 
+ => 
+#<Post:0x0000556961d78690
+ id: nil,
+ title: "Buy Gamestop Stocks",
+ content: "get rich",
+ category_id: nil,
+ updated_at: nil> 
+3.0.2 :121 > p.authorr
+ined method `authorr' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil,
+Did you mean?  authorrs
+3.0.2 :122 > p.authorrs
+ => nil 
+3.0.2 :123 > p.authorrs= a
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/inheritance.rb:237:in `compute_type': uninitialized constant Post::Authorrs (NameError)
+3.0.2 :124 > Authorrs
+(irb):124:in `<main>': uninitialized constant Authorrs (NameError)
+3.0.2 :125 > Authorr
+ => Authorr(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+ => 
+#<Post:0x0000556961d78690
+ id: nil,
+ title: "Buy Gamestop Stocks",
+ content: "get rich",
+ category_id: nil,
+ created_at: nil,
+ updated_at: nil> 
+3.0.2 :127 > p.Authorr
+ined method `Authorr' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil,
+Did you mean?  authorrs
+3.0.2 :128 > p.Authorrs
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undef
+, created_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  authorrs=
+3.0.2 :129 > p.authorrs
+3.0.2 :130 > a
+ => #<Authorr:0x0000556962f05138 id: nil, name: "Aryan", created_at: nil, updated_at: nil> 
+3.0.2 :131 > p.authorrs = a
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/inheritance.rb:237:in `compute_type': uninitializ
+3.0.2 :132 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich")
+ => 
+#<Post:0x0000556962b7fd88
+3.0.2 :133 > p.author
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `author' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil, created_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  authorrs
+ => 
+#<Post:0x0000556962ebf2a0
+... 
+3.0.2 :135 > p.authors
+ined method `authors' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil, created_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  authorrs
+               authorrs=
+3.0.2 :136 > p.author
+ined method `author' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil, created_at: nil, updated_at: nil> (NoMethodError)
+3.0.2 :137 > p.author = a
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `author=' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil, created_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  authorrs=
+               authorrs
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/inheritance.rb:237:in `compute_type': uninitializ
+3.0.2 :139 > p.Authorrs = a
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `Authorrs=' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil, created_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  authorrs
+               author_id=
+               author_id
+3.0.2 :140 > p.author_id = a
+ => #<Authorr:0x0000556962f05138 id: nil, name: "Aryan", created_at: nil, updated_at: nil> 
+ => 
+ id: nil,
+ content: "get rich",
+ author_id: nil,
+ created_at: nil,
+ updated_at: nil> 
+3.0.2 :142 > Authorrs
+(irb):142:in `<main>': uninitialized constant Authorrs (NameError)
+3.0.2 :143 > Authorr
+ => Authorr(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :144 > Authorr.all
+  Authorr Load (0.7ms)  SELECT "authorrs".* FROM "authorrs"
+ => [] 
+ => 
+ id: nil,
+ title: "Buy Gamestop Stocks",
+ content: "get rich",
+ category_id: nil,
+ updated_at: nil> 
+3.0.2 :146 > p.save
+ => false 
+3.0.2 :147 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich")
+ => 
+#<Post:0x0000556962adf720
+... 
+3.0.2 :148 > p.save
+ => false 
+ => 
+#<Post:0x0000556962adf720
+ title: "Buy Gamestop Stocks",
+ content: "get rich",
+ author_id: nil,
+ created_at: nil,
+ updated_at: nil> 
+3.0.2 :150 > Post.all
+  Post Load (0.8ms)  SELECT "posts".* FROM "posts"
+ => [] 
+3.0.2 :151 > p.first
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `first' for #<Post id: nil, title: "Buy Gamestop Stocks", content: "get rich", author_id: nil, category_id: nil, created_at: nil, updated_at: nil> (NoMethodError)
+ => 
+ id: nil,
+ content: "get rich",
+ author_id: nil,
+ created_at: nil,
+3.0.2 :153 > Posts.all
+3.0.2 :154 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich").save
+3.0.2 :155 > reload!
+ => true 
+ => false 
+3.0.2 :157 > p.empty?
+3.0.2 :158 > p.class
+3.0.2 :159 > p = Post.create(title:"Buy Gamestop Stocks" ,content:"get rich").save
+3.0.2 :160 > p = Post.create(title:"Buy Gamestop Stocks" ,content:"get rich").save
+3.0.2 :161 > reload!
+ => true 
+3.0.2 :162 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich").save
+3.0.2 :163 > p = Posts.new(title:"Buy Gamestop Stocks" ,content:"get rich").save
+3.0.2 :164 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich").save
+ => false 
+3.0.2 :165 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich").save
+3.0.2 :166 > reload!
+Reloading...
+ => true 
+3.0.2 :167 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich").save
+ => false 
+3.0.2 :168 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich")
+ => 
+#<Post:0x0000556962f7c940
+... 
+ => 
+ id: nil,
+ content: "get rich",
+ category_id: nil,
+ updated_at: nil> 
+3.0.2 :170 > a = Author.new(name:"Aryan")
+ => #<Author:0x00005569621ddb68 id: nil, created_at: nil, updated_at: nil, name: "Aryan"> 
+3.0.2 :171 > p.author
+ => nil 
+ => #<Author:0x00005569621ddb68 id: nil, created_at: nil, updated_at: nil, name: "Aryan"> 
+ => false 
+3.0.2 :174 > a.save
+  TRANSACTION (0.5ms)  BEGIN
+  Author Create (41.1ms)  INSERT INTO "authors" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2021-11-13 10:49:58.186050"], ["updated_at", "2021-11-13 10:49:58.186050"], ["name", "Aryan"]]
+  TRANSACTION (24.6ms)  COMMIT
+ => true 
+3.0.2 :175 > p.save
+ => false 
+ => 
+#<Post:0x0000556962f7c940
+ id: nil,
+ content: "get rich",
+ category_id: nil,
+ created_at: nil,
+ updated_at: nil> 
+3.0.2 :177 > p.author = a
+ => 
+#<Author:0x00005569621ddb68
+3.0.2 :178 > p.save
+ => false 
+3.0.2 :179 > a
+#<Author:0x00005569621ddb68
+ id: 1,
+ created_at: Sat, 13 Nov 2021 10:49:58.186050000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 10:49:58.186050000 UTC +00:00,
+ name: "Aryan"> 
+3.0.2 :180 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich")
+ => 
+#<Post:0x00005569601a2a60
+... 
+ => 
+ id: nil,
+ title: "Buy Gamestop Stocks",
+ author_id: nil,
+ category_id: nil,
+ created_at: nil,
+3.0.2 :182 > p.save
+3.0.2 :183 > Post
+datetime) 
+3.0.2 :184 > w = Post.new(title:"Buy Game Stocks",content:"get rich")
+ => 
+... 
+ => false 
+3.0.2 :186 > w = Posts.new(title:"Buy Game Stocks",content:"get rich")
+(irb):186:in `<main>': uninitialized constant Posts (NameError)
+3.0.2 :187 > w = Post.new(title:"Buy Game Stocks",content:"get rich")
+ => 
+... 
+3.0.2 :188 > w = Post.new(title:"Buy Game Stocks",content:"get rich").save
+3.0.2 :189 > w = Post.new(title:"Buy Game Stocks",content:"get rich").save?
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undef
+ed_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  save
+3.0.2 :190 > w = Post.new(title:"Buy Game Stocks",content:"get rich").save!
+alidation failed: Author must exist, Category must exist (ActiveRecord::RecordInvalid)
+3.0.2 :191 > w = Post.new(title:'Buy Game Stocks',content:'get rich').save!
+alidation failed: Author must exist, Category must exist (ActiveRecord::RecordInvalid)
+ => false 
+3.0.2 :193 > w = Post.new(title:'Buy Game Stocks',content:'get rich').save
+3.0.2 :194 > w = Post.new(title:"Buy Game Stocks",content:"get rich").save!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: Author must exist, Category must exist (ActiveRecord::RecordInvalid)
+ => false 
+3.0.2 :196 > reload!
+Reloading...
+ => true 
+3.0.2 :197 > p = Post.new(title:"Buy Gamestop Stocks" ,content:"get rich")
+ => 
+... 
+  TRANSACTION (0.3ms)  BEGIN
+  Post Create (21.2ms)  INSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Buy Gamestop Stocks"], ["content", "get rich"], ["created_at", "2021-11-13 11:07:43.627284"], ["updated_at", "2021-11-13 11:07:43.627284"]]
+ => true 
+3.0.2 :199 > p.author
+ => nil 
+3.0.2 :200 > p.author = a
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/associations/association.rb:283:in `raise_on_typ
+21-11-13 10:49:58.186050000 +0000", name: "Aryan"> which is an instance of Author(#14800) (ActiveRecord::AssociationTypeMismatch)
+3.0.2 :201 > a = Author.new(name:"Aryan").save
+  Author Create (1.0ms)  INSERT INTO "authors" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2021-11-13 11:08:30.114637"], ["updated_at", "2021-11-13 11:08:30.114637"], ["name", "Aryan"]]
+ => true 
+3.0.2 :202 > p.author = a
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/associations/association.rb:283:in `raise_on_type_mismatch!': Author(#15600) expected, got true which is an instance of TrueClass(#2980) (ActiveRecord::AssociationTypeMismat
+3.0.2 :203 > p2 = Post.create(title:"Hedgefunds going crazy")
+  TRANSACTION (0.4ms)  BEGIN
+  Post Create (0.7ms)  INSERT INTO "posts" ("title", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["title
+  TRANSACTION (27.8ms)  COMMIT
+ => 
+#<Post:0x0000556962c96190
+... 
+3.0.2 :204 > p2.build_author(name:"Amanda")
+ => #<Author:0x000055696219ea80 id: nil, created_at: nil, updated_at: nil, name: "Amanda"> 
+3.0.2 :205 > p2.save
+  TRANSACTION (0.3ms)  BEGIN
+  Author Create (0.6ms)  INSERT INTO "authors" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"  [["cr
+  Post Update (0.5ms)  UPDATE "posts" SET "author_id" = $1, "updated_at" = $2 WHERE "posts"."id" = $3  [["author_id", 3], ["updated_at", "2021-11-13 11:18:31.209328"], ["id", 2]]
+  TRANSACTION (23.6ms)  COMMIT
+ => true 
+3.0.2 :206 > p2
+ => 
+ id: 2,
+ title: "Hedgefunds going crazy",
+ content: nil,
+ author_id: 3,
+ category_id: nil,
+ created_at: Sat, 13 Nov 2021 11:13:36.465025000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 11:18:31.209328000 UTC +00:00> 
+3.0.2 :207 > p2.author
+ => 
+ id: 3,
+ updated_at: Sat, 13 Nov 2021 11:18:31.206647000 UTC +00:00,
+ name: "Amanda"> 
+3.0.2 :208 > p2
+ => 
+#<Post:0x0000556962c96190
+ id: 2,
+ title: "Hedgefunds going crazy",
+ content: nil,
+ author_id: 3,
+ category_id: nil,
+ created_at: Sat, 13 Nov 2021 11:13:36.465025000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 11:18:31.209328000 UTC +00:00> 
+3.0.2 :209 > p2.author.name
+ => "Amanda" 
+3.0.2 :210 > p2
+ => 
+#<Post:0x0000556962c96190
+ id: 2,
+ title: "Hedgefunds going crazy",
+ content: nil,
+ author_id: 3,
+ category_id: nil,
+ created_at: Sat, 13 Nov 2021 11:13:36.465025000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 11:18:31.209328000 UTC +00:00> 
+3.0.2 :211 > p2 = Post.create(title:"Hedgefunds going crazy")
+
+Tables:
+
+
+
+simple_cms_development=# select * from posts;
+ id |         title          | content  | author_id | category_id |         created_at         |         updated_at         
+----+------------------------+----------+-----------+-------------+----------------------------+----------------------------
+  1 | Buy Gamestop Stocks    | get rich |           |             | 2021-11-13 11:07:43.627284 | 2021-11-13 11:07:43.627284
+  2 | Hedgefunds going crazy |          |         3 |             | 2021-11-13 11:13:36.465025 | 2021-11-13 11:18:31.209328
+(2 rows)
+
+simple_cms_development=# select * from author;
+ERROR:  relation "author" does not exist
+LINE 1: select * from author;
+                      ^
+simple_cms_development=# select * from authors;
+ id |         created_at         |         updated_at         |  name  
+----+----------------------------+----------------------------+--------
+  1 | 2021-11-13 10:49:58.18605  | 2021-11-13 10:49:58.18605  | Aryan
+  2 | 2021-11-13 11:08:30.114637 | 2021-11-13 11:08:30.114637 | Aryan
+  3 | 2021-11-13 11:18:31.206647 | 2021-11-13 11:18:31.206647 | Amanda
+(3 rows)
+
 
 
