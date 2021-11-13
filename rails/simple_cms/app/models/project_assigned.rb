@@ -1,0 +1,2 @@
+class ProjectAssigned < ApplicationRecord
+end
