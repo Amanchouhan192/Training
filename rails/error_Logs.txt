@@ -94,5 +94,33 @@ see below :
 
 3.0.2 :106 > user
  => nil 
+-----------------------------------------------13th Nov-------------------------------------------------------------------
+5.Raising Validation error:
 
+Error Explanation:
+
+p= Post.new(title:"Buy Game Stocks",content:"get rich").save!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: Author must exist, Category must exist (ActiveRecord::RecordInvalid)
+ => false 
+ 
+ solution : 
+ class Post < ApplicationRecord
+    #belongs to both author and Categories.
+    belongs_to:author ,optional: true
+
+    #post.authorr // read the author that post belongs to
+    #post.authorr // set the author that post belongs to
+    belongs_to:category,optional: true
+
+
+I found out a solution to the problem "Validation failed: Class must exist" and it's better than use:
+
+belongs_to :city, optional: true
+
+    4.1.2.11 :optional
+
+    If you set the :optional option to true, then the presence of the associated object won't be validated. By default, this option is set to false.
+
+
+ 
 
