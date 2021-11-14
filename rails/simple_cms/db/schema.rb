@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_13_102050) do
+ActiveRecord::Schema.define(version: 2021_11_14_155530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,10 +54,36 @@ ActiveRecord::Schema.define(version: 2021_11_13_102050) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "dept_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "developer1s", force: :cascade do |t|
+    t.integer "dev_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "team1_id"
+    t.index ["team1_id"], name: "index_developer1s_on_team1_id"
+  end
+
+  create_table "developer2s", force: :cascade do |t|
+    t.integer "dev_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "team_id"
+    t.bigint "team2_id"
+    t.index ["team2_id"], name: "index_developer2s_on_team2_id"
+    t.index ["team_id"], name: "index_developer2s_on_team_id"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -70,6 +96,8 @@ ActiveRecord::Schema.define(version: 2021_11_13_102050) do
     t.string "email"
     t.string "salary"
     t.string "gender"
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_employees_on_department_id"
   end
 
   create_table "people", force: :cascade do |t|
@@ -110,6 +138,15 @@ ActiveRecord::Schema.define(version: 2021_11_13_102050) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "software_engineers", force: :cascade do |t|
+    t.integer "dev_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "team_id"
+    t.index ["team_id"], name: "index_software_engineers_on_team_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "lname"
     t.string "fname"
@@ -117,6 +154,35 @@ ActiveRecord::Schema.define(version: 2021_11_13_102050) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "gender"
     t.string "email"
+  end
+
+  create_table "team1s", force: :cascade do |t|
+    t.integer "team_id"
+    t.string "team_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "team2s", force: :cascade do |t|
+    t.integer "team_id"
+    t.string "team_namer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.integer "team_id"
+    t.string "team_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.text "discription"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "client_id"
+    t.index ["client_id"], name: "index_tickets_on_client_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -128,4 +194,10 @@ ActiveRecord::Schema.define(version: 2021_11_13_102050) do
     t.string "gender"
   end
 
+  add_foreign_key "developer1s", "team1s"
+  add_foreign_key "developer2s", "team2s"
+  add_foreign_key "developer2s", "teams"
+  add_foreign_key "employees", "departments"
+  add_foreign_key "software_engineers", "teams"
+  add_foreign_key "tickets", "clients"
 end
