@@ -450,5 +450,229 @@ simple_cms_development=# select * from authors;
   3 | 2021-11-13 11:18:31.206647 | 2021-11-13 11:18:31.206647 | Amanda
 (3 rows)
 
+=============================================15th Nov=======================================================
+Belongs_to Association:
 
+Software Engineer Table : reference with team(team is a child of software Engineer Table)
+
+simple_cms_development=# \d software_engineers;
+                                          Table "public.software_engineers"
+   Column   |              Type              | Collation | Nullable |                    Default                     
+------------+--------------------------------+-----------+----------+------------------------------------------------
+ id         | bigint                         |           | not null | nextval('software_engineers_id_seq'::regclass)
+ dev_id     | integer                        |           |          | 
+ name       | character varying              |           |          | 
+ created_at | timestamp(6) without time zone |           | not null | 
+ updated_at | timestamp(6) without time zone |           | not null | 
+ team_id    | bigint                         |           |          | 
+Indexes:
+    "software_engineers_pkey" PRIMARY KEY, btree (id)
+    "index_software_engineers_on_team_id" btree (team_id)
+Foreign-key constraints:
+    "fk_rails_0af46f6e85" FOREIGN KEY (team_id) REFERENCES teams(id)
+
+simple_cms_development=# select * from software_engineers;
+ id | dev_id | name | created_at | updated_at | team_id 
+----+--------+------+------------+------------+---------
+(0 rows)
+
+simple_cms_development=# \d teams;
+                                          Table "public.teams"
+   Column   |              Type              | Collation | Nullable |              Default              
+------------+--------------------------------+-----------+----------+-----------------------------------
+ id         | bigint                         |           | not null | nextval('teams_id_seq'::regclass)
+ team_id    | integer                        |           |          | 
+ team_name  | character varying              |           |          | 
+ created_at | timestamp(6) without time zone |           | not null | 
+ updated_at | timestamp(6) without time zone |           | not null | 
+Indexes:
+    "teams_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "software_engineers" CONSTRAINT "fk_rails_0af46f6e85" FOREIGN KEY (team_id) REFERENCES teams(id)
+
+Reails code Migration and Models:
+
+Migration of  Team:
+
+class CreateTeams < ActiveRecord::Migration[6.1]
+  def change
+    create_table :teams do |t|
+      t.integer  :team_id
+      t.string   :team_name
+
+      t.timestamps
+    end
+  end
+end
+
+Migration of Software Engineer:
+
+class CreateSoftwareEngineers < ActiveRecord::Migration[6.1]
+  def change
+    create_table :software_engineers do |t|
+      t.integer :dev_id
+      t.string  :name
+      t.timestamps
+    end
+  end
+end
+
+Reference Migration for creation of foreign key with team and Software engineer one_to_one relation:
+
+class AddTeamRefToSoftwareEngr < ActiveRecord::Migration[6.1]
+  def change
+    add_reference :software_engineers,:team,foreign_key:true    // team is a singular type reference key
+  end
+end
+
+================================Has_one==============================================================
+Has_one Association tables:
+
+client:
+
+simple_cms_development=# select * from clients;
+ id |  name  |         created_at         |         updated_at         
+----+--------+----------------------------+----------------------------
+  1 | Peter  | 2021-11-14 13:33:50.290262 | 2021-11-14 13:33:50.290262
+  2 | Jones  | 2021-11-14 13:52:49.138209 | 2021-11-14 13:52:49.138209
+  3 | Khaby  | 2021-11-14 13:56:52.595753 | 2021-11-14 13:56:52.595753
+  4 | Shelly | 2021-11-14 14:09:39.844424 | 2021-11-14 14:09:39.844424
+  5 | Neha   | 2021-11-14 14:14:12.354064 | 2021-11-14 14:14:12.354064
+(5 rows)
+
+simple_cms_development=# \d clients;
+                                          Table "public.clients"
+   Column   |              Type              | Collation | Nullable |               Default               
+------------+--------------------------------+-----------+----------+-------------------------------------
+ id         | bigint                         |           | not null | nextval('clients_id_seq'::regclass)
+ name       | character varying              |           |          | 
+ created_at | timestamp(6) without time zone |           | not null | 
+ updated_at | timestamp(6) without time zone |           | not null | 
+Indexes:
+    "clients_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "tickets" CONSTRAINT "fk_rails_e079795272" FOREIGN KEY (client_id) REFERENCES clients(id)
+
+Has_one Association tables:
+
+Tickets:
+
+simple_cms_development=# select * from tickets;
+ id |      discription      |         created_at         |         updated_at         | client_id 
+----+-----------------------+----------------------------+----------------------------+-----------
+  1 | I technical Issue     | 2021-11-14 13:36:16.743753 | 2021-11-14 13:36:16.743753 |         1
+  2 | Issue in UI           | 2021-11-14 13:53:59.500658 | 2021-11-14 13:53:59.500658 |         2
+  3 | Button is not working | 2021-11-14 13:58:28.862099 | 2021-11-14 13:58:28.862099 |         3
+  4 | Bug Report In rails   | 2021-11-14 14:11:55.277198 | 2021-11-14 14:11:55.277198 |         4
+  5 | Issue in backend      | 2021-11-14 14:18:41.031802 | 2021-11-14 14:18:41.031802 |         5
+(5 rows)
+
+simple_cms_development=# \d tickets;
+                                          Table "public.tickets"
+   Column    |              Type              | Collation | Nullable |               Default               
+-------------+--------------------------------+-----------+----------+-------------------------------------
+ id          | bigint                         |           | not null | nextval('tickets_id_seq'::regclass)
+ discription | text                           |           |          | 
+ created_at  | timestamp(6) without time zone |           | not null | 
+ updated_at  | timestamp(6) without time zone |           | not null | 
+ client_id   | bigint                         |           |          | 
+Indexes:
+    "tickets_pkey" PRIMARY KEY, btree (id)
+    "index_tickets_on_client_id" btree (client_id)
+Foreign-key constraints:
+    "fk_rails_e079795272" FOREIGN KEY (client_id) REFERENCES clients(id)
+
+
+Migration :
+
+class AddTicketRefToClient < ActiveRecord::Migration[6.1]
+  def change
+    add_reference :tickets,:client,foreign_key:true
+  end
+end
+
+
+Models:
+
+class Client < ApplicationRecord
+    has_one :client
+end
+
+class Ticket < ApplicationRecord
+end
+
+
+Migration:
+
+class CreateTickets < ActiveRecord::Migration[6.1]
+  def change
+    create_table :tickets do |t|
+       t.text :discription
+
+      t.timestamps
+    end
+  end
+end
+
+
+class CreateClients < ActiveRecord::Migration[6.1]
+  def change
+    create_table :clients do |t|
+      t.string :name
+
+      t.timestamps
+    end
+  end
+end
+
+=====================================Has_many Association==================================
+Tables :
+
+Employee:
+
+id |   dept   |  fname  |         created_at         |         updated_at         |  lname  | date_of_birth |       email       | salary | gender | department_id 
+----+----------+---------+----------------------------+----------------------------+---------+---------------+-------------------+--------+--------+---------------
+  1 | IT       | Aman    | 2021-11-13 05:43:26.419445 | 2021-11-14 18:02:09.526065 | Chouhan | 1997-12-28    | aman@gmail.com    | 30000  | Male   |             1
+  2 | IT       | Akansha | 2021-11-13 05:47:12.686036 | 2021-11-14 18:02:59.658542 | Sharma  | 1998-11-28    | akansha@gmail.com | 30000  | Female |             1
+  4 | SALES    | Kiran   | 2021-11-13 05:50:00.223418 | 2021-11-14 18:04:41.568561 | Sharma  | 1998-09-24    | kiran@gmail.com   | 30000  | Female |             3
+  5 | SALES    | Pawan   | 2021-11-13 06:07:14.962867 | 2021-11-14 18:05:56.560861 | Khanna  | 1994-06-20    | pawan@gmail.com   | 35000  | Male   |             3
+  6 | ACCOUNTS | Krishna | 2021-11-13 06:10:09.292505 | 2021-11-14 18:07:20.400491 | Yadav   | 1995-08-24    | krishna@gmail.com | 35000  | Male   |             2
+  7 | RESEARCH | Brijesh | 2021-11-13 06:11:34.784036 | 2021-11-14 18:08:02.227693 | Yadav   | 1992-03-21    | brij@gmail.com    | 25000  | Male   |             4
+  8 | ACCOUNTS | Prithvi | 2021-11-13 06:15:06.522628 | 2021-11-14 18:09:07.796054 | Singh   | 1990-03-21    | prithvi@gmail.com | 40000  | Male   |             2
+  9 | HR       | Kunal   | 2021-11-13 06:16:31.518224 | 2021-11-14 18:10:17.063172 | Sharma  | 1990-01-22    | kunal@gmail.com   | 50000  | Male   |             5
+ 10 | SALES    | Bhavya  | 2021-11-13 06:17:54.954527 | 2021-11-14 18:11:49.894553 | Sharma  | 1998-01-22    | bsharma@gmail.com | 25000  | Female |             3
+  3 | IT       | Neha    | 2021-11-13 05:48:52.727475 | 2021-11-14 18:13:06.731187 | Nagar   | 1997-12-28    | neha@gmail.com    | 25000  | Female |             1
+(10 rows)
+
+Department:
+
+ id | dept_name |         created_at         |         updated_at         
+----+-----------+----------------------------+----------------------------
+  1 | IT        | 2021-11-13 06:37:07.859094 | 2021-11-13 06:37:07.859094
+  2 | ACCOUNTS  | 2021-11-13 06:38:03.846906 | 2021-11-13 06:38:03.846906
+  3 | SALES     | 2021-11-13 06:38:18.153407 | 2021-11-13 06:38:18.153407
+  4 | RESEARCH  | 2021-11-13 06:38:40.833696 | 2021-11-13 06:38:40.833696
+  5 | HR        | 2021-11-13 06:39:00.239417 | 2021-11-13 06:39:00.239417
+(5 rows)
+
+
+Migration:
+
+class AddDptmRefToEmployee < ActiveRecord::Migration[6.1]
+  def change
+    add_reference :employees, :department,foreign_key: true
+  end
+end
+
+
+Models and Their Migrations:=====================================================================
+
+class Department < ApplicationRecord
+    has_many :employees
+end
+
+
+class Employee < ApplicationRecord
+    belongs_to :department
+end
 
