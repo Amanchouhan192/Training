@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_155530) do
+ActiveRecord::Schema.define(version: 2021_11_14_200053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 2021_11_14_155530) do
     t.string "keeper"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "appointments", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "patient_id"
+    t.bigint "physician_id", null: false
+    t.index ["patient_id"], name: "index_appointments_on_patient_id"
+    t.index ["physician_id"], name: "index_appointments_on_physician_id"
   end
 
   create_table "authorrs", force: :cascade do |t|
@@ -100,10 +109,22 @@ ActiveRecord::Schema.define(version: 2021_11_14_155530) do
     t.index ["department_id"], name: "index_employees_on_department_id"
   end
 
+  create_table "patients", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "people", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "physicians", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -194,6 +215,8 @@ ActiveRecord::Schema.define(version: 2021_11_14_155530) do
     t.string "gender"
   end
 
+  add_foreign_key "appointments", "patients"
+  add_foreign_key "appointments", "physicians"
   add_foreign_key "developer1s", "team1s"
   add_foreign_key "developer2s", "team2s"
   add_foreign_key "developer2s", "teams"
