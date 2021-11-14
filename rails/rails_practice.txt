@@ -2949,4 +2949,1971 @@ Reloading...
  updated_at: Sat, 13 Nov 2021 11:18:31.209328000 UTC +00:00> 
 3.0.2 :211 > p2 = Post.create(title:"Hedgefunds going crazy")
 
+=========================================Belongs_To==========================================================
+3.0.2 :033 > Team.all
+ => [] 
+3.0.2 :034 > Software_engineer.all
+Did you mean?  SoftwareEngineer
+3.0.2 :035 > Software_Engineer.all
+Did you mean?  SoftwareEngineer
+3.0.2 :036 > Software_engineer.all
+Did you mean?  SoftwareEngineer
+3.0.2 :037 > software_engieer
+main:Object (NameError)
+3.0.2 :038 > software_engieers.all
+(irb):38:in `<main>': undefined local variable or method `software_engieers' for
+3.0.2 :039 > s = software_engieers.all
+(irb):39:in `<main>': undefined local variable or method `software_engieers' for main:Object (NameError)
+(irb):40:in `<main>': uninitialized constant SoftwareEngieers (NameError)
+3.0.2 :041 > SoftwareEngineer.all
+gineers"
+ => [] 
+3.0.2 :042 > team1 = Team.new
+ => 
+#<Team:0x000055fc6a1b66d0
+... 
+3.0.2 :043 > team1.team_name = "Blasters"
+3.0.2 :044 > team1.team_id=1
+ => 1 
+3.0.2 :045 > team1.save
+  TRANSACTION (0.5ms)  BEGIN
+  Team Create (1.0ms)  INSERT INTO "teams" ("team_id", "team_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["team_id", 1], ["team_name", "Blasters"], ["created_at", "2021-11-14 09:37:28.377393"], ["updated_at",
+ => true 
+#<Team:0x000055fc6a1b66d0
+ updated_at: Sun, 14 Nov 2021 09:37:28.377393000 UTC +00:00> 
+3.0.2 :047 > s1 = simple_cms_development=# \d teams;
+3.0.2 :048 >                                           Table "public.teams"
+(irb):48:in `<main>': undefined method `Table' for main:Object (NoMethodError)
+...                  |           | not null | nextval('teams_id...
+...                              ^
+3.0.2 :052 >  team_id    | integer                        |           |         
+ | 
+3.0.2 :053 >  team_name  | character varying              |           |         
+ | 
+3.0.2 :054 >  created_at | timestamp(6) without time zone |           | not null
+ | 
+3.0.2 :055 >  updated_at | timestamp(6) without time zone |           | not null
+ | 
+3.0.2 :056 > Indexes:
+/home/beryl/.rvm/rubies/ruby-3.0.2/lib/ruby/3.0.0/irb/workspace.rb:116:in `eval'
+...                  |           |          | 
+...                              ^
+(irb):53: syntax error, unexpected local variable or method, expecting `do' or '{' or '('
+    "teams_pkey" PRIMARY KEY, btree (id)
+3.0.2 :058 > Referenced by:
+3.0.2 :060 > 
+' (SyntaxError)
+..."software_engineers" CONSTRAINT "fk_rails_0af46f6e85" FOREIG...
+...                     ^~~~~~~~~~
+3.0.2 :061 > s1 = SoftwareEngineer.new
+ => 
+... 
+3.0.2 :062 > s1.name = "Jack"
+ => "Jack" 
+3.0.2 :063 > s1.team_id = 1
+3.0.2 :064 > s1.save
+  TRANSACTION (0.6ms)  BEGIN
+  Team Load (0.7ms)  SELECT "teams".* FROM "teams" WHERE "teams"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  SoftwareEngineer Create (1.8ms)  INSERT INTO "software_engineers" ("name", "created_at", "updated_at", "team_id") VALUES ($1, $2, $3, $4) RET
+  TRANSACTION (21.6ms)  COMMIT
+ => true 
+ => 
+#<Team:0x000055fc69f4eb68
+ id: 1,
+ team_id: 1,
+ team_name: "Blasters",
+ created_at: Sun, 14 Nov 2021 09:37:28.377393000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 09:37:28.377393000 UTC +00:00> 
+3.0.2 :066 > 
+3.0.2 :067 > 
+3.0.2 :068 > 
+3.0.2 :070 > Team.name
+ => "Team" 
+3.0.2 :071 > s1.name.dev_id
+(irb):71:in `<main>': undefined method `dev_id' for "Jack":String (NoMethodError)
+3.0.2 :072 > s1.name
+3.0.2 :073 > s1.team_id
+3.0.2 :074 > s1.team_name
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `team_name' for #<SoftwareEngineer id: 1, dev_id: nil, name: "Jack", created_at: "2021-11-14 09:39:49.737124000 +0000", updated_at: "2021-11-14 09:39:49.737124000 +0000", team_id: 1> (NoMethodError)
+Did you mean?  team_id_change
+3.0.2 :075 > s1
+#<SoftwareEngineer:0x000055fc68f0f9c8
+ id: 1,
+ dev_id: nil,
+ name: "Jack",
+ created_at: Sun, 14 Nov 2021 09:39:49.737124000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 09:39:49.737124000 UTC +00:00,
+ team_id: 1> 
+3.0.2 :076 > SoftwareEngineer.dev_if = 1
+if=' for SoftwareEngineer:Class (NoMethodError)
+  SoftwareEngineer Load (0.8ms)  SELECT "software_engineers".* FROM "software_engineers" WHERE "software_engineers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<SoftwareEngineer:0x000055fc69fdcdc8
+ id: 1,
+ dev_id: nil,
+ name: "Jack",
+ created_at: Sun, 14 Nov 2021 09:39:49.737124000 UTC +00:00,
+ team_id: 1> 
+  SoftwareEngineer Load (1.0ms)  SELECT "software_engineers".* FROM "software_engineers" WHERE "software_engineers"."id" = $1 LIMIT $2  [["id",
+ => 
+... 
+ => 101 
+  TRANSACTION (0.8ms)  BEGIN
+  Team Load (0.7ms)  SELECT "teams".* FROM "teams" WHERE "teams"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  SoftwareEngineer Update (0.8ms)  UPDATE "software_engineers" SET "dev_id" = $1, "updated_at" = $2 WHERE "software_engineers"."id" = $3  [["dev_id", 101], ["updated_at", "2021-11-14 09:47:29.807599"], ["id", 1]]
+ => true 
+ => 
+ id: 1,
+ name: "Jack",
+ created_at: Sun, 14 Nov 2021 09:39:49.737124000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 09:39:49.737124000 UTC +00:00,
+3.0.2 :082 > s1.dev_id
+ => nil 
+3.0.2 :083 > s
+#<SoftwareEngineer:0x000055fc6a347300
+ dev_id: 101,
+ created_at: Sun, 14 Nov 2021 09:39:49.737124000 UTC +00:00,
+ team_id: 1> 
+3.0.2 :084 > s.dev_id
+ => 101 
+3.0.2 :085 > s2 = SoftwareEngineer.new
+ => #<SoftwareEngineer:0x000055fc6a005e30 id: nil, dev_id: nil, name: nil, created_at: nil, updated_at: nil, team_id: nil> 
+ => "Harry" 
+ => 102 
+ => 2 
+3.0.2 :089 > s2.save
+  TRANSACTION (0.5ms)  BEGIN
+  TRANSACTION (0.6ms)  ROLLBACK
+3.0.2 :090 > s2
+3.0.2 :091 > s2.save
+3.0.2 :092 > s2.team_id = 2
+3.0.2 :093 > s2.team_name = "LionsRor"
+_name=' for #<SoftwareEngineer id: nil, dev_id: 102, name: "Harry", created_at: nil, updated_at: nil, team_id: 2> (NoMethodError)
+3.0.2 :094 > s2.team_name = "LionsRor"
+_name=' for #<SoftwareEngineer id: nil, dev_id: 102, name: "Harry", created_at: nil, updated_at: nil, team_id: 2> (NoMethodError)
+Did you mean?  team_id=
+3.0.2 :095 > t2 = Team.new
+3.0.2 :096 > t2.team_id = 2
+3.0.2 :097 > t2.team_name = "LionRors"
+3.0.2 :098 > t2.save
+  TRANSACTION (0.5ms)  BEGIN
+  Team Create (0.9ms)  INSERT INTO "teams" ("team_id", "team_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["team_id", 2], ["team_name", "LionRors"], ["created_at", "2021-11-14 09:51:29.772202"], ["updated_at", "2021-11-14 09:51:29.772202"]]
+  TRANSACTION (26.5ms)  COMMIT
+ => true 
+3.0.2 :099 > s2
+ => #<SoftwareEngineer:0x000055fc6a005e30 id: nil, dev_id: 102, name: "Harry", created_at: nil, updated_at: nil, team_id: 2> 
+3.0.2 :100 > s2.team_id = 2
+ => 2 
+3.0.2 :101 > s2.team_name = t2.team_name
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `team_name=' for #<SoftwareEngineer id: nil, dev_id: 102, name: "Harry", created_at: nil, updated_at: nil, team_id: 2> (NoMethodError)
+Did you mean?  team_id=
+3.0.2 :102 > s2
+ => #<SoftwareEngineer:0x000055fc6a005e30 id: nil, dev_id: 102, name: "Harry", created_at: nil, updated_at: nil, team_id: 2> 
+3.0.2 :103 > s2.team_id = nil
+ => nil 
+3.0.2 :104 > s2
+ => #<SoftwareEngineer:0x000055fc6a005e30 id: nil, dev_id: 102, name: "Harry", created_at: nil, updated_at: nil, team_id: nil> 
+3.0.2 :105 > s2.save
+ => false 
+3.0.2 :106 > s2.save.valid?
+(irb):106:in `<main>': undefined method `valid?' for false:FalseClass (NoMethodError)
+3.0.2 :107 > s2valid?
+(irb):107:in `<main>': undefined method `s2valid?' for main:Object (NoMethodError)
+3.0.2 :108 > s2.valid?
+ => false 
+3.0.2 :109 > s2.valid
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `valid' for #<SoftwareEngineer id: nil, dev_id: 102, name: "Harry", created_at: nil, updated_at: nil, team_id: nil> (NoMethodError)
+Did you mean?  valid?
+3.0.2 :110 > s2
+ => #<SoftwareEngineer:0x000055fc6a005e30 id: nil, dev_id: 102, name: "Harry", created_at: nil, updated_at: nil, team_id: nil> 
+3.0.2 :111 > s2.dev_id = 2
+ => 2 
+3.0.2 :112 > s2.save
+ => false 
+3.0.2 :113 > 
+
+=========================================has_one==========================================================
+Tables Client and Ticket:
+
+
+3.0.2 :542 > client1 = Client.new
+ => 
+#<Client:0x000055fc6a18dc30
+3.0.2 :543 > client1.name="Peter"
+ => "Peter" 
+3.0.2 :544 > client1.save
+  Client Create (1.1ms)  INSERT INTO "clients" ("name", "created_at", "updated_
+21-11-14 13:33:50.290262"], ["updated_at", "2021-11-14 13:33:50.290262"]]
+  TRANSACTION (29.8ms)  COMMIT
+3.0.2 :545 > ticket1 = Ticket.new
+#<Ticket:0x000055fc69d757d8
+... 
+3.0.2 :546 > ticket1.discription="I technical Issue"
+ => "I technical Issue" 
+3.0.2 :547 > Ticket
+ => Ticket(id: integer, discription: text, created_at: datetime, updated_at: datetime, client_id: integer) 
+ => 1 
+3.0.2 :549 > ticket1.save
+  TRANSACTION (0.4ms)  BEGIN
+  Ticket Create (1.3ms)  INSERT INTO "tickets" ("discription", "created_at", "updated_at", "client_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["discription", "I technical Issue"], ["created_at", "2021-11-14 13:36:16.743753"], ["updated_at", "2021-11-14 13:36:16.743753"], ["client_id", 1]]
+ => true 
+ => 
+#<Ticket:0x000055fc69d757d8
+ discription: "I technical Issue",
+ created_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+ client_id: 1> 
+ => "Peter" 
+3.0.2 :552 > client1.name.ticket
+(irb):552:in `<main>': undefined method `ticket' for "Peter":String (NoMethodError)
+3.0.2 :553 > client1.ticket
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `ticket' for #<Client id: 1, name: "Peter", created_at: "2021-11-14 13:33:50.290262000 +0000", updated_at: "2021-11-14 13:33:50.290262000 +0000"> (NoMethodError)
+3.0.2 :554 > client1
+ => 
+#<Client:0x000055fc6a18dc30
+ id: 1,
+ name: "Peter",
+ created_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00> 
+3.0.2 :555 > 
+3.0.2 :558 > client2.name="Jones"
+ => "Jones" 
+ => 
+ id: nil,
+ name: "Jones",
+ created_at: nil,
+ updated_at: nil> 
+ => 
+#<Client:0x000055fc6a18dc30
+ id: 1,
+ name: "Peter",
+ created_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00> 
+(irb):561:in `<main>': undefined local variable or method `ticket' for main:Object (NameError)
+Did you mean?  ticket1
+3.0.2 :562 > ticket1.discription
+ => "I technical Issue" 
+3.0.2 :563 > ticket2.discription
+Object (NameError)
+Did you mean?  ticket1
+3.0.2 :564 > client2.save
+ticket2.discription=
+ticket2.discription_before_last_save
+ticket2.discription_came_from_user?
+ticket2.discription_change
+ticket2.discription_change_to_be_saved
+ticket2.discription_changed?
+ticket2.discription_for_database
+ticket2.discription_in_database
+ticket2.discription_previous_change
+ticket2.discription_previously_was
+ticket2.discription_was
+ticket2.discription_will_change!
+ticket2.display
+ => "Issue in UI" 
+3.0.2 :568 > ticket2.client_id=2
+ => 2 
+3.0.2 :569 > ticket2.save
+  TRANSACTION (0.5ms)  BEGIN
+  Ticket Create (0.9ms)  INSERT INTO "tickets" ("discription", "created_at", 
+tion", "Issue in UI"], ["created_at", "2021-11-14 13:53:59.500658"], ["updated_at", "2021-11-14 13:53:59.500658"], ["client_id", 2]]
+  TRANSACTION (19.3ms)  COMMIT
+ => true 
+3.0.2 :570 > client2.ticket
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/at
+lient id: 2, name: "Jones", created_at: "2021-11-14 13:52:49.138209000 +0000", updated_at: "2021-11-14 13:52:49.138209000 +0000"> (NoMethodError)
+3.0.2 :571 > ticket2.client
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `client' for #<Ticket id: 2, discription: "Issue in UI", created_at: "2021-11-14 13:53:59.500658000 +0000", updated_at: "2021-11-14 13:53:59.500658000 +0000", client_id: 2> (NoMethodError)
+Did you mean?  client_id
+3.0.2 :572 > ticket2.client2
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `client2' for #<Ticket id: 2, discription: "Issue in UI", created_at: "2021-11-14 13:53:59.500658000 +0000", updated_at: "2021-11-14 13:53:59.500658000 +0000", client_id:
+Did you mean?  client_id
+3.0.2 :573 > Ticket.all
+  Ticket Load (1.1ms)  SELECT "tickets".* FROM "tickets"
+ => 
+[#<Ticket:0x000055fc6a06e6d8
+  id: 1,
+  discription: "I technical Issue",
+  created_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  client_id: 1>,
+ #<Ticket:0x000055fc6a06e598
+  id: 2,
+  updated_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  client_id: 2>] 
+3.0.2 :574 > Client.all
+  Client Load (1.0ms)  SELECT "clients".* FROM "clients"
+ => 
+[#<Client:0x000055fc6a23e1e8
+  id: 1,
+  name: "Peter",
+  created_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00>,
+ #<Client:0x000055fc6a23e0d0
+  id: 2,
+  name: "Jones",
+  created_at: Sun, 14 Nov 2021 13:52:49.138209000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:52:49.138209000 UTC +00:00>] 
+3.0.2 :575 > 
+3.0.2 :576 > 
+3.0.2 :577 > 
+
+-----------------entry in data base client and ticket data-----------------------------------------------------
+ => true 
+3.0.2 :542 > client1 = Client.new
+ => 
+#<Client:0x000055fc6a18dc30
+3.0.2 :543 > client1.name="Peter"
+ => "Peter" 
+3.0.2 :544 > client1.save
+21-11-14 13:33:50.290262"], ["updated_at", "2021-11-14 13:33:50.290262"]]
+  TRANSACTION (29.8ms)  COMMIT
+3.0.2 :545 > ticket1 = Ticket.new
+... 
+3.0.2 :546 > ticket1.discription="I technical Issue"
+ => "I technical Issue" 
+3.0.2 :547 > Ticket
+ => Ticket(id: integer, discription: text, created_at: datetime, updated_at: datetime, client_id: integer) 
+ => 1 
+3.0.2 :549 > ticket1.save
+  TRANSACTION (0.4ms)  BEGIN
+  Ticket Create (1.3ms)  INSERT INTO "tickets" ("discription", "created_at", "updated_at", "client_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["discription", "I technical Issue"], ["created_at", "2021-11-14 13:36:16.743753"], ["updated_at", "2021-11-14 13:36:16.743753"], ["client_id", 1]]
+ => true 
+ => 
+#<Ticket:0x000055fc69d757d8
+ discription: "I technical Issue",
+ created_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+ client_id: 1> 
+ => "Peter" 
+3.0.2 :552 > client1.name.ticket
+(irb):552:in `<main>': undefined method `ticket' for "Peter":String (NoMethodError)
+3.0.2 :553 > client1.ticket
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `ticket' for #<Cli
+pdated_at: "2021-11-14 13:33:50.290262000 +0000"> (NoMethodError)
+3.0.2 :554 > client1
+ => 
+ id: 1,
+ created_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00> 
+3.0.2 :555 > client1.ticket
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `ticket' for #<Client id: 1, name: "Peter", created_at: "2021-11-14 13:33:50.290262000 +0000", u
+3.0.2 :556 > ticket.discription
+(irb):556:in `<main>': undefined local variable or method `ticket' for main:Object (NameError)
+Did you mean?  ticket1
+3.0.2 :557 > client2 = Client.new
+ => 
+... 
+3.0.2 :558 > client2.name="Jones"
+ => "Jones" 
+ => 
+ id: nil,
+ name: "Jones",
+ created_at: nil,
+ updated_at: nil> 
+ => 
+#<Client:0x000055fc6a18dc30
+ id: 1,
+ name: "Peter",
+ created_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00> 
+(irb):561:in `<main>': undefined local variable or method `ticket' for main:Object (NameError)
+Did you mean?  ticket1
+3.0.2 :562 > ticket1.discription
+ => "I technical Issue" 
+3.0.2 :563 > ticket2.discription
+Object (NameError)
+Did you mean?  ticket1
+3.0.2 :564 > client2.save
+ticket2.discription=
+ticket2.discription_before_last_save
+ticket2.discription_came_from_user?
+ticket2.discription_change
+ticket2.discription_change_to_be_saved
+ticket2.discription_changed?
+ticket2.discription_for_database
+ticket2.discription_in_database
+ticket2.discription_previous_change
+ticket2.discription_previously_was
+ticket2.discription_was
+ticket2.discription_will_change!
+ticket2.display
+ => "Issue in UI" 
+3.0.2 :568 > ticket2.client_id=2
+ => 2 
+3.0.2 :569 > ticket2.save
+  TRANSACTION (0.5ms)  BEGIN
+  Ticket Create (0.9ms)  INSERT INTO "tickets" ("discription", "created_at", 
+tion", "Issue in UI"], ["created_at", "2021-11-14 13:53:59.500658"], ["updated_at", "2021-11-14 13:53:59.500658"], ["client_id", 2]]
+  TRANSACTION (19.3ms)  COMMIT
+ => true 
+3.0.2 :570 > client2.ticket
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/at
+lient id: 2, name: "Jones", created_at: "2021-11-14 13:52:49.138209000 +0000", updated_at: "2021-11-14 13:52:49.138209000 +0000"> (NoMethodError)
+3.0.2 :571 > ticket2.client
+00 +0000", client_id: 2> (NoMethodError)
+3.0.2 :572 > ticket2.client2
+nt2' for #<Ticket id: 2, discription: "Issue in UI", created_at: "2021-11-14 13:53:59.500658000 +0000", updated_at: "2021-11-14 13:53:59.500658
+Did you mean?  client_id
+3.0.2 :573 > Ticket.all
+  Ticket Load (1.1ms)  SELECT "tickets".* FROM "tickets"
+ => 
+[#<Ticket:0x000055fc6a06e6d8
+  discription: "I technical Issue",
+  created_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  client_id: 1>,
+ #<Ticket:0x000055fc6a06e598
+  id: 2,
+  updated_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  client_id: 2>] 
+3.0.2 :574 > Client.all
+  Client Load (1.0ms)  SELECT "clients".* FROM "clients"
+ => 
+[#<Client:0x000055fc6a23e1e8
+  id: 1,
+  name: "Peter",
+  created_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00>,
+ #<Client:0x000055fc6a23e0d0
+  name: "Jones",
+  created_at: Sun, 14 Nov 2021 13:52:49.138209000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:52:49.138209000 UTC +00:00>] 
+3.0.2 :575 > 
+3.0.2 :576 > 
+3.0.2 :577 > 
+3.0.2 :578 > client3=Client.new
+ => #<Client:0x000055fc6867a8a8 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :579 > client3.name="Khaby"
+ => "Khaby" 
+3.0.2 :580 > client3
+ => #<Client:0x000055fc6867a8a8 id: nil, name: "Khaby", created_at: nil, updated_at: nil> 
+3.0.2 :581 > client3.save
+  TRANSACTION (0.6ms)  BEGIN
+reated_at", "2021-11-14 13:56:52.595753"], ["updated_at", "2021-11-14 13:56:52.595753"]]
+ => true 
+  Client Load (0.8ms)  SELECT "clients".* FROM "clients"
+[#<Client:0x000055fc69e1c7e0
+  name: "Peter",
+  created_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00>,
+ #<Client:0x000055fc69e1c718
+  id: 2,
+  name: "Jones",
+  updated_at: Sun, 14 Nov 2021 13:52:49.138209000 UTC +00:00>,
+ #<Client:0x000055fc69e1c650
+  id: 3,
+  name: "Khaby",
+  created_at: Sun, 14 Nov 2021 13:56:52.595753000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:56:52.595753000 UTC +00:00>] 
+3.0.2 :583 > Ticket.all
+  Ticket Load (0.9ms)  SELECT "tickets".* FROM "tickets"
+ => 
+[#<Ticket:0x000055fc6a0653d0
+  id: 1,
+  discription: "I technical Issue",
+  created_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  client_id: 1>,
+ #<Ticket:0x000055fc6a0652e0
+  id: 2,
+  discription: "Issue in UI",
+  created_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+3.0.2 :584 > ticket3=Ticket.new
+ => #<Ticket:0x000055fc684ad318 id: nil, discription: nil, created_at: nil, updated_at: nil, client_id: nil> 
+3.0.2 :585 > ticket3.discription="Button is not working"
+3.0.2 :586 > ticket3.client_id=3
+ => 3 
+3.0.2 :587 > ticket3
+ => #<Ticket:0x000055fc684ad318 id: nil, discription: "Button is not working", created_at: nil, updated_at: nil, client_id: 3> 
+3.0.2 :588 > ticket3.save
+  TRANSACTION (0.6ms)  BEGIN
+  Ticket Create (0.9ms)  INSERT INTO "tickets" ("discription", "created_at", "updated_at", "client_id") VALUES ($1, $2, $3, $4) RETURNING "id" 
+t_id", 3]]
+ => true 
+3.0.2 :589 > Ticket.all
+  Ticket Load (1.1ms)  SELECT "tickets".* FROM "tickets"
+ => 
+[#<Ticket:0x000055fc685809e8
+  id: 1,
+  discription: "I technical Issue",
+  created_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  client_id: 1>,
+ #<Ticket:0x000055fc68573c70
+  id: 2,
+  discription: "Issue in UI",
+  created_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  client_id: 2>,
+ #<Ticket:0x000055fc68573428
+  id: 3,
+  discription: "Button is not working",
+  created_at: Sun, 14 Nov 2021 13:58:28.862099000 UTC +00:00,
+  client_id: 3>] 
+3.0.2 :590 > t
+(irb):590:in `<main>': undefined local variable or method `t' for main:Object (NameError)
+Did you mean?  t2
+3.0.2 :591 > ticket3
+ => 
+ id: 3,
+ discription: "Button is not working",
+ updated_at: Sun, 14 Nov 2021 13:58:28.862099000 UTC +00:00,
+ client_id: 3> 
+3.0.2 :592 > ticket3.client_id
+ => 3 
+  Ticket Load (1.2ms)  SELECT "tickets".* FROM "tickets"
+ => 
+[#<Ticket:0x000055fc6a0a97d8
+  discription: "I technical Issue",
+  updated_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+ #<Ticket:0x000055fc6a0a96c0
+  discription: "Issue in UI",
+  updated_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  client_id: 2>,
+ #<Ticket:0x000055fc6a0a95d0
+  id: 3,
+  created_at: Sun, 14 Nov 2021 13:58:28.862099000 UTC +00:00,
+  client_id: 3>] 
+(irb):594:in `<main>': undefined local variable or method `client' for main:Object (NameError)
+               client2
+3.0.2 :595 > Ticket.client.name
+nt' for Ticket:Class (NoMethodError)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `disc
+3.0.2 :597 > ticket.name
+(irb):597:in `<main>': undefined local variable or method `ticket' for main:Object (NameError)
+Did you mean?  ticket1
+               ticket2
+               ticket3
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `name' for #<Ticket id: 1, discription: "I technical Issue", created_at: "2021-11-14 13:36:16.743753000 +0000", updated_at: "2021-11-14 13:36:16.743753000 +0000", client_id: 1> (NoMethodError)
+3.0.2 :599 > ticket1.discription
+ => "I technical Issue" 
+3.0.2 :600 > t = Ticket.new
+ => #<Ticket:0x000055fc692ab230 id: nil, discription: nil, created_at: nil, updated_at: nil, client_id: nil> 
+3.0.2 :601 > t.discription
+ => nil 
+3.0.2 :602 > t = ticket1.discription
+ => "I technical Issue" 
+3.0.2 :603 > t = ticket12.discription
+(irb):603:in `<main>': undefined local variable or method `ticket12' for main:Object (NameError)
+Did you mean?  ticket1
+               ticket2
+               ticket3
+3.0.2 :604 > t = ticket2.discription
+ => "Issue in UI" 
+3.0.2 :605 > t = ticket3.discription
+ => "Button is not working" 
+3.0.2 :606 > c = client1.name
+ => "Peter" 
+ => "Jones" 
+ #<Client:0x000055fc693e1690
+  name: "Jones",
+  updated_at: Sun, 14 Nov 2021 13:52:49.138209000 UTC +00:00>,
+ #<Client:0x000055fc693e15a0
+  id: 3,
+  name: "Khaby",
+  created_at: Sun, 14 Nov 2021 13:56:52.595753000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:56:52.595753000 UTC +00:00>,
+  id: 4,
+  name: "Shelly",
+  created_at: Sun, 14 Nov 2021 14:09:39.844424000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 14:09:39.844424000 UTC +00:00>] 
+3.0.2 :613 > ticket4 = Ticket.new
+ => #<Ticket:0x000055fc69eefe38 id: nil, discription: nil, created_at: nil, updated_at: nil, client_id: nil> 
+3.0.2 :614 > ticket4.dis
+
+ticket4.discription
+ticket4.discription=
+ticket4.discription?
+ticket4.discription_before_last_save
+ticket4.discription_before_type_cast
+ticket4.discription_came_from_user?
+ticket4.discription_change
+ticket4.discription_change_to_be_saved
+ticket4.discription_changed?
+ticket4.discription_for_database
+ticket4.discription_in_database
+ticket4.discription_previous_change
+ticket4.discription_previously_changed?
+ticket4.discription_previously_was
+ticket4.discription_was
+ticket4.discription_will_change!
+ticket4.display
+3.0.2 :614 > ticket4.discription="Bug Report In rails"
+3.0.2 :615 > ticket4.client_id=4
+3.0.2 :616 > ticket4.save
+  Ticket Create (1.0ms)  INSERT INTO "tickets" ("discription", "created_at", "updated_at", "client_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["discription", "Bug Report In rails"], ["created_at", "2021-11-14 14:11:55.277198"], ["updated_at", "2021-11-14 14:11:55.277198"], ["client_id", 4]]
+  TRANSACTION (24.4ms)  COMMIT
+ => true 
+  Ticket Load (0.9ms)  SELECT "tickets".* FROM "tickets"
+ => 
+[#<Ticket:0x000055fc6a16d598
+  id: 1,
+  discription: "I technical Issue",
+  created_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  client_id: 1>,
+ #<Ticket:0x000055fc6a16d4a8
+  id: 2,
+  discription: "Issue in UI",
+  created_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  TRANSACTION (0.7ms)  BEGIN
+  Client Create (1.0ms)  INSERT INTO "clients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Neha"], ["created_at", "2021-11-14 14:14:12.354064"], ["updated_at", "2021-11-14 14:14:12.354064"]]
+  TRANSACTION (22.3ms)  COMMIT
+ => true 
+ => 
+#<Client:0x000055fc687654c0
+ id: 5,
+ name: "Neha",
+ created_at: Sun, 14 Nov 2021 14:14:12.354064000 UTC +00:00,
+3.0.2 :622 > ticket5
+(irb):622:in `<main>': undefined local variable or method `ticket5' for main:Object (NameError)
+Did you mean?  ticket1
+               ticket2
+               ticket3
+               ticket4
+3.0.2 :623 > ticket5.discription
+
+ticket5.discription
+ticket5.discription=
+ticket5.discription?
+ticket5.discription_before_last_save
+ticket5.discription_before_type_cast
+ticket5.discription_came_from_user?
+ticket5.discription_change
+ticket5.discription_change_to_be_saved
+ticket5.discription_changed?
+ticket5.discription_for_database
+ticket5.discription_in_database
+ticket5.discription_previous_change
+ticket5.discription_previously_changed?
+ticket5.discription_previously_was
+ticket5.discription_was
+ticket5.discription_will_change!
+3.0.2 :623 > ticket5.discription="Issue in Backend"
+(irb):623:in `<main>': undefined local variable or method `ticket5' for main:Object (NameError)
+               ticket2
+               ticket3
+               ticket4
+3.0.2 :624 > ticket5
+(irb):624:in `<main>': undefined local variable or method `ticket5' for main:Object (NameError)
+Did you mean?  ticket1
+               ticket2
+               ticket3
+               ticket4
+3.0.2 :625 > Ticket.all
+  Ticket Load (1.0ms)  SELECT "tickets".* FROM "tickets"
+ => 
+[#<Ticket:0x000055fc6a06f5b0
+  id: 1,
+  discription: "I technical Issue",
+  created_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  client_id: 1>,
+ #<Ticket:0x000055fc6a06f3a8
+  id: 2,
+  discription: "Issue in UI",
+  created_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  client_id: 2>,
+ #<Ticket:0x000055fc6a06f128
+  id: 3,
+  discription: "Button is not working",
+  updated_at: Sun, 14 Nov 2021 13:58:28.862099000 UTC +00:00,
+ #<Ticket:0x000055fc6a06ef48
+  discription: "Bug Report In rails",
+  updated_at: Sun, 14 Nov 2021 14:11:55.277198000 UTC +00:00,
+3.0.2 :626 > Client.all
+  Client Load (0.9ms)  SELECT "clients".* FROM "clients"
+ => 
+[#<Client:0x000055fc6a2c4950
+  id: 1,
+  name: "Peter",
+  updated_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00>,
+ #<Client:0x000055fc6a2c4860
+  id: 2,
+  created_at: Sun, 14 Nov 2021 13:52:49.138209000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:52:49.138209000 UTC +00:00>,
+ #<Client:0x000055fc6a2c4798
+  id: 3,
+  name: "Khaby",
+  created_at: Sun, 14 Nov 2021 13:56:52.595753000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:56:52.595753000 UTC +00:00>,
+ #<Client:0x000055fc6a2c46d0
+  id: 4,
+  name: "Shelly",
+  created_at: Sun, 14 Nov 2021 14:09:39.844424000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 14:09:39.844424000 UTC +00:00>,
+ #<Client:0x000055fc6a2c45e0
+  id: 5,
+  name: "Neha",
+  created_at: Sun, 14 Nov 2021 14:14:12.354064000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 14:14:12.354064000 UTC +00:00>] 
+3.0.2 :627 > ticket5 = Ticket.new
+ => #<Ticket:0x000055fc6938e170 id: nil, discription: nil, created_at: nil, updated_at: nil, client_id: nil> 
+3.0.2 :628 > ticket5.discription="Issue in backend"
+ => "Issue in backend" 
+3.0.2 :629 > ticket5.client_id=5
+ => 5 
+3.0.2 :630 > ticket5
+ => #<Ticket:0x000055fc6938e170 id: nil, discription: "Issue in backend", created_at: nil, updated_at: nil, client_id: 5> 
+3.0.2 :631 > ticket5.save
+  TRANSACTION (0.5ms)  BEGIN
+  Ticket Create (0.9ms)  INSERT INTO "tickets" ("discription", "created_at", "updated_at", "client_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["discription", "Issue in backend"], ["created_at", "2021-11-14 14:18:41.031802"], ["updated_at", "2021-11-14 14:18:41.031802"], ["client_id", 5]]
+  TRANSACTION (22.4ms)  COMMIT
+ => true 
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `al' for Ticket:Class (NoMethodError)
+Did you mean?  all
+3.0.2 :633 > Ticket.all
+  Ticket Load (1.1ms)  SELECT "tickets".* FROM "tickets"
+ => 
+[#<Ticket:0x000055fc67e06cd0
+  id: 1,
+  discription: "I technical Issue",
+  created_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:36:16.743753000 UTC +00:00,
+  client_id: 1>,
+ #<Ticket:0x000055fc67e06960
+  id: 2,
+  discription: "Issue in UI",
+  created_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:53:59.500658000 UTC +00:00,
+  client_id: 2>,
+ #<Ticket:0x000055fc67e062f8
+  id: 3,
+  discription: "Button is not working",
+  created_at: Sun, 14 Nov 2021 13:58:28.862099000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:58:28.862099000 UTC +00:00,
+  client_id: 3>,
+ #<Ticket:0x000055fc67df73e8
+  id: 4,
+  discription: "Bug Report In rails",
+  created_at: Sun, 14 Nov 2021 14:11:55.277198000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 14:11:55.277198000 UTC +00:00,
+  client_id: 4>,
+ #<Ticket:0x000055fc67df5e30
+  id: 5,
+  discription: "Issue in backend",
+  created_at: Sun, 14 Nov 2021 14:18:41.031802000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 14:18:41.031802000 UTC +00:00,
+  client_id: 5>] 
+3.0.2 :634 > Client.all
+  Client Load (1.0ms)  SELECT "clients".* FROM "clients"
+ => 
+[#<Client:0x000055fc694323d8
+  id: 1,
+  name: "Peter",
+  created_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:33:50.290262000 UTC +00:00>,
+ #<Client:0x000055fc69432310
+  id: 2,
+  name: "Jones",
+  created_at: Sun, 14 Nov 2021 13:52:49.138209000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:52:49.138209000 UTC +00:00>,
+ #<Client:0x000055fc69432180
+  id: 3,
+  name: "Khaby",
+  created_at: Sun, 14 Nov 2021 13:56:52.595753000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 13:56:52.595753000 UTC +00:00>,
+ #<Client:0x000055fc69431ff0
+  id: 4,
+  name: "Shelly",
+  created_at: Sun, 14 Nov 2021 14:09:39.844424000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 14:09:39.844424000 UTC +00:00>,
+ #<Client:0x000055fc69431e60
+  id: 5,
+  name: "Neha",
+  created_at: Sun, 14 Nov 2021 14:14:12.354064000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 14:14:12.354064000 UTC +00:00>] 
+3.0.2 :635 > 
+
+===================================has_many association===================================================
+3.0.2 :638 > Employee.all
+  Employee Load (19.5ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x000055fc6a236998
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a24c3b0
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:57:58.633445000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: "30000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a24c270
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:59:58.615209000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: "30000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a24c158
+  id: 3,
+  dept: "IT",
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:01:40.502623000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: "25000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a24c090
+  id: 5,
+  dept: "SALES",
+  fname: "Pawan",
+  created_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  lname: "Khanna",
+  date_of_birth: Mon, 20 Jun 1994,
+  email: "pawan@gmail.com",
+  salary: "35000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a24f858
+  id: 6,
+  dept: "ACCOUNTS",
+  fname: "Krishna",
+  created_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  lname: "Yadav",
+  date_of_birth: Thu, 24 Aug 1995,
+  email: "krishna@gmail.com",
+  salary: "35000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a247ef0
+  id: 7,
+  dept: "RESEARCH",
+  fname: "Brijesh",
+  created_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  lname: "Yadav",
+  email: "brij@gmail.com",
+  salary: "25000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a247e28
+  id: 8,
+  dept: "ACCOUNTS",
+  fname: "Prithvi",
+  created_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+  lname: "Singh",
+  date_of_birth: Wed, 21 Mar 1990,
+  email: "prithvi@gmail.com",
+  salary: "40000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a247d60
+  id: 9,
+  dept: "HR",
+  fname: "Kunal",
+  created_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Mon, 22 Jan 1990,
+  email: "kunal@gmail.com",
+  salary: "50000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a247c98
+  id: 10,
+  fname: "Bhavya",
+  created_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  lname: "Sharma",
+  email: "bsharma@gmail.com",
+  salary: "25000",
+  gender: "Female">] 
+3.0.2 :639 > Department.all
+  Department Load (57.8ms)  SELECT "departments".* FROM "departments"
+ => 
+[#<Department:0x000055fc69deff88
+  id: 1,
+  dept_name: "IT",
+  created_at: Sat, 13 Nov 2021 06:37:07.859094000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:37:07.859094000 UTC +00:00>,
+ #<Department:0x000055fc69e3c130
+  id: 2,
+  dept_name: "ACCOUNTS",
+  created_at: Sat, 13 Nov 2021 06:38:03.846906000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:38:03.846906000 UTC +00:00>,
+ #<Department:0x000055fc69e3c068
+  id: 3,
+  dept_name: "SALES",
+  created_at: Sat, 13 Nov 2021 06:38:18.153407000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:38:18.153407000 UTC +00:00>,
+ #<Department:0x000055fc69e37f90
+  id: 4,
+  dept_name: "RESEARCH",
+  created_at: Sat, 13 Nov 2021 06:38:40.833696000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:38:40.833696000 UTC +00:00>,
+ #<Department:0x000055fc69e37ec8
+  id: 5,
+  dept_name: "HR",
+  created_at: Sat, 13 Nov 2021 06:39:00.239417000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:39:00.239417000 UTC +00:00>] 
+3.0.2 :640 > e = Employee.all
+  Employee Load (1.8ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x000055fc6a3548e8
+... 
+3.0.2 :641 > e
+ => 
+[#<Employee:0x000055fc6a3548e8
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a3547f8
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:57:58.633445000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: "30000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a354730
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:59:58.615209000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: "30000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a354668
+  id: 3,
+  dept: "IT",
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:01:40.502623000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: "25000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a3545a0
+  id: 5,
+  dept: "SALES",
+  fname: "Pawan",
+  created_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  lname: "Khanna",
+  date_of_birth: Mon, 20 Jun 1994,
+  email: "pawan@gmail.com",
+  salary: "35000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a3544b0
+  id: 6,
+  dept: "ACCOUNTS",
+  fname: "Krishna",
+  created_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  lname: "Yadav",
+  date_of_birth: Thu, 24 Aug 1995,
+  email: "krishna@gmail.com",
+  salary: "35000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a3543c0
+  id: 7,
+  dept: "RESEARCH",
+  fname: "Brijesh",
+  created_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  lname: "Yadav",
+  gender: "Male">,
+ #<Employee:0x000055fc6a3542f8
+  id: 8,
+  dept: "ACCOUNTS",
+  created_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+  lname: "Singh",
+  date_of_birth: Wed, 21 Mar 1990,
+  email: "prithvi@gmail.com",
+  salary: "40000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a354230
+  id: 9,
+  dept: "HR",
+  fname: "Kunal",
+  created_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Mon, 22 Jan 1990,
+  email: "kunal@gmail.com",
+  salary: "50000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a354168
+  id: 10,
+  dept: "SALES",
+  fname: "Bhavya",
+  created_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 22 Jan 1998,
+  salary: "25000",
+  gender: "Female">] 
+3.0.2 :642 > 
+3.0.2 :643 > 
+3.0.2 :644 > d = Department.all
+  Department Load (1.5ms)  SELECT "departments".* FROM "departments"
+ => 
+[#<Department:0x000055fc6872faa0
+... 
+3.0.2 :645 > d
+ => 
+[#<Department:0x000055fc6872faa0
+  id: 1,
+  dept_name: "IT",
+  created_at: Sat, 13 Nov 2021 06:37:07.859094000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:37:07.859094000 UTC +00:00>,
+ #<Department:0x000055fc6872d188
+  id: 2,
+  dept_name: "ACCOUNTS",
+  created_at: Sat, 13 Nov 2021 06:38:03.846906000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:38:03.846906000 UTC +00:00>,
+ #<Department:0x000055fc6872c828
+  id: 3,
+  dept_name: "SALES",
+  created_at: Sat, 13 Nov 2021 06:38:18.153407000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:38:18.153407000 UTC +00:00>,
+ #<Department:0x000055fc6871b910
+  id: 4,
+  dept_name: "RESEARCH",
+  created_at: Sat, 13 Nov 2021 06:38:40.833696000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:38:40.833696000 UTC +00:00>,
+ #<Department:0x000055fc6871a880
+  id: 5,
+  dept_name: "HR",
+  created_at: Sat, 13 Nov 2021 06:39:00.239417000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:39:00.239417000 UTC +00:00>] 
+3.0.2 :646 > e
+ => 
+[#<Employee:0x000055fc6a3548e8
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a3547f8
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:57:58.633445000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: "30000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a354730
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:59:58.615209000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: "30000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a354668
+  id: 3,
+  dept: "IT",
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:01:40.502623000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: "25000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a3545a0
+  id: 5,
+  dept: "SALES",
+  fname: "Pawan",
+  created_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  lname: "Khanna",
+  date_of_birth: Mon, 20 Jun 1994,
+  email: "pawan@gmail.com",
+  salary: "35000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a3544b0
+  id: 6,
+  dept: "ACCOUNTS",
+  fname: "Krishna",
+  created_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  lname: "Yadav",
+  date_of_birth: Thu, 24 Aug 1995,
+  email: "krishna@gmail.com",
+  salary: "35000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a3543c0
+  id: 7,
+  dept: "RESEARCH",
+  fname: "Brijesh",
+  created_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  lname: "Yadav",
+  email: "brij@gmail.com",
+  salary: "25000",
+ #<Employee:0x000055fc6a3542f8
+  id: 8,
+  dept: "ACCOUNTS",
+  fname: "Prithvi",
+  created_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+  lname: "Singh",
+  date_of_birth: Wed, 21 Mar 1990,
+  email: "prithvi@gmail.com",
+  salary: "40000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a354230
+  id: 9,
+  dept: "HR",
+  fname: "Kunal",
+  created_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Mon, 22 Jan 1990,
+  email: "kunal@gmail.com",
+  salary: "50000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a354168
+  id: 10,
+  dept: "SALES",
+  fname: "Bhavya",
+  created_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 22 Jan 1998,
+  email: "bsharma@gmail.com",
+  salary: "25000",
+  gender: "Female">] 
+3.0.2 :647 > reload!
+Reloading...
+ => true 
+3.0.2 :648 > e
+ => 
+[#<Employee:0x000055fc6a3548e8
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a3547f8
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:57:58.633445000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: "30000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a354730
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:59:58.615209000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: "30000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a354668
+  id: 3,
+  dept: "IT",
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:01:40.502623000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: "25000",
+  gender: "Female">,
+ #<Employee:0x000055fc6a3545a0
+  id: 5,
+  dept: "SALES",
+  fname: "Pawan",
+  created_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  lname: "Khanna",
+  date_of_birth: Mon, 20 Jun 1994,
+  email: "pawan@gmail.com",
+  salary: "35000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a3544b0
+  id: 6,
+  dept: "ACCOUNTS",
+  fname: "Krishna",
+  created_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  lname: "Yadav",
+  date_of_birth: Thu, 24 Aug 1995,
+  email: "krishna@gmail.com",
+  salary: "35000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a3543c0
+  id: 7,
+  dept: "RESEARCH",
+  fname: "Brijesh",
+  created_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  lname: "Yadav",
+  email: "brij@gmail.com",
+  salary: "25000",
+ #<Employee:0x000055fc6a3542f8
+  id: 8,
+  dept: "ACCOUNTS",
+  fname: "Prithvi",
+  created_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+  lname: "Singh",
+  date_of_birth: Wed, 21 Mar 1990,
+  email: "prithvi@gmail.com",
+  salary: "40000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a354230
+  id: 9,
+  dept: "HR",
+  fname: "Kunal",
+  created_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Mon, 22 Jan 1990,
+  email: "kunal@gmail.com",
+  salary: "50000",
+  gender: "Male">,
+ #<Employee:0x000055fc6a354168
+  id: 10,
+  dept: "SALES",
+  fname: "Bhavya",
+  created_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 22 Jan 1998,
+  email: "bsharma@gmail.com",
+  salary: "25000",
+  gender: "Female">] 
+3.0.2 :649 > Employee
+ => Employee(id: integer, dept: string, fname: string, created_at: datetime, updated_at: datetime, lname: string, date_of_birth: date, email: string, salary: string, gender: string, department_id: integer) 
+3.0.2 :650 > Employee.all
+  Employee Load (1.1ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x000055fc68499110
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male",
+  department_id: nil>,
+ #<Employee:0x000055fc68a26ba0
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:57:58.633445000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: "30000",
+  gender: "Female",
+  department_id: nil>,
+ #<Employee:0x000055fc68a26538
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 05:59:58.615209000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: "30000",
+  gender: "Female",
+  department_id: nil>,
+ #<Employee:0x000055fc68a25e08
+  id: 3,
+  dept: "IT",
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:01:40.502623000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: "25000",
+  gender: "Female",
+  department_id: nil>,
+ #<Employee:0x000055fc68a25818
+  id: 5,
+  dept: "SALES",
+  fname: "Pawan",
+  created_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  lname: "Khanna",
+  date_of_birth: Mon, 20 Jun 1994,
+  email: "pawan@gmail.com",
+  salary: "35000",
+  gender: "Male",
+  department_id: nil>,
+ #<Employee:0x000055fc68a252f0
+  id: 6,
+  dept: "ACCOUNTS",
+  fname: "Krishna",
+  created_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  lname: "Yadav",
+  date_of_birth: Thu, 24 Aug 1995,
+  email: "krishna@gmail.com",
+  salary: "35000",
+  gender: "Male",
+  department_id: nil>,
+ #<Employee:0x000055fc68a24f30
+  id: 7,
+  dept: "RESEARCH",
+  fname: "Brijesh",
+  created_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  lname: "Yadav",
+  date_of_birth: Sat, 21 Mar 1992,
+  email: "brij@gmail.com",
+  salary: "25000",
+  gender: "Male",
+ #<Employee:0x000055fc68a24ad0
+  id: 8,
+  dept: "ACCOUNTS",
+  fname: "Prithvi",
+  updated_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+  lname: "Singh",
+  date_of_birth: Wed, 21 Mar 1990,
+  email: "prithvi@gmail.com",
+  salary: "40000",
+  gender: "Male",
+  department_id: nil>,
+ #<Employee:0x000055fc68a24508
+  id: 9,
+  dept: "HR",
+  fname: "Kunal",
+  created_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  date_of_birth: Mon, 22 Jan 1990,
+  salary: "50000",
+  gender: "Male",
+  department_id: nil>,
+ #<Employee:0x000055fc68a240d0
+  id: 10,
+  dept: "SALES",
+  created_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 22 Jan 1998,
+  email: "bsharma@gmail.com",
+  salary: "25000",
+  gender: "Female",
+  department_id: nil>] 
+3.0.2 :651 > emp1=Employee.find_by(id:1)
+  Employee Load (0.6ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Employee:0x000055fc68a790a8
+... 
+ => 
+#<Employee:0x000055fc68a790a8
+ id: 1,
+ dept: "IT",
+ created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 05:44:55.564479000 UTC +00:00,
+ lname: "Chouhan",
+ date_of_birth: Sun, 28 Dec 1997,
+ email: "aman@gmail.com",
+ salary: "30000",
+ gender: "Male",
+ department_id: nil> 
+3.0.2 :653 > emp1.department_id=1
+ => 1 
+3.0.2 :654 > emp1.save
+  TRANSACTION (0.4ms)  BEGIN
+  Department Load (19.9ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+1-14 18:02:09.526065"], ["department_id", 1], ["id", 1]]
+ => true 
+3.0.2 :655 > emp1
+ => 
+#<Employee:0x000055fc68a790a8
+ id: 1,
+ dept: "IT",
+ fname: "Aman",
+ created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 18:02:09.526065000 UTC +00:00,
+ lname: "Chouhan",
+ date_of_birth: Sun, 28 Dec 1997,
+ email: "aman@gmail.com",
+ salary: "30000",
+ department_id: 1> 
+3.0.2 :656 > emp2=Employee.find_by(id:2)
+  Employee Load (1.0ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => 
+#<Employee:0x000055fc67e11cc0
+... 
+ => 
+#<Employee:0x000055fc67e11cc0
+ id: 2,
+ dept: "IT",
+ created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 05:57:58.633445000 UTC +00:00,
+ lname: "Sharma",
+ date_of_birth: Sat, 28 Nov 1998,
+ email: "akansha@gmail.com",
+ salary: "30000",
+ gender: "Female",
+ department_id: nil> 
+3.0.2 :658 > emp2.department_id=1
+ => 1 
+3.0.2 :659 > emp2
+ => 
+#<Employee:0x000055fc67e11cc0
+ dept: "IT",
+ created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 05:57:58.633445000 UTC +00:00,
+ lname: "Sharma",
+ date_of_birth: Sat, 28 Nov 1998,
+ email: "akansha@gmail.com",
+ salary: "30000",
+ gender: "Female",
+ department_id: 1> 
+3.0.2 :660 > emp2.save
+  TRANSACTION (0.6ms)  BEGIN
+  Department Load (0.7ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Employee Update (1.1ms)  UPDATE "employees" SET "updated_at" = $1, "department_id" = $2 WHERE "employees"."id" = $3  [["updated_at", "2021-11-14 18:02:59.658542"], ["department_id", 1], ["id", 2]]
+ => true 
+3.0.2 :661 > emp3=Employee.find_by(id:3)
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+ => 
+... 
+3.0.2 :662 > emp3
+ => 
+#<Employee:0x000055fc6a3e6158
+ id: 3,
+ dept: "IT",
+ fname: "Neha",
+ created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:01:40.502623000 UTC +00:00,
+ lname: "Nagar",
+ date_of_birth: Sun, 28 Dec 1997,
+ email: "neha@gmail.com",
+ salary: "25000",
+ department_id: nil> 
+ => 1 
+3.0.2 :664 > emp3
+ => 
+#<Employee:0x000055fc6a3e6158
+ id: 3,
+ dept: "IT",
+ created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:01:40.502623000 UTC +00:00,
+ lname: "Nagar",
+ date_of_birth: Sun, 28 Dec 1997,
+ salary: "25000",
+ gender: "Female",
+ department_id: 1> 
+3.0.2 :665 > emp4=Employee.find_by(id:4)
+  Employee Load (1.0ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+ => 
+#<Employee:0x000055fc6a42cea0
+... 
+3.0.2 :666 > emp4
+ => 
+#<Employee:0x000055fc6a42cea0
+ id: 4,
+ dept: "SALES",
+ created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+ lname: "Sharma",
+ date_of_birth: Thu, 24 Sep 1998,
+ email: "kiran@gmail.com",
+ salary: "30000",
+ gender: "Female",
+ department_id: nil> 
+ => 3 
+3.0.2 :668 > emp4.save
+  TRANSACTION (0.6ms)  BEGIN
+  Department Load (0.6ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Employee Update (1.0ms)  UPDATE "employees" SET "updated_at" = $1, "department_id" = $2 WHERE "employees"."id" = $3  [["updated_at", "2021-11-14 18:04:41.568561"], ["department_id", 3], ["id", 4]]
+  TRANSACTION (21.1ms)  COMMIT
+ => true 
+3.0.2 :669 > emp5=Employee.find_by(id:5)
+  Employee Load (1.0ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+ => 
+#<Employee:0x000055fc6a06d5a8
+... 
+ => 
+#<Employee:0x000055fc6a06d5a8
+ id: 5,
+ dept: "SALES",
+ created_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+ lname: "Khanna",
+ date_of_birth: Mon, 20 Jun 1994,
+ email: "pawan@gmail.com",
+ salary: "35000",
+ gender: "Male",
+ department_id: nil> 
+3.0.2 :671 > emp5.department_id=3
+ => 3 
+3.0.2 :672 > emp5.save
+  TRANSACTION (0.7ms)  BEGIN
+  Department Load (1.0ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+-14 18:05:56.560861"], ["department_id", 3], ["id", 5]]
+ => true 
+3.0.2 :673 > emp5
+ => 
+#<Employee:0x000055fc6a06d5a8
+ id: 5,
+ dept: "SALES",
+ created_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 18:05:56.560861000 UTC +00:00,
+ lname: "Khanna",
+ date_of_birth: Mon, 20 Jun 1994,
+ salary: "35000",
+ gender: "Male",
+ department_id: 3> 
+3.0.2 :674 > emp6=Employee.find_by(id:6)
+  Employee Load (1.1ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+ => 
+#<Employee:0x000055fc69ea5310
+... 
+3.0.2 :675 > emp6
+ => 
+#<Employee:0x000055fc69ea5310
+ id: 6,
+ dept: "ACCOUNTS",
+ created_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+ lname: "Yadav",
+ date_of_birth: Thu, 24 Aug 1995,
+ email: "krishna@gmail.com",
+ salary: "35000",
+ gender: "Male",
+ department_id: nil> 
+ => 2 
+3.0.2 :677 > emp6.save
+  TRANSACTION (0.6ms)  BEGIN
+  Department Load (1.1ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Employee Update (1.1ms)  UPDATE "employees" SET "updated_at" = $1, "department_id" = $2 WHERE "employees"."id" = $3  [["updated_at", "2021-11-14 18:07:20.400491"], ["department_id", 2], ["id", 6]]
+  TRANSACTION (18.2ms)  COMMIT
+ => true 
+3.0.2 :678 > emp7=Employee.find_by(id:7)
+  Employee Load (0.4ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 7], ["LIMIT", 1]]
+ => 
+#<Employee:0x000055fc6a096ea8
+... 
+ => 
+#<Employee:0x000055fc6a096ea8
+ id: 7,
+ dept: "RESEARCH",
+ created_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+ lname: "Yadav",
+ date_of_birth: Sat, 21 Mar 1992,
+ email: "brij@gmail.com",
+ salary: "25000",
+ gender: "Male",
+ department_id: nil> 
+3.0.2 :680 > emp7.department_id=4
+ => 4 
+3.0.2 :681 > emp7.save
+  TRANSACTION (0.5ms)  BEGIN
+  Department Load (0.6ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+-14 18:08:02.227693"], ["department_id", 4], ["id", 7]]
+ => true 
+3.0.2 :682 > emp7
+ => 
+#<Employee:0x000055fc6a096ea8
+ id: 7,
+ dept: "RESEARCH",
+ created_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 18:08:02.227693000 UTC +00:00,
+ lname: "Yadav",
+ date_of_birth: Sat, 21 Mar 1992,
+ email: "brij@gmail.com",
+ salary: "25000",
+ gender: "Male",
+ department_id: 4> 
+3.0.2 :683 > emp8=Employee.find_by(id:8)
+  Employee Load (0.7ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 8], ["LIMIT", 1]]
+ => 
+#<Employee:0x000055fc6a0d3308
+... 
+ => 
+#<Employee:0x000055fc6a0d3308
+ id: 8,
+ dept: "ACCOUNTS",
+ created_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+ lname: "Singh",
+ date_of_birth: Wed, 21 Mar 1990,
+ email: "prithvi@gmail.com",
+ salary: "40000",
+ gender: "Male",
+ department_id: nil> 
+3.0.2 :685 > emp8.department_id=2
+ => 2 
+3.0.2 :686 > emp8.save
+  TRANSACTION (0.6ms)  BEGIN
+  Department Load (0.3ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+-14 18:09:07.796054"], ["department_id", 2], ["id", 8]]
+ => true 
+3.0.2 :687 > emp8
+ => 
+#<Employee:0x000055fc6a0d3308
+ id: 8,
+ dept: "ACCOUNTS",
+ fname: "Prithvi",
+ created_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 18:09:07.796054000 UTC +00:00,
+ lname: "Singh",
+ date_of_birth: Wed, 21 Mar 1990,
+ email: "prithvi@gmail.com",
+ salary: "40000",
+ department_id: 2> 
+3.0.2 :688 > emp9=Employee.find_by(id:9)
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 9], ["LIMIT", 1]]
+ => 
+#<Employee:0x000055fc69eaf518
+... 
+ => 
+#<Employee:0x000055fc69eaf518
+ id: 9,
+ dept: "HR",
+ fname: "Kunal",
+ created_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+ lname: "Sharma",
+ date_of_birth: Mon, 22 Jan 1990,
+ email: "kunal@gmail.com",
+ salary: "50000",
+ gender: "Male",
+ department_id: nil> 
+ => 5 
+3.0.2 :691 > emp9
+ => 
+#<Employee:0x000055fc69eaf518
+ dept: "HR",
+ fname: "Kunal",
+ created_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+ lname: "Sharma",
+ date_of_birth: Mon, 22 Jan 1990,
+ email: "kunal@gmail.com",
+ salary: "50000",
+ gender: "Male",
+ department_id: 5> 
+3.0.2 :692 > emp9.save
+  TRANSACTION (0.6ms)  BEGIN
+  Department Load (0.6ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+-14 18:10:17.063172"], ["department_id", 5], ["id", 9]]
+ => true 
+3.0.2 :693 > emp9
+ => 
+#<Employee:0x000055fc69eaf518
+ id: 9,
+ dept: "HR",
+ created_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 18:10:17.063172000 UTC +00:00,
+ lname: "Sharma",
+ date_of_birth: Mon, 22 Jan 1990,
+ email: "kunal@gmail.com",
+ salary: "50000",
+ gender: "Male",
+ department_id: 5> 
+3.0.2 :694 > emp10=Employee.find_by(id:10)
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 10], ["LIMIT", 1]]
+ => 
+#<Employee:0x000055fc69dc4338
+... 
+ => 
+#<Employee:0x000055fc69dc4338
+ id: 10,
+ dept: "SALES",
+ fname: "Bhavya",
+ created_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+ lname: "Sharma",
+ date_of_birth: Thu, 22 Jan 1998,
+ email: "bsharma@gmail.com",
+ salary: "25000",
+ gender: "Female",
+ department_id: nil> 
+3.0.2 :696 > emp10.department_id=3
+ => 3 
+3.0.2 :697 > emp10.save
+  TRANSACTION (0.7ms)  BEGIN
+  Department Load (0.3ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Employee Update (1.0ms)  UPDATE "employees" SET "updated_at" = $1, "department_id" = $2 WHERE "employees"."id" = $3  [["updated_at", "2021-11-14 18:11:49.894553"], ["department_id", 3], ["id", 10]]
+  TRANSACTION (21.9ms)  COMMIT
+ => true 
+3.0.2 :698 > emp10
+ => 
+#<Employee:0x000055fc69dc4338
+ id: 10,
+ dept: "SALES",
+ fname: "Bhavya",
+ created_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 18:11:49.894553000 UTC +00:00,
+ lname: "Sharma",
+ date_of_birth: Thu, 22 Jan 1998,
+ email: "bsharma@gmail.com",
+ salary: "25000",
+ gender: "Female",
+ department_id: 3> 
+3.0.2 :699 > Employee.all
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees"
+ => 
+[#<Employee:0x000055fc67ce5900
+  id: 3,
+  dept: "IT",
+  fname: "Neha",
+  created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+  updated_at: Sat, 13 Nov 2021 06:01:40.502623000 UTC +00:00,
+  lname: "Nagar",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "neha@gmail.com",
+  salary: "25000",
+  gender: "Female",
+  department_id: nil>,
+ #<Employee:0x000055fc67ce51f8
+  id: 1,
+  dept: "IT",
+  fname: "Aman",
+  created_at: Sat, 13 Nov 2021 05:43:26.419445000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 18:02:09.526065000 UTC +00:00,
+  lname: "Chouhan",
+  date_of_birth: Sun, 28 Dec 1997,
+  email: "aman@gmail.com",
+  salary: "30000",
+  gender: "Male",
+  department_id: 1>,
+ #<Employee:0x000055fc67ce4230
+  id: 2,
+  dept: "IT",
+  fname: "Akansha",
+  created_at: Sat, 13 Nov 2021 05:47:12.686036000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 18:02:59.658542000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Sat, 28 Nov 1998,
+  email: "akansha@gmail.com",
+  salary: "30000",
+  gender: "Female",
+  department_id: 1>,
+ #<Employee:0x000055fc67cd3818
+  id: 4,
+  dept: "SALES",
+  fname: "Kiran",
+  created_at: Sat, 13 Nov 2021 05:50:00.223418000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 18:04:41.568561000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 24 Sep 1998,
+  email: "kiran@gmail.com",
+  salary: "30000",
+  gender: "Female",
+  department_id: 3>,
+ #<Employee:0x000055fc67cd3070
+  id: 5,
+  dept: "SALES",
+  fname: "Pawan",
+  created_at: Sat, 13 Nov 2021 06:07:14.962867000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 18:05:56.560861000 UTC +00:00,
+  lname: "Khanna",
+  date_of_birth: Mon, 20 Jun 1994,
+  email: "pawan@gmail.com",
+  salary: "35000",
+  gender: "Male",
+  department_id: 3>,
+ #<Employee:0x000055fc67cd2b70
+  id: 6,
+  dept: "ACCOUNTS",
+  fname: "Krishna",
+  created_at: Sat, 13 Nov 2021 06:10:09.292505000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 18:07:20.400491000 UTC +00:00,
+  lname: "Yadav",
+  date_of_birth: Thu, 24 Aug 1995,
+  email: "krishna@gmail.com",
+  salary: "35000",
+  gender: "Male",
+  department_id: 2>,
+ #<Employee:0x000055fc67cd22b0
+  id: 7,
+  dept: "RESEARCH",
+  fname: "Brijesh",
+  created_at: Sat, 13 Nov 2021 06:11:34.784036000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 18:08:02.227693000 UTC +00:00,
+  lname: "Yadav",
+  date_of_birth: Sat, 21 Mar 1992,
+  email: "brij@gmail.com",
+  salary: "25000",
+  gender: "Male",
+ #<Employee:0x000055fc67cd1b30
+  id: 8,
+  dept: "ACCOUNTS",
+  fname: "Prithvi",
+  created_at: Sat, 13 Nov 2021 06:15:06.522628000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 18:09:07.796054000 UTC +00:00,
+  lname: "Singh",
+  date_of_birth: Wed, 21 Mar 1990,
+  email: "prithvi@gmail.com",
+  salary: "40000",
+  gender: "Male",
+  department_id: 2>,
+ #<Employee:0x000055fc67cd1608
+  dept: "HR",
+  fname: "Kunal",
+  created_at: Sat, 13 Nov 2021 06:16:31.518224000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 18:10:17.063172000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Mon, 22 Jan 1990,
+  salary: "50000",
+  gender: "Male",
+  department_id: 5>,
+ #<Employee:0x000055fc67cd0f78
+  id: 10,
+  dept: "SALES",
+  fname: "Bhavya",
+  created_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 18:11:49.894553000 UTC +00:00,
+  lname: "Sharma",
+  date_of_birth: Thu, 22 Jan 1998,
+  email: "bsharma@gmail.com",
+  salary: "25000",
+ dept: "IT",
+ fname: "Neha",
+ created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:01:40.502623000 UTC +00:00,
+ lname: "Nagar",
+ date_of_birth: Sun, 28 Dec 1997,
+ salary: "25000",
+ gender: "Female",
+ department_id: 1> 
+  TRANSACTION (0.7ms)  BEGIN
+  Department Load (0.7ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Employee Update (1.2ms)  UPDATE "employees" SET "updated_at" = $1, "department_id" = $2 WHERE "employees"."id" = $3  [["updated_at", "2021-11-14 18:13:06.731187"], ["department_id", 1], ["id", 3]]
+  TRANSACTION (22.9ms)  COMMIT
+ => true 
+ => 
+#<Employee:0x000055fc6a3e6158
+ id: 3,
+ dept: "IT",
+ fname: "Neha",
+ created_at: Sat, 13 Nov 2021 05:48:52.727475000 UTC +00:00,
+ lname: "Nagar",
+ date_of_birth: Sun, 28 Dec 1997,
+ email: "neha@gmail.com",
+ salary: "25000",
+ gender: "Female",
+ department_id: 1> 
+3.0.2 :703 > 
+3.0.2 :704 > 
+3.0.2 :705 > 
+3.0.2 :706 > 
+3.0.2 :707 > 
+3.0.2 :708 > emp1.department
+ => 
+#<Department:0x000055fc69eee8f8
+ dept_name: "IT",
+ created_at: Sat, 13 Nov 2021 06:37:07.859094000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:37:07.859094000 UTC +00:00> 
+3.0.2 :709 > emp2.department.count
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `count' for #<Department id: 1, dept_name: "IT", created_at: "2021-11-13 06:37:07.859094000 +0000", updated_at: "2021-11-13 06:37:07.859094000 +0000
+3.0.2 :710 > emp2.department
+#<Department:0x000055fc69fb4120
+ id: 1,
+ dept_name: "IT",
+ updated_at: Sat, 13 Nov 2021 06:37:07.859094000 UTC +00:00> 
+ => 
+#<Department:0x000055fc6a1a4a98
+ id: 3,
+ created_at: Sat, 13 Nov 2021 06:38:18.153407000 UTC +00:00,
+3.0.2 :712 > Employee.last
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees" ORDER BY "employees"."id" DESC LIMIT $1  [["LIMIT", 1]]
+ => 
+#<Employee:0x000055fc6a095fa8
+ id: 10,
+ dept: "SALES",
+ created_at: Sat, 13 Nov 2021 06:17:54.954527000 UTC +00:00,
+ lname: "Sharma",
+ email: "bsharma@gmail.com",
+ salary: "25000",
+ gender: "Female",
+ department_id: 3> 
+3.0.2 :713 > emp10.name
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `name' for #<Employee id: 10, dept: "SALES", fname: "Bhavya", created_at: "2021-11-13 06:17:54.954527000 +0000", updated_at: "2021-11-14 18:11:49.894553000 +0000", lname: "Sharma", date_of_birth: "1998-01-22", email: "bsharma@gmail.com", salary: "25000", gender: "Female", department_id: 3> (NoMethodError)
+Did you mean?  fname
+               lname
+3.0.2 :714 > emp10.fname
+ => "Bhavya" 
+3.0.2 :715 > e10 = Employee.fname
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `fname' for Employee:Class (NoMethodError)
+Did you mean?  name
+3.0.2 :716 > e10 = Employee.name
+ => "Employee" 
+3.0.2 :717 > e = Employee.new
+ => 
+#<Employee:0x000055fc6a0b30a8
+... 
+3.0.2 :718 > e.fname
+ => nil 
+3.0.2 :719 > emp10.department
+ => 
+#<Department:0x000055fc6a1a4a98
+ id: 3,
+ dept_name: "SALES",
+ created_at: Sat, 13 Nov 2021 06:38:18.153407000 UTC +00:00,
+ updated_at: Sat, 13 Nov 2021 06:38:18.153407000 UTC +00:00> 
+3.0.2 :720 > emp10.fname
+ => "Bhavya" 
+3.0.2 :721 > emp10.lname
+ => "Sharma" 
+3.0.2 :722 > emp10.email
+ => "bsharma@gmail.com" 
+3.0.2 :723 > 
+
 
