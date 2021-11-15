@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_200053) do
+ActiveRecord::Schema.define(version: 2021_11_15_105440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_histories", force: :cascade do |t|
+    t.integer "credit_rating"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_account_histories_on_account_id"
+  end
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "acnt_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "supplier_id"
+    t.index ["supplier_id"], name: "index_accounts_on_supplier_id"
+  end
 
   create_table "animals", force: :cascade do |t|
     t.string "animal_type"
@@ -31,6 +47,13 @@ ActiveRecord::Schema.define(version: 2021_11_14_200053) do
     t.bigint "physician_id", null: false
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
     t.index ["physician_id"], name: "index_appointments_on_physician_id"
+  end
+
+  create_table "assemblies_parts", id: false, force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "student_id"
+    t.index ["student_id"], name: "index_assemblies_parts_on_student_id"
+    t.index ["teacher_id"], name: "index_assemblies_parts_on_teacher_id"
   end
 
   create_table "authorrs", force: :cascade do |t|
@@ -109,10 +132,32 @@ ActiveRecord::Schema.define(version: 2021_11_14_200053) do
     t.index ["department_id"], name: "index_employees_on_department_id"
   end
 
+  create_table "games", force: :cascade do |t|
+    t.string "game_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "groupes", force: :cascade do |t|
+    t.string "group_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "peak_id"
+    t.index ["peak_id"], name: "index_groupes_on_peak_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "peaks", force: :cascade do |t|
+    t.float "peak_price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "groupe_id"
+    t.index ["groupe_id"], name: "index_peaks_on_groupe_id"
   end
 
   create_table "people", force: :cascade do |t|
@@ -175,6 +220,19 @@ ActiveRecord::Schema.define(version: 2021_11_14_200053) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "gender"
     t.string "email"
+    t.string "stud_id", limit: 10
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.string "teacher_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "team1s", force: :cascade do |t|
@@ -215,12 +273,16 @@ ActiveRecord::Schema.define(version: 2021_11_14_200053) do
     t.string "gender"
   end
 
+  add_foreign_key "account_histories", "accounts"
+  add_foreign_key "accounts", "suppliers"
   add_foreign_key "appointments", "patients"
   add_foreign_key "appointments", "physicians"
   add_foreign_key "developer1s", "team1s"
   add_foreign_key "developer2s", "team2s"
   add_foreign_key "developer2s", "teams"
   add_foreign_key "employees", "departments"
+  add_foreign_key "groupes", "peaks"
+  add_foreign_key "peaks", "groupes"
   add_foreign_key "software_engineers", "teams"
   add_foreign_key "tickets", "clients"
 end
