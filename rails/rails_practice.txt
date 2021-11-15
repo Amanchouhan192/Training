@@ -4915,6 +4915,1084 @@ Did you mean?  name
 3.0.2 :722 > emp10.email
  => "bsharma@gmail.com" 
 3.0.2 :723 > 
-================================================Has_many : through====================================================
-Tables:
+============================================has_many :through===================================================
+ => Patient(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+ => Physician(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+ApplicationJob
+ApplicationRecord
+Appointment
+3.0.2 :771 > Appointment
+ => Appointment(id: integer, created_at: datetime, updated_at: datetime, patient_id: integer, physician_id: integer) 
+ => #<Patient:0x000055fc690f5968 id: nil, name: nil, created_at: nil, updated_at: nil> 
+ => "Jack" 
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Create (1.1ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Jack"], ["
+  TRANSACTION (14.1ms)  COMMIT
+ => true 
+ => #<Physician:0x000055fc69fa6390 id: nil, name: nil, created_at: nil, updated_at: nil> 
+ => "Mr Donald" 
+ => #<Physician:0x000055fc69fa6390 id: nil, name: "Mr Donald", created_at: nil, updated_at: nil> 
+  TRANSACTION (0.4ms)  BEGIN
+ald"], ["created_at", "2021-11-14 20:19:24.656317"], ["updated_at", "2021-11-14 20:19:24.656317"]]
+  TRANSACTION (28.2ms)  COMMIT
+ => true 
+3.0.2 :779 > appt1 = Appointment.new
+ => #<Appointment:0x000055fc692b1e00 id: nil, created_at: nil, updated_at: nil, patient_id: nil, physician_id: nil> 
+3.0.2 :780 > appt1.patient_id=1
+ => 1 
+3.0.2 :781 > app
+app
+3.0.2 :781 > appt1.physician_id=1
+3.0.2 :782 > appt1.save
+  TRANSACTION (0.4ms)  BEGIN
+  Patient Load (0.8ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  TRANSACTION (0.6ms)  ROLLBACK
+ => false 
+3.0.2 :783 > appt1
+ => #<Appointment:0x000055fc692b1e00 id: nil, created_at: nil, updated_at: nil, patient_id: 1, physician_id: 1> 
+ => false 
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: 
+3.0.2 :786 > reload!
+Reloading...
+ => true 
+3.0.2 :787 > appt1.save
+ => false 
+ => #<Appointment:0x000055fc6a1d49f0 id: nil, created_at: nil, updated_at: nil, patient_id: nil, physician_id: nil> 
+3.0.2 :789 > appt1.physician_id=1
+ => 1 
+3.0.2 :790 > appt1.patient_id=1
+ => 1 
+3.0.2 :791 > appt1.save
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Load (0.6ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Appointment Create (1.5ms)  INSERT INTO "appointments" ("created_at", "updated_at", "patient_id", "physician_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2021-11-14 20:27:05.550486"], ["updated_at", "2021-11-14 20:27:05.550486"], ["patient_id", 1], ["physician_id", 1]]
+ => true 
+ => #<Patient:0x000055fc67f7ee50 id: nil, name: nil, created_at: nil, updated_at: nil> 
+ => #<Patient:0x000055fc67f7ee50 id: nil, name: nil, created_at: nil, updated_at: nil> 
+  Patient Load (0.9ms)  SELECT "patients".* FROM "patients"
+ => 
+[#<Patient:0x000055fc69df4f38
+  id: 1,
+  name: "Jack",
+  created_at: Sun, 14 Nov 2021 20:18:09.738973000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:18:09.738973000 UTC +00:00>] 
+3.0.2 :795 > p2 = Patient.new
+3.0.2 :796 > p2.name="Ahana"
+ => "Ahana" 
+  TRANSACTION (0.4ms)  BEGIN
+  Patient Create (0.5ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Ahana"], ["created_at", "2021-11-14 20:29:25.379577"], ["updated_at", "2021-11-14 20:29:25.379577"]]
+  TRANSACTION (44.0ms)  COMMIT
+ => true 
+3.0.2 :798 > Patient.all
+  Patient Load (1.0ms)  SELECT "patients".* FROM "patients"
+ => 
+[#<Patient:0x000055fc6a424098
+  id: 1,
+  name: "Jack",
+  created_at: Sun, 14 Nov 2021 20:18:09.738973000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:18:09.738973000 UTC +00:00>,
+ #<Patient:0x000055fc6a41ff70
+  name: "Ahana",
+  created_at: Sun, 14 Nov 2021 20:29:25.379577000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:29:25.379577000 UTC +00:00>] 
+3.0.2 :799 > appt2 = Appointment.new
+ => #<Appointment:0x000055fc692b8de0 id: nil, created_at: nil, updated_at: nil, patient_id: nil, physician_id: nil> 
+3.0.2 :800 > appt2.patient_id=2
+3.0.2 :801 > appt2.physician_id=1
+ => 1 
+  TRANSACTION (0.6ms)  BEGIN
+  Patient Load (0.7ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Physician Load (0.8ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Appointment Create (1.0ms)  INSERT INTO "appointments" ("created_at", "updated_at", "patient_id", "physician_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2021-11-14 20:31:50.063646"], ["updated_at", "2021-11-14 20:31:50.063646"], ["patient_id", 2], ["physician_id", 1]]
+  id: 1,
+  created_at: Sun, 14 Nov 2021 20:27:05.550486000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:27:05.550486000 UTC +00:00,
+  patient_id: 1,
+  physician_id: 1>,
+ #<Appointment:0x000055fc69248810
+  id: 2,
+  created_at: Sun, 14 Nov 2021 20:31:50.063646000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:31:50.063646000 UTC +00:00,
+  patient_id: 2,
+  physician_id: 1>] 
+3.0.2 :805 > phy1
+ => 
+ id: 1,
+ created_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00,
+3.0.2 :806 > phy
+Did you mean?  phy1
+3.0.2 :807 > phy1
+ => 
+#<Physician:0x000055fc69fa6390
+ id: 1,
+ created_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00,
+ updated_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00> 
+3.0.2 :808 > phy1.pa
+
+phy1.partial_writes
+phy1.partial_writes?
+phy1.patient_ids
+phy1.patient_ids=
+phy1.patients
+phy1.patients=
+3.0.2 :808 > phy1.patients
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients" INNER JOIN "appointments" ON "patients"."id" = "appointments"."patient_id" WHERE "a
+ => 
+  id: 1,
+  created_at: Sun, 14 Nov 2021 20:18:09.738973000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:18:09.738973000 UTC +00:00>,
+ #<Patient:0x000055fc6a1dd320
+  id: 2,
+  created_at: Sun, 14 Nov 2021 20:29:25.379577000 UTC +00:00,
+3.0.2 :809 > phy2 = Physician.new
+3.0.2 :810 > Physician
+ => Physician(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :811 > phy2.name="Mrs Sunita Seshodiya"
+ => "Mrs Sunita Seshodiya" 
+3.0.2 :812 > phy2.save
+  Physician Create (1.0ms)  INSERT INTO "physicians" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Mrs Sunita Seshodiya"], ["created_at", "2021-11-14 20:37:33.989101"], ["updated_at", "2021-11-14 20:37:33.989101"]]
+  TRANSACTION (23.3ms)  COMMIT
+ => true 
+3.0.2 :813 > Physician.all
+  Physician Load (0.9ms)  SELECT "physicians".* FROM "physicians"
+ => 
+[#<Physician:0x000055fc69283690
+  id: 1,
+  name: "Mr Donald",
+  created_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00>,
+ #<Physician:0x000055fc69283500
+  id: 2,
+  name: "Mrs Sunita Seshodiya",
+  created_at: Sun, 14 Nov 2021 20:37:33.989101000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:37:33.989101000 UTC +00:00>] 
+ => #<Physician:0x000055fc69e6f828 id: nil, name: nil, created_at: nil, updated_at: nil> 
+ => "Ms Shally" 
+(irb):816:in `<main>': undefined local variable or method `phy4' for main:Object (NameError)
+Did you mean?  phy1
+               phy2
+               phy3
+3.0.2 :817 > phy4 = Physician.new
+3.0.2 :818 > phy4.name="Mr Oswald"
+ => "Mr Oswald" 
+3.0.2 :819 > phy4.save
+  TRANSACTION (0.4ms)  BEGIN
+  Physician Create (0.9ms)  INSERT INTO "physicians" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Mr Oswald"], ["created_at", "2021-11-14 20:39:44.939744"], ["updated_at", "2021-11-14 20:39:44.939744"]]
+  TRANSACTION (23.9ms)  COMMIT
+ => true 
+3.0.2 :820 > Physician.all
+  Physician Load (0.7ms)  SELECT "physicians".* FROM "physicians"
+ => 
+[#<Physician:0x000055fc689aaa50
+  id: 1,
+  name: "Mr Donald",
+  created_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00>,
+ #<Physician:0x000055fc689aa7d0
+  id: 2,
+  name: "Mrs Sunita Seshodiya",
+  created_at: Sun, 14 Nov 2021 20:37:33.989101000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:37:33.989101000 UTC +00:00>,
+ #<Physician:0x000055fc689aa488
+  name: "Mr Oswald",
+  updated_at: Sun, 14 Nov 2021 20:39:44.939744000 UTC +00:00>] 
+ => #<Physician:0x000055fc69cf5858 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :822 > phy4.name="Ms Kenny"
+ => "Ms Kenny" 
+3.0.2 :823 > phy4.save
+  TRANSACTION (0.6ms)  BEGIN
+  Physician Create (1.2ms)  INSERT INTO "physicians" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Ms Kenny"], ["created_at", "2021-11-14 20:40:32.967941"], ["updated_at", "2021-11-14 20:40:32.967941"]]
+  TRANSACTION (23.5ms)  COMMIT
+ => true 
+3.0.2 :824 > Physician.all
+  Physician Load (1.0ms)  SELECT "physicians".* FROM "physicians"
+ => 
+[#<Physician:0x000055fc6a174640
+  id: 1,
+  name: "Mr Donald",
+  created_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00>,
+ #<Physician:0x000055fc6a174550
+  id: 2,
+  name: "Mrs Sunita Seshodiya",
+  created_at: Sun, 14 Nov 2021 20:37:33.989101000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:37:33.989101000 UTC +00:00>,
+  id: 3,
+  created_at: Sun, 14 Nov 2021 20:39:44.939744000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:39:44.939744000 UTC +00:00>,
+ #<Physician:0x000055fc6a1743c0
+  id: 4,
+  name: "Ms Kenny",
+  updated_at: Sun, 14 Nov 2021 20:40:32.967941000 UTC +00:00>] 
+3.0.2 :825 > phy5 = Physician.new
+ => #<Physician:0x000055fc6a3e5f28 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :826 > phy5.name="Mr Yung Su"
+ => "Mr Yung Su" 
+3.0.2 :827 > Physician.all
+  Physician Load (1.0ms)  SELECT "physicians".* FROM "physicians"
+ => 
+[#<Physician:0x000055fc694f1968
+  id: 1,
+  name: "Mr Donald",
+  created_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00>,
+ #<Physician:0x000055fc694f1878
+  id: 2,
+  name: "Mrs Sunita Seshodiya",
+  created_at: Sun, 14 Nov 2021 20:37:33.989101000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:37:33.989101000 UTC +00:00>,
+ #<Physician:0x000055fc694f16e8
+  id: 3,
+  name: "Mr Oswald",
+  created_at: Sun, 14 Nov 2021 20:39:44.939744000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:39:44.939744000 UTC +00:00>,
+ #<Physician:0x000055fc694f13c8
+  id: 4,
+  name: "Ms Kenny",
+  created_at: Sun, 14 Nov 2021 20:40:32.967941000 UTC +00:00,
+3.0.2 :828 > phy5
+3.0.2 :829 > phy5.save
+  TRANSACTION (0.4ms)  BEGIN
+  Physician Create (0.7ms)  INSERT INTO "physicians" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Mr Yung Su"], ["created_at", "2021-11-14 20:42:54.692645"], ["updated_at", "2021-11-14 20:42:54.692645"]]
+  TRANSACTION (28.4ms)  COMMIT
+ => true 
+3.0.2 :830 > Physician.all
+  Physician Load (1.1ms)  SELECT "physicians".* FROM "physicians"
+ => 
+[#<Physician:0x000055fc6a2ac418
+  id: 1,
+  name: "Mr Donald",
+  updated_at: Sun, 14 Nov 2021 20:19:24.656317000 UTC +00:00>,
+  id: 2,
+  created_at: Sun, 14 Nov 2021 20:37:33.989101000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:37:33.989101000 UTC +00:00>,
+ #<Physician:0x000055fc6a2ac170
+  id: 3,
+  name: "Mr Oswald",
+  updated_at: Sun, 14 Nov 2021 20:39:44.939744000 UTC +00:00>,
+  id: 4,
+  id: 2,
+  name: "Ahana",
+  created_at: Sun, 14 Nov 2021 20:29:25.379577000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:29:25.379577000 UTC +00:00>] 
+3.0.2 :833 > p3 = Patient.new
+ => #<Patient:0x000055fc69ececb0 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :834 > p3.name="Sneha"
+ => "Sneha" 
+3.0.2 :835 > p3.save
+  TRANSACTION (0.7ms)  BEGIN
+  Patient Create (0.9ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sneha"], ["created_at", "2021-11-14 20:44:21.725420"], ["updated_at", "2021-11-14 20:44:21.725420"]]
+  TRANSACTION (26.0ms)  COMMIT
+ => true 
+3.0.2 :836 > p4 = Patient.new
+ => #<Patient:0x000055fc67f655b8 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :837 > p4.name="Bridge"
+3.0.2 :838 > P
+PG
+PP
+PTY
+ParseError
+Pathname
+Person
+Post
+Proc
+Process
+Project
+ProjectAssigned
+Psych
+3.0.2 :838 > Patient.all
+ => 
+  id: 1,
+  name: "Jack",
+  created_at: Sun, 14 Nov 2021 20:18:09.738973000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:18:09.738973000 UTC +00:00>,
+ #<Patient:0x000055fc69fada00
+  name: "Ahana",
+  updated_at: Sun, 14 Nov 2021 20:29:25.379577000 UTC +00:00>,
+  id: 3,
+  name: "Sneha",
+  created_at: Sun, 14 Nov 2021 20:44:21.725420000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:44:21.725420000 UTC +00:00>] 
+3.0.2 :839 > p4
+3.0.2 :840 > p4.save
+  Patient Create (0.9ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Bridge"], 
+  TRANSACTION (22.6ms)  COMMIT
+ => true 
+3.0.2 :841 > p5=Patient.new
+ => #<Patient:0x000055fc69d94228 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :842 > p5.name="Yogyata"
+3.0.2 :843 > p5.save
+  Patient Create (0.7ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Yogyata"],
+  TRANSACTION (26.2ms)  COMMIT
+ => true 
+3.0.2 :844 > p6=Patient.new
+ => #<Patient:0x000055fc6a40c9c0 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :845 > p6.name="Priya"
+3.0.2 :846 > p6.save
+  Patient Create (1.3ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Priya"], [
+  TRANSACTION (24.9ms)  COMMIT
+ => true 
+3.0.2 :847 > p7=Patient.new
+ => #<Patient:0x000055fc69f858c0 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :848 > p7.name="Shaggy"
+3.0.2 :849 > p7.save
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Create (0.8ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Shaggy"], ["created_at", "2021-11-14 20:47:02.987049"], ["updated_at", "2021-11-14 20:47:02.987049"]]
+  TRANSACTION (19.3ms)  COMMIT
+ => true 
+3.0.2 :850 > p8=Patient.new
+ => #<Patient:0x000055fc6921ea88 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :851 > p8.name="George"
+ => "George" 
+3.0.2 :852 > p8.save
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Create (1.2ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "George"], ["created_at", "2021-11-14 20:47:29.092635"], ["updated_at", "2021-11-14 20:47:29.092635"]]
+  TRANSACTION (23.3ms)  COMMIT
+ => true 
+3.0.2 :853 > p9=Patient.new
+ => #<Patient:0x000055fc6a16eee8 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :854 > p9.name="Lora"
+ => "Lora" 
+3.0.2 :855 > p9.save
+  TRANSACTION (0.6ms)  BEGIN
+  Patient Create (0.9ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Lora"], ["created_at", "2021-11-14 20:47:58.380237"], ["updated_at", "2021-11-14 20:47:58.380237"]]
+  TRANSACTION (21.1ms)  COMMIT
+ => true 
+3.0.2 :856 > p10=Patient.new
+ => #<Patient:0x000055fc691e9090 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :857 > p10.name="Sam"
+ => "Sam" 
+3.0.2 :858 > p10.save
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Create (0.8ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sam"], ["created_at", "2021-11-14 20:48:29.942289"], ["updated_at", "2021-11-14 20:48:29.942289"]]
+  TRANSACTION (20.6ms)  COMMIT
+ => true 
+3.0.2 :859 > Patient.all
+  Patient Load (1.1ms)  SELECT "patients".* FROM "patients"
+ => 
+[#<Patient:0x000055fc6a0bac90
+  id: 1,
+  name: "Jack",
+  created_at: Sun, 14 Nov 2021 20:18:09.738973000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:18:09.738973000 UTC +00:00>,
+ #<Patient:0x000055fc6a0bab50
+  id: 2,
+  name: "Ahana",
+  created_at: Sun, 14 Nov 2021 20:29:25.379577000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:29:25.379577000 UTC +00:00>,
+ #<Patient:0x000055fc6a0ba9c0
+  id: 3,
+  name: "Sneha",
+  updated_at: Sun, 14 Nov 2021 20:44:21.725420000 UTC +00:00>,
+ #<Patient:0x000055fc6a0ba858
+  id: 4,
+  name: "Bridge",
+  created_at: Sun, 14 Nov 2021 20:45:30.683169000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:45:30.683169000 UTC +00:00>,
+ #<Patient:0x000055fc6a0ba6f0
+  id: 5,
+  name: "Yogyata",
+  created_at: Sun, 14 Nov 2021 20:46:00.884386000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:46:00.884386000 UTC +00:00>,
+ #<Patient:0x000055fc6a0ba4c0
+  id: 6,
+  name: "Priya",
+  updated_at: Sun, 14 Nov 2021 20:46:23.178126000 UTC +00:00>,
+  id: 7,
+  created_at: Sun, 14 Nov 2021 20:47:02.987049000 UTC +00:00,
+ #<Patient:0x000055fc6a0ba268
+  name: "George",
+  created_at: Sun, 14 Nov 2021 20:47:29.092635000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:47:29.092635000 UTC +00:00>,
+ #<Patient:0x000055fc6a0ba128
+  id: 9,
+  name: "Lora",
+  created_at: Sun, 14 Nov 2021 20:47:58.380237000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:47:58.380237000 UTC +00:00>,
+  id: 10,
+  created_at: Sun, 14 Nov 2021 20:48:29.942289000 UTC +00:00,
+3.0.2 :860 > Appointment.all
+ => 
+[#<Appointment:0x000055fc685809e8
+  id: 1,
+  created_at: Sun, 14 Nov 2021 20:27:05.550486000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:27:05.550486000 UTC +00:00,
+  patient_id: 1,
+  physician_id: 1>,
+ #<Appointment:0x000055fc68573c70
+  created_at: Sun, 14 Nov 2021 20:31:50.063646000 UTC +00:00,
+  patient_id: 2,
+3.0.2 :861 > Appointment
+ => Appointment(id: integer, created_at: datetime, updated_at: datetime, patient_id: integer, physician_id: integer) 
+3.0.2 :862 > appt3 = Appointment.new
+3.0.2 :863 > appt3.physician_id=2
+3.0.2 :864 > appt3.patient_id=2
+ => 2 
+3.0.2 :865 > appt3.save
+  TRANSACTION (0.6ms)  BEGIN
+  Patient Load (0.7ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Physician Load (0.7ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Appointment Create (1.0ms)  INSERT INTO "appointments" ("created_at", "updated_at", "patient_id", "physician_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2021-11-14 20:50:38.513998"], ["updated_at", "2021-11-14 20:50:38.513998"], ["patient_id", 2], ["physician_id", 2
+  TRANSACTION (26.1ms)  COMMIT
+3.0.2 :866 > appt4 = Appointment.new
+3.0.2 :867 > appt4.physician_id=3
+3.0.2 :868 > appt4.patient_id=2
+3.0.2 :869 > appt4.save
+  Patient Load (0.6ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Appointment Create (1.0ms)  INSERT INTO "appointments" ("created_at", "updated_at", "patient_id", "physician_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2021-11-14 20:51:15.617609"], ["updated_at", "2021-11-14 20:51:15.617609"], ["patient_id", 2], ["physician_id", 3]]
+  TRANSACTION (26.3ms)  COMMIT
+ => true 
+ => #<Appointment:0x000055fc6a39d228 id: nil, created_at: nil, updated_at: nil, patient_id: nil, physician_id: nil> 
+3.0.2 :871 > appt5.physician_id=3
+3.0.2 :872 > app5.patient_id=4
+(irb):872:in `<main>': undefined local variable or method `app5' for main:Object (NameError)
+               app
+ => 4 
+  TRANSACTION (0.6ms)  BEGIN
+  Physician Load (0.8ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Appointment Create (0.9ms)  INSERT INTO "appointments" ("created_at", "updated_at", "patient_id", "physician_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2021-11-14 20:52:24.261027"], ["updated_at", "2021-11-14 20:52:24.261027"], ["patient_id", 4], ["physician_id", 3]]
+  TRANSACTION (22.0ms)  COMMIT
+3.0.2 :875 > appt6=Appointment.new
+ => #<Appointment:0x000055fc67abe398 id: nil, created_at: nil, updated_at: nil, patient_id: nil, physician_id: nil> 
+ => 5 
+ => 3 
+3.0.2 :878 > appt7=Appointment.new
+ => #<Appointment:0x000055fc6acabb30 id: nil, created_at: nil, updated_at: nil, patient_id: nil, physician_id: nil> 
+3.0.2 :879 > appt7.physician_id=6
+ => 6 
+3.0.2 :880 > appt7.patient_id=5
+ => 5 
+  TRANSACTION (0.4ms)  BEGIN
+  Physician Load (0.8ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+ => false 
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: 
+3.0.2 :883 > reload!
+Reloading...
+ => true 
+3.0.2 :884 > appt7=Appointment.new
+ => #<Appointment:0x000055fc686b26e0 id: nil, created_at: nil, updated_at: nil, patient_id: nil, physician_id: nil> 
+ => 5 
+3.0.2 :886 > appt7.physician_id=6
+3.0.2 :887 > appt7.save
+  Patient Load (0.4ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+ => false 
+3.0.2 :888 > appt7.save!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: Physician must exist (ActiveRecord::RecordInvalid)
+ => 4 
+  TRANSACTION (0.7ms)  BEGIN
+  Appointment Create (1.1ms)  INSERT INTO "appointments" ("created_at", "updated_at", "patient_id", "physician_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2021-11-14 20:56:26.127806"], ["updated_at", "2021-11-14 20:56:26.127806"], ["patient_id", 5], ["physician_id", 4]]
+  TRANSACTION (23.2ms)  COMMIT
+ => true 
+3.0.2 :891 > appt7.save
+ => true 
+3.0.2 :892 > appt8 = Appointment.new
+3.0.2 :893 > appt8.physician_id=9
+3.0.2 :894 > appt8.patient_id=4
+3.0.2 :895 > appt8.save
+  Patient Load (0.6ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  TRANSACTION (0.5ms)  ROLLBACK
+ => false 
+3.0.2 :896 > appt8.save!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: Physician must exist (ActiveRecord::RecordInvalid)
+3.0.2 :897 > appt8.physician_id=8
+ => 8 
+3.0.2 :898 > appt8.patient_id=5
+3.0.2 :899 > appt8.save
+  Patient Load (0.4ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+3.0.2 :900 > appt8.physician_id=4
+ => 4 
+3.0.2 :901 > appt8.patient_id=10
+ => 10 
+3.0.2 :902 > appt8.save
+  TRANSACTION (0.7ms)  BEGIN
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  Appointment Create (0.8ms)  INSERT INTO "appointments" ("created_at", "updated_at", "patient_id", "physician_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2021-11-14 20:59:08.032502"], ["updated_at", "2021-11-14 20:59:08.032502"], ["patient_id", 10], ["physician_id", 4]]
+  TRANSACTION (23.3ms)  COMMIT
+ => true 
+ => 4 
+3.0.2 :904 > appt9 = Appointment.new
+ => #<Appointment:0x000055fc69443598 id: nil, created_at: nil, updated_at: nil, patient_id: nil, physician_id: nil> 
+3.0.2 :905 > appt9.physician_id=4
+ => 4 
+ => 8 
+3.0.2 :907 > appt9.save
+  TRANSACTION (0.4ms)  BEGIN
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 8], ["LIMIT", 1]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  Appointment Create (1.0ms)  INSERT INTO "appointments" ("created_at", "updated_at", "patient_id", "physician_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2021-11-14 21:00:03.836531"], ["updated_at", "2021-11-14 21:00:03.836531"], ["patient_id", 8], ["physician_id", 4]]
+  TRANSACTION (23.9ms)  COMMIT
+ => true 
+3.0.2 :908 > appt10 = Appointment.new
+ => #<Appointment:0x000055fc6a5540a8 id: nil, created_at: nil, updated_at: nil, patient_id: nil, physician_id: nil> 
+3.0.2 :909 > appt10.physician_id=1
+ => 1 
+ => 10 
+3.0.2 :911 > phy
+(irb):911:in `<main>': undefined local variable or method `phy' for main:Object (NameError)
+Did you mean?  phy1
+               phy2
+               phy3
+               phy4
+               phy5
+(irb):912:in `<main>': undefined local variable or method `phy' for main:Object (NameError)
+Did you mean?  phy1
+               phy2
+               phy3
+               phy4
+               phy5
+Did you mean?  appointments
+               appointments=
+3.0.2 :914 > phy1.appointments
+  Appointment Load (0.8ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."physician_id" = $1  [["physician_id", 1]]
+ => 
+[#<Appointment:0x000055fc6910f340
+  id: 1,
+  created_at: Sun, 14 Nov 2021 20:27:05.550486000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:27:05.550486000 UTC +00:00,
+  patient_id: 1,
+  physician_id: 1>,
+ #<Appointment:0x000055fc6910d518
+  id: 2,
+  created_at: Sun, 14 Nov 2021 20:31:50.063646000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:31:50.063646000 UTC +00:00,
+  patient_id: 2,
+  physician_id: 1>] 
+3.0.2 :915 > phy2.appointments
+  Appointment Load (0.8ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."physician_id" = $1  [["physician_id", 2]]
+ => 
+[#<Appointment:0x000055fc694bbf70
+  id: 3,
+  created_at: Sun, 14 Nov 2021 20:50:38.513998000 UTC +00:00,
+  updated_at: Sun, 14 Nov 2021 20:50:38.513998000 UTC +00:00,
+  patient_id: 2,
+  physician_id: 2>] 
+3.0.2 :916 > phy.name
+Did you mean?  phy1
+               phy2
+               phy3
+               phy4
+3.0.2 :917 > 
+3.0.2 :918 > 
+3.0.2 :920 > Physician.all
+pat1.app_cache_dirname
+pat1.app_cache_path
+pat1.app_class=
+pat1.app_config_path
+pat1.app_env
+pat1.app_generators
+pat1.app_middleware
+pat1.app_name
+pat1.append
+pat1.append_attribute
+pat1.append_class
+pat1.append_features
+pat1.append_ignores
+pat1.append_path
+pat1.append_view_path
+pat1.application
+pat1.application=
+pat1.application_id
+pat1.application_root
+pat1.application_root=
+pat1.application_root_path
+pat1.application_trace
+pat1.applied_to?
+pat1.apply
+pat1.apply_column_aliases
+pat1.apply_deref_options
+pat1.apply_mapping
+pat1.apply_seconds_precision
+pat1.apply_to
+pat1.apply_with_args
+pat1.appointment_ids
+pat1.appointment_ids=
+pat1.appointments
+pat1.appointments=
+pat1.approximate_recommendation
+3.0.2 :924 > pat1.appointment
+(irb):924:in `<main>': undefined local variable or method `pat1' for main:Object (NameError)
+Did you mean?  appt1
+3.0.2 :925 > pat1.appointments
+(irb):925:in `<main>': undefined local variable or method `pat1' for main:Object (NameError)
+Did you mean?  appt1
+3.0.2 :926 > 
+===========================================15th Nov==========================
+3.0.2 :028 > Peak.all
+  Groupe Load (1.0ms)  SELECT "groupes".* FROM "groupes"
+ => 
+[#<Groupe:0x000055ca34771358
+  group_name: "Blasters",
+  created_at: Mon, 15 Nov 2021 06:00:31.501319000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 06:00:31.501319000 UTC +00:00,
+3.0.2 :037 > p1 = Pea
+(irb):37:in `<main>': uninitialized constant Pea (NameError)
+3.0.2 :038 > p1 = Peak.new
+3.0.2 :039 > p1.peak_price=35000
+3.0.2 :040 > p1.pe
+p1.peak
+p1.peak=
+p1.peak_price=
+p1.peak_price?
+p1.peak_price_before_type_cast
+p1.peak_price_change
+p1.peak_price_changed?
+p1.peak_price_in_database
+p1.peak_price_previously_changed?
+p1.peak_price_was
+p1.persisted?
+3.0.2 :040 > p1.peak_id=1
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `peak_id=' for #<Peak id: nil, peak_price: 35000.0, created_at: nil, updated_at: nil, groupe_id: nil> (NoMethodError)
+Did you mean?  peak=
+3.0.2 :041 > p1.peak_id=1
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `peak_id=' for #<Peak id: nil, peak_price: 35000.0, created_at: nil, updated_at: nil, groupe_id: nil> (NoMethodError)
+Did you mean?  peak=
+3.0.2 :042 > p1.peak=1
+(#108160) expected, got 1 which is an instance of Integer(#3000) (ActiveRecord::AssociationTypeMismatch)
+ => Peak(id: integer, peak_price: float, created_at: datetime, updated_at: datetime, groupe_id: integer) 
+ => 1 
+ => false 
+3.0.2 :046 > p1.save!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: Peak must exist (ActiveRecord::RecordInvalid)
+3.0.2 :047 > p1.save!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: Peak must exist (ActiveRecord::RecordInvalid)
+ => #<Peak:0x000055ca35386b98 id: nil, peak_price: nil, created_at: nil, updated_at: nil, groupe_id: nil> 
+3.0.2 :049 > Peak
+ => Peak(id: integer, peak_price: float, created_at: datetime, updated_at: datetime, groupe_id: integer) 
+3.0.2 :050 > p1.peak_price=35000
+ => 35000 
+3.0.2 :051 > g1 = Groupe.new
+ => #<Groupe:0x000055ca3471d0a0 id: nil, group_name: nil, created_at: nil, updated_at: nil, peak_id: nil> 
+3.0.2 :052 > g1.group_name="Pokemon Go"
+ => "Pokemon Go" 
+3.0.2 :053 > g1.peak_id=1
+3.0.2 :054 > g1.save
+  TRANSACTION (0.7ms)  BEGIN
+DETAIL:  Key (peak_id)=(1) is not present in table "peaks".
+3.0.2 :055 > Peak
+3.0.2 :056 > Groupe
+3.0.2 :057 > g1.peak_id=1
+3.0.2 :070 > p1= Peak.new
+3.0.2 :071 > p1.peak_
+p1.peak_id
+p1.peak_id?
+p1.peak_id_before_type_cast
+p1.peak_id_change
+p1.peak_id_change_to_be_saved
+p1.peak_id_changed?
+p1.peak_id_for_database
+p1.peak_id_previous_change
+p1.peak_id_previously_changed?
+p1.peak_id_was
+p1.peak_price
+p1.peak_price?
+p1.peak_price_before_type_cast
+p1.peak_price_change
+p1.peak_price_change_to_be_saved
+p1.peak_price_for_database
+p1.peak_price_previous_change
+p1.peak_price_previously_changed?
+p1.peak_price_was
+3.0.2 :071 > p1.peak_price=35000
+ => 35000 
+ => Peak(id: integer, peak_price: float, created_at: datetime, updated_at: datetime, groupe_id: integer, peak_id: integer) 
+ => 1 
+ => 1 
+ => #<Peak:0x000055ca3589c538 id: nil, peak_price: 35000.0, created_at: nil, updated_at: nil, groupe_id: 1, peak_id: 1> 
+  TRANSACTION (0.4ms)  BEGIN
+  TRANSACTION (0.5ms)  ROLLBACK
+3.0.2 :077 > p1.save!
+Peak must exist (ActiveRecord::RecordInvalid)
+ => #<Peak:0x000055ca3589c538 id: nil, peak_price: 35000.0, created_at: nil, updated_at: nil, groupe_id: 1, peak_id: 1> 
+3.0.2 :079 > Peak
+ => Peak(id: integer, peak_price: float, created_at: datetime, updated_at: datetime, groupe_id: integer, peak_id: integer) 
+3.0.2 :080 > p1.save
+3.0.2 :081 > p1
+3.0.2 :082 > p1.save!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: Peak must exist (ActiveRecord::RecordInvalid)
+3.0.2 :083 > g1 = Groupe.new
+ => #<Groupe:0x000055ca3547c890 id: nil, group_name: nil, created_at: nil, updated_at: nil, peak_id: nil> 
+3.0.2 :084 > g1.team_name="Blasters"
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `team_name=' for #<Groupe id: nil, group_name: nil, created_at: nil, updated_at: nil, peak_id: nil> (NoMethodError)
+3.0.2 :085 > g1.group_name="Blasters"
+ => "Blasters" 
+(irb):86:in `<main>': uninitialized constant Group (NameError)
+Did you mean?  Groupe
+ => Groupe(id: integer, group_name: string, created_at: datetime, updated_at: datetime, peak_id: integer) 
+ => Peak(id: integer, peak_price: float, created_at: datetime, updated_at: datetime, groupe_id: integer, peak_id: integer) 
+ => #<Peak:0x000055ca3589c538 id: nil, peak_price: 35000.0, created_at: nil, updated_at: nil, groupe_id: 1, peak_id: 1> 
+3.0.2 :101 > Groupe
+3.0.2 :102 > p1.peak_
+p1.peak_id
+p1.peak_id?
+p1.peak_id_before_type_cast
+p1.peak_id_came_from_user?
+p1.peak_id_change_to_be_saved
+p1.peak_id_changed?
+p1.peak_id_in_database
+p1.peak_id_previously_changed?
+p1.peak_id_was
+p1.peak_price
+p1.peak_price?
+p1.peak_price_before_type_cast
+p1.peak_price_came_from_user?
+p1.peak_price_change_to_be_saved
+p1.peak_price_changed?
+p1.peak_price_in_database
+p1.peak_price_previously_changed?
+p1.peak_price_was
+3.0.2 :102 > p1.peak_price=3500
+3.0.2 :103 > p1.groupe_id=1
+ => 1 
+ => #<Peak:0x000055ca33d68d48 id: nil, peak_price: 3500.0, created_at: nil, updated_at: nil, groupe_id: 1, peak_id: nil> 
+ => false 
+3.0.2 :106 > p1.save!
+Peak must exist (ActiveRecord::RecordInvalid)
+3.0.2 :107 > reload!
+ => true 
+3.0.2 :108 > p1
+3.0.2 :109 > p1=Peak.new
+3.0.2 :110 > p1.peak_price=3500
+3.0.2 :111 > p1.groupe_id=1
+ => 1 
+ => false 
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: 
+3.0.2 :117 > p1
+ => Account(id: integer, acnt_number: string, created_at: datetime, updated_at: datetime, supplier_id: integer) 
+3.0.2 :129 > 
+
+ => #<Supplier:0x000055ca352dc940 id: nil, name: nil, created_at: nil, updated_at: nil> 
+ => "Mohan" 
+3.0.2 :213 > sup1.save
+  TRANSACTION (0.8ms)  BEGIN
+  Supplier Create (1.3ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Mohan"], ["created_at", "2021-11-15 09:24:04.753169"], ["updated_at", "2021-11-15 09:24:04.753169"]]
+  TRANSACTION (31.8ms)  COMMIT
+3.0.2 :214 > act1 = Account.new
+3.0.2 :215 > act1.acnt_number=1234
+3.0.2 :216 > act1.save
+3.0.2 :217 > act1.supp
+act1.supplier
+act1.supplier_id
+act1.supplier_id=
+act1.supplier_id?
+act1.supplier_id_before_last_save
+act1.supplier_id_before_type_cast
+act1.supplier_id_came_from_user?
+act1.supplier_id_change
+act1.supplier_id_changed?
+act1.supplier_id_for_database
+act1.supplier_id_in_database
+act1.supplier_id_previous_change
+act1.supplier_id_previously_changed?
+act1.supplier_id_previously_was
+act1.supplier_id_was
+act1.supplier_id_will_change!
+3.0.2 :217 > act1.supplier_id=1
+ => 1 
+3.0.2 :218 > act1.save
+  TRANSACTION (0.3ms)  BEGIN
+  Supplier Load (0.6ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Create (1.3ms)  INSERT INTO "accounts" ("acnt_number", "created_at", "updated_at", "supplier_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["acnt_number", "1234"], ["created_at", "2021-11-15 09:25:43.264404"], ["updated_at", "2021-11-15 09:25:43.264404"], ["supplier_id", 1]]
+ => true 
+3.0.2 :219 > ah1 = AccountHistory.new
+ => #<AccountHistory:0x000055ca33ea05a8 id: nil, credit_rating: nil, created_at: nil, updated_at: nil, account_id: nil> 
+3.0.2 :220 > ah1.credit_rating=4
+ => 4 
+3.0.2 :221 > ah1.save
+ => false 
+3.0.2 :222 > AccountHistory
+3.0.2 :223 > ah1.account_id=1
+3.0.2 :224 > ah1.save
+  Account Load (0.7ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  AccountHistory Create (1.8ms)  INSERT INTO "account_histories" ("credit_rating", "created_at", "updated_at", "account_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["credit_rating", 4], ["created_at", "2021-11-15 09:29:13.884628"], ["updated_at", "2021-11-15 09:29:13.884628"], ["account_id", 1]]
+  TRANSACTION (25.4ms)  COMMIT
+3.0.2 :225 > Account.all
+ => 
+  id: 1,
+  acnt_number: "1234",
+  updated_at: Mon, 15 Nov 2021 09:25:43.264404000 UTC +00:00,
+3.0.2 :226 > Supplier.all
+  Supplier Load (0.6ms)  SELECT "suppliers".* FROM "suppliers"
+ => 
+[#<Supplier:0x000055ca35daf480
+  id: 1,
+  name: "Mohan",
+  updated_at: Mon, 15 Nov 2021 09:24:04.753169000 UTC +00:00>] 
+  AccountHistory Load (1.0ms)  SELECT "account_histories".* FROM "account_histories"
+[#<AccountHistory:0x000055ca36120bc8
+  credit_rating: 4,
+  updated_at: Mon, 15 Nov 2021 09:29:13.884628000 UTC +00:00,
+3.0.2 :228 > sup2 = Supplier.new
+ => #<Supplier:0x000055ca36435390 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :229 > sup2.name = "Brijesh"
+ => "Brijesh" 
+3.0.2 :230 > sup2.save
+  TRANSACTION (0.6ms)  BEGIN
+  Supplier Create (0.9ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Brijesh"
+  TRANSACTION (21.3ms)  COMMIT
+3.0.2 :231 > act2 = Account.new
+3.0.2 :232 > act2.acnt_number=4321
+ => 4321 
+3.0.2 :233 > acnt2.supplier_id=2
+(irb):233:in `<main>': undefined local variable or method `acnt2' for main:Object (NameError)
+Did you mean?  act2
+3.0.2 :235 > act2.save
+  Supplier Load (0.6ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+id"  [["acnt_number", "4321"], ["created_at", "2021-11-15 09:33:35.808362"], ["updated_at", "2021-11-15 09:33:35.808362"], ["supplier_id", 2]]
+ => 2 
+3.0.2 :239 > ah2.save
+ => false 
+3.0.2 :240 > ah2.account_id=2
+ => 2 
+3.0.2 :241 > ah2.save
+  Account Load (0.7ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+, $4) RETURNING "id"  [["credit_rating", 2], ["created_at", "2021-11-15 09:35:28.632639"], ["updated_at", "2021-11-15 09:35:28.632639"], ["acco
+  TRANSACTION (24.2ms)  COMMIT
+3.0.2 :242 > sup3 = Supplier.new
+ => #<Supplier:0x000055ca361f63e0 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :243 > sup3.name="Sohan"
+ => "Sohan" 
+3.0.2 :244 > sup3.save
+  TRANSACTION (0.5ms)  BEGIN
+  Supplier Create (0.9ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sohan"],
+  TRANSACTION (30.0ms)  COMMIT
+3.0.2 :245 > 
+ => #<Account:0x000055ca36564270 id: nil, acnt_number: nil, created_at: nil, updated_at: nil, supplier_id: nil> 
+3.0.2 :247 > act3.acnt_number=7890
+ => 7890 
+3.0.2 :248 > act3.supplier_id=3
+ => 3 
+
+act2
+acts_like?
+  TRANSACTION (0.7ms)  BEGIN
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Account Create (0.8ms)  INSERT INTO "accounts" ("acnt_number", "created_at", "updated_at", "supplier_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["acnt_number", "7890"], ["created_at", "2021-11-15 09:37:15.628747"], ["updated_at", "2021-11-15 09:37:15.628747"], ["supplier_id", 3]]
+  TRANSACTION (27.3ms)  COMMIT
+ => true 
+ => #<AccountHistory:0x000055ca3549f1b0 id: nil, credit_rating: nil, created_at: nil, updated_at: nil, account_id: nil> 
+ => 5 
+ => 3 
+  TRANSACTION (0.7ms)  BEGIN
+  Account Load (1.0ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  AccountHistory Create (0.6ms)  INSERT INTO "account_histories" ("credit_rating", "created_at", "updated_at", "account_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["credit_rating", 5], ["created_at", "2021-11-15 09:39:54.216001"], ["updated_at", "2021-11-15 09:39:54.216001"], ["account_id", 3]]
+  TRANSACTION (26.7ms)  COMMIT
+ => true 
+ => #<Supplier:0x000055ca36138610 id: nil, name: nil, created_at: nil, updated_at: nil> 
+ => "Kishor" 
+  TRANSACTION (0.6ms)  BEGIN
+  Supplier Create (1.0ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Kishor"], ["created_at", "2021-11-15 09:40:32.647836"], ["updated_at", "2021-11-15 09:40:32.647836"]]
+  TRANSACTION (21.0ms)  COMMIT
+ => true 
+ => #<Account:0x000055ca36417ae8 id: nil, acnt_number: nil, created_at: nil, updated_at: nil, supplier_id: nil> 
+ => 9087 
+ => 4 
+  TRANSACTION (0.7ms)  BEGIN
+  Supplier Load (0.9ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  Account Create (0.9ms)  INSERT INTO "accounts" ("acnt_number", "created_at", "updated_at", "supplier_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["acnt_number", "9087"], ["created_at", "2021-11-15 09:41:34.571555"], ["updated_at", "2021-11-15 09:41:34.571555"], ["supplier_id", 4]]
+  TRANSACTION (28.4ms)  COMMIT
+ => true 
+ => #<AccountHistory:0x000055ca348dd048 id: nil, credit_rating: nil, created_at: nil, updated_at: nil, account_id: nil> 
+ => 5 
+ => 4 
+  TRANSACTION (0.5ms)  BEGIN
+  Account Load (0.9ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  AccountHistory Create (1.3ms)  INSERT INTO "account_histories" ("credit_rating", "created_at", "updated_at", "account_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["credit_rating", 5], ["created_at", "2021-11-15 09:42:38.664796"], ["updated_at", "2021-11-15 09:42:38.664796"], ["account_id", 4]]
+  TRANSACTION (22.5ms)  COMMIT
+ => true 
+ => #<Supplier:0x000055ca35bccbb8 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :266 > sup5.name = "Dhanu"
+ => "Dhanu" 
+3.0.2 :267 > sup5.save
+  Supplier Create (0.9ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Dhanu"],
+  TRANSACTION (26.8ms)  COMMIT
+ => true 
+3.0.2 :268 > act5 = Account.new
+ => #<Account:0x000055ca362240b0 id: nil, acnt_number: nil, created_at: nil, updated_at: nil, supplier_id: nil> 
+3.0.2 :269 > act5.acnt_number=5
+ => 5 
+  TRANSACTION (0.5ms)  BEGIN
+  Supplier Load (0.4ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Account Create (0.8ms)  INSERT INTO "accounts" ("acnt_number", "created_at", "updated_at", "supplier_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["acnt_number", "5"], ["created_at", "2021-11-15 09:44:04.729509"], ["updated_at", "2021-11-15 09:44:04.729509"], ["supplier_id", 5]]
+  TRANSACTION (22.9ms)  COMMIT
+ => true 
+3.0.2 :272 > ah5 = AccountHistory.new
+ => #<AccountHistory:0x000055ca36644208 id: nil, credit_rating: nil, created_at: nil, updated_at: nil, account_id: nil> 
+3.0.2 :273 > ah5.credit_rating=4
+ => 4 
+3.0.2 :274 > ah5.account_id=5
+ => 5 
+3.0.2 :275 > ah5.save
+  TRANSACTION (0.7ms)  BEGIN
+  Account Load (0.7ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  AccountHistory Create (1.0ms)  INSERT INTO "account_histories" ("credit_rating", "created_at", "updated_at", "account_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["credit_rating", 4], ["created_at", "2021-11-15 09:45:26.393054"], ["updated_at", "2021-11-15 09:45:26.393054"], ["account_id", 5]]
+  TRANSACTION (24.2ms)  COMMIT
+ => true 
+3.0.2 :276 > a = Account.find_by(id:5)
+  Account Load (1.0ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+ => 
+#<Account:0x000055ca35948a40
+... 
+3.0.2 :277 > a.acnt_number=5664
+ => 5664 
+  TRANSACTION (0.6ms)  BEGIN
+  Supplier Load (1.1ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Account Update (0.6ms)  UPDATE "accounts" SET "acnt_number" = $1, "updated_at" = $2 WHERE "accounts"."id" = $3  [["acnt_number", "5664"], ["updated_at", "2021-11-15 09:46:39.499356"], ["id", 5]]
+  TRANSACTION (22.4ms)  COMMIT
+ => true 
+3.0.2 :279 > 
+3.0.2 :280 > 
+3.0.2 :281 > Supplier.all
+  Supplier Load (1.0ms)  SELECT "suppliers".* FROM "suppliers"
+ => 
+[#<Supplier:0x000055ca360d1820
+  id: 1,
+  name: "Mohan",
+  created_at: Mon, 15 Nov 2021 09:24:04.753169000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:24:04.753169000 UTC +00:00>,
+ #<Supplier:0x000055ca360d1758
+  id: 2,
+  name: "Brijesh",
+  created_at: Mon, 15 Nov 2021 09:31:12.538907000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:31:12.538907000 UTC +00:00>,
+ #<Supplier:0x000055ca360d1690
+  id: 3,
+  name: "Sohan",
+  created_at: Mon, 15 Nov 2021 09:36:11.695195000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:36:11.695195000 UTC +00:00>,
+ #<Supplier:0x000055ca360d15c8
+  id: 4,
+  name: "Kishor",
+  created_at: Mon, 15 Nov 2021 09:40:32.647836000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:40:32.647836000 UTC +00:00>,
+ #<Supplier:0x000055ca360d1500
+  name: "Dhanu",
+  created_at: Mon, 15 Nov 2021 09:43:15.921578000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:43:15.921578000 UTC +00:00>] 
+3.0.2 :282 > Account.all
+  Account Load (1.2ms)  SELECT "accounts".* FROM "accounts"
+ => 
+[#<Account:0x000055ca3620ea08
+  id: 1,
+  acnt_number: "1234",
+  created_at: Mon, 15 Nov 2021 09:25:43.264404000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:25:43.264404000 UTC +00:00,
+  supplier_id: 1>,
+ #<Account:0x000055ca3620e940
+  id: 2,
+  acnt_number: "4321",
+  created_at: Mon, 15 Nov 2021 09:33:35.808362000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:33:35.808362000 UTC +00:00,
+  supplier_id: 2>,
+ #<Account:0x000055ca3620e878
+  id: 3,
+  acnt_number: "7890",
+  created_at: Mon, 15 Nov 2021 09:37:15.628747000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:37:15.628747000 UTC +00:00,
+  supplier_id: 3>,
+ #<Account:0x000055ca3620e7b0
+  id: 4,
+  acnt_number: "9087",
+  created_at: Mon, 15 Nov 2021 09:41:34.571555000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:41:34.571555000 UTC +00:00,
+  supplier_id: 4>,
+ #<Account:0x000055ca3620e6e8
+  id: 5,
+  created_at: Mon, 15 Nov 2021 09:44:04.729509000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:46:39.499356000 UTC +00:00,
+  supplier_id: 5>] 
+3.0.2 :283 > AccountHistory.all
+  AccountHistory Load (1.1ms)  SELECT "account_histories".* FROM "account_histories"
+ => 
+  id: 1,
+  created_at: Mon, 15 Nov 2021 09:29:13.884628000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:29:13.884628000 UTC +00:00,
+  account_id: 1>,
+ #<AccountHistory:0x000055ca3642e400
+  id: 2,
+  credit_rating: 2,
+  created_at: Mon, 15 Nov 2021 09:35:28.632639000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:35:28.632639000 UTC +00:00,
+ #<AccountHistory:0x000055ca3642e338
+  id: 3,
+  credit_rating: 5,
+  created_at: Mon, 15 Nov 2021 09:39:54.216001000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:39:54.216001000 UTC +00:00,
+  account_id: 3>,
+  id: 4,
+  credit_rating: 5,
+  created_at: Mon, 15 Nov 2021 09:42:38.664796000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:42:38.664796000 UTC +00:00,
+  account_id: 4>,
+ #<AccountHistory:0x000055ca3642e1a8
+  id: 5,
+  created_at: Mon, 15 Nov 2021 09:45:26.393054000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 09:45:26.393054000 UTC +00:00,
+  account_id: 5>] 
+3.0.2 :284 > sup1
+ => 
+#<Supplier:0x000055ca352dc940
+ name: "Mohan",
+ created_at: Mon, 15 Nov 2021 09:24:04.753169000 UTC +00:00,
+ updated_at: Mon, 15 Nov 2021 09:24:04.753169000 UTC +00:00> 
+3.0.2 :285 > sup1.name
+ => "Mohan" 
+3.0.2 :286 > sup1.account
+  Account Load (0.9ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+ => 
+ id: 1,
+ created_at: Mon, 15 Nov 2021 09:25:43.264404000 UTC +00:00,
+ updated_at: Mon, 15 Nov 2021 09:25:43.264404000 UTC +00:00,
+ supplier_id: 1> 
+3.0.2 :287 > sup1
+ => 
+#<Supplier:0x000055ca352dc940
+ name: "Mohan",
+ created_at: Mon, 15 Nov 2021 09:24:04.753169000 UTC +00:00,
+ updated_at: Mon, 15 Nov 2021 09:24:04.753169000 UTC +00:00> 
+ => 
+ id: 1,
+ acnt_number: "1234",
+ created_at: Mon, 15 Nov 2021 09:25:43.264404000 UTC +00:00,
+ updated_at: Mon, 15 Nov 2021 09:25:43.264404000 UTC +00:00,
+ supplier_id: 1> 
+3.0.2 :289 > sup3
+ => 
+#<Supplier:0x000055ca361f63e0
+ id: 3,
+ name: "Sohan",
+ created_at: Mon, 15 Nov 2021 09:36:11.695195000 UTC +00:00,
+ updated_at: Mon, 15 Nov 2021 09:36:11.695195000 UTC +00:00> 
+3.0.2 :290 > sup3.account
+  Account Load (1.0ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 3], ["LIMIT", 1]]
+ => 
+#<Account:0x000055ca35d56240
+ id: 3,
+ acnt_number: "7890",
+ created_at: Mon, 15 Nov 2021 09:37:15.628747000 UTC +00:00,
+ updated_at: Mon, 15 Nov 2021 09:37:15.628747000 UTC +00:00,
+ supplier_id: 3> 
+3.0.2 :291 > sup3.account.acnt_number
+ => "7890" 
+3.0.2 :292 > sup3
+ => 
+#<Supplier:0x000055ca361f63e0
+ id: 3,
+ name: "Sohan",
+ created_at: Mon, 15 Nov 2021 09:36:11.695195000 UTC +00:00,
+ updated_at: Mon, 15 Nov 2021 09:36:11.695195000 UTC +00:00> 
+3.0.2 :293 > sup3.account.account_history.credit_rating
+  AccountHistory Load (0.6ms)  SELECT "account_histories".* FROM "account_histories" WHERE "account_histories"."account_id" = $1 LIMIT $2  [["account_id", 3], ["LIMIT", 1]]
+ => 5 
+3.0.2 :294 > sup3.account.account_history.credit_rating
+ => 5 
+3.0.2 :295 > sup4.account.account_history.credit_rating
+  Account Load (1.3ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 4], ["LIMIT", 1]]
+  AccountHistory Load (0.7ms)  SELECT "account_histories".* FROM "account_histories" WHERE "account_histories"."account_id" = $1 LIMIT $2  [["account_id", 4], ["LIMIT", 1]]
+ => 5 
+3.0.2 :296 > 
+
+
 
