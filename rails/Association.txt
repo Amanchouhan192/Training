@@ -788,5 +788,102 @@ class CreatePhysicians < ActiveRecord::Migration[6.1]
     end
   end
 end
+=======================================has_one,Through association============================================
+Tables:
+
+simple_cms_development=# select * from suppliers;
+ id |  name   |         created_at         |         updated_at         
+----+---------+----------------------------+----------------------------
+  1 | Mohan   | 2021-11-15 09:24:04.753169 | 2021-11-15 09:24:04.753169
+  2 | Brijesh | 2021-11-15 09:31:12.538907 | 2021-11-15 09:31:12.538907
+  3 | Sohan   | 2021-11-15 09:36:11.695195 | 2021-11-15 09:36:11.695195
+  4 | Kishor  | 2021-11-15 09:40:32.647836 | 2021-11-15 09:40:32.647836
+  5 | Dhanu   | 2021-11-15 09:43:15.921578 | 2021-11-15 09:43:15.921578
+(5 rows)
+
+simple_cms_development=# select * from accounts;
+ id | acnt_number |         created_at         |         updated_at         | supplier_id 
+----+-------------+----------------------------+----------------------------+-------------
+  1 | 1234        | 2021-11-15 09:25:43.264404 | 2021-11-15 09:25:43.264404 |           1
+  2 | 4321        | 2021-11-15 09:33:35.808362 | 2021-11-15 09:33:35.808362 |           2
+  3 | 7890        | 2021-11-15 09:37:15.628747 | 2021-11-15 09:37:15.628747 |           3
+  4 | 9087        | 2021-11-15 09:41:34.571555 | 2021-11-15 09:41:34.571555 |           4
+  5 | 5664        | 2021-11-15 09:44:04.729509 | 2021-11-15 09:46:39.499356 |           5
+(5 rows)
+
+simple_cms_development=# select * from account_histories;
+ id | credit_rating |         created_at         |         updated_at         | account_id 
+----+---------------+----------------------------+----------------------------+------------
+  1 |             4 | 2021-11-15 09:29:13.884628 | 2021-11-15 09:29:13.884628 |          1
+  2 |             2 | 2021-11-15 09:35:28.632639 | 2021-11-15 09:35:28.632639 |          2
+  3 |             5 | 2021-11-15 09:39:54.216001 | 2021-11-15 09:39:54.216001 |          3
+  4 |             5 | 2021-11-15 09:42:38.664796 | 2021-11-15 09:42:38.664796 |          4
+  5 |             4 | 2021-11-15 09:45:26.393054 | 2021-11-15 09:45:26.393054 |          5
+(5 rows)
+
+Model: 
+
+class Account < ApplicationRecord
+    belongs_to :supplier
+    has_one :account_history
+end
+
+
+class AccountHistory < ApplicationRecord
+    belongs_to :account
+end
+
+class Supplier < ApplicationRecord
+    has_one :account
+    has_one :account_history,through: :account
+
+end
+
+
+Migrations:
+
+class CreateSuppliers < ActiveRecord::Migration[6.1]
+  def change
+    create_table :suppliers do |t|
+      t.string :name
+
+      t.timestamps
+    end
+  end
+end
+
+class CreateAccounts < ActiveRecord::Migration[6.1]
+  def change
+    create_table :accounts do |t|
+      t.string :acnt_number
+
+      t.timestamps
+    end
+  end
+end
+
+class CreateAccountHistories < ActiveRecord::Migration[6.1]
+  def change
+    create_table :account_histories do |t|
+      t.integer :credit_rating
+
+      t.timestamps
+    end
+  end
+end
+
+For changing the table for foreign_key
+
+class AddSupplierRefToAccount < ActiveRecord::Migration[6.1]
+  def change
+    add_reference :accounts,:supplier,foreign_key: true
+  end
+end
+
+class AddAccountRefToAccountHistory < ActiveRecord::Migration[6.1]
+  def change
+    add_reference :account_histories,:account,foreign_key: true
+  end
+end
 
 
