@@ -872,7 +872,7 @@ class CreateAccountHistories < ActiveRecord::Migration[6.1]
   end
 end
 
-For changing the table for foreign_key
+For changing the table for foreign_key 
 
 class AddSupplierRefToAccount < ActiveRecord::Migration[6.1]
   def change
