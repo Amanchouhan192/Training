@@ -1,10 +1,10 @@
 class Post < ApplicationRecord
     #belongs to both author and Categories.
-    belongs_to:author ,optional: true
+    belongs_to:author, optional: true
 
     #post.authorr // read the author that post belongs to
     #post.authorr // set the author that post belongs to
-    belongs_to:category,optional: true
+    belongs_to:category, optional: true
 end
 
 =begin
