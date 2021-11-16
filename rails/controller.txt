@@ -1,0 +1,16 @@
+=============================================Controller========================================
+ 1.Gernerating Controller:
+ 
+rails generate controller comments
+Running via Spring preloader in process 14063
+      create  app/controllers/comments_controller.rb
+      invoke  erb
+      create    app/views/comments
+      invoke  test_unit
+      create    test/controllers/comments_controller_test.rb
+      invoke  helper
+      create    app/helpers/comments_helper.rb
+      invoke    test_unit
+      invoke  assets
+      invoke    scss
+
