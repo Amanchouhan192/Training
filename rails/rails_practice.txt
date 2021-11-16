@@ -5993,6 +5993,151 @@ acts_like?
   AccountHistory Load (0.7ms)  SELECT "account_histories".* FROM "account_histories" WHERE "account_histories"."account_id" = $1 LIMIT $2  [["account_id", 4], ["LIMIT", 1]]
  => 5 
 3.0.2 :296 > 
+================================================16th Nov================================
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ rails c
+Loading development environment (Rails 6.1.4.1)
+Reloading...
+3.0.2 :002 > Picture
+3.0.2 :003 > Picture
+ => Picture (call 'Picture.connection' to establish a connection) 
+3.0.2 :004 > Picture.all
+  Picture Load (60.4ms)  SELECT "pictures".* FROM "pictures"
+3.0.2 :005 > Picture
+ => Picture(id: integer, pic_name: string, imageable_type: string, imageable_id: integer, created_at: datetime, updated_at: datetime) 
+3.0.2 :006 > Prodcut
+ => Prodcut(id: integer, prod_name: string, created_at: datetime, updated_at: datetime) 
+ => Customer(id: integer, cust_name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :008 > p1 = Pro
+
+Proc
+Prodcut
+Project
+ProjectAssigned
+3.0.2 :008 > p1 = Prodcut.new
+3.0.2 :009 > p1.prod_name="Power Bank"
+3.0.2 :010 > p1.save
+  TRANSACTION (0.7ms)  BEGIN
+  Prodcut Create (40.8ms)  INSERT INTO "prodcuts" ("prod_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["prod_name", "Power Bank"], ["created_at", "2021-11-16 02:15:34.633081"], ["updated_at", "2021-11-16 02:15:34.633081"]]
+ => true 
+3.0.2 :011 > pict1 = Picture.new
+ => #<Picture:0x000055b57023cdc0 id: nil, pic_name: nil, imageable_type: nil, imageable_id: nil, created_at: nil, updated_at: nil> 
+ => "Power Bankg Image" 
+3.0.2 :013 > pict1.imageable_type="Product"
+ => "Product" 
+3.0.2 :014 > pict1.imageable_id=1
+ => 1 
+3.0.2 :015 > pict1.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/inflector/methods.rb:274:in `const_get': uninitialized constant Product (NameError)
+               Project
+3.0.2 :016 > pict1.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/inflector/methods.rb:274:in `const_get': uninitialized constant Product (NameError)
+               Project
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/inflector/methods.rb:274:in `const_get': uninitialized constant 
+Did you mean?  Prodcut
+               Project
+3.0.2 :018 > pict1.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/inflector/methods.rb:274:in `const_get': uninitialized constant Product (NameError)
+               Project
+3.0.2 :019 > p1.save
+ => true 
+3.0.2 :020 > pict1.save
+Product (NameError)
+               Project
+3.0.2 :021 > pict1.Product
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `Product' for #<Picture id: nil, pic_name: "Power Bankg Image", imageable_type: "Product", imageable_id: 1, created_at: nil, updated_at: nil> (NoMethodError)
+3.0.2 :022 > pict1
+ => 
+ id: nil,
+ pic_name: "Power Bankg Image",
+ imageable_type: "Product",
+ imageable_id: 1,
+ created_at: nil,
+ updated_at: nil> 
+3.0.2 :023 > pict1.save
+Product (NameError)
+Did you mean?  Prodcut
+               Project
+3.0.2 :024 > cust1 = Customer.new
+ => #<Customer:0x000055b5701035d0 id: nil, cust_name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :025 > cust1.cust_name="Mohan"
+ => "Mohan" 
+3.0.2 :026 > cust1.save
+ created_at: nil,
+3.0.2 :032 > pict1.imageable_
+
+pict1.imageable_id
+pict1.imageable_id=
+pict1.imageable_id?
+pict1.imageable_id_before_last_save
+pict1.imageable_id_before_type_cast
+pict1.imageable_id_came_from_user?
+pict1.imageable_id_change_to_be_saved
+pict1.imageable_id_changed?
+pict1.imageable_id_for_database
+pict1.imageable_id_in_database
+pict1.imageable_id_previous_change
+pict1.imageable_id_previously_changed?
+pict1.imageable_id_previously_was
+pict1.imageable_id_will_change!
+pict1.imageable_type_changed?
+pict1.imageable_type_for_database
+pict1.imageable_type_in_database
+pict1.imageable_type_previous_change
+pict1.imageable_type_previously_was
+pict1.imageable_type_was
+pict1.imageable_type_will_change!
+3.0.2 :032 > pict1.imageable_type="Prodcut"
+ => "Prodcut" 
+3.0.2 :033 > pict1
+#<Picture:0x000055b57023cdc0
+ id: nil,
+ pic_name: "Power Bankg Image",
+ imageable_type: "Prodcut",
+ created_at: nil,
+ updated_at: nil> 
+3.0.2 :034 > pict1.save
+  TRANSACTION (0.5ms)  BEGIN
+  Prodcut Load (0.7ms)  SELECT "prodcuts".* FROM "prodcuts" WHERE "prodcuts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Picture Create (26.5ms)  INSERT INTO "pictures" ("pic_name", "imageable_type", "imageable_id", "created_at", "updated_at") VALUES ($1, $2, $3
+:25:45.707617"], ["updated_at", "2021-11-16 02:25:45.707617"]]
+ => true 
+3.0.2 :035 > @prodcut.imageable
+(irb):35:in `<main>': undefined method `imageable' for nil:NilClass (NoMethodError)
+3.0.2 :036 > Pro
+
+Proc
+Process
+Prodcut
+Project
+ProjectAssigned
+3.0.2 :036 > Prodcut.first.imageable
+  Prodcut Load (0.8ms)  SELECT "prodcuts".* FROM "prodcuts" ORDER BY "prodcuts"."id" ASC LIMIT $1  [["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `imageable' for #<Prodcut id: 1, prod_name: "Power Bank", created_at: "2021-11-16 02:15:34.633081000 +0000", updated_at: "2021-11-16 02:15:34.633081000 +0000"> (NoMethodError)
+3.0.2 :037 > Prodcut.first.picture
+  Prodcut Load (0.8ms)  SELECT "prodcuts".* FROM "prodcuts" ORDER BY "prodcuts"."id" ASC LIMIT $1  [["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `picture' for #<Prodcut id: 1, prod_name: "Power Bank", created_at: "2021-11-16 02:15:34.633081000 +0000", updated_at: "2021-11-16 02:15:34.633081000 +0000"> (NoMethodError)
+Did you mean?  pictures
+               pictures=
+3.0.2 :038 > Prodcut.first.image
+  Prodcut Load (0.8ms)  SELECT "prodcuts".* FROM "prodcuts" ORDER BY "prodcuts"."id" ASC LIMIT $1  [["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `image' for #<Prodcut id: 1, prod_name: "Power Bank", created_at: "2021-11-16 02:15:34.633081000 +0000", updated_at: "2021-11-16 02:15:34.633081000 +0000"> (NoMethodError)
+3.0.2 :039 > Prodcut.first.picture
+  Prodcut Load (1.2ms)  SELECT "prodcuts".* FROM "prodcuts" ORDER BY "prodcuts"."id" ASC LIMIT $1  [["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `picture' for #<Prodcut id: 1, prod_name: "Power Bank", created_at: "2021-11-16 02:15:34.633081000 +0000", updated_at: "2021-11-16 02:15:34.633081000 +0000"> (NoMethodError)
+Did you mean?  pictures
+               pictures=
+3.0.2 :040 > @Prodcut.first.picture
+(irb):40:in `<main>': undefined method `first' for nil:NilClass (NoMethodError)
+3.0.2 :041 > Prodcut.first
+  Prodcut Load (1.3ms)  SELECT "prodcuts".* FROM "prodcuts" ORDER BY "prodcuts"."id" ASC LIMIT $1  [["LIMIT", 1]]
+ => 
+#<Prodcut:0x000055b56f72e438
+ id: 1,
+ prod_name: "Power Bank",
+ created_at: Tue, 16 Nov 2021 02:15:34.633081000 UTC +00:00,
+ updated_at: Tue, 16 Nov 2021 02:15:34.633081000 UTC +00:00> 
+3.0.2 :042 > 
+
 
 
 
