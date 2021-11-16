@@ -1,0 +1,309 @@
+=============================Active Query==================================================
+2. Retrieving Objects from the Database:
+
+1.annotate: 
+		
+	syntax : 
+	 Student.annotate("Rohan").select(:fname)
+	 
+  Student Load (24.7ms)  SELECT "students"."fname" FROM "students" /* Rohan */
+ => 
+[#<Student:0x0000563de07f95d0 id: nil, fname: "Rohan">,
+ #<Student:0x0000563de07f9508 id: nil, fname: "Karan">,
+ #<Student:0x0000563de07f9418 id: nil, fname: "Rishabh">,
+ #<Student:0x0000563de07f9350 id: nil, fname: "Brijesh">,
+ #<Student:0x0000563de07f9288 id: nil, fname: "Simran">,
+ #<Student:0x0000563de07f91c0 id: nil, fname: "Tarushee">,
+ #<Student:0x0000563de07f90f8 id: nil, fname: "Kiran">,
+ #<Student:0x0000563de07f9030 id: nil, fname: "Sanjay">,
+ #<Student:0x0000563de07f8f68 id: nil, fname: "Rajesh">,
+ #<Student:0x0000563de07f8ea0 id: nil, fname: "Pawan">,
+ #<Student:0x0000563de07f8dd8 id: nil, fname: "Utkarsh">] 
+
+3.0.2 :076 > Student.annotate("Simran").select(:lname)
+  Student Load (0.9ms)  SELECT "students"."lname" FROM "students" /* Simran */
+ => 
+[#<Student:0x0000563de053d0a8 id: nil, lname: "sharma">,
+ #<Student:0x0000563de053cfe0 id: nil, lname: "Malhotra">,
+ #<Student:0x0000563de053cf18 id: nil, lname: "Bhardwaj">,
+ #<Student:0x0000563de053ce50 id: nil, lname: "Yadav">,
+ #<Student:0x0000563de053cd88 id: nil, lname: "Kumari">,
+ #<Student:0x0000563de053ccc0 id: nil, lname: "Kumar">,
+ #<Student:0x0000563de053cbf8 id: nil, lname: "Kumari">,
+ #<Student:0x0000563de053cb30 id: nil, lname: "Tank">,
+ #<Student:0x0000563de053ca68 id: nil, lname: "Kumar">,
+ #<Student:0x0000563de053c9a0 id: nil, lname: "Kumar">,
+ #<Student:0x0000563de053c8d8 id: nil, lname: "Sharma">] 
+3.0.2 :077 > 
+---------------------------------------------------------------------------
+2.find():   Find by id - This can either be a specific id (1), a list of ids (1, 5, 6), or an array of ids ([5, 6, 10]). If one or more records cannot be found for the requested ids, then ActiveRecord::RecordNotFound will be raised. If the primary key is an integer, find by id coerces its arguments by using to_i.
+
+	syntax : Model_name.find(id)
+	
+3.0.2 :081 > Student.find(1)
+  Student Load (0.8ms)  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Student:0x0000563dded10958
+ id: 1,
+ lname: "sharma",
+ fname: "Rohan",
+ created_at: Fri, 12 Nov 2021 19:02:45.734525000 UTC +00:00,
+ updated_at: Mon, 15 Nov 2021 11:17:24.855307000 UTC +00:00,
+ gender: "Male",
+ email: "rohan@gmail.com",
+ stud_id: "1"> 
+3.0.2 :082 > Student.find("1")
+  Student Load (0.9ms)  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Student:0x0000563ddf6fad88
+ id: 1,
+ lname: "sharma",
+ fname: "Rohan",
+ created_at: Fri, 12 Nov 2021 19:02:45.734525000 UTC +00:00,
+ updated_at: Mon, 15 Nov 2021 11:17:24.855307000 UTC +00:00,
+ gender: "Male",
+ email: "rohan@gmail.com",
+ stud_id: "1"> 
+3.0.2 :083 > Student.find("1-Rohan")
+  Student Load (0.8ms)  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Student:0x0000563de01f9540
+ id: 1,
+ fname: "Rohan",
+ created_at: Fri, 12 Nov 2021 19:02:45.734525000 UTC +00:00,
+ updated_at: Mon, 15 Nov 2021 11:17:24.855307000 UTC +00:00,
+ email: "rohan@gmail.com",
+ stud_id: "1"> 
+3.0.2 :084 > Student.find(1, 2, 6)
+  Student Load (1.1ms)  SELECT "students".* FROM "students" WHERE "students"."id" IN ($1, $2, $3)  [["id", 1], ["id", 2], ["id", 6]]
+ => 
+[#<Student:0x0000563de040faa0
+  id: 1,
+  lname: "sharma",
+  fname: "Rohan",
+  created_at: Fri, 12 Nov 2021 19:02:45.734525000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 11:17:24.855307000 UTC +00:00,
+  gender: "Male",
+  email: "rohan@gmail.com",
+  stud_id: "1">,
+ #<Student:0x0000563de040f9d8
+  id: 2,
+  lname: "Malhotra",
+  fname: "Karan",
+  created_at: Fri, 12 Nov 2021 19:03:04.896675000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 11:18:35.176193000 UTC +00:00,
+  email: "karan@gmail.com",
+  stud_id: "2">,
+ #<Student:0x0000563de040f910
+  id: 6,
+  lname: "Kumari",
+  fname: "Simran",
+  created_at: Fri, 12 Nov 2021 19:04:00.892915000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 11:21:14.025161000 UTC +00:00,
+  gender: "Female",
+  email: "simran@gmail.com",
+  stud_id: "6">] 
+3.0.2 :085 > Student.find([7,17])
+  Student Load (1.0ms)  SELECT "students".* FROM "students" WHERE "students"."id" IN ($1, $2)  [["id", 7], ["id", 17]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/relation/finder_methods.rb:362:in `raise_record_not_found_exception!': Couldn't find all Students with 'id': (7, 17) (found 1 results, but was looking for 2). (ActiveRecord::RecordNotFound)
+3.0.2 :086 > Student.find([1,5])
+  Student Load (0.7ms)  SELECT "students".* FROM "students" WHERE "students"."id" IN ($1, $2)  [["id", 1], ["id", 5]]
+ => 
+[#<Student:0x0000563de07f2a28
+  id: 1,
+  lname: "sharma",
+  fname: "Rohan",
+  created_at: Fri, 12 Nov 2021 19:02:45.734525000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 11:17:24.855307000 UTC +00:00,
+  gender: "Male",
+  email: "rohan@gmail.com",
+  stud_id: "1">,
+ #<Student:0x0000563de07f2938
+  id: 5,
+  lname: "Yadav",
+  fname: "Brijesh",
+  created_at: Fri, 12 Nov 2021 19:03:42.673478000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 11:19:48.798678000 UTC +00:00,
+  gender: "Male",
+  email: "brijesh@gmail.com",
+  stud_id: "5">] 
+3.0.2 :087 > Student.find([1])
+  Student Load (0.8ms)  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+[#<Student:0x0000563ddeb03728
+  id: 1,
+  lname: "sharma",
+  fname: "Rohan",
+  created_at: Fri, 12 Nov 2021 19:02:45.734525000 UTC +00:00,
+  updated_at: Mon, 15 Nov 2021 11:17:24.855307000 UTC +00:00,
+  gender: "Male",
+  email: "rohan@gmail.com",
+  stud_id: "1">] 
+3.0.2 :088 > 
+
+------------------------------------------------------------------------------
+2.create_with:  Sets attributes to be used when creating new records from a relation object.
+
+s = Student.where(fname: 'Kishan')
+  Student Load (0.9ms)  SELECT "students".* FROM "students" WHERE "students"."fname" = $1  [["fname", "Kishan"]]
+ => [] 
+3.0.2 :072 > s.new.fname
+ => "Kishan" 
+3.0.2 :073 > s = Student.create_with(fname: 'Krishna')
+  Student Load (0.9ms)  SELECT "students".* FROM "students"
+ => 
+[#<Student:0x0000563ddf26ec88
+
+
+users = users.create_with(nil)
+users.new.name # => 'Oscar'
+
+
+
+3.0.2 :075 > s.new.fname
+ => "Krishna" 
+
+ s = Student.where(fname: 'Kishan')
+  Student Load (0.9ms)  SELECT "students".* FROM "students" WHERE "students
+ => [] 
+3.0.2 :072 > s.new.fname
+ => "Kishan" 
+
+3.0.2 :076 > s = Student.create_with(nil)
+  Student Load (0.6ms)  SELECT "students".* FROM "students"
+3.0.2 :078 > s.new.fname
+ => nil 
+3.0.2 :079 > 
+
+
+------------------------------------------------------------------------------------------------------
+3.distinct :
+
+Student.select(:fname)
+  Student Load (0.8ms)  SELECT "students"."fname" FROM "students"
+ => 
+[#<Student:0x0000563ddf70a558 id: nil, fname: "Rohan">,
+ #<Student:0x0000563ddf70a490 id: nil, fname: "Karan">,
+ #<Student:0x0000563ddf70a3c8 id: nil, fname: "Rishabh">,
+ #<Student:0x0000563ddf70a300 id: nil, fname: "Brijesh">,
+ #<Student:0x0000563ddf70a210 id: nil, fname: "Simran">,
+ #<Student:0x0000563ddf70a0d0 id: nil, fname: "Tarushee">,
+ #<Student:0x0000563ddf70a008 id: nil, fname: "Kiran">,
+ #<Student:0x0000563ddf709f18 id: nil, fname: "Sanjay">,
+ #<Student:0x0000563ddf709e50 id: nil, fname: "Rajesh">,
+ #<Student:0x0000563ddf709d88 id: nil, fname: "Pawan">,
+ #<Student:0x0000563ddf709cc0 id: nil, fname: "Utkarsh">,
+ #<Student:0x0000563ddf709bf8 id: nil, fname: "Simran">] 
+3.0.2 :093 > Student.select(:fname).distinct
+  Student Load (21.9ms)  SELECT DISTINCT "students"."fname" FROM "students"
+ => 
+[#<Student:0x0000563ddffcf620 id: nil, fname: "Kiran">,
+ #<Student:0x0000563ddffcf558 id: nil, fname: "Rajesh">,
+ #<Student:0x0000563ddffcf490 id: nil, fname: "Tarushee">,
+ #<Student:0x0000563ddffcf3c8 id: nil, fname: "Simran">,
+ #<Student:0x0000563ddffcf300 id: nil, fname: "Rishabh">,
+ #<Student:0x0000563ddffcf238 id: nil, fname: "Pawan">,
+ #<Student:0x0000563ddffcf170 id: nil, fname: "Brijesh">,
+ #<Student:0x0000563ddffcf0a8 id: nil, fname: "Utkarsh">,
+ #<Student:0x0000563ddffcefe0 id: nil, fname: "Sanjay">,
+ #<Student:0x0000563ddffcef18 id: nil, fname: "Karan">,
+ #<Student:0x0000563ddffcee50 id: nil, fname: "Rohan">] 
+3.0.2 :094 > Student.select(:fname).distinct.distinct(false)
+  Student Load (0.7ms)  SELECT "students"."fname" FROM "students"
+ => 
+[#<Student:0x0000563de046b5d0 id: nil, fname: "Rohan">,
+ #<Student:0x0000563de046b490 id: nil, fname: "Karan">,
+ #<Student:0x0000563de046b328 id: nil, fname: "Rishabh">,
+ #<Student:0x0000563de046b120 id: nil, fname: "Brijesh">,
+ #<Student:0x0000563de046b058 id: nil, fname: "Simran">,
+ #<Student:0x0000563de046af90 id: nil, fname: "Tarushee">,
+ #<Student:0x0000563de046aec8 id: nil, fname: "Kiran">,
+ #<Student:0x0000563de046adb0 id: nil, fname: "Sanjay">,
+ #<Student:0x0000563de046ac20 id: nil, fname: "Rajesh">,
+ #<Student:0x0000563de046aae0 id: nil, fname: "Pawan">,
+ #<Student:0x0000563de046a978 id: nil, fname: "Utkarsh">,
+ #<Student:0x0000563de046a838 id: nil, fname: "Simran">] 
+3.0.2 :095 > 
+------------------------------------------------------------------------------------------
+4.eager_load(*args) 
+
+Forces eager loading by performing a LEFT OUTER JOIN on args:
+------------------------------------------------------------------------------------------
+5.Student.select('fname').from('students')
+
+  Student Load (0.8ms)  SELECT "students"."fname" FROM students
+ => 
+[#<Student:0x0000563de0015288 id: nil, fname: "Rohan">,
+ #<Student:0x0000563de00151c0 id: nil, fname: "Karan">,
+ #<Student:0x0000563de00150f8 id: nil, fname: "Rishabh">,
+ #<Student:0x0000563de0015030 id: nil, fname: "Brijesh">,
+ #<Student:0x0000563de0014f68 id: nil, fname: "Simran">,
+ #<Student:0x0000563de0014ea0 id: nil, fname: "Tarushee">,
+ #<Student:0x0000563de0014dd8 id: nil, fname: "Kiran">,
+ #<Student:0x0000563de0014d10 id: nil, fname: "Sanjay">,
+ #<Student:0x0000563de0014c48 id: nil, fname: "Rajesh">,
+ #<Student:0x0000563de0014b80 id: nil, fname: "Pawan">,
+ #<Student:0x0000563de0014ab8 id: nil, fname: "Utkarsh">,
+ #<Student:0x0000563de00149f0 id: nil, fname: "Simran">] 
+
+-------------------------------------------------------------------------------------------
+6.Group
+
+
+User.group(:id)
+  User Load (0.9ms)  SELECT "users".* FROM "users" GROUP BY "users"."id"
+ => 
+[#<User:0x0000563ddf3e8de8
+  id: 5,
+  last_name: "Garg",
+  first_name: "Ankit",
+  email: "ankit@gmail.com",
+  created_at: Fri, 12 Nov 2021 20:10:29.983194000 UTC +00:00,
+  updated_at: Fri, 12 Nov 2021 20:13:13.538375000 UTC +00:00,
+  gender: "Male">,
+	:
+	:
+	soon..
+	
+User.select([:id,:first_name])
+  User Load (0.7ms)  SELECT "users"."id", "users"."first_name" FROM "users"
+ => 
+[#<User:0x0000563de05fa6a8 id: 1, first_name: "Karan">,
+ #<User:0x0000563de05fa5b8 id: 2, first_name: "Pooja">,
+ #<User:0x0000563de05fa4f0 id: 3, first_name: "Priya">,
+ #<User:0x0000563de05fa428 id: 4, first_name: "Priyanshu">,
+ #<User:0x0000563de05fa360 id: 5, first_name: "Ankit">] 
+ 
+ 
+  User.select([:id,:first_name]).group(:id,:first_name).first
+(3)
+  User Load (0.8ms)  SELECT "users"."id", "users"."first_name" FROM "users" GROUP BY "users"."id", "users"."first_name" ORDER BY "users"."id" ASC LIMIT $1  [["LIMIT", 3]]
+ => 
+[#<User:0x0000563ddd7c9bf8 id: 1, first_name: "Karan">,
+ #<User:0x0000563ddd7c9270 id: 2, first_name: "Pooja">,
+ #<User:0x0000563ddd7c3870 id: 3, first_name: "Priya">] 
+3.0.2 :133 > 
+
+--------------------------------------------------------------------------------------------
+7.from
+
+Student.select('fname').from('students')
+  Student Load (0.7ms)  SELECT "students"."fname" FROM students
+ => 
+[#<Student:0x0000563ddedec5e8 id: nil, fname: "Rohan">,
+ #<Student:0x0000563ddedec390 id: nil, fname: "Karan">,
+ #<Student:0x0000563ddeddffa0 id: nil, fname: "Rishabh">,
+ #<Student:0x0000563ddeddf938 id: nil, fname: "Brijesh">,
+ #<Student:0x0000563ddeddf7d0 id: nil, fname: "Simran">,
+ #<Student:0x0000563ddeddf550 id: nil, fname: "Tarushee">,
+ #<Student:0x0000563ddeddf078 id: nil, fname: "Kiran">,
+ #<Student:0x0000563ddeddebc8 id: nil, fname: "Sanjay">,
+ #<Student:0x0000563ddedde858 id: nil, fname: "Rajesh">,
+ #<Student:0x0000563ddedde448 id: nil, fname: "Pawan">,
+ #<Student:0x0000563ddedddef8 id: nil, fname: "Utkarsh">,
+ #<Student:0x0000563ddeddd750 id: nil, fname: "Simran">] 
+3.0.2 :141 > 
+-------------------------------------------------------------------------------------------------
+8. joins(*args)
+
+
