@@ -1,1 +1,24 @@
 </br><h1>This is hello page .</h1>
+
+<% taget = 1+1 %>
+<%= "Hello #{taget}" %></ br>
+<% @stundents.each do |student| %></br>
+    <%= student.fname %>
+    <%= student.lname %>
+    <input>Enter Text</input>
+    <button>Click Me</button>
+    <%= student.email %>
+<% end %>
+<br />
+
+
+<% @array.each do |i| %><br />
+    <%= i %>
+<% end %><br />
+<%= link_to("Hello Page 1",{:action =>'index'}) %> 
+
+<br />
+ID: <%= @id %><br />
+ID: <%= @params %><br />
+Page: <%= @page %><br />
+Next page: <%=  @page.to_i+1 %>
