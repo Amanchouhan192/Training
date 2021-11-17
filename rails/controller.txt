@@ -13,4 +13,54 @@ Running via Spring preloader in process 14063
       invoke    test_unit
       invoke  assets
       invoke    scss
+----------------------------------------------------------------------------------------
+ rails generate controller Subjects index show new edit delete
+Running via Spring preloader in process 19397
+      create  app/controllers/subjects_controller.rb
+       route  get 'subjects/index'
+get 'subjects/show'
+get 'subjects/new'
+get 'subjects/edit'
+get 'subjects/delete'
+      invoke  erb
+      create    app/views/subjects
+      create    app/views/subjects/index.html.erb
+      create    app/views/subjects/show.html.erb
+      create    app/views/subjects/new.html.erb
+      create    app/views/subjects/edit.html.erb
+      create    app/views/subjects/delete.html.erb
+      invoke  test_unit
+      create    test/controllers/subjects_controller_test.rb
+      invoke  helper
+      create    app/helpers/subjects_helper.rb
+      invoke    test_unit
+      invoke  assets
+      invoke    scss
+      create      app/assets/stylesheets/subjects.scss
+
+ rails generate controller Pages index show new edit delete
+Running via Spring preloader in process 19424
+      create  app/controllers/pages_controller.rb
+       route  get 'pages/index'
+get 'pages/show'
+get 'pages/new'
+get 'pages/edit'
+get 'pages/delete'
+      invoke  erb
+      create    app/views/pages
+      create    app/views/pages/index.html.erb
+      create    app/views/pages/show.html.erb
+      create    app/views/pages/new.html.erb
+      create    app/views/pages/edit.html.erb
+      create    app/views/pages/delete.html.erb
+      invoke  test_unit
+      create    test/controllers/pages_controller_test.rb
+      invoke  helper
+      create    app/helpers/pages_helper.rb
+      invoke    test_unit
+      invoke  assets
+      invoke    scss
+      create      app/assets/stylesheets/pages.scss
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ 
+
 
