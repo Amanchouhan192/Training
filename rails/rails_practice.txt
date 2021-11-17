@@ -6138,6 +6138,21 @@ Did you mean?  pictures
  updated_at: Tue, 16 Nov 2021 02:15:34.633081000 UTC +00:00> 
 3.0.2 :042 > 
 
+===============
 
+<%= @employees.each do |employee| %>
+  <%= employee.fname %>Department: <%= employee.department %>br />
+.0.2 :050 > Prodcut.find(1).pictures
+  Prodcut Load (0.8ms)  SELECT "prodcuts".* FROM "prodcuts" WHERE "prodcuts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Picture Load (0.5ms)  SELECT "pictures".* FROM "pictures" WHERE "pictures"."imageable_id" = $1 AND "pictures"."imageable_type" = $2  [["imageable_id", 1], ["imageable_type", "Prodcut"]]
+ => 
+[#<Picture:0x0000557cc3097cd0
+  id: 1,
+  pic_name: "Power Bankg Image",
+  imageable_type: "Prodcut",
+  imageable_id: 1,
+  created_at: Tue, 16 Nov 2021 02:25:45.707617000 UTC +00:00,
+  updated_at: Tue, 16 Nov 2021 02:25:45.707617000 UTC +00:00>] 
+3.0.2 :051 > 
 
 
