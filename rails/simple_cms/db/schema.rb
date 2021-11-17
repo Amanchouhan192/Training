@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_183150) do
+ActiveRecord::Schema.define(version: 2021_11_16_223709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,21 @@ ActiveRecord::Schema.define(version: 2021_11_15_183150) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "peak_id"
     t.index ["peak_id"], name: "index_groupes_on_peak_id"
+  end
+
+  create_table "movie_ratings", force: :cascade do |t|
+    t.integer "imbd"
+    t.integer "audience_rating"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "movie_id"
+    t.index ["movie_id"], name: "index_movie_ratings_on_movie_id"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "patients", force: :cascade do |t|
@@ -303,6 +318,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_183150) do
   add_foreign_key "developer2s", "teams"
   add_foreign_key "employees", "departments"
   add_foreign_key "groupes", "peaks"
+  add_foreign_key "movie_ratings", "movies"
   add_foreign_key "peaks", "groupes"
   add_foreign_key "software_engineers", "teams"
   add_foreign_key "tickets", "clients"
