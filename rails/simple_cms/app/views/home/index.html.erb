@@ -1,15 +1,19 @@
-<<br /><br />Welcome Aman!
-<a href="http://google.com">Google</a>
-<%= link_to "Google1", "http://google.com" %>
+<br /><br /><a href="http://google.com">Google</a><br />
+<%= link_to "Google1", "http://google.com" %><br />
 
-<% @employees.each do |employee| %></br>
-   <%= employee.fname %></ br>
+<br /><br />Student Names
+
+
+<% @employees.each do |employee| %><br />
+   <%= employee.fname %><br />
 <% end %> 
 
-<%#= <a href="/home/hello>Hello Page 1</a></ br> %>
-<%= link_to("Hello Page 2",{:action =>'hello'}) %> </ br>
+<%#= <a href="/home/hello>Hello Page 1</a><br /> %>
+<%= link_to("Hello Page 2",{:action =>'hello'}) %> <br />
 
 <%#= ----------------------------Rail Param Method----------------------------- %>
 
 <%= link_to("Hello with Parameters",{:action =>'hello',:page => 5, :id => 20}) %>
 
+<br />
+<%= link_to('All subjects',subjects_path) %>

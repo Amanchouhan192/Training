@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
   def hello
     #redirect_to(:controller => 'home', :action => 'index')
-    @stundents = Student.all
+    @students = Student.all
 
     @array = [0,1,2,3,4,5,6,7]
 

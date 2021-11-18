@@ -1,2 +1,21 @@
-<h1>Subjects#show</h1>
-<p>Find me in app/views/subjects/show.html.erb</p>
+<br /><%= link_to("<< Back to List",subjects_path, :class => 'back-link') %>
+
+<div class="subjects show">
+  <h2>Show Subject</h2>
+
+  <table summary="Subject detail view">
+    <tr>
+      <th>Name :</th>
+      <td><%= @subject.name %></td>
+    </tr>
+    <tr>
+      <th>Created :</th>
+      <td><%= @subject.created_at %></dt>
+    </tr>
+    <tr>
+      <th>Updated :</th>
+      <td><%= @subject.updated_at %></td>
+    </tr>
+  </table>
+
+</div>
