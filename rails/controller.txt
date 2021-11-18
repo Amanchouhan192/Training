@@ -61,6 +61,16 @@ get 'pages/delete'
       invoke  assets
       invoke    scss
       create      app/assets/stylesheets/pages.scss
-beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/simple_cms$ 
+      
+
+=================================================Nov 18th============================
+index.html.erb code :
+
+<h1>Subjects#index</h1>
+<p><%= link_to('Show subjects',subject_path(1)) %></p>
+
+<% @subjects.each do |subject| %><br />
+    <%= subject.name %><br />
+ <% end %>
 
 
