@@ -6154,5 +6154,263 @@ Did you mean?  pictures
   created_at: Tue, 16 Nov 2021 02:25:45.707617000 UTC +00:00,
   updated_at: Tue, 16 Nov 2021 02:25:45.707617000 UTC +00:00>] 
 3.0.2 :051 > 
+======================================================================================================================================
+3.0.2 :013 > y1
+3.0.2 :014 > y1.body="This is Youtube comment"
+3.0.2 :015 > y1.save
+  Youtube Create (1.4ms)  INSERT INTO "youtubes" ("body", "created_at", "updated_at") VALUES ($1, $2,
+"], ["updated_at", "2021-11-19 11:59:09.593408"]]
+ => true 
+3.0.2 :016 > Twitter
+ => Twitter(id: integer, body: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :017 > t1 = Twitter.new
+ => #<Twitter:0x000055e69e4b97b0 id: nil, body: nil, created_at: nil, updated_at: nil> 
+3.0.2 :018 > t1.body="This is twitter comment"
+3.0.2 :019 > t1.save
+  Twitter Create (19.0ms)  INSERT INTO "twitters" ("body", "created_at", "updated_at") VALUES ($1, $2
+1"], ["updated_at", "2021-11-19 12:00:11.525301"]]
+ => true 
+3.0.2 :020 > Instagram
+ => Instagram(id: integer, body: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :021 > I1 = Instagram.new
+ => #<Instagram:0x00007f8c8801fd80 id: nil, body: nil, created_at: nil, updated_at: nil> 
+3.0.2 :022 > i1 = Instagram.new
+3.0.2 :023 > i1.body="This is Instagram comment"
+ => "This is Instagram comment" 
+  TRANSACTION (0.4ms)  BEGIN
+  Instagram Create (30.1ms)  INSERT INTO "instagrams" ("body", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["body", "This is Instagram comment"], ["created_at", "2021-11-19 12:01:15
+  TRANSACTION (16.5ms)  COMMIT
+ => true 
+3.0.2 :025 > Facebook
+ => Facebook(id: integer, body: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :026 > f1 = Facebook.new
+ => #<Facebook:0x000055e69eec50d8 id: nil, body: nil, created_at: nil, updated_at: nil> 
+3.0.2 :027 > f1.body="This is facebook comment"
+ => "This is facebook comment" 
+  TRANSACTION (0.6ms)  BEGIN
+$2, $3) RETURNING "id"  [["body", "This is facebook comment"], ["created_at", "2021-11-19 12:01:49.62
+  TRANSACTION (5.8ms)  COMMIT
+3.0.2 :029 > Comment
+ => Comment(id: integer, created_at: datetime, updated_at: datetime, name: string, commentable_type: string, commentable_id: integer) 
+3.0.2 :030 > c1 = Comment.new
+ => 
+#<Comment:0x000055e69c2cd160
+... 
+3.0.2 :031 > c1
+ => 
+ id: nil,
+ updated_at: nil,
+ name: nil,
+ commentable_id: nil> 
+3.0.2 :032 > c1.name = "Youtube Comment"
+ => "Youtube Comment" 
+3.0.2 :033 > c1.commentable_type="Youtube"
+ => "Youtube" 
+3.0.2 :034 > c1.commentable_id=1
+ => 1 
+3.0.2 :035 > c1.save
+  TRANSACTION (0.4ms)  BEGIN
+  Youtube Load (0.4ms)  SELECT "youtubes".* FROM "youtubes" WHERE "youtubes"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Comment Create (1.1ms)  INSERT INTO "comments" ("created_at", "updated_at", "name", "commentable_ty
+23.592217"], ["updated_at", "2021-11-19 12:03:23.592217"], ["name", "Youtube Comment"], ["commentable_type", "Youtube"], ["commentable_id", 1]]
+  TRANSACTION (23.3ms)  COMMIT
+3.0.2 :036 > Comments
+(irb):36:in `<main>': uninitialized constant Comments (NameError)
+3.0.2 :037 > Youtube.comments
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `comments' for Youtube:Class (NoMethodError)
+3.0.2 :038 > Youtube.find(1).comments
+  Youtube Load (0.4ms)  SELECT "youtubes".* FROM "youtubes" WHERE "youtubes"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Comment Load (0.4ms)  SELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2  [["commentable_id", 1], ["commentable_type", "Youtube"]]
+[#<Comment:0x000055e69c253018
+  id: 1,
+  created_at: Fri, 19 Nov 2021 12:03:23.592217000 UTC +00:00,
+  name: "Youtube Comment",
+  commentable_type: "Youtube",
+3.0.2 :039 > Youtube.find(1).comments.name
+  Youtube Load (0.5ms)  SELECT "youtubes".* FROM "youtubes" WHERE "youtubes"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => "Comment" 
+3.0.2 :040 > Comment.find(1)
+  Comment Load (0.5ms)  SELECT "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+#<Comment:0x00007f8c94086dd0
+ id: 1,
+ created_at: Fri, 19 Nov 2021 12:03:23.592217000 UTC +00:00,
+ updated_at: Fri, 19 Nov 2021 12:03:23.592217000 UTC +00:00,
+ name: "Youtube Comment",
+ commentable_type: "Youtube",
+ commentable_id: 1> 
+3.0.2 :041 > Comment.find(1).name
+  Comment Load (0.7ms)  SELECT "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+3.0.2 :042 > Comment.comment.find(1)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `comment' for Comment:Class (NoMethodError)
+3.0.2 :043 > Comment.find(1).comment
+d", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `comment' for #<Comment id: 1, created_at: "2021-11-19 12:03:23.592217000 +0000", updated_at: "2021-11-19 12:03:23.592217000 +0000", name: "Youtube Comment", comment
+Did you mean?  commentable
+3.0.2 :044 > Comment.find(1).commentable
+  Comment Load (1.0ms)  SELECT "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+d", 1], ["LIMIT", 1]]
+ => 
+#<Youtube:0x000055e69e0e6fc0
+ id: 1,
+ body: "This is Youtube comment",
+ created_at: Fri, 19 Nov 2021 11:59:09.593408000 UTC +00:00,
+ updated_at: Fri, 19 Nov 2021 11:59:09.593408000 UTC +00:00> 
+3.0.2 :045 > Comment.find(2).commentable
+  Comment Load (0.4ms)  SELECT "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT $2  [["i
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/core.rb:338:in `find': Couldn't find Comment with 'id'=2 (ActiveRecord::RecordNotFound)
+3.0.2 :046 > Comment.find(3).commentable
+d", 3], ["LIMIT", 1]]
+ouldn't find Comment with 'id'=3 (ActiveRecord::RecordNotFound)
+  Comment Load (0.6ms)  SELECT "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT $2  [["i
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/core.rb:338:in `find': Couldn't find Comment with 'id'=2 (ActiveRecord::RecordNotFound)
+3.0.2 :048 > Comment.all
+  Comment Load (0.8ms)  SELECT "comments".* FROM "comments"
+ => 
+  id: 1,
+  created_at: Fri, 19 Nov 2021 12:03:23.592217000 UTC +00:00,
+  name: "Youtube Comment",
+  commentable_id: 1>] 
+ => 
+#<Comment:0x000055e69eebc988
+... 
+3.0.2 :050 > c2.name = "Twitter Comment"
+ => "Twitter Comment" 
+3.0.2 :051 > c2.commentable_type="Twitter"
+ => "Twitter" 
+3.0.2 :052 > c2.commentable_id=2
+3.0.2 :053 > c2.save
+  Twitter Load (0.7ms)  SELECT "twitters".* FROM "twitters" WHERE "twitters"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+3.0.2 :054 > c2.save!
+ise_validation_error': Validation failed: Commentable must exist (ActiveRecord::RecordInvalid)
+ => 2 
+ => false 
+3.0.2 :057 > c2
+ => 
+#<Comment:0x000055e69eebc988
+ id: nil,
+ updated_at: nil,
+ name: "Twitter Comment",
+ commentable_type: "Twitter",
+ commentable_id: 2> 
+3.0.2 :058 > Twitter
+ => Twitter(id: integer, body: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :059 > c2 = Comment.new
+#<Comment:0x00007f8c940c60c0
+3.0.2 :060 > c2.name="Twitter Comment"
+ => "Twitter Comment" 
+3.0.2 :061 > c2.commentable_type="Twitter"
+ => "Twitter" 
+3.0.2 :062 > c2.commentable_id=2
+3.0.2 :063 > c2.save
+  TRANSACTION (0.4ms)  BEGIN
+d", 2], ["LIMIT", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+ => false 
+3.0.2 :064 > Twitter.all
+ => 
+[#<Twitter:0x000055e69efdd998
+  id: 1,
+  created_at: Fri, 19 Nov 2021 12:00:11.525301000 UTC +00:00,
+3.0.2 :065 > c1.save
+ => true 
+3.0.2 :066 > c1
+ => 
+#<Comment:0x000055e69c2cd160
+ id: 1,
+ created_at: Fri, 19 Nov 2021 12:03:23.592217000 UTC +00:00,
+ name: "Youtube Comment",
+ commentable_type: "Youtube",
+ commentable_id: 1> 
+3.0.2 :067 > c2
+ => 
+#<Comment:0x00007f8c940c60c0
+ id: nil,
+ created_at: nil,
+ updated_at: nil,
+ name: "Twitter Comment",
+ commentable_type: "Twitter",
+3.0.2 :068 > c2.save
+ => false 
+3.0.2 :069 > c2.save!
+Commentable must exist (ActiveRecord::RecordInvalid)
+3.0.2 :070 > Youtube.find(1).comment
+  Youtube Load (0.9ms)  SELECT "youtubes".* FROM "youtubes" WHERE "youtubes"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `comment' for #<Youtube id: 1, body: "This is Youtube comment", created_at: "2021-11-19 11:59:09.593408000 +0000", updated_at: "2021-11-19 11:59:09.593408000 +0000"> (NoMethodError)
+Did you mean?  comments
+               comments=
+3.0.2 :071 > Youtube.find(1).comments
+  Youtube Load (0.9ms)  SELECT "youtubes".* FROM "youtubes" WHERE "youtubes"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Comment Load (0.7ms)  SELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2  [["c
+ => 
+[#<Comment:0x000055e69ee0d1b8
+  id: 1,
+  created_at: Fri, 19 Nov 2021 12:03:23.592217000 UTC +00:00,
+  updated_at: Fri, 19 Nov 2021 12:03:23.592217000 UTC +00:00,
+  name: "Youtube Comment",
+  commentable_id: 1>] 
+3.0.2 :072 > Youtube.find(1).comments
+  Youtube Load (0.5ms)  SELECT "youtubes".* FROM "youtubes" WHERE "youtubes"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Comment Load (0.4ms)  SELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2  [["c
+1).commentable
+1).commentable=
+1).commentable_id
+1).commentable_id=
+1).commentable_id?
+1).commentable_id_before_last_save
+1).commentable_id_before_type_cast
+1).commentable_id_came_from_user?
+1).commentable_id_change_to_be_saved
+1).commentable_id_changed?
+1).commentable_id_for_database
+1).commentable_id_in_database
+1).commentable_id_previous_change
+1).commentable_id_previously_was
+1).commentable_id_was
+1).commentable_id_will_change!
+1).commentable_type
+1).commentable_type=
+1).commentable_type?
+1).commentable_type_before_last_save
+1).commentable_type_before_type_cast
+1).commentable_type_came_from_user?
+1).commentable_type_change
+1).commentable_type_change_to_be_saved
+1).commentable_type_changed?
+1).commentable_type_for_database
+1).commentable_type_in_database
+1).commentable_type_previous_change
+1).commentable_type_previously_changed?
+1).commentable_type_previously_was
+1).commentable_type_was
+1).commentable_type_will_change!
+1).comments
+1).comments=
+3.0.2 :077 > Comment.find(1).commentable
+  Comment Load (0.7ms)  SELECT "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Youtube Load (0.3ms)  SELECT "youtubes".* FROM "youtubes" WHERE "youtubes"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Youtube:0x000055e69efb4bd8
+ id: 1,
+ body: "This is Youtube comment",
+ created_at: Fri, 19 Nov 2021 11:59:09.593408000 UTC +00:00,
+ updated_at: Fri, 19 Nov 2021 11:59:09.593408000 UTC +00:00> 
+3.0.2 :078 > Youtube.find(1).commentable
+  Youtube Load (0.4ms)  SELECT "youtubes".* FROM "youtubes" WHERE "youtubes"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `commentable' for #<Youtube id: 1, body: "This is Youtube comment", created_at: "2021-11-19 11:59:09.593408000 +0000", updated_at: "2021-11-19 11:59:09.593408000 +0000"> (NoMethodError)
+Did you mean?  comments
+3.0.2 :079 > Youtube.find(1).comments
+  Youtube Load (0.6ms)  SELECT "youtubes".* FROM "youtubes" WHERE "youtubes"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Comment Load (0.7ms)  SELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2  [["commentable_id", 1], ["commentable_type", "Youtube"]]
+ => 
+[#<Comment:0x000055e69e51bfc8
+  id: 1,
+  created_at: Fri, 19 Nov 2021 12:03:23.592217000 UTC +00:00,
+  updated_at: Fri, 19 Nov 2021 12:03:23.592217000 UTC +00:00,
+  name: "Youtube Comment",
+  commentable_type: "Youtube",
+  commentable_id: 1>] 
+3.0.2 :080 > Youtube.find(1).comments
+
 
 

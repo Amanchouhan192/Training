@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_18_070748) do
+ActiveRecord::Schema.define(version: 2021_11_19_114350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,15 @@ ActiveRecord::Schema.define(version: 2021_11_18_070748) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "cust_name"
     t.datetime "created_at", precision: 6, null: false
@@ -138,6 +147,12 @@ ActiveRecord::Schema.define(version: 2021_11_18_070748) do
     t.index ["department_id"], name: "index_employees_on_department_id"
   end
 
+  create_table "facebooks", force: :cascade do |t|
+    t.string "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "games", force: :cascade do |t|
     t.string "game_name"
     t.datetime "created_at", precision: 6, null: false
@@ -150,6 +165,12 @@ ActiveRecord::Schema.define(version: 2021_11_18_070748) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "peak_id"
     t.index ["peak_id"], name: "index_groupes_on_peak_id"
+  end
+
+  create_table "instagrams", force: :cascade do |t|
+    t.string "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "movie_ratings", force: :cascade do |t|
@@ -306,6 +327,12 @@ ActiveRecord::Schema.define(version: 2021_11_18_070748) do
     t.index ["client_id"], name: "index_tickets_on_client_id"
   end
 
+  create_table "twitters", force: :cascade do |t|
+    t.string "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "last_name"
     t.string "first_name"
@@ -313,6 +340,12 @@ ActiveRecord::Schema.define(version: 2021_11_18_070748) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "gender"
+  end
+
+  create_table "youtubes", force: :cascade do |t|
+    t.string "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "account_histories", "accounts"
