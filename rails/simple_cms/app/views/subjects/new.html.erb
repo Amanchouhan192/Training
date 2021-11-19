@@ -4,12 +4,8 @@
   <h2>Create Subject</h2>
   
   <%= form_for(@subject, :url => subjects_path, :method => 'post') do |f| %>
-  <table summary="Subject form field">
-    <tr>
-      <th>Name :</th>
-      <td><%= f.text_field(:name) %></td>
-    </tr>
-  </table>
+ 
+  <%= render(:partial => 'form', :locals => {:f => f}) %>
   <div class="form-buttons">
     <%= f.submit("Create Subject") %>
   </div>

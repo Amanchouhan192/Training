@@ -17,7 +17,7 @@ class SubjectsController < ApplicationController
     #Instantiate a new object using form parameter
     @subject = Subject.new(subject_params) # mass assignment 
     #save the object
-    if @subject.save
+    if @subject.save 
       #if save succeeds,redirect to the next index action
       redirect_to(subjects_path)
     else
@@ -29,15 +29,26 @@ class SubjectsController < ApplicationController
   end
 
   def edit
+    @subject = Subject.find(params[:id])
   end
 
   def update
+    @subject = Subject.find(params[:id])
+    if @subject.update(subject_params)
+      redirect_to(subject_path(@subject))
+    else
+      render('edit')
+    end
   end
 
   def delete
-  end
+    @subject = Subject.find(params[:id])
+  end 
 
   def destroy
+    @subject = Subject.find(params[:id])
+    @subject.destroy
+    redirect_to(subjects_path)
   end
 
   private 
