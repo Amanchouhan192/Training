@@ -192,4 +192,408 @@ end
 
 
 
+============================Validation Practice====================================
+code :
+class Author < ApplicationRecord
+    has_many :books
+    validates :name, presence: true # author has name if he/she has a book published
+end
+3.0.2 :113 > a4 = Author.create(name:" ").valid?
+3.0.2 :114 > a4 = Author.create(name:"Aman").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Author Create (0.8ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Aman"], ["created_at", "2021-11-20 19:44:27.076166"], ["updated_at", "2021-11-20 19:44:27.076166"]]
+  TRANSACTION (43.2ms)  COMMIT
+ => true 
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors"
+ => 
+ -----------------------------Valid Associated-----------------------------------------------------------
+ Author.find(2).valid?
+  Author Load (0.4ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Load (0.4ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 2]]
+ => true 
+3.0.2 :013 > Author.find(2).books
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 2]]
+ => 
+[#<Book:0x0000557990e100a0
+  id: 2,
+  name: "Harry Potter and the Goblet of Fire",
+  published_date: Sat, 08 Jul 2000 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x0000557990e0bed8
+  id: 3,
+  name: "Harry Potter and the Chamber of secrets",
+  published_date: Thu, 02 Jul 1998 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x0000557990e0bcf8
+  id: 4,
+  name: "Harry Potter & The Deathly Hallows Pt 1",
+  published_date: Fri, 19 Nov 2010 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  author_id: 2>] 
+
+Book.find(1).valid?
+  Book Load (0.9ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => true 
+
+----------------------------------------------------------------------------------
+Physician.find(1).invalid?
+  Physician Load (0.9ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => false 
+
+Patient.find(2).valid?
+  Patient Load (0.7ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Appointment Load (1.4ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."patient_id" = $1  [["patient_id", 2]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Physician Load (0.7ms)  SELECT "physicians".* FROM "physicians" INNER JOIN "appointments" ON "physicians"."id" = "appointments"."physician_id" WHERE "appointments"."patient_id" = $1  [["patient_id", 2]]
+ => true 
+3.0.2 :045 > Patient.find(2).invalid?
+  Patient Load (0.8ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Appointment Load (0.7ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."patient_id" = $1  [["patient_id", 2]]
+  Physician Load (0.7ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Physician Load (0.8ms)  SELECT "physicians".* FROM "physicians" INNER JOIN "appointments" ON "physicians"."id" = "appointments"."physician_id" WHERE "appointments"."patient_id" = $1  [["patient_id", 2]]
+ => false 
+----------------------------------------------------------------------------------
+Supplier.find(1).account.valid?
+  Supplier Load (0.8ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.7ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+ => true 
+
+Supplier.find(1).account.invalid?
+  Supplier Load (0.5ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.4ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+ => false 
+
+--------------------------------------------
+Supplier.find(1).account.account_history
+  Supplier Load (1.0ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.8ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+  AccountHistory Load (0.8ms)  SELECT "account_histories".* FROM "account_histories" WHERE "account_histories"."account_id" = $1 LIMIT $2  [["account_id", 1], ["LIMIT", 1]]
+ => 
+#<AccountHistory:0x000055798ffb0168
+ id: 1,
+ credit_rating: 8,
+ created_at: Sun, 21 Nov 2021 11:17:45.791261000 UTC +00:00,
+ updated_at: Sun, 21 Nov 2021 11:17:45.791261000 UTC +00:00,
+ account_id: 1> 
+3.0.2 :063 > Supplier.find(1).account.account_history.valid?
+  Supplier Load (0.8ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.5ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+  AccountHistory Load (0.8ms)  SELECT "account_histories".* FROM "account_histories" WHERE "account_histories"."account_id" = $1 LIMIT $2  [["account_id", 1], ["LIMIT", 1]]
+ => true 
+3.0.2 :064 > Supplier.find(1).account.account_history.invalid?
+  Supplier Load (0.6ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.5ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+  AccountHistory Load (0.6ms)  SELECT "account_histories".* FROM "account_histories" WHERE "account_histories"."account_id" = $1 LIMIT $2  [["account_id", 1], ["LIMIT", 1]]
+ => false 
+--------------------------------------------length-----------------------------------------
+
+class Book < ApplicationRecord
+    belongs_to :author
+    #validates :name, presence: true # book has a name 
+    validates_associated :author
+    validates :name, length: { maximum: 100 }
+    
+
+end
+
+3.0.2 :125 > a1 = Author.new
+ => #<Author:0x0000557990c48f38 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :126 > a1.name="Chetan Bhagat"
+ => "Chetan Bhagat" 
+3.0.2 :127 > a1.save
+  TRANSACTION (0.3ms)  BEGIN
+  Author Create (48.8ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Chetan Bhagat"], ["created_at", "2021-11-22 06:59:51.620045"], ["updated_at", "2021-11-22 06:59:51.620045"]]
+  TRANSACTION (35.2ms)  COMMIT
+ => true 
+3.0.2 :128 > b1 = Book.new
+ => #<Book:0x000055798feeba70 id: nil, name: nil, published_date: nil, created_at: nil, updated_at: nil, author_id: nil> 
+3.0.2 :129 > b1.name="2 States: The Story of My Marriage commonly known as 2 States is a 2009 novel written by Chetan Bhagat. It is the story a
+bout a couple coming from two different states in India, who face hardships in convincing their parents to approve of their marriage."
+ => "2 States: The Story of My Marriage commonly known as 2 States is a 2009 novel written by Chetan Bhagat. It is the story about a coup... 
+3.0.2 :130 > a1
+ => 
+#<Author:0x0000557990c48f38
+ id: 5,
+ name: "Chetan Bhagat",
+ created_at: Mon, 22 Nov 2021 06:59:51.620045000 UTC +00:00,
+ updated_at: Mon, 22 Nov 2021 06:59:51.620045000 UTC +00:00> 
+3.0.2 :131 > b1.author_id=5
+ => 5 
+3.0.2 :132 > b1.save
+  TRANSACTION (0.6ms)  BEGIN
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Load (0.4ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 5]]
+  TRANSACTION (0.5ms)  ROLLBACK
+ => false 
+3.0.2 :133 > b1.name="2 States: The Story Of My Marriage"
+ => "2 States: The Story Of My Marriage" 
+3.0.2 :134 > b1.save
+  TRANSACTION (0.6ms)  BEGIN
+  Book Create (60.8ms)  INSERT INTO "books" ("name", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "2 States: The Story Of My Marriage"], ["created_at", "2021-11-22 07:04:06.369001"], ["updated_at", "2021-11-22 07:04:06.369001"], ["author_id", 5]]
+  TRANSACTION (13.4ms)  COMMIT
+ => true 
+3.0.2 :135 > 
+---------------------------------------------------------presence------------------------------------
+Account.find(1).valid?
+  Account Load (0.4ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Supplier Load (0.3ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => true 
+
+---------------------------------------------Uniqueness-------------------------------------------
+3.0.2 :219 > u2.email="kevin@gmail.com"
+ => "kevin@gmail.com" 
+3.0.2 :220 > u2.valid?
+  User Exists? (1.5ms)  SELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3  [["email", "kevin@gmail.com"], ["id", 2], ["LIMIT", 1]]
+ => false 
+3.0.2 :221 > User.all
+  User Load (1.1ms)  SELECT "users".* FROM "users"
+ => 
+[#<User:0x00005579916df6e0
+  id: 1,
+  name: "Kevin",
+  created_at: Sun, 21 Nov 2021 17:33:14.763817000 UTC +00:00,
+  updated_at: Mon, 22 Nov 2021 07:51:39.094593000 UTC +00:00,
+  email: "kevin@gmail.com">,
+ #<User:0x00005579916df618
+  id: 2,
+  name: "Harry",
+  created_at: Sun, 21 Nov 2021 17:52:52.270452000 UTC +00:00,
+  updated_at: Mon, 22 Nov 2021 07:53:10.115073000 UTC +00:00,
+  email: "harry@gmailcom">]
+  
+------------------------------------message and error----------------------------------------
+ b.name="Half Girlfriend"
+ => "Half Girlfriend" 
+3.0.2 :013 > b.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/callbacks.rb:824:in `_run_validate_callbacks': stack level too deep (SystemStackError)
+3.0.2 :014 > b.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/callbacks.rb:824:in `_run_validate_callbacks': stack level too deep (SystemStackError)
+3.0.2 :015 > b.error_size
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `error_size' for #<Book id: nil, name: "Half Girlfriend", published_date: nil, created_at: nil, updated_at: nil, author_id: 5> (NoMethodError)
+Did you mean?  errors
+3.0.2 :016 > b.errors
+ => 
+#<ActiveModel::Errors:0x000055798de62038
+ @base=#<Book:0x0000557990986c00 id: nil, name: "Half Girlfriend", published_date: nil, created_at: nil, updated_at: nil, author_id: 5>,
+ @errors=[]> 
+3.0.2 :017 > Book.all
+  Book Load (0.8ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x000055798f515898
+  id: 1,
+  name: "A Midsummer Night's Dream",
+  published_date: Wed, 12 Jan 1605 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  author_id: 1>,
+  id: 2,
+  published_date: Sat, 08 Jul 2000 00:00:00.000000000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+ #<Book:0x000055798f5153e8
+  id: 3,
+  published_date: Thu, 02 Jul 1998 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055798f5150f0
+  id: 4,
+  name: "Harry Potter & The Deathly Hallows Pt 1",
+  published_date: Fri, 19 Nov 2010 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055798f514ec0
+  id: 5,
+  name: "Wings of Fire",
+  created_at: Sat, 20 Nov 2021 19:20:41.246021000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:20:41.246021000 UTC +00:00,
+ #<Book:0x000055798f514c68
+  name: "2 States: The Story Of My Marriage",
+  published_date: nil,
+  updated_at: Mon, 22 Nov 2021 07:04:06.369001000 UTC +00:00,
+3.0.2 :018 > b = Book.new
+3.0.2 :019 > b.name="Half Girlfriend"
+3.0.2 :020 > b.published_date="2014-10-01"
+3.0.2 :021 > b.author_id=6
+ => 6 
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+ => false 
+3.0.2 :023 > b.errors
+#<ActiveModel::Errors:0x000055798e821ce0
+ @base=
+  #<Book:0x00005579908c5208
+   id: nil,
+   published_date: Wed, 01 Oct 2014 00:00:00.000000000 UTC +00:00,
+   updated_at: nil,
+ @errors=
+   #<ActiveModel::Error attribute=name, type=too_short, options={:count=>20}>,
+   #<ActiveModel::Error attribute=published_date, type=present, options={}>]> 
+3.0.2 :024 > reload!
+Reloading...
+ => true 
+3.0.2 :025 > b.save
+ => false 
+3.0.2 :026 > reload!
+ => true 
+ => false 
+3.0.2 :028 > b = Book.new
+3.0.2 :029 > b.name="Half Girlfriend"
+ => "Half Girlfriend" 
+3.0.2 :030 > b.author_id=6
+ => 6 
+3.0.2 :031 > b.valid?
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+ => false 
+3.0.2 :032 > b.error
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `error' for #<Book id: nil, name: "Half Girlfriend", published_date: nil, created_at: nil, updated_at: nil, author_id: 6> (NoMethodError)
+Did you mean?  errors
+3.0.2 :033 > b.errors
+ => 
+#<ActiveModel::Errors:0x000055798f4c7508
+ @base=#<Book:0x0000557990b8ffb0 id: nil, name: "Half Girlfriend", published_date: nil, created_at: nil, updated_at: nil, author_id: 6>,
+ @errors=[#<ActiveModel::Error attribute=author, type=blank, options={:message=>:required}>]> 
+3.0.2 :034 > b.published_date="2014-10-01"
+ => "2014-10-01" 
+3.0.2 :035 > b.valid?
+ => false 
+3.0.2 :036 > b.valid?b
+ => false 
+ => 
+ id: nil,
+ name: "Half Girlfriend",
+ published_date: Wed, 01 Oct 2014 00:00:00.000000000 UTC +00:00,
+ created_at: nil,
+ author_id: 6> 
+3.0.2 :038 > b.save
+3.0.2 :039 > b.save!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: 
+3.0.2 :040 > Author.all
+  Author Load (1.0ms)  SELECT "authors".* FROM "authors"
+[#<Author:0x0000557990e79d20
+  name: "Williams Shakespear",
+  updated_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00>,
+  id: 2,
+  created_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00>,
+ #<Author:0x0000557990e3b278
+  id: 3,
+  name: "Dr A P J Abdul Kalam",
+  created_at: Sat, 20 Nov 2021 19:18:51.776961000 UTC +00:00,
+ #<Author:0x0000557990e3b0e8
+  id: 5,
+  created_at: Mon, 22 Nov 2021 06:59:51.620045000 UTC +00:00,
+  updated_at: Mon, 22 Nov 2021 06:59:51.620045000 UTC +00:00>] 
+3.0.2 :041 > b.author_id=5
+ => 5 
+3.0.2 :042 > b.valid?
+  Author Load (1.3ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 5]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/autosave_association.rb:520:in `custom_validation_context?': stack level too deep (SystemStackError)
+3.0.2 :043 > b.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/callbacks.rb:824:in `_run_validate_callbacks': stack level too d
+3.0.2 :044 > reload!
+Reloading...
+3.0.2 :045 > b.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/callbacks.rb:824:in `_run_validate_callbacks': stack level too deep (SystemStackError)
+3.0.2 :046 > b = Book.new
+ => #<Book:0x000055798ff41a38 id: nil, name: nil, published_date: nil, created_at: nil, updated_at: nil, author_id: nil> 
+3.0.2 :047 > b.name="Half Girlfriend"
+ => "Half Girlfriend" 
+3.0.2 :048 > b.author_id=5
+ => 5 
+3.0.2 :049 > b.published_date="2014-10-01"
+ => "2014-10-01" 
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 5]]
+  TRANSACTION (0.5ms)  ROLLBACK
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/callbacks.rb:824:in `_run_validate_callbacks': stack level too deep (SystemStackError)
+3.0.2 :051 > b.valid?
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/autosave_association.rb:520:in `custom_validation_context?': stack level too deep (SystemStackError)
+3.0.2 :052 > b.errors
+ => 
+#<ActiveModel::Errors:0x0000557990ee2cf8
+ @base=
+  #<Book:0x000055798ff41a38
+   id: nil,
+   name: "Half Girlfriend",
+   published_date: Wed, 01 Oct 2014 00:00:00.000000000 UTC +00:00,
+   created_at: nil,
+   updated_at: nil,
+   author_id: 5>,
+ @errors=[]> 
+3.0.2 :053 > b.errors.length
+(irb):53:in `<main>': undefined method `length' for #<ActiveModel::Errors:0x0000557990ee2cf8 @base=#<Book id: nil, name: "Half Girlfriend", published_date: "2014-10-01 00:00:00.000000000 +0000", created_at: nil, updated_at: nil, author_id: 5>, @errors=[]> (NoMethodError)
+3.0.2 :054 > b.errors
+ => 
+#<ActiveModel::Errors:0x0000557990ee2cf8
+ @base=
+  #<Book:0x000055798ff41a38
+   id: nil,
+   name: "Half Girlfriend",
+   published_date: Wed, 01 Oct 2014 00:00:00.000000000 UTC +00:00,
+   created_at: nil,
+   updated_at: nil,
+   author_id: 5>,
+ @errors=[]> 
+3.0.2 :055 > b.save
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/callbacks.rb:824:in `_run_validate_callbacks': stack level too deep (SystemStackError)
+3.0.2 :056 > 
+-----------------------------------------Errors-------------------------------------------------------------
+3.0.2 :072 > b
+ => 
+#<Book:0x000055798fe658f8
+ id: nil,
+ name: "Half GirlFriend",
+ published_date: Wed, 01 Oct 2014 00:00:00.000000000 UTC +00:00,
+ created_at: nil,
+ author_id: 5> 
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `error' for #<Book id: nil, name: "Half GirlFriend", published_date: "2014-10-01 00:00:00.000000000 +0000", created_at: nil, updated_at: nil, author
+Did you mean?  errors
+3.0.2 :074 > b.errors
+ => 
+#<ActiveModel::Errors:0x000055798f36dfb8
+ @base=
+  #<Book:0x000055798fe658f8
+   id: nil,
+   name: "Half GirlFriend",
+   published_date: Wed, 01 Oct 2014 00:00:00.000000000 UTC +00:00,
+   created_at: nil,
+   updated_at: nil,
+   author_id: 5>,
+ @errors=[]> 
+3.0.2 :075 > b.error[:base]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `error' for #<Book id: nil, name: "Half GirlFriend", published_date: "2014-10-01 00:00:00.000000000 +0000", created_at: nil, updated_at: nil, author_id: 5> (NoMethodError)
+Did you mean?  errors
+3.0.2 :076 > b.errors[:base]
+ => [] 
+3.0.2 :077 > b.errors.clear
+ => [] 
+3.0.2 :078 > b
+ => 
+#<Book:0x000055798fe658f8
+ id: nil,
+ name: "Half GirlFriend",
+ published_date: Wed, 01 Oct 2014 00:00:00.000000000 UTC +00:00,
+ created_at: nil,
+ updated_at: nil,
+ author_id: 5> 
+3.0.2 :079 > b.errors.size
+ => 0 
+3.0.2 :080 > b.errors.add
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/errors.rb:404:in `add': wrong number of arguments (given 0, expected 1..2) (ArgumentError)
+3.0.2 :081 > b.errors.where
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/errors.rb:167:in `where': wrong number of arguments (given 0, expected 1..2) (ArgumentError)
+3.0.2 :082 > 
+
+
+
+
+
 
