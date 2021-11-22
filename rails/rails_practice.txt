@@ -6412,5 +6412,1229 @@ Did you mean?  comments
   commentable_id: 1>] 
 3.0.2 :080 > Youtube.find(1).comments
 
+==========================================Association Practice============================================================
+Running via Spring preloader in process 5490
+3.0.2 :001 > a1
+(irb):1:in `<main>': undefined local variable or method `a1' for main:Object (Na
+3.0.2 :002 > Book
+ => Book (call 'Book.connection' to establish a connection) 
+3.0.2 :006 > 
+3.0.2 :007 > Author
+ => Author (call 'Author.connection' to establish a connection) 
+Reloading...
+3.0.2 :009 > Author
+3.0.2 :010 > Author.all
+ => [] 
+3.0.2 :011 > Book.all
+  Book Load (1.0ms)  SELECT "books".* FROM "books"
+3.0.2 :012 > Book
+ => Book(id: integer, name: string, published_date: datetime, created_at: datetime, updated_at: datetime) 
 
+BookStore
+Bootsnap
+3.0.2 :013 > b1 = Book.new
+ => 
+... 
+3.0.2 :015 > b1.published_date="1605-01-12"
+ => false 
+3.0.2 :017 > b1.save!
+Author must exist (ActiveRecord::RecordInvalid)
+3.0.2 :018 > a1 = Author.new
+#<Author:0x000055a5aac9ab08
+3.0.2 :019 > a1.name="Williams Shakespear"
+3.0.2 :020 > a1
+ => 
+#<Author:0x000055a5aac9ab08
+ created_at: nil,
+ updated_at: nil,
+3.0.2 :021 > a1.book_id=1
+ => 1 
+  TRANSACTION (0.5ms)  BEGIN
+", "Williams Shakespear"], ["created_at", "2021-11-20 18:37:15.111843"], ["updated_at", "2021-11-20 18:37:15.111843"], ["book_id", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+t or update on table "authors" violates foreign key constraint "fk_rails_be0bf38327" (ActiveRecord::InvalidForeignKey)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/rack-mini-profiler-2.3.3/lib/patches/db/pg.rb:69:in `exec_params': ERROR:  insert or update on table "aut
+DETAIL:  Key (book_id)=(1) is not present in table "books".
+ => false 
+ => Book(id: integer, name: string, published_date: datetime, created_at: datetime, updated_at: datetime) 
+3.0.2 :025 > b1.save
+ => false 
+3.0.2 :026 > Book.all
+  Book Load (0.8ms)  SELECT "books".* FROM "books"
+3.0.2 :027 > reload!
+ => true 
+ => Author(id: integer, name: string, created_at: datetime, updated_at: datetime, book_id: integer) 
+ => Book(id: integer, name: string, published_date: datetime, created_at: datetime, updated_at: datetime, author_id: integer) 
+  Author Load (1.0ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ord::RecordNotFound)
+3.0.2 :031 > reload!
+Reloading...
+ => true 
+3.0.2 :032 > Author.all
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors"
+3.0.2 :033 > Author
+ => Author(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :034 > Book.all
+  Book Load (1.1ms)  SELECT "books".* FROM "books"
+ => [] 
+3.0.2 :035 > Book
+ => Book(id: integer, name: string, published_date: datetime, created_at: datetime, updated_at: datetime, author_id: integer) 
+3.0.2 :036 > a1 = Author.new
+3.0.2 :037 > a1.name="Williams Shakespear"
+ => "Williams Shakespear" 
+3.0.2 :038 > a1
+ => #<Author:0x000055a5aae13c28 id: nil, name: "Williams Shakespear", created_at: nil, updated_at: nil> 
+3.0.2 :039 > a1.save
+  TRANSACTION (0.5ms)  BEGIN
+  Author Create (1.0ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Williams Shakespear"], ["created_at", "2021-11-20 19:03:03.799187"], ["updated_at", "2021-11-20 19:03:03.799187"]]
+  TRANSACTION (22.6ms)  COMMIT
+3.0.2 :040 > b1 = Book.new
+ => #<Book:0x000055a5a93c34e0 id: nil, name: nil, published_date: nil, created_at: nil, updated_at: nil, author_id: nil> 
+ => "A Midsummer Night's Dream" 
+3.0.2 :042 > b1.published_date="1605-01-12"
+ => "1605-01-12" 
+3.0.2 :043 > b1.author_id=1
+ => 1 
+3.0.2 :044 > a1.save
+3.0.2 :045 > a1
+ => 
+ id: 1,
+ created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+ => true 
+ => 
+ id: 1,
+ name: "Williams Shakespear",
+ created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+ updated_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00> 
+3.0.2 :050 > b1 = Book,new
+(irb):50:in `<main>': undefined local variable or method `new' for main:Object (NameError)
+Did you mean?  next
+ => #<Book:0x000055a5aabba198 id: nil, name: nil, published_date: nil, created_at: nil, updated_at: nil, author_id: nil> 
+3.0.2 :052 > b1.name="A Midsummer Night's Dream"
+ => "A Midsummer Night's Dream" 
+3.0.2 :053 > b1.publi
+
+b1.public_method
+b1.public_methods
+b1.public_send
+b1.published_date=
+b1.published_date?
+b1.published_date_before_last_save
+b1.published_date_before_type_cast
+b1.published_date_came_from_user?
+b1.published_date_change
+b1.published_date_changed?
+b1.published_date_for_database
+b1.published_date_in_database
+b1.published_date_previous_change
+b1.published_date_previously_changed?
+b1.published_date_previously_was
+b1.published_date_was
+3.0.2 :053 > b1.published_date="1605-01-12"
+ => "1605-01-12" 
+3.0.2 :054 > b1.author_id=1
+ => 1 
+3.0.2 :055 > b1.save
+  Author Load (0.4ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Book Create (1.7ms)  INSERT INTO "books" ("name", "published_date", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "A Midsummer Night's Dream"], ["published_date", "1605-01-12 00:00:00"], ["created_at", "2021-11-20 19:06:23.925867"], ["updated_at", "2021-11-20 19:06:23.925867"], ["author_id", 1]]
+  TRANSACTION (35.4ms)  COMMIT
+ => true 
+3.0.2 :056 > b1
+ => 
+#<Book:0x000055a5aabba198
+ id: 1,
+ published_date: Wed, 12 Jan 1605 00:00:00.000000000 UTC +00:00,
+ created_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+ updated_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+ author_id: 1> 
+3.0.2 :057 > a1
+ => 
+ id: 1,
+ name: "Williams Shakespear",
+ created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+ updated_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00> 
+3.0.2 :058 > Author.find(1)
+  Author Load (1.1ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Author:0x000055a5aac63f68
+ name: "Williams Shakespear",
+ created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+ updated_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00> 
+3.0.2 :059 > Author.find(1).book
+  Author Load (1.1ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `book' for #<Author id: 1, name: "Williams Shakespear", created_at: "2021-11-20 19:03:03.799187000 +0000", updated_at: "2021-11-20 19:03:03.799187000 +0000"> (NoMethodError)
+3.0.2 :060 > Author.find(1).books
+  Book Load (0.5ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 1]]
+[#<Book:0x000055a5aae972a8
+  name: "A Midsummer Night's Dream",
+  created_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :061 > Book.find(1).authors
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ors' for #<Book id: 1, name: "A Midsummer Night's Dream", published_date: "1605-01-12 00:00:00.000000000 +0000", created_at: "2021-11-20 19:06:23.925867000 +0000", updated_at: "2021-11-20 19:06:23.925867000 +0000", author_id: 1> (NoMethodError)
+Did you mean?  author
+               author=
+3.0.2 :062 > Book.find(1).author
+  Book Load (1.2ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+ id: 1,
+ created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+3.0.2 :063 > b1
+#<Book:0x000055a5aabba198
+ id: 1,
+ name: "A Midsummer Night's Dream",
+ published_date: Wed, 12 Jan 1605 00:00:00.000000000 UTC +00:00,
+ created_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+ updated_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+ author_id: 1> 
+ => Author(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :065 > a2 = Author.new
+ => #<Author:0x000055a5a87e6820 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :066 > a2.name="J.K. Rowling"
+ => "J.K. Rowling" 
+3.0.2 :067 > a2
+ => #<Author:0x000055a5a87e6820 id: nil, name: "J.K. Rowling", created_at: nil, updated_at: nil> 
+3.0.2 :068 > a2.save
+  TRANSACTION (0.6ms)  BEGIN
+  Author Create (1.0ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "J.K. Rowling"], ["created_at", "2021-11-20 19:10:35.504050"], ["updated_at", "2021-11-20 19:10:35.504050"]]
+  TRANSACTION (27.8ms)  COMMIT
+ => true 
+3.0.2 :069 > a2
+ => 
+#<Author:0x000055a5a87e6820
+ name: "J.K. Rowling",
+ updated_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00> 
+3.0.2 :070 > b2=Book.new
+ => #<Book:0x000055a5aaef88c8 id: nil, name: nil, published_date: nil, created_at: nil, updated_at: nil, author_id: nil> 
+3.0.2 :071 > b2.name="Harry Potter and the Goblet of Fire"
+ => "Harry Potter and the Goblet of Fire" 
+3.0.2 :072 > b2.published_date="2000-07-08"
+ => "2000-07-08" 
+3.0.2 :073 > b2.author_id=2
+ => 2 
+3.0.2 :074 > b2.save
+  TRANSACTION (0.7ms)  BEGIN
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+RNING "id"  [["name", "Harry Potter and the Goblet of Fire"], ["published_date", "2000-07-08 00:00:00"], ["created_at", "2021-11-20 19:13:02.14
+  TRANSACTION (22.7ms)  COMMIT
+3.0.2 :075 > Book.all
+ => 
+  id: 1,
+  published_date: Wed, 12 Jan 1605 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x000055a5aad4f0d0
+  id: 2,
+  name: "Harry Potter and the Goblet of Fire",
+  created_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  author_id: 2>] 
+3.0.2 :076 > Author
+ => Author(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :077 > Author.all
+  Author Load (1.1ms)  SELECT "authors".* FROM "authors"
+ => 
+[#<Author:0x000055a5aafc9f68
+  id: 1,
+  name: "Williams Shakespear",
+  created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00>,
+ #<Author:0x000055a5aafc9e78
+  id: 2,
+  name: "J.K. Rowling",
+  created_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00>] 
+3.0.2 :078 > b2 = Book.new
+ => #<Book:0x000055a5a946a628 id: nil, name: nil, published_date: nil, created_at: nil, updated_at: nil, author_id: nil> 
+3.0.2 :079 > b3 = Book.new
+ => #<Book:0x000055a5aa124be8 id: nil, name: nil, published_date: nil, created_at: nil, updated_at: nil, author_id: nil> 
+3.0.2 :080 > b3.name="Harry Potter and the Chamber of secrets"
+3.0.2 :081 > b3.published_date="1998-07-02"
+3.0.2 :082 > b3.author_id=2
+3.0.2 :083 > b3.save
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+RNING "id"  [["name", "Harry Potter and the Chamber of secrets"], ["published_date", "1998-07-02 00:00:00"], ["created_at", "2021-11-20 19:15:23.071174"], ["updated_at", "2021-11-20 19:15:23.071174"], ["author_id", 2]]
+  TRANSACTION (27.8ms)  COMMIT
+ => true 
+3.0.2 :084 > Book.all
+  Book Load (1.0ms)  SELECT "books".* FROM "books"
+ => 
+  id: 1,
+  published_date: Wed, 12 Jan 1605 00:00:00.000000000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+ #<Book:0x000055a5aabbbb10
+  id: 2,
+  name: "Harry Potter and the Goblet of Fire",
+  published_date: Sat, 08 Jul 2000 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  author_id: 2>,
+  id: 3,
+  published_date: Thu, 02 Jul 1998 00:00:00.000000000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  author_id: 2>] 
+3.0.2 :085 > b4=Book.new
+ => #<Book:0x000055a5aade1a48 id: nil, name: nil, published_date: nil, created_at: nil, updated_at: nil, author_id: nil> 
+3.0.2 :086 > b4.name="Harry Potter & The Deathly Hallows Pt 1"
+ => "Harry Potter & The Deathly Hallows Pt 1" 
+ => "2010-11-19" 
+3.0.2 :088 > b4.author_id=2
+ => 2 
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Create (1.1ms)  INSERT INTO "books" ("name", "published_date", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Harry Potter & The Deathly Hallows Pt 1"], ["published_date", "2010-11-19 00:00:00"], ["created_at", "2021-11-20 19:17:41.079670"], ["updated_at", "2021-11-20 19:17:41.079670"], ["author_id", 2]]
+  TRANSACTION (21.5ms)  COMMIT
+ => true 
+3.0.2 :090 > a3=Author.new
+ => #<Author:0x000055a5aad0c7f8 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :091 > a3.name="Dr A P J Abdul Kalam"
+ => "Dr A P J Abdul Kalam" 
+3.0.2 :092 > a3
+ => #<Author:0x000055a5aad0c7f8 id: nil, name: "Dr A P J Abdul Kalam", created_at: nil, updated_at: nil> 
+3.0.2 :093 > a3.save
+  TRANSACTION (0.6ms)  BEGIN
+  Author Create (0.9ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Dr A P J Abdul Kalam"], ["created_at", "2021-11-20 19:18:51.776961"], ["updated_at", "2021-11-20 19:18:51.776961"]]
+ => true 
+3.0.2 :094 > b5 = Book.new
+ => #<Book:0x000055a5aaaa4e20 id: nil, name: nil, published_date: nil, created_at: nil, updated_at: nil, author_id: nil> 
+3.0.2 :095 > b5.name="Wings of Fire"
+ => "Wings of Fire" 
+3.0.2 :096 > b5.author_id=3
+ => 3 
+3.0.2 :097 > b5.save
+  TRANSACTION (0.6ms)  BEGIN
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Book Create (1.1ms)  INSERT INTO "books" ("name", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Wings of Fire"], ["created_at", "2021-11-20 19:20:41.246021"], ["updated_at", "2021-11-20 19:20:41.246021"], ["author_id", 3]]
+  TRANSACTION (11.2ms)  COMMIT
+ => true 
+3.0.2 :098 > Author.al
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `al' for Author:Class (NoMethodError)
+Did you mean?  all
+3.0.2 :099 > Author.all
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors"
+ => 
+[#<Author:0x000055a5a8244840
+  id: 1,
+  name: "Williams Shakespear",
+  created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00>,
+ #<Author:0x000055a5a82327d0
+  id: 2,
+  name: "J.K. Rowling",
+  created_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00>,
+ #<Author:0x000055a5a8231d30
+  id: 3,
+  name: "Dr A P J Abdul Kalam",
+  created_at: Sat, 20 Nov 2021 19:18:51.776961000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:18:51.776961000 UTC +00:00>] 
+3.0.2 :100 > Book.all
+ => 
+[#<Book:0x000055a5a9938b00
+  id: 1,
+  name: "A Midsummer Night's Dream",
+  published_date: Wed, 12 Jan 1605 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+ #<Book:0x000055a5a99386a0
+  id: 2,
+  name: "Harry Potter and the Goblet of Fire",
+  published_date: Sat, 08 Jul 2000 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055a5a992fed8
+  id: 3,
+  name: "Harry Potter and the Chamber of secrets",
+  created_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055a5a992f9b0
+  id: 4,
+  name: "Harry Potter & The Deathly Hallows Pt 1",
+  published_date: Fri, 19 Nov 2010 00:00:00.000000000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055a5a992f370
+  id: 5,
+  name: "Wings of Fire",
+  published_date: nil,
+  created_at: Sat, 20 Nov 2021 19:20:41.246021000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:20:41.246021000 UTC +00:00,
+  author_id: 3>] 
+3.0.2 :101 > Author.find(1)
+  Author Load (0.9ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Author:0x000055a5aabe3570
+ id: 1,
+ name: "Williams Shakespear",
+ created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+ updated_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00> 
+3.0.2 :102 > Author.find(1).books
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 1]]
+ => 
+[#<Book:0x000055a5aacb4170
+  id: 1,
+  name: "A Midsummer Night's Dream",
+  created_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+3.0.2 :103 > Author.find(2)
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => 
+#<Author:0x000055a5aaf18c68
+ id: 2,
+ name: "J.K. Rowling",
+ created_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00,
+ updated_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00> 
+3.0.2 :104 > Author.find(2).books
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 2]]
+ => 
+[#<Book:0x000055a5ab0b6ca0
+  id: 2,
+  name: "Harry Potter and the Goblet of Fire",
+  published_date: Sat, 08 Jul 2000 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055a5ab0b6b38
+  id: 3,
+  name: "Harry Potter and the Chamber of secrets",
+  published_date: Thu, 02 Jul 1998 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055a5ab0b69a8
+  id: 4,
+  name: "Harry Potter & The Deathly Hallows Pt 1",
+  published_date: Fri, 19 Nov 2010 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  author_id: 2>] 
+3.0.2 :105 > Author.find(2).books.name 
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => "Book" 
+3.0.2 :106 > Author.find(2).books
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 2]]
+ => 
+[#<Book:0x000055a5aa8cc580
+  id: 2,
+  name: "Harry Potter and the Goblet of Fire",
+  published_date: Sat, 08 Jul 2000 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055a5aa8cc3a0
+  id: 3,
+  published_date: Thu, 02 Jul 1998 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055a5aa8cc1c0
+  id: 4,
+  published_date: Fri, 19 Nov 2010 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+3.0.2 :107 > Author.find(2).books
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 2]]
+[#<Book:0x000055a5aae862c8
+  id: 2,
+  published_date: Sat, 08 Jul 2000 00:00:00.000000000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055a5aae86160
+  id: 3,
+  name: "Harry Potter and the Chamber of secrets",
+  created_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055a5aae85fa8
+  id: 4,
+  name: "Harry Potter & The Deathly Hallows Pt 1",
+  published_date: Fri, 19 Nov 2010 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  author_id: 2>] 
+3.0.2 :108 > Author.find(2).books.name
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => "Book" 
+3.0.2 :109 > Book.fins(2).author.name
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `fins' for Book:Class (NoMethodError)
+Did you mean?  find
+3.0.2 :110 > Book.fins(2).author
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `fins' for Book:Class (NoMethodError)
+Did you mean?  find
+3.0.2 :111 > Book.find(2).author.name
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+3.0.2 :112 > reload!
+Reloading...
+ => true 
+3.0.2 :113 > a4 = Author.create(name:" ").valid?
+3.0.2 :114 > a4 = Author.create(name:"Aman").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Author Create (0.8ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Aman"], ["created_at", "2021-11-20 19:44:27.076166"], ["updated_at", "2021-11-20 19:44:27.076166"]]
+  TRANSACTION (43.2ms)  COMMIT
+ => true 
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors"
+ => 
+[#<Author:0x000055a5a9c099b0
+  id: 1,
+  name: "Williams Shakespear",
+  created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00>,
+ #<Author:0x000055a5a9c08498
+  id: 2,
+  created_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00>,
+ #<Author:0x000055a5a9c03ce0
+  id: 3,
+  name: "Dr A P J Abdul Kalam",
+  created_at: Sat, 20 Nov 2021 19:18:51.776961000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:18:51.776961000 UTC +00:00>,
+ #<Author:0x000055a5a9c03970
+  id: 4,
+  name: "Aman",
+  created_at: Sat, 20 Nov 2021 19:44:27.076166000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:44:27.076166000 UTC +00:00>] 
+3.0.2 :116 > a4
+ => true 
+3.0.2 :117 > a4 = Author.find(4)
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+ => 
+... 
+3.0.2 :118 > a4
+#<Author:0x000055a5aac81978
+ name: "Aman",
+ updated_at: Sat, 20 Nov 2021 19:44:27.076166000 UTC +00:00> 
+  TRANSACTION (0.6ms)  BEGIN
+  TRANSACTION (10.6ms)  COMMIT
+ => 
+#<Author:0x000055a5aac81978
+ id: 4,
+ name: "Aman",
+ updated_at: Sat, 20 Nov 2021 19:44:27.076166000 UTC +00:00> 
+  Author Load (1.3ms)  SELECT "authors".* FROM "authors"
+[#<Author:0x000055a5aaf61170
+  name: "Williams Shakespear",
+  created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00>,
+ #<Author:0x000055a5aaf61080
+  id: 2,
+  name: "J.K. Rowling",
+  created_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00,
+ #<Author:0x000055a5aaf60fb8
+  id: 3,
+  name: "Dr A P J Abdul Kalam",
+  created_at: Sat, 20 Nov 2021 19:18:51.776961000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:18:51.776961000 UTC +00:00>] 
+3.0.2 :121 > reload!
+Reloading...
+3.0.2 :122 > Account
+ => Account(id: integer, account_numebr: string, created_at: datetime, updated_at: datetime, supplier_id: integer) 
+3.0.2 :123 > Supplier
+ => Supplier(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :124 > s1 = Supplier.new
+ => #<Supplier:0x000055a5aad7db38 id: nil, name: nil, created_at: nil, updated_at: nil> 
+ => "Mohan" 
+  TRANSACTION (0.7ms)  BEGIN
+ ["created_at", "2021-11-20 20:30:16.019657"], ["updated_at", "2021-11-20 20:30:16.019657"]]
+  TRANSACTION (30.7ms)  COMMIT
+ => true 
+3.0.2 :127 > a1 = Account.new
+ => #<Account:0x000055a5aa1da5d8 id: nil, account_numebr: nil, created_at: nil, updated_at: nil, supplier_id: nil> 
+ => "23451" 
+ => 1 
+  TRANSACTION (0.5ms)  BEGIN
+  Account Create (2.4ms)  INSERT INTO "accounts" ("account_numebr", "created_at", "updated_at", "supplier_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["account_numebr", "23451"], ["created_at", "2021-11-20 20:31:09.984040"], ["updated_at", "2021-11-20 20:31:09.984040"], ["supplier_id", 1]]
+  TRANSACTION (13.7ms)  COMMIT
+ => true 
+3.0.2 :131 > a1
+ => 
+ id: 1,
+ created_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+ supplier_id: 1> 
+3.0.2 :132 > s1
+ => 
+#<Supplier:0x000055a5aad7db38
+ id: 1,
+ created_at: Sat, 20 Nov 2021 20:30:16.019657000 UTC +00:00,
+3.0.2 :133 > s2 = Supplier.new
+ => #<Supplier:0x000055a5aa0c67a0 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :134 > s2.name="Brijesh Yagav"
+ => "Brijesh Yagav" 
+3.0.2 :135 > s2.save
+  TRANSACTION (0.7ms)  BEGIN
+  Supplier Create (1.0ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Brijesh Yagav"], ["created_at", "2021-11-20 20:31:55.944299"], ["updated_at", "2021-11-20 20:31:55.944299"]]
+  TRANSACTION (23.8ms)  COMMIT
+ => true 
+3.0.2 :136 > a2 = Account.new
+ => #<Account:0x000055a5ab086050 id: nil, account_numebr: nil, created_at: nil, updated_at: nil, supplier_id: nil> 
+3.0.2 :137 > a2.account_numebr="34353"
+ => "34353" 
+ => 2 
+  TRANSACTION (0.5ms)  BEGIN
+  Supplier Load (0.8ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Account Create (1.4ms)  INSERT INTO "accounts" ("account_numebr", "created_at", "updated_at", "supplier_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["account_numebr", "34353"], ["created_at", "2021-11-20 20:32:33.828379"], ["updated_at", "2021-11-20 20:32:33.828379"], ["supplier_id", 2]]
+  TRANSACTION (27.4ms)  COMMIT
+ => true 
+3.0.2 :140 > s3 = Supplier.new
+ => #<Supplier:0x000055a5aae2d808 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :141 > s3.name="Krishna"
+ => "Krishna" 
+3.0.2 :142 > s3.save
+  TRANSACTION (0.7ms)  BEGIN
+  Supplier Create (1.0ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Krishna"], ["created_at", "2021-11-20 20:33:02.165611"], ["updated_at", "2021-11-20 20:33:02.165611"]]
+  TRANSACTION (23.4ms)  COMMIT
+ => true 
+ => Account(id: integer, account_numebr: string, created_at: datetime, updated_at: datetime, supplier_id: integer) 
+  Account Load (1.3ms)  SELECT "accounts".* FROM "accounts"
+[#<Account:0x000055a5a9280678
+  account_numebr: "23451",
+  created_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+  supplier_id: 1>,
+ #<Account:0x000055a5a927bd80
+  id: 2,
+  account_numebr: "34353",
+  updated_at: Sat, 20 Nov 2021 20:32:33.828379000 UTC +00:00,
+3.0.2 :145 > Supplier
+ => Supplier(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :146 > Supplier.all
+  Supplier Load (0.5ms)  SELECT "suppliers".* FROM "suppliers"
+ => 
+[#<Supplier:0x000055a5aa1eafc8
+  id: 1,
+  name: "Mohan",
+  created_at: Sat, 20 Nov 2021 20:30:16.019657000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:30:16.019657000 UTC +00:00>,
+ #<Supplier:0x000055a5aa1eac80
+  id: 2,
+  name: "Brijesh Yagav",
+  created_at: Sat, 20 Nov 2021 20:31:55.944299000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:31:55.944299000 UTC +00:00>,
+ #<Supplier:0x000055a5aa1eaaa0
+  id: 3,
+  name: "Krishna",
+  created_at: Sat, 20 Nov 2021 20:33:02.165611000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:33:02.165611000 UTC +00:00>] 
+ => #<Account:0x000055a5aac42570 id: nil, account_numebr: nil, created_at: nil, updated_at: nil, supplier_id: nil> 
+3.0.2 :148 > a3.account_numebr="98789"
+ => "98789" 
+3.0.2 :149 > a3.supplier_id=3
+ => 3 
+3.0.2 :150 > a3.save
+  TRANSACTION (0.5ms)  BEGIN
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Account Create (1.0ms)  INSERT INTO "accounts" ("account_numebr", "created_at", "updated_at", "supplier_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["account_numebr", "98789"], ["created_at", "2021-11-20 20:34:42.665374"], ["updated_at", "2021-11-20 20:34:42.665374"], ["supplier_id", 3]]
+  TRANSACTION (25.5ms)  COMMIT
+ => true 
+3.0.2 :151 > Account
+ => Account(id: integer, account_numebr: string, created_at: datetime, updated_at: datetime, supplier_id: integer) 
+3.0.2 :152 > Account.all
+  Account Load (1.0ms)  SELECT "accounts".* FROM "accounts"
+[#<Account:0x000055a5aa0ed1c0
+  id: 1,
+  account_numebr: "23451",
+  created_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+  supplier_id: 1>,
+  id: 2,
+  account_numebr: "34353",
+  created_at: Sat, 20 Nov 2021 20:32:33.828379000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:32:33.828379000 UTC +00:00,
+  supplier_id: 2>,
+ #<Account:0x000055a5aa0ecea0
+  id: 3,
+  account_numebr: "98789",
+  created_at: Sat, 20 Nov 2021 20:34:42.665374000 UTC +00:00,
+  supplier_id: 3>] 
+3.0.2 :153 > Supplier.all
+  Supplier Load (1.1ms)  SELECT "suppliers".* FROM "suppliers"
+ => 
+[#<Supplier:0x000055a5aab794e0
+  name: "Mohan",
+  created_at: Sat, 20 Nov 2021 20:30:16.019657000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:30:16.019657000 UTC +00:00>,
+ #<Supplier:0x000055a5aab793f0
+  name: "Brijesh Yagav",
+  created_at: Sat, 20 Nov 2021 20:31:55.944299000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:31:55.944299000 UTC +00:00>,
+  id: 3,
+  name: "Krishna",
+  updated_at: Sat, 20 Nov 2021 20:33:02.165611000 UTC +00:00>] 
+3.0.2 :154 > Supplier.find(1).accounts
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `accounts' for #<Supplier id: 1, name: "Mohan", created_at: "2021-11-20 20:30:16.019657000 +0000", updated_at: "2021-11-20 20:30:16.019657000 +0000"> (NoMethodError)
+Did you mean?  account
+3.0.2 :155 > Supplier.find(1).account
+  Supplier Load (1.0ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.8ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+ => 
+#<Account:0x000055a5aab71010
+ id: 1,
+ account_numebr: "23451",
+ updated_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+ supplier_id: 1> 
+3.0.2 :156 > Supplier.find(1).account_numebr
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `account_numebr' for #<Supplier id: 1, name: "Mohan", created_at: "2021-11-20 20:30:16.019657000 +0000", updated_at: "2021-11-20 20:30:16.019657000 +0000"> (NoMethodError)
+Did you mean?  account=
+3.0.2 :157 > Supplier.find(1).account_numebrs
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `account_numebrs' for #<Supplier id: 1, name: "Mohan", created_at: "2021-11-20 20:30:16.019657000 +0000", updated_at: "2021-11-20 20:30:16.019657000 +0000"> (NoMethodError)
+3.0.2 :158 > Supplier.find(1).account.account_numebr
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.7ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+ => "23451" 
+3.0.2 :159 > Account.account_number
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `account_number' for Account:Class (NoMethodError)
+3.0.2 :160 > Account.find(1).account_numebr
+  Account Load (1.0ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => "23451" 
+3.0.2 :161 > Account.find(1).name
+  Account Load (0.9ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `name' for #<Account id: 1, account_numebr: "23451", created_at: "2021-11-20 20:31:09.984040000 +0000", updated_at: "2021-11-20 20:31:09.984040000 +0000", supplier_id: 1> (NoMethodError)
+3.0.2 :162 > Account.find(1).suppliers
+  Account Load (1.0ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `suppliers' for #<Account id: 1, account_numebr: "23451", created_at: "2021-11-20 20:31:09.984040000 +0000", updated_at: "2021-11-20 20:31:09.984040000 +0000", supplier_id: 1> (NoMethodError)
+Did you mean?  supplier
+               supplier=
+               supplier_id
+3.0.2 :163 > Account.find(1).supplier.name
+  Account Load (0.8ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Supplier Load (0.6ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => "Mohan" 
+3.0.2 :164 > Account.find(2).supplier.name 
+  Account Load (0.7ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Supplier Load (0.5ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => "Brijesh Yagav" 
+3.0.2 :165 > 
+3.0.2 :171 > Supplier.find(3).name
+  Supplier Load (0.8ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+ => "Krishna" 
+3.0.2 :172 > Supplier.find(3).account.account_numebr
+  Supplier Load (0.9ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Account Load (1.0ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 3], ["LIMIT", 1]]
+ => "98789" 
+3.0.2 :173 > 
+
+--------------------------------------------------------------------------------------------------
+3.0.2 :001 > Author.all
+  Author Load (114.1ms)  SELECT "authors".* FROM "authors"
+ => 
+[#<Author:0x000055ddbf9dd418
+  id: 1,
+  name: "Williams Shakespear",
+  created_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:03:03.799187000 UTC +00:00>,
+ #<Author:0x000055ddbfb93898
+  id: 2,
+  name: "J.K. Rowling",
+  created_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:10:35.504050000 UTC +00:00>,
+ #<Author:0x000055ddbfb93708
+  id: 3,
+  name: "Dr A P J Abdul Kalam",
+  created_at: Sat, 20 Nov 2021 19:18:51.776961000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:18:51.776961000 UTC +00:00>] 
+3.0.2 :002 > 
+3.0.2 :003 > 
+3.0.2 :004 > Book.all
+  Book Load (42.8ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x000055ddc1064b50
+  id: 1,
+  name: "A Midsummer Night's Dream",
+  published_date: Wed, 12 Jan 1605 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x000055ddc1286708
+  id: 2,
+  name: "Harry Potter and the Goblet of Fire",
+  published_date: Sat, 08 Jul 2000 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055ddc1286640
+  id: 3,
+  name: "Harry Potter and the Chamber of secrets",
+  published_date: Thu, 02 Jul 1998 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055ddc1286578
+  id: 4,
+  name: "Harry Potter & The Deathly Hallows Pt 1",
+  published_date: Fri, 19 Nov 2010 00:00:00.000000000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055ddc12864b0
+  name: "Wings of Fire",
+  published_date: nil,
+  created_at: Sat, 20 Nov 2021 19:20:41.246021000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:20:41.246021000 UTC +00:00,
+  author_id: 3>] 
+3.0.2 :005 > Author.find(1).books
+  Author Load (0.9ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 1]]
+ => 
+[#<Book:0x000055ddc198dc40
+  name: "A Midsummer Night's Dream",
+  published_date: Wed, 12 Jan 1605 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :006 > Author.find(1).name
+  Author Load (1.2ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => "Williams Shakespear" 
+3.0.2 :007 > Author.find(1).books
+  Author Load (0.9ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Book Load (0.9ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 1]]
+ => 
+[#<Book:0x000055ddc12a5270
+  id: 1,
+  name: "A Midsummer Night's Dream",
+  published_date: Wed, 12 Jan 1605 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:06:23.925867000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :008 > Author.find(2).books
+  Author Load (1.0ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $
+ => 
+[#<Book:0x000055ddc139d448
+  id: 2,
+  published_date: Sat, 08 Jul 2000 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:13:02.147078000 UTC +00:00,
+ #<Book:0x000055ddc139d2e0
+  id: 3,
+  name: "Harry Potter and the Chamber of secrets",
+  published_date: Thu, 02 Jul 1998 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:15:23.071174000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055ddc139d178
+  id: 4,
+  name: "Harry Potter & The Deathly Hallows Pt 1",
+  published_date: Fri, 19 Nov 2010 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 19:17:41.079670000 UTC +00:00,
+  author_id: 2>] 
+3.0.2 :009 > Author.find(1).name
+  Author Load (1.3ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => "Williams Shakespear" 
+3.0.2 :010 > Author.find(2).name
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => "J.K. Rowling" 
+3.0.2 :011 > Physician.all
+  Physician Load (22.9ms)  SELECT "physicians".* FROM "physicians"
+ => 
+[#<Physician:0x000055ddc1826190
+  id: 1,
+  created_at: Sat, 20 Nov 2021 21:02:05.722684000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:02:05.722684000 UTC +00:00>,
+ #<Physician:0x000055ddc1731410
+  id: 2,
+  name: "Dr Arjun Bhardwaj",
+  created_at: Sat, 20 Nov 2021 21:02:53.774826000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:02:53.774826000 UTC +00:00>,
+ #<Physician:0x000055ddc1731348
+  id: 3,
+  name: "Dr Kiran Modi",
+  created_at: Sat, 20 Nov 2021 21:03:36.375787000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:03:36.375787000 UTC +00:00>,
+ #<Physician:0x000055ddc1731280
+  id: 4,
+  name: "Dr Abhinav Bhatiya",
+  created_at: Sat, 20 Nov 2021 21:04:06.277111000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:04:06.277111000 UTC +00:00>,
+ #<Physician:0x000055ddc17311b8
+  id: 5,
+  name: "Dr Sunita Seshodiya",
+  created_at: Sat, 20 Nov 2021 21:04:50.793493000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:04:50.793493000 UTC +00:00>] 
+3.0.2 :012 > Patient.all
+  Patient Load (46.1ms)  SELECT "patients".* FROM "patients"
+ => 
+[#<Patient:0x000055ddbf99b838
+  id: 1,
+  created_at: Sat, 20 Nov 2021 20:58:55.497833000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:58:55.497833000 UTC +00:00>,
+ #<Patient:0x000055ddbfc3f4b8
+  id: 2,
+  name: "Rishabh",
+  created_at: Sat, 20 Nov 2021 20:59:21.386299000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:59:21.386299000 UTC +00:00>,
+ #<Patient:0x000055ddbfc3f328
+  id: 3,
+  name: "Sneha",
+  created_at: Sat, 20 Nov 2021 20:59:41.941026000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:59:41.941026000 UTC +00:00>,
+ #<Patient:0x000055ddbfc3f0a8
+  id: 4,
+  name: "Laeba",
+  created_at: Sat, 20 Nov 2021 21:00:18.796576000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:00:18.796576000 UTC +00:00>,
+ #<Patient:0x000055ddbfc3ee50
+  id: 5,
+  name: "Aman",
+  created_at: Sat, 20 Nov 2021 21:00:47.622155000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:00:47.622155000 UTC +00:00>] 
+3.0.2 :013 > Appointment.all
+  Appointment Load (34.2ms)  SELECT "appointments".* FROM "appointments"
+ => 
+[#<Appointment:0x000055ddc08e3c28
+  id: 1,
+  appointment_date: Tue, 23 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:06:32.624206000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:06:32.624206000 UTC +00:00,
+  patient_id: 1,
+  physician_id: 1>,
+ #<Appointment:0x000055ddc0929138
+  id: 2,
+  appointment_date: Wed, 24 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:08:02.057823000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:08:02.057823000 UTC +00:00,
+  patient_id: 2,
+  physician_id: 1>,
+ #<Appointment:0x000055ddc0928fa8
+  id: 3,
+  appointment_date: Thu, 25 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:11:31.405482000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:30:37.278713000 UTC +00:00,
+  patient_id: 3,
+  physician_id: 2>,
+ #<Appointment:0x000055ddc0928df0
+  id: 4,
+  appointment_date: Tue, 23 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:16:35.859743000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:32:33.793597000 UTC +00:00,
+  patient_id: 5,
+  physician_id: 4>,
+ #<Appointment:0x000055ddc0928c10
+  id: 7,
+  appointment_date: Thu, 23 Dec 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:22:29.062765000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:33:31.072835000 UTC +00:00,
+  physician_id: 3>,
+ #<Appointment:0x000055ddc0928918
+  id: 8,
+  appointment_date: Fri, 03 Dec 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:23:10.947589000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:36:37.825460000 UTC +00:00,
+  patient_id: 5,
+  physician_id: 4>,
+ #<Appointment:0x000055ddc09286e8
+  id: 6,
+  appointment_date: Sun, 28 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:21:33.827625000 UTC +00:00,
+  patient_id: 4,
+  physician_id: 3>,
+ #<Appointment:0x000055ddc0928490
+  id: 5,
+  appointment_date: Sun, 12 Dec 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:19:51.245244000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:40:12.481102000 UTC +00:00,
+  patient_id: 4,
+  physician_id: 4>] 
+3.0.2 :014 > Patient.find(1).appointments
+  Patient Load (0.8ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ppointments"."patient_id" = $1  [["patient_id", 1]]
+ => 
+[#<Appointment:0x000055ddbfbf67b8
+  id: 1,
+  appointment_date: Tue, 23 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:06:32.624206000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:06:32.624206000 UTC +00:00,
+  patient_id: 1,
+  physician_id: 1>] 
+3.0.2 :015 > Patient.find(2).appointments
+  Patient Load (1.1ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Appointment Load (0.7ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."patient_id" = $1  [["patient_id", 2]]
+ => 
+[#<Appointment:0x000055ddc065ce28
+  id: 2,
+  appointment_date: Wed, 24 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:08:02.057823000 UTC +00:00,
+  patient_id: 2,
+  physician_id: 1>] 
+3.0.2 :016 > Patient.find(4).appointments
+  Patient Load (1.0ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  Appointment Load (0.8ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."patient_id" = $1  [["patient_id", 4]]
+ => 
+  id: 5,
+  appointment_date: Sun, 12 Dec 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:19:51.245244000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:40:12.481102000 UTC +00:00,
+  patient_id: 4,
+  physician_id: 4>,
+ #<Appointment:0x000055ddc12563a0
+  id: 6,
+  appointment_date: Sun, 28 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:21:33.827625000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:37:45.886988000 UTC +00:00,
+  patient_id: 4,
+  physician_id: 3>] 
+3.0.2 :017 > Physician.find(1).appointment
+  Physician Load (0.6ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `appointment' for #<Physician id: 1, name: "Dr Shefali Shukla", created_at: "2021-11-20 21:02:05.72268
+Did you mean?  appointments
+               appointments=
+3.0.2 :018 > Physician.find(1).appointments
+  Physician Load (0.8ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Appointment Load (0.4ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."physician_id" = $1  [["physician_id", 1]]
+ => 
+  id: 1,
+  appointment_date: Tue, 23 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:06:32.624206000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:06:32.624206000 UTC +00:00,
+  patient_id: 1,
+ #<Appointment:0x000055ddbf9efbe0
+  id: 2,
+  appointment_date: Wed, 24 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:08:02.057823000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 21:08:02.057823000 UTC +00:00,
+  patient_id: 2,
+  physician_id: 1>] 
+3.0.2 :019 > Physician.find(1).appointment
+  Physician Load (1.2ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `appointment' for #<Physician id: 1, name: "Dr Shefali Shukla", created_at: "2021-11-20 21:02:05.72268
+Did you mean?  appointments
+               appointments=
+3.0.2 :020 > Physician.find(1).appointments=1
+  Physician Load (1.0ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/associations/collection_association.rb:245:in `replace': undefined method `each' for 1:Integer (NoMethodError)
+3.0.2 :021 > Physician.find(1).appointments.where(patient_id:1)
+  Physician Load (1.2ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Appointment Load (0.9ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."physician_id" = $1 AND "appointments"."patient_id" = $2  [["physician_id", 1], ["patient_id", 1]]
+ => 
+[#<Appointment:0x000055ddc1445f08
+  id: 1,
+  appointment_date: Tue, 23 Nov 2021 00:00:00.000000000 UTC +00:00,
+  created_at: Sat, 20 Nov 2021 21:06:32.624206000 UTC +00:00,
+:patient_
+:patient_i
+:patient_id=
+:patient_id?
+:patient_id_before_type_cast
+:patient_id_came_from_user?
+:patient_id_change
+:patient_id_changed?
+:patient_id_for_database
+:patient_id_in_database
+:patient_id_previous_change
+:patient_id_previously_changed?
+:patient_id_previously_was
+:patient_id_was
+:patient_id_will_change!
+:patient_ids
+:patient_ids=
+:patients
+:patients=
+3.0.2 :023 > Physician.joins(:patient).where(physician_id:3)
+(Object doesn't support #inspect)
+ =>  
+3.0.2 :024 > Physician.joins(:patients).where(physician_id:3)
+(Object doesn't support #inspect)
+3.0.2 :025 > Physician.joins(:patients).where(physician_id=3)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/rel
+3 (Integer) (ArgumentError)
+3.0.2 :026 > Supplier.all
+  Supplier Load (20.5ms)  SELECT "suppliers".* FROM "suppliers"
+ => 
+[#<Supplier:0x000055ddc131ef58
+  id: 1,
+  name: "Mohan",
+  created_at: Sat, 20 Nov 2021 20:30:16.019657000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:30:16.019657000 UTC +00:00>,
+ #<Supplier:0x000055ddc12ff568
+  id: 2,
+  name: "Brijesh Yagav",
+  created_at: Sat, 20 Nov 2021 20:31:55.944299000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:31:55.944299000 UTC +00:00>,
+ #<Supplier:0x000055ddc12ff4a0
+  id: 3,
+  name: "Krishna",
+  created_at: Sat, 20 Nov 2021 20:33:02.165611000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:33:02.165611000 UTC +00:00>] 
+3.0.2 :027 > Account
+t: datetime, supplier_id: integer) 
+3.0.2 :028 > Account.all
+  Account Load (31.9ms)  SELECT "accounts".* FROM "accounts"
+ => 
+[#<Account:0x000055ddc14d73e0
+  id: 1,
+  account_numebr: "23451",
+  created_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+  supplier_id: 1>,
+  id: 2,
+  account_numebr: "34353",
+  created_at: Sat, 20 Nov 2021 20:32:33.828379000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:32:33.828379000 UTC +00:00,
+  supplier_id: 2>,
+  id: 3,
+  account_numebr: "98789",
+  created_at: Sat, 20 Nov 2021 20:34:42.665374000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:34:42.665374000 UTC +00:00,
+  supplier_id: 3>] 
+3.0.2 :029 > Account.find(1).supplier
+  Account Load (1.0ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Supplier Load (0.6ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+ id: 1,
+ name: "Mohan",
+ created_at: Sat, 20 Nov 2021 20:30:16.019657000 UTC +00:00,
+ updated_at: Sat, 20 Nov 2021 20:30:16.019657000 UTC +00:00> 
+3.0.2 :030 > Account.find(1).supplier.name
+  Account Load (1.2ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"
+ => "Mohan" 
+3.0.2 :031 > Supplier.find(1).account
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.7ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."su
+ => 
+#<Account:0x000055ddc18fe7e8
+ account_numebr: "23451",
+ created_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+ updated_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+3.0.2 :032 > Supplier.find(1).accounts.account_numebr
+  Supplier Load (1.1ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `accounts' for #<Supplier id: 1, name: "Mohan", created_at: "2021-11-20 20:30:16.019657000 +0000", updated_at: "2021-11-20 20:30:16.019657000 +0000"> (NoMethodError)
+Did you mean?  account
+               account=
+3.0.2 :033 > Supplier.find(1).account.account_numebr
+  Supplier Load (1.0ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.7ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+ => "23451" 
+3.0.2 :034 > reload!
+Reloading...
+ => true 
+3.0.2 :035 > AccountHistory.all
+  AccountHistory Load (0.7ms)  SELECT "account_histories".* FROM "account_histories"
+ => [] 
+3.0.2 :036 > AccountHistory
+dated_at: datetime, account_id: integer) 
+3.0.2 :037 > Account.all
+ => 
+[#<Account:0x000055ddc06646c8
+  account_numebr: "23451",
+  updated_at: Sat, 20 Nov 2021 20:31:09.984040000 UTC +00:00,
+ #<Account:0x000055ddc07f0bb8
+  account_numebr: "34353",
+  created_at: Sat, 20 Nov 2021 20:32:33.828379000 UTC +00:00,
+  updated_at: Sat, 20 Nov 2021 20:32:33.828379000 UTC +00:00,
+  supplier_id: 2>,
+ #<Account:0x000055ddc07f0960
+  id: 3,
+  account_numebr: "98789",
+  updated_at: Sat, 20 Nov 2021 20:34:42.665374000 UTC +00:00,
+3.0.2 :038 > AccountHistory
+3.0.2 :039 > aid1=AccountHistory.new
+#<AccountHistory:0x000055ddc0495770
+... 
+3.0.2 :040 > aid1.credit_rating=8
+ => 8 
+3.0.2 :041 > aid1.account_id=1
+ => 1 
+3.0.2 :042 > aid1
+3.0.2 :043 > aid1.save
+  Account Load (1.2ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+$1, $2, $3, $4) RETURNING "id"  [["credit_rating", 8], ["created_at", "2021-11-21 11:17:45.791261"], ["updated_at", "2021-11-21 11:17:
+  TRANSACTION (50.2ms)  COMMIT
+ => true 
+3.0.2 :044 > aid2=AccountHistory.new
+ => #<AccountHistory:0x000055ddc160f4b0 id: nil, credit_rating: nil, created_at: nil, updated_at: nil, account_id: nil> 
+3.0.2 :045 > aid2.credit_rating=7
+ => 7 
+3.0.2 :046 > aid2.account_id=2
+3.0.2 :047 > aid2.save
+  TRANSACTION (0.7ms)  BEGIN
+  Account Load (1.0ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  AccountHistory Create (1.2ms)  INSERT INTO "account_histories" ("credit_rating", "created_at", "updated_at", "account_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["credit_rating", 7], ["created_at", "2021-11-21 11:18:27.488673"], ["updated_at", "2021-11-21 11:18:27.488673"], ["account_id", 2]]
+  TRANSACTION (20.8ms)  COMMIT
+3.0.2 :048 > aid3=AccountHistory.new
+ => #<AccountHistory:0x000055ddc15a8ff8 id: nil, credit_rating: nil, created_at: nil, updated_at: nil, account_id: nil> 
+3.0.2 :049 > aid3.credit_rating=9
+ => 9 
+3.0.2 :050 > aid3.account_id=3
+ => 3 
+3.0.2 :051 > aid3.save
+  TRANSACTION (0.6ms)  BEGIN
+  Account Load (0.7ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  AccountHistory Create (1.2ms)  INSERT INTO "account_histories" ("credit_rating", "created_at", "updated_at", "account_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["credit_rating", 9], ["created_at", "2021-11-21 11:19:05.791907"], ["updated_at", "2021-11-21 11:19:05.791907"], ["account_id", 3]]
+  TRANSACTION (28.2ms)  COMMIT
+ => true 
+3.0.2 :052 > aid3
+ => 
+#<AccountHistory:0x000055ddc15a8ff8
+ id: 3,
+ credit_rating: 9,
+ created_at: Sun, 21 Nov 2021 11:19:05.791907000 UTC +00:00,
+ account_id: 3> 
+3.0.2 :053 > AccountHistory.all
+  AccountHistory Load (1.1ms)  SELECT "account_histories".* FROM "account_histories"
+ => 
+[#<AccountHistory:0x000055ddc13bd298
+  id: 1,
+  credit_rating: 8,
+  created_at: Sun, 21 Nov 2021 11:17:45.791261000 UTC +00:00,
+  updated_at: Sun, 21 Nov 2021 11:17:45.791261000 UTC +00:00,
+  account_id: 1>,
+ #<AccountHistory:0x000055ddc13bd180
+  id: 2,
+  created_at: Sun, 21 Nov 2021 11:18:27.488673000 UTC +00:00,
+  updated_at: Sun, 21 Nov 2021 11:18:27.488673000 UTC +00:00,
+  account_id: 2>,
+ #<AccountHistory:0x000055ddc13bd0b8
+  id: 3,
+  credit_rating: 9,
+  updated_at: Sun, 21 Nov 2021 11:19:05.791907000 UTC +00:00,
+  account_id: 3>] 
+3.0.2 :054 > Supplier.find(1).account.account_history
+  Supplier Load (0.4ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (1.4ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT
+  AccountHistory Load (0.4ms)  SELECT "account_histories".* FROM "account_histories" WHERE "account_histories"."account_id" = $1 LIMIT $2  [["account_id", 1], ["LIMIT", 1]]
+ => 
+#<AccountHistory:0x000055ddc08c3860
+ id: 1,
+ credit_rating: 8,
+ created_at: Sun, 21 Nov 2021 11:17:45.791261000 UTC +00:00,
+ account_id: 1> 
+3.0.2 :055 > Supplier.find(1).account.account_history.credit_rating
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.6ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+  AccountHistory Load (0.6ms)  SELECT "account_histories".* FROM "account_histories" WHERE "account_histories"."account_id" = $1 LIMIT $2  [["account_id", 1], ["LIMIT", 1]]
+ => 8 
+  AccountHistory Load (0.7ms)  SELECT "account_histories".* FROM "account_histories" WHERE "account_histories"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.6ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Supplier Load (0.6ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => "Mohan" 
+3.0.2 :057 > AccountHistory.find(1).account.supplier.supplier_id
+  AccountHistory Load (0.9ms)  SELECT "account_histories".* FROM "account_histories" WHERE "account_histories"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.6ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Supplier Load (0.5ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `supplier_id' for #<Supplier id: 1, name: "Mohan", created_at: "2021-11-20 20:30:16.019657000 +0000", updated_at: "2021-11-20 20:30:16.019657000 +0000"> (NoMethodError)
+3.0.2 :058 > Account.find(3)
+  Account Load (0.8ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+ => 
+#<Account:0x000055ddc16e81c0
+ id: 3,
+ account_numebr: "98789",
+ created_at: Sat, 20 Nov 2021 20:34:42.665374000 UTC +00:00,
+ updated_at: Sat, 20 Nov 2021 20:34:42.665374000 UTC +00:00,
+ supplier_id: 3> 
+3.0.2 :059 > Account.find(3).supplier.name
+  Account Load (0.7ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Supplier Load (0.6ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+ => "Krishna" 
+3.0.2 :060 > 
+-----------------------------
+#<Youtube:0x000055ddea907f40
+ id: 1,
+ body: "This is Youtube comment",
+ created_at: Fri, 19 Nov 2021 11:59:09.593408000 UTC +00:00,
+ updated_at: Fri, 19 Nov 2021 11:59:09.593408000 UTC +00:00> 
+3.0.2 :033 > Comment.find(1).commentable
 
