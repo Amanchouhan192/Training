@@ -6,8 +6,9 @@
   <%= form_for(@subject) do |f| %>
      
     <%= render(:partial => 'form', :locals => {:f => f}) %>
-
+    
   <div class="form-buttons">
+    <input type="checkbox" id=form_checkbox><p>"Are you sure with the changes?"</p>
     <%= f.submit("Update Subject") %>
   </div>
 <% end %>

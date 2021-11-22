@@ -6,6 +6,7 @@ class SubjectsController < ApplicationController
 
   def show
     @subject = Subject.find(params[:id])
+    
   end
 
   def new
@@ -30,6 +31,8 @@ class SubjectsController < ApplicationController
 
   def edit
     @subject = Subject.find(params[:id])
+    #validates :form_checkbox, acceptance: {accept: true} , on: :create, 
+    #allow_nil: false
   end
 
   def update
