@@ -121,6 +121,10 @@ belongs_to :city, optional: true
 
     If you set the :optional option to true, then the presence of the associated object won't be validated. By default, this option is set to false.
 
+----------------------------------------------------------------------------------------------------------------------------
+6. Stack level too deep:
+	error explanation: home/beryl/.rvm/gems/ruby-3.0.2/gems/activesupport-6.1.4.1/lib/active_support/callbacks.rb:824:in `_run_validate_callbacks': stack level too deep (SystemStackError)
 
+solution : not known yet
  
 
