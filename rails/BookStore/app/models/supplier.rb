@@ -6,5 +6,8 @@ class Supplier < ApplicationRecord
     validates_associated :account
     validates_associated :account_history
 
+    # Hard-coded message
+    validates :name, presence: { message: "must be given please" }
+
 
 end
