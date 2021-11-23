@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
     # For details on the DSL available within this file, see 
     root to: 'home#index'
-  
+
+
   
     get 'home/index'
     get 'home/login'
-    get 'home/signup'
+    get 'home/signup' 
+    get 'home/new' 
+    post 'home/new'
+    post 'home/signup'
 
+end
   
 =begin
     get 'pages/index'
@@ -30,4 +35,3 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 =end
-end
