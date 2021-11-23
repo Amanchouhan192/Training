@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
     get 'home/index'
     get 'home/login'
+    get 'home/signup'
 
   
 =begin

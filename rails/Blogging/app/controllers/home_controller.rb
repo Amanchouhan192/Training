@@ -2,6 +2,10 @@ class HomeController < ApplicationController
   def index
   end
 
+  def login
+    #redirect_to(:controller => 'home', :action => 'index')
+  end
+
   def show
   end
 
