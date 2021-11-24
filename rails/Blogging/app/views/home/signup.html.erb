@@ -3,7 +3,7 @@
 <%= link_to("Login ",{:action =>'new'})%><br />
 <h>Signup Links are there</h><br />
 
-<%= form_for User.new,:url=>home_signup_path, :method=> 'post' do |f| %>
+<%= form_for User.new,:url=>"/home/create", remote: true do |f| %>
   <div class="mb-3">
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control" %>
@@ -24,7 +24,6 @@
     <%= f.label :gender %>
     <%= f.radio_button :gender, 'Male' %>Male
     <%= f.radio_button :gender, 'Female' %>Female<br />
-    <%= f.text_field :gender, class: "form-control",placeholder: "Male or Female"  %>
   </div>
   <div class="mb-3">
     <div class="form-group">

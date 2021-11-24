@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   #root to: 'ragistration#index'
   
-
-
+  
   get 'home/index'
   get 'home/show'
   get 'home/new' 
@@ -14,9 +13,9 @@ Rails.application.routes.draw do
   #get 'home/login'
   get  'home/signup', to: 'home#signup'
   post 'home/signup', to: 'home#signup'
-  post 'home/create' 
-  post 'home/new', to: 'home#new'
+  post 'home/create' , to: 'home#create'
 
+  post 'home/new', to: 'home#new'
 
 
   get 'ragistration/index'

@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < ActionController::API
   def index
   end
 
@@ -15,13 +15,14 @@ class HomeController < ApplicationController
   end
 
   def create
-  
+    debugger
     #@user = User.new
     @user = User.new(user_params) # mass assignment 
     #save the object
+    
     if @user.save 
       #if save succeeds,redirect to the next index action
-      redirect_to(home_signup_path)
+      redirect_to '/home/show'
     else
       #if save fails ,redisplay the form so user can fix problem.
       render('new')
