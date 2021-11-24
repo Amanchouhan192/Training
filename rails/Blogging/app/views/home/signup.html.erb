@@ -22,6 +22,8 @@
   </div>
   <div class="mb-3">
     <%= f.label :gender %>
+    <%= f.radio_button :gender, 'Male' %>Male
+    <%= f.radio_button :gender, 'Female' %>Female<br />
     <%= f.text_field :gender, class: "form-control",placeholder: "Male or Female"  %>
   </div>
   <div class="mb-3">
