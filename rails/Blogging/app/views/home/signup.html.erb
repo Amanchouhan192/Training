@@ -25,8 +25,11 @@
     <%= f.text_field :gender, class: "form-control",placeholder: "Male or Female"  %>
   </div>
   <div class="mb-3">
-    <%= f.label :age %>
-    <%= f.text_field :age, class: "form-control",placeholder: "0-100"  %>
+    <div class="form-group">
+        <%= f.label :age %>
+        <%= f.select :age, options_for_select(%w[10-18 18-20 20-25 25-30 30-35 35-40 40+]), class: "form-control" %>
+     </div>
+  
   </div>
   <div class="mb-3">
     <%= f.label :phone %>

@@ -21,7 +21,7 @@ class HomeController < ApplicationController
     #save the object
     if @user.save 
       #if save succeeds,redirect to the next index action
-      redirect_to(@user)
+      redirect_to(home_signup_path)
     else
       #if save fails ,redisplay the form so user can fix problem.
       render('new')
