@@ -11,15 +11,17 @@ class HomeController < ApplicationController
 
   def new
     @user = User.new # mass assignment 
+  
   end
 
   def create
+  
     #@user = User.new
-    @user = User.new(home_params) # mass assignment 
+    @user = User.new(user_params) # mass assignment 
     #save the object
     if @user.save 
       #if save succeeds,redirect to the next index action
-      redirect_to(home_path)
+      redirect_to(@user)
     else
       #if save fails ,redisplay the form so user can fix problem.
       render('new')
@@ -35,5 +37,10 @@ class HomeController < ApplicationController
 
   def delete
   end
+  private 
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :gender, :age, :phone)
+    end
 end
 
