@@ -37,7 +37,9 @@ Rails.application.routes.draw do
   get 'blogs/create',to: 'blogs#create'
   post 'blogs/create',to: 'blogs#create'
   get 'blogs/edit' ,to: 'blogs#edit'
+  post 'blogs/edit' ,to: 'blogs#edit'
   get 'blogs/delete',to: 'blogs#delete'
+  post 'blogs/delete',to: 'blogs#delete'
   
 end
   

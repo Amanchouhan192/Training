@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
         end
       
         def show
-          @blogpost = Blogpost.find(params[:id])
+          @blogpost = Blogpost.find_by(params[:id])
         end
       
         def new
@@ -13,7 +13,7 @@ class BlogsController < ApplicationController
       
         def create
           #Instantiate a new object using form parameter
-          @blogpost = Blogpost.new(blog_params) # mass assignment 
+          @blogpost = Blogpost.new(params[:id]) # mass assignment 
           #save the object
           if @blogpost.save 
             #if save succeeds,redirect to the next index action
@@ -27,9 +27,11 @@ class BlogsController < ApplicationController
         end
       
         def edit
-          @blogpost = Blogpost.find(params[:id])
+          @blogpost = Blogpost.find_by(params[:id])
           #validates :form_checkbox, acceptance: {accept: true} , on: :create, 
           #allow_nil: false
+        
+
         end
       
         def update
@@ -42,19 +44,20 @@ class BlogsController < ApplicationController
         end
       
         def delete
-          @blogpost = Blogpost.find(params[:id])
+          @blogpost = Blogpost.find_by(params[:id])
+          #render 'index'
         end 
       
         def destroy
-          @blogpost = Blogpost.find(params[:id])
+          @blogpost = Blogpost.find_by(params[:id])
           @blogpost.destroy
-          redirect_to '/home/show'
+          redirect_to 'index'
         end
       
         private 
       
-          def subject_params
-            params.require(:blogpost).permit(title,:body)
+          def blog_params
+            params.require(:blogpost).permit(:title,:body)
           end
         
       end

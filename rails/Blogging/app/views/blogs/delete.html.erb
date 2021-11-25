@@ -1,13 +1,13 @@
-<br /><%= link_to("<< Back to List",'home/show', :class => 'back-link') %>
+<br /><%= link_to("<< Back to List",'index', :class => 'back-link') %>
 
 <div class="Blogs delete">
   <h2>Delete Blog</h2>
   
-  <%= form_for(@blog, :method => 'delete') do |f| %>
+  <%= form_for(@blogpost,blogs_delete_path, :method => 'delete') |f| %>
  
-  
-    <p>Are you sure you want to permanently delete this Blog Post?</p>
     <p><%= @blogpost.title %></p>
+    <p>Are you sure you want to permanently delete this Blog Post?</p>
+    
 
   <div class="form-buttons">
     <%= f.submit("Delete BlogPost") %>
