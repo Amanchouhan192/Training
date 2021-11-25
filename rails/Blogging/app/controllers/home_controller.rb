@@ -2,7 +2,7 @@ class HomeController < ActionController::API
   def index
   end
 
-  def login
+  def login_new
     #redirect_to(:controller => 'home', :action => 'index')
   end
 
@@ -25,7 +25,7 @@ class HomeController < ActionController::API
       redirect_to '/home/show'
     else
       #if save fails ,redisplay the form so user can fix problem.
-      render'/home/new'
+      render'/home/show'
     end
   end
 

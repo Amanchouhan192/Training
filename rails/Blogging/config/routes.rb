@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  
     # For details on the DSL available within this file, see 
   root to: 'home#index'
   #root to: 'ragistration#index'
@@ -15,7 +16,18 @@ Rails.application.routes.draw do
   post 'home/signup', to: 'home#signup'
   post 'home/create' , to: 'home#create'
 
-  post 'home/new', to: 'home#new'
+  post 'home/new', to: 'sessions#create'
+
+
+
+  get 'sessions/index'
+  get 'sessions/new',to: 'sessions#new'
+  post 'sessions/new',to: 'sessions#new'
+  get 'sessions/show'
+  get 'sessions/create',to: 'home#new'
+  get 'sessions/edit'
+  get 'sessions/destroy'
+  get 'sessions/delete'
 
 
   get 'ragistration/index'
