@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   #root to: 'ragistration#index'
   
   
-  get 'home/index'
-  get 'home/show'
-  get 'home/new' 
+  get 'home/index',to: 'home#index'
+  get 'home/show',to: 'home#show'
+  get 'home/new', to: 'home#new'
   get 'home/edit' 
   get 'home/delete'
   #get 'home/login'

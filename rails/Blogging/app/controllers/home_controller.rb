@@ -7,6 +7,7 @@ class HomeController < ActionController::API
   end
 
   def show
+    @user = User.all
   end
 
   def new
@@ -15,7 +16,6 @@ class HomeController < ActionController::API
   end
 
   def create
-    debugger
     #@user = User.new
     @user = User.new(user_params) # mass assignment 
     #save the object
@@ -25,15 +25,11 @@ class HomeController < ActionController::API
       redirect_to '/home/show'
     else
       #if save fails ,redisplay the form so user can fix problem.
-      render('new')
+      render'/home/new'
     end
   end
 
   def edit
-  end
-
-  def create
-    
   end
 
   def delete
