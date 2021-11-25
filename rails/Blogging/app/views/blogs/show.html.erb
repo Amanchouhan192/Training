@@ -1,0 +1,25 @@
+<br /><%= link_to("<< Back to List",'/blogs/show', :class => 'back-link') %>
+
+<div class="blogs show">
+  <h2>Show Blogpost</h2>
+
+  <table summary="Blog detail view">
+    <tr>
+      <th>Title:</th>
+      <td><%= @blogpost.title %></td>
+    </tr>
+    <tr>
+      <th>Title:</th>
+      <td><%= @blogpost.body %></td>
+    </tr>
+    <tr>
+      <th>Created :</th>
+      <td><%= @blogpost.created_at %></dt>
+    </tr>
+    <tr>
+      <th>Updated :</th>
+      <td><%= @blogpost.updated_at %></td>
+    </tr>
+  </table>
+
+</div>

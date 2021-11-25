@@ -21,8 +21,8 @@ Rails.application.routes.draw do
 
 
   get 'sessions/index'
-  get 'sessions/new',to: 'sessions#new'
-  post 'sessions/new',to: 'sessions#new'
+  get 'sessions/new',to: 'home#new'
+  post 'sessions/new',to: 'home#new'
   get 'sessions/show'
   get 'sessions/create',to: 'home#new'
   get 'sessions/edit'
@@ -30,13 +30,15 @@ Rails.application.routes.draw do
   get 'sessions/delete'
 
 
-  get 'ragistration/index'
-  get 'ragistration/show'
-  get 'ragistration/new'
-  get 'ragistration/create'
-  get 'ragistration/edit'
-  get 'ragistration/delete'
-  post 'ragistration/new'
+
+  get 'blogs/index',to: 'blogs#index'
+  get 'blogs/show',to: 'blogs#show'
+  get 'blogs/new',to: 'blogs#new'
+  get 'blogs/create',to: 'blogs#create'
+  post 'blogs/create',to: 'blogs#create'
+  get 'blogs/edit' ,to: 'blogs#edit'
+  get 'blogs/delete',to: 'blogs#delete'
+  
 end
   
 =begin

@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       redirect_to '/home/show',notice: "Logged In Successfully"
     else
       flash[:alert] = "Invalid Email or password"
-      render 'sessions/new'
+      render '/home/show'
     end
 
   end
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to '/sessions/create',notice: "Logged out"
+    redirect_to '/sessions/new',notice: "Logged out"
   end
 
   def delete

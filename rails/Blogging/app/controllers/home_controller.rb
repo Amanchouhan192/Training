@@ -22,10 +22,10 @@ class HomeController < ActionController::API
     
     if @user.save 
       #if save succeeds,redirect to the next index action
-      redirect_to '/home/show'
+      redirect_to '/blogs/show'
     else
       #if save fails ,redisplay the form so user can fix problem.
-      render'/home/show'
+      render'/blogs/show'
     end
   end
 

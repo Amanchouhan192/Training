@@ -1,2 +1,17 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<br /><br />
+<%= link_to("Home",{:action =>'index'}) %> <br />
+<h>Login page Links</h>
+<h2>Create User Login</h2>
+  <%= form_with url: "/sessions/new" do |f| %>
+    <div class="mb-3">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control", placeholder: "Email"  %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control" ,placeholder: "password" %>
+    </div>
+    <div class="mb-3">
+        <%= f.submit("Login In") %>
+    </div>
+  <% end %>

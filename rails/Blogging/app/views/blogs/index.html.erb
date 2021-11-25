@@ -1,0 +1,27 @@
+<dev class="blogpost index">
+  <h2>Blogpost</h2>
+
+  <%= link_to("Add New Blog",'/blog/new',:class => 'action new') %>
+
+  <table class="listing" summary="Subject list">
+   <tr class="header">
+     <%# <th>#</th> %>
+     <th>Blog</th>
+     <%# <th>Visible</th> %>
+     <%# <th>Pages</th> %>
+     <th>Actions</th>
+   </tr>
+   <% @blogpost.each do |blog| %></td>
+   <tr>
+        <td><%= blog.title %><td>
+   <%#  <td class="center"><%= subject.Visible ? 'Yes' : 'No' %></td> 
+   <%# <td class="center"><%= blog.pages.size %></td>
+     <td class="actions">
+        <%= link_to("Show", blogs_new_path(@blogpost), :class => 'action show') %>
+        <%= link_to("Edit", blogs_edit_path(@blogpost), :class => 'action edit') %>
+        <%= link_to("Delete",blogs_delete_path(@blogpost), :class => 'action delete') %>
+     </td>
+    </tr>
+    <% end %>
+ </table>
+</div>

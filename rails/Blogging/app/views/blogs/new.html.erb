@@ -1,0 +1,23 @@
+<br /><%= link_to("<< Back to List",'/blogs/show', :class => 'back-link') %>
+
+<div class="subjects show">
+  <h2>Create Blog</h2>
+  
+  <%= form_for(Blogpost.new, :url => 'blogs/create', :method => 'post') do |f| %>
+ 
+    <table summary="Blog form field">
+    <tr>
+      <th>Title :</th>
+      <td><%= f.text_field(:title) %></td>
+    </tr>
+    <tr>
+      <th>Body:</th>
+      <td><%= f.text_field(:body) %></td>
+    </tr>
+    </table>
+  <div class="form-buttons">
+    <%= f.submit("Create Subject") %>
+  </div>
+<% end %>
+
+</div>
