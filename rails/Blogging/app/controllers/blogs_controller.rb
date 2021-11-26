@@ -13,11 +13,11 @@ class BlogsController < ApplicationController
       
         def create
           #Instantiate a new object using form parameter
-          @blogpost = Blogpost.new(params[:id]) # mass assignment 
+          @blogpost = Blogpost.new(blog_params) # mass assignment 
           #save the object
           if @blogpost.save 
             #if save succeeds,redirect to the next index action
-            redirect_to 'show'
+            redirect_to 'index'
           else
             #if save fails ,redisplay the form so user can fix problem.
             render('new')
@@ -35,7 +35,7 @@ class BlogsController < ApplicationController
         end
       
         def update
-          @blogpost = Blogpost.find(params[:id])
+          @blogpost = Blogpost.find_by(params[:id])
           if @blogpost.update(blog_params)
             redirect_to @blogpost
           else
@@ -52,6 +52,7 @@ class BlogsController < ApplicationController
           @blogpost = Blogpost.find_by(params[:id])
           @blogpost.destroy
           redirect_to 'index'
+          render 'index'
         end
       
         private 

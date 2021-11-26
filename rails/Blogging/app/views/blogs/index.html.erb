@@ -1,18 +1,19 @@
 <dev class="blogpost index">
-  <h2>Blogpost</h2>
+  <h2>Welcome User</h2>
 
   <%= link_to("Add New Blog",'new',:class => 'action new') %>
 
   <table class="listing" summary="Subject list">
    <tr class="header">
-     <%# <th>#</th> %>
-     <th>Blog</th>
+     <th>No.</th>
+     <th>Blog List</th>
      <%# <th>Visible</th> %>
-     <%# <th>Pages</th> %>
+     <%#  <th>#</th> %>
      <th>Actions</th>
    </tr>
    <% @blogpost.each do |blog| %></td>
-   <tr>
+   <tr> 
+        <td><%= blog.id %><td>
         <td><%= blog.title %><td>
    <%#  <td class="center"><%= subject.Visible ? 'Yes' : 'No' %></td> 
    <%# <td class="center"><%= blog.pages.size %></td>

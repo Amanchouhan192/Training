@@ -3,7 +3,7 @@
 <div class="Blogs delete">
   <h2>Delete Blog</h2>
   
-  <%= form_for(@blogpost,blogs_delete_path, :method => 'delete') |f| %>
+  <%= form_for  blogs_delete_path, :method => 'delete' do |f| %>
  
     <p><%= @blogpost.title %></p>
     <p>Are you sure you want to permanently delete this Blog Post?</p>
@@ -12,6 +12,6 @@
   <div class="form-buttons">
     <%= f.submit("Delete BlogPost") %>
   </div>
-<% end %>
 
+<% end %>
 </div>

@@ -3,7 +3,7 @@
 <div class="subjects show">
   <h2>Create Blog</h2>
   
-  <%= form_for(Blogpost.new, :url => 'create', :method => 'post') do |f| %>
+  <%= form_for(Blogpost.new, :url => blogs_new_path, :method => 'post') do |f| %>
  
     <table summary="Blog form field">
     <tr>

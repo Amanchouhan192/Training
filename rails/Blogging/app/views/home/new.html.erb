@@ -2,7 +2,7 @@
 <%= link_to("Home",{:action =>'index'}) %> <br />
 <h>Login page Links</h>
 <h2>Create User Login</h2>
-  <%= form_with url: "/sessions/new" do |f| %>
+  <%= form_with blogs_new_path, url: "index" ,method:'post' do |f| %>
     <div class="mb-3">
       <%= f.label :email %>
       <%= f.text_field :email, class: "form-control", placeholder: "Email"  %>
@@ -12,6 +12,6 @@
       <%= f.password_field :password, class: "form-control" ,placeholder: "password" %>
     </div>
     <div class="mb-3">
-        <%= f.submit("Login In") %>
+        <%= f.submit("Log In") %>
     </div>
   <% end %>

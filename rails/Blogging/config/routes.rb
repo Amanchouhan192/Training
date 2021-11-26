@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   
   get 'home/index',to: 'home#index'
+  get 'home/blog/index',to: 'home#blog#index'
   get 'home/show',to: 'home#show'
   get 'home/new', to: 'home#new'
   get 'home/edit' 
@@ -32,14 +33,19 @@ Rails.application.routes.draw do
 
 
   get 'blogs/index',to: 'blogs#index'
+  post 'blogs/index',to: 'blogs#index'
   get 'blogs/show',to: 'blogs#show'
   get 'blogs/new',to: 'blogs#new'
+  post 'blogs/new',to: 'blogs#new'
   get 'blogs/create',to: 'blogs#create'
   post 'blogs/create',to: 'blogs#create'
   get 'blogs/edit' ,to: 'blogs#edit'
   post 'blogs/edit' ,to: 'blogs#edit'
   get 'blogs/delete',to: 'blogs#delete'
-  post 'blogs/delete',to: 'blogs#delete'
+delete 'blogs/delete',to: 'blogs#delete'
+
+  get 'home/blogs/index',to: 'home#blogs#index'
+  post 'home/blogs/index',to: 'home#blogs#index'
   
 end
   

@@ -1,9 +1,5 @@
 class Blogpost < ApplicationRecord
-    def change
-        create_table :blogposts do |t|
-          t.string :title
-          t.text :body
-          t.timestamps
-        end
-    end
+     belongs_to :user
+     #polymorphic associations
+     has_many :comments, as: :commentable
 end
