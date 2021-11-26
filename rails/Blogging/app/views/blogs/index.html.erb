@@ -11,16 +11,16 @@
      <%#  <th>#</th> %>
      <th>Actions</th>
    </tr>
-   <% @blogpost.each do |blog| %></td>
+   <% @blogposts.each do |blog| %></td>
    <tr> 
         <td><%= blog.id %><td>
         <td><%= blog.title %><td>
    <%#  <td class="center"><%= subject.Visible ? 'Yes' : 'No' %></td> 
    <%# <td class="center"><%= blog.pages.size %></td>
      <td class="actions">
-        <%= link_to("Show", blogs_show_path(@blogpost), :class => 'action show') %>
-        <%= link_to("Edit", blogs_edit_path(@blogpost), :class => 'action edit') %>
-        <%= link_to("Delete",blogs_delete_path(@blogpost), :class => 'action delete') %>
+        <%= link_to("Show", {:action =>'show',:id => blog.id}, :class => 'action show') %>
+        <%= link_to("Edit", {:action =>'edit',:id => blog.id}, :class => 'action edit') %>
+        <%= link_to("Delete",{:action =>'delete',:id => blog.id}, :class => 'action delete') %>
      </td>
     </tr>
     <% end %>

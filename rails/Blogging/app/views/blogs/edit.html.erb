@@ -1,17 +1,19 @@
 <br /><%= link_to("<< Back to List",'index', :class => 'back-link') %>
 
-<div class="Blog edit">
+<div class="blogs edit">
   <h2>Update Blog</h2>
   
-  <%= form_for blogs_edit_path do |f| %>
+  <%= form_for(@blogpost,:url =>'blogs/edit/:id', :method => 'post') do |f| %>
      
   <tr>
     <th>Title :</th>
     <td><%= f.text_field(:title) %></td>
   </tr>
+  <br />
   <tr>
     <th>Body :</th>
-    <td><%= f.text_field(:body) %></td>
+    <td><%= f.text_field(:body)  %></td>
+   
   </tr>
     
   <div class="form-buttons">

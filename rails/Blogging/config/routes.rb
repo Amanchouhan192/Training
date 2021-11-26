@@ -37,12 +37,19 @@ Rails.application.routes.draw do
   get 'blogs/show',to: 'blogs#show'
   get 'blogs/new',to: 'blogs#new'
   post 'blogs/new',to: 'blogs#new'
-  get 'blogs/create',to: 'blogs#create'
+  get 'blogs/create/:id',to: 'blogs#create#:id'
+  post 'blogs/create/:id',to: 'blogs#create#:id'
   post 'blogs/create',to: 'blogs#create'
+  get 'blogs/create',to: 'blogs#create'
   get 'blogs/edit' ,to: 'blogs#edit'
   post 'blogs/edit' ,to: 'blogs#edit'
-  get 'blogs/delete',to: 'blogs#delete'
-delete 'blogs/delete',to: 'blogs#delete'
+  get 'blogs/edit/:id' ,to: 'blogs#edit#:id'
+  post 'blogs/edit/:id' ,to: 'blogs#edit#:id'
+  get 'blogs/delete/:id',to: 'blogs#delete'
+  post 'blogs/delete/:id',to: 'blogs#delete'
+
+  post '/blogs/edit/blogs/edit/:id',to: 'blogs#edit#blogs#edit#:id'
+
 
   get 'home/blogs/index',to: 'home#blogs#index'
   post 'home/blogs/index',to: 'home#blogs#index'

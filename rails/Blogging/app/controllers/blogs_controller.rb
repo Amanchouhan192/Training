@@ -1,10 +1,10 @@
 class BlogsController < ApplicationController
         def index
-          @blogpost = Blogpost.all
+          @blogposts = Blogpost.all
         end
       
         def show
-          @blogpost = Blogpost.find_by(params[:id])
+          @blogpost = Blogpost.find(params[:id])
         end
       
         def new
@@ -17,7 +17,8 @@ class BlogsController < ApplicationController
           #save the object
           if @blogpost.save 
             #if save succeeds,redirect to the next index action
-            redirect_to 'index'
+            #redirect_to 'index'
+            redirect_to blogs_new_path(@blogpost)
           else
             #if save fails ,redisplay the form so user can fix problem.
             render('new')
@@ -27,32 +28,30 @@ class BlogsController < ApplicationController
         end
       
         def edit
-          @blogpost = Blogpost.find_by(params[:id])
-          #validates :form_checkbox, acceptance: {accept: true} , on: :create, 
-          #allow_nil: false
-        
-
+          #debugger
+          @blogpost = Blogpost.find(params[:id])
         end
       
+
+      
         def update
-          @blogpost = Blogpost.find_by(params[:id])
+          @blogpost = Blogpost.find(params[:id])
           if @blogpost.update(blog_params)
-            redirect_to @blogpost
+            redirect_to blogs_new_path(@blogposts)
           else
             render('edit')
           end
         end
       
         def delete
-          @blogpost = Blogpost.find_by(params[:id])
-          #render 'index'
+          @blogpost = Blogpost.find(params[:id])
         end 
       
         def destroy
-          @blogpost = Blogpost.find_by(params[:id])
+          @blogpost = Blogpost.find(params[:id])
           @blogpost.destroy
-          redirect_to 'index'
-          render 'index'
+          redirect_to @blogpost
+          render 'delete'
         end
       
         private 

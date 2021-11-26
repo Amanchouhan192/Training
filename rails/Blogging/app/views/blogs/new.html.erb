@@ -3,7 +3,7 @@
 <div class="subjects show">
   <h2>Create Blog</h2>
   
-  <%= form_for(Blogpost.new, :url => blogs_new_path, :method => 'post') do |f| %>
+  <%= form_for(Blogpost.new, :url => 'create', :method => 'post') do |f| %>
  
     <table summary="Blog form field">
     <tr>
@@ -12,7 +12,7 @@
     </tr>
     <tr>
       <th>Body:</th>
-      <td><%= f.text_field(:body) %></td>
+      <td><textarea name="paragraph_text"  f.text_field(:body) cols="50" rows="10"></textarea></td>
     </tr>
     </table>
   <div class="form-buttons">
