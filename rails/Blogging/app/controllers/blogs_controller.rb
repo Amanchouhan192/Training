@@ -13,7 +13,7 @@ class BlogsController < ApplicationController
         end
       
         def create
-          #Instantiate a new object using form parameter
+        #Instantiate a new object using form paramete
           @blogpost = Blogpost.new(blog_params) # mass assignment 
           #save the object
           if @blogpost.save 
