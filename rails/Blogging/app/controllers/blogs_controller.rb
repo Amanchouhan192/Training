@@ -4,6 +4,7 @@ class BlogsController < ApplicationController
         end
       
         def show
+          
           @blogpost = Blogpost.find(params[:id])
         end
       
@@ -17,7 +18,6 @@ class BlogsController < ApplicationController
           #save the object
           if @blogpost.save 
             #if save succeeds,redirect to the next index action
-            #redirect_to 'index'
             redirect_to blogs_new_path(@blogpost)
           else
             #if save fails ,redisplay the form so user can fix problem.

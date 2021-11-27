@@ -36,7 +36,9 @@ Rails.application.routes.draw do
   post 'blogs/index',to: 'blogs#index'
   get 'blogs/show',to: 'blogs#show'
   get 'blogs/new',to: 'blogs#new'
-  post 'blogs/new',to: 'blogs#new'
+  
+  post 'blogs/new',to: 'blogs#index'
+  post 'blogs/new/:id',to: 'blogs#index'
   get 'blogs/create/:id',to: 'blogs#create'
   post 'blogs/create/:id',to: 'blogs#create'
   post 'blogs/create',to: 'blogs#create'
