@@ -1,0 +1,16 @@
+<br /><br />
+
+<h>Login</h>
+<%= form_with url: "home/new" ,method:'post' do |f| %>
+    <div class="mb-3">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control", placeholder: "Email"  %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control" ,placeholder: "password" %>
+    </div>
+    <div class="mb-3">
+        <%= f.submit("Log In") %>
+    </div>
+<% end %>
