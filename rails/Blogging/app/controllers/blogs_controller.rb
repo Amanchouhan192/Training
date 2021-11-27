@@ -28,7 +28,6 @@ class BlogsController < ApplicationController
         end
       
         def edit
-          #debugger
           @blogpost = Blogpost.find(params[:id])
         end
       

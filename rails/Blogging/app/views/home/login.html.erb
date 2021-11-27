@@ -1,22 +1,17 @@
 <br /><br />
 <%= link_to("Home",{:action =>'index'}) %> <br />
 <h>Login page Links</h>
-
-<div class="home show">
-  <h2>Create User Login</h2>
-  
-  <table summary="Subject form field">
-  <tr>
-    <th>User Name :</th>
-    <th><input type="text"  name="name"></th>
-    <th>Password :</th>
-    <th><input type="text"  password="password"></th>
-    
-  </tr>
-  </table>
-
-  <div class="form-buttons">
-    <button>Login</button>
-  </div>
-
-</div>
+<h2>Create User Login</h2>
+  <%= form_with url: "/blogs/index" ,method:'post' do |f| %>
+    <div class="mb-3">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control", placeholder: "Email"  %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control" ,placeholder: "password" %>
+    </div>
+    <div class="mb-3">
+        <%= f.submit("Log In") %>
+    </div>
+  <% end %>

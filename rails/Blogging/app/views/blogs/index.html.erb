@@ -1,7 +1,8 @@
 <dev class="blogpost index">
   <h2>Welcome User</h2>
 
-  <%= link_to("Add New Blog",'new',:class => 'action new') %>
+  <%= link_to("Create Blog",'new',:class => 'action new') %>
+  <%= link_to("LogOut",'#',:class => 'action new') %>
 
   <table class="listing" summary="Subject list">
    <tr class="header">
@@ -18,9 +19,9 @@
    <%#  <td class="center"><%= subject.Visible ? 'Yes' : 'No' %></td> 
    <%# <td class="center"><%= blog.pages.size %></td>
      <td class="actions">
-        <%= link_to("Show", {:action =>'show',:id => blog.id}, :class => 'action show') %>
-        <%= link_to("Edit", {:action =>'edit',:id => blog.id}, :class => 'action edit') %>
-        <%= link_to("Delete",{:action =>'delete',:id => blog.id}, :class => 'action delete') %>
+        <%= link_to("View", { :action =>'show',:id => blog.id}, :class => 'action show') %>
+        <%= link_to("Edit", { :action =>'edit',:id => blog.id}, :class => 'action edit') %>
+        <%= link_to("Delete", { :action =>'delete',:id => blog.id}, :class => 'action delete') %>
      </td>
     </tr>
     <% end %>

@@ -1,3 +1,19 @@
 // Place all the styles related to the blogs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.actions{
+    padding: 10px;
+    height: auto;
+}
+.body_of_blog{
+  background-color: lightgrey;
+  width: 500px;
+  height: 250px;
+  border: 3px solid rgb(238, 240, 238);
+  padding: 10px;
+  margin: 20px;
+}
+.title_of_blog{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 50px;
+}

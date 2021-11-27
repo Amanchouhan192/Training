@@ -3,7 +3,7 @@
 <div class="Blogs delete">
   <h2>Delete Blog</h2>
   
-  <%= form_for blogs_edit_path, :method => 'post' do |f| %>
+  <%= form_for @blogpost, url:'/delete/:id', :method => 'post' do |f| %>
  
     <p><%= @blogpost.title %></p>
     <p>Are you sure you want to permanently delete this Blog Post?</p>

@@ -3,7 +3,7 @@
 <div class="blogs edit">
   <h2>Update Blog</h2>
   
-  <%= form_for(@blogpost,:url =>'blogs/edit/:id', :method => 'post') do |f| %>
+  <%= form_for @blogpost, url: "/blogs/edit/#{@blogpost.id}" ,:method => 'patch' do |f| %>
      
   <tr>
     <th>Title :</th>
