@@ -14,4 +14,10 @@ Rails.application.routes.draw do
 
  #get '/user/login_create', to: 'user#login_create' #create user login post request
  post '/user/login_create', to: 'user#login_create' #create user login post request
+
+
+ get '/post/new',to: 'post#new' # show page of create a blog
+
+ post '/post/create',to: 'post#create' # show page of create a blog
+
 end
