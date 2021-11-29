@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'user/index', to: 'user#index' # this will show  user index file
   get '/user/login',to: 'user#login' # show login page 
 
-  get 'user/new',to: 'user#new'     #show new page after login i.e sfter  the user logged in 
+  #get 'user/new',to: 'user#new'     #show new page after login i.e sfter  the user logged in 
   get '/user/new',to: 'user#new'
 
   get 'user/signup',to: 'user#signup' #show the signup form for enter user datails
@@ -20,4 +20,6 @@ Rails.application.routes.draw do
 
  post '/post/create',to: 'post#create' # show page of create a blog
 
+
+ get '/post/show',to: 'post#show' #for show the content of the blog
 end
