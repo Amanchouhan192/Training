@@ -1,0 +1,25 @@
+<br />
+<h>Create Your New Blog <%= current_user.name %></h>
+<%= link_to "Logout", "/user/logout", method: 'post' %><br />
+
+<div class="blog_create">
+  <h2>Create Blog</h2>
+  
+  <%= form_for(Post.new, :url => '/post/create', :method => 'post') do |f| %>
+ 
+    <table summary="Blog form field">
+    <tr>
+      <th>Title :</th>
+      <td><%= f.text_field(:title) %></td>
+    </tr>
+    <tr>
+      <th>Body:</th>
+      <td><%= f.text_field(:body) %></td>
+    </tr>
+    </table>
+  <div class="form-buttons">
+    <%= f.submit("Save Blog") %>
+  </div>
+<% end %>
+
+</div>
