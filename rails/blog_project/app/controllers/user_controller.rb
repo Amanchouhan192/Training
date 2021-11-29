@@ -4,9 +4,23 @@ class UserController < ApplicationController
           @users = User.all
         end
         
-        def create
+        def new
+            @user = User.new
         end
-        
+          
+        def create  #for signup things
+            #Instantiate a new object using form paramete
+            @user = User.new(user_params) # mass assignment 
+              #save the object
+            if @user.save 
+                #if save succeeds,redirect to the next index action
+              redirect_to '/user/new'   #this is redirecting to the new.html.erb page
+            else
+                #if save fails ,redisplay the form so user can fix problem.
+              render('new') 
+            end
+          
+        end
         private 
         
         def user_params
