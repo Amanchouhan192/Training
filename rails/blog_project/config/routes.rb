@@ -22,4 +22,10 @@ Rails.application.routes.draw do
 
 
  get '/post/show',to: 'post#show' #for show the content of the blog
+
+ patch 'post/edit/:id' ,to: 'post#update'
+
+ get 'post/edit' ,to: 'post#edit'
+ post 'post/edit' ,to: 'post#update'
+ 
 end
