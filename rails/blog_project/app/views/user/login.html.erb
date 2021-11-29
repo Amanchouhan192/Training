@@ -1,16 +1,16 @@
 <br /><br />
 
 <h>Login</h>
-<%= form_with url: "new" ,method:'post' do |f| %>
+<%= form_tag '/user/login_create' do %>
     <div class="mb-3">
-      <%= f.label :email %>
-      <%= f.text_field :email, class: "form-control", placeholder: "Email"  %>
+      <label>Email</label>
+      <%= text_field_tag "user[email]", "", class: "form-control", placeholder: "Email"  %>
     </div>
     <div class="mb-3">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: "form-control" ,placeholder: "password" %>
-    </div>
+      <label>password</label>
+        <%= password_field_tag "user[password]", "", class: "form-control" ,placeholder: "password" %>
+      </div>
     <div class="mb-3">
-        <%= f.submit("Log In") %>
+        <%= submit_tag "Log In"  %>
     </div>
 <% end %>
