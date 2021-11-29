@@ -1,1 +1,3 @@
-<h>Welcome Buddy this is  Home Page</h>
+<br />
+<h>Welcome <%= current_user.name %></h><br />
+<%= link_to "Logout", "/user/logout", method: 'post' %><br />
