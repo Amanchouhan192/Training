@@ -20,6 +20,22 @@
     <%= f.password_field :password_confirmation, class: "form-control" ,placeholder: "confirm password" %>
   </div>
   <div class="mb-3">
+    <%= f.label :gender %>
+    <%= f.radio_button :gender, 'Male' %>Male
+    <%= f.radio_button :gender, 'Female' %>Female<br />
+  </div>
+  <div class="mb-3">
+    <div class="form-group">
+        <%= f.label :age %>
+        <%= f.select :age, options_for_select(%w[10-18 18-20 20-25 25-30 30-35 35-40 40+]), class: "form-control" %>
+     </div>
+  
+  </div>
+  <div class="mb-3">
+    <%= f.label :phone %>
+    <%= f.text_field :phone , class: "form-control"%>
+  </div>
+  <div class="mb-3">
      <%= f.submit("Sign Up") %>
   </div>
 <% end %>

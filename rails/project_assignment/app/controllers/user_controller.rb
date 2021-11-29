@@ -1,6 +1,9 @@
 class UserController < ApplicationController
 
-
+    def index
+      @users = User.all
+      #@blogposts = Blogpost.all
+    end
     def new
       @user = User.new
       if session[:user_id] == nil
@@ -31,6 +34,7 @@ class UserController < ApplicationController
                 session[:user_id] = @user.id  
                 redirect_to '/user/new'
             end
+
         end
         
     end
@@ -55,7 +59,11 @@ class UserController < ApplicationController
     private 
     
     def user_params
-        params.require(:user).permit(:name,:email,:password)
+        params.require(:user).permit(:name,:email,:password,:gender,:age,:phone)
+    end
+      
+    def blog_params
+      params.permit(:title,:body)
     end
       
 end
