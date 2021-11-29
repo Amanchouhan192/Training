@@ -1,8 +1,8 @@
 class UserController < ApplicationController
 
+   
     def index
       @users = User.all
-      #@blogposts = Blogpost.all
     end
     def new
       @user = User.new
