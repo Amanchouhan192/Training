@@ -1,3 +1,28 @@
 <br />
 <h>Welcome <%= current_user.name %></h><br />
 <%= link_to "Logout", "/user/logout", method: 'post' %><br />
+<%= link_to("Create Blog",'/post/new',:class => 'action new') %>
+<dev class="blogs_index">
+
+  <table class="listing" summary="Blog list">
+   <tr class="header">
+     <th>No.</th>
+     <th>#</th>
+     <th>Blog List</th>
+     <th>#</th>
+     <th>Actions</th>
+   </tr>
+  
+   <% Post.all.each do |post| %></td>
+   <tr> 
+    <td><%= post.id %><td>
+    <td><%= post.title %><td> 
+    <td class="actions">
+        <%= link_to("View","#", :class => 'action show') %>
+        <%= link_to("Edit","#", :class => 'action edit') %>
+        <%= link_to("Delete","#", :class => 'action delete') %>
+    </td>
+    </tr>
+    <% end %>
+ </table>
+</div>
