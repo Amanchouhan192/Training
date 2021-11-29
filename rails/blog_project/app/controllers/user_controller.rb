@@ -54,6 +54,11 @@ class UserController < ApplicationController
         redirect_to '/user/login' 
     end  
     
+    def logout     
+        session[:user_id] = nil         
+        redirect_to '/user/login' 
+    end  
+    
     private 
     
     def user_params
