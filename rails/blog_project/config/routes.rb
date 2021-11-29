@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'user/signup',to: 'user#signup' #show the signup form for enter user datails
  post '/user/create',to: 'user#create' #signup form post rquest for enter detail into database
 
+ post '/user/logout',to: 'user#logout' # for logout the user from the current session
+
  #get '/user/login_create', to: 'user#login_create' #create user login post request
  post '/user/login_create', to: 'user#login_create' #create user login post request
 end
