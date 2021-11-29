@@ -19,7 +19,7 @@
     <td><%= post.title %><td> 
     <td class="actions">
         <%= link_to("View",post_show_url(post), :class => 'action show') %>
-        <%= link_to("Edit","#", :class => 'action edit') %>
+        <%= link_to("Edit",post_edit_path(post), :class => 'action edit') %>
         <%= link_to("Delete","#", :class => 'action delete') %>
     </td>
     </tr>
