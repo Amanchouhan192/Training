@@ -1,0 +1,239 @@
+<!--------------------------------------------------HTML tags tested  on w3school online editor---------------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+<style>
+table, th, td {
+  border:1px solid black;
+}
+.city {
+  background-color: tomato;
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+} 
+
+#myHeader {
+  background-color: lightblue;
+  color: black;
+  padding: 40px;
+  text-align: center;
+} 
+</style>
+<body>
+
+<h1>This is heading 1</h1>
+<h2>This is heading 2</h2>
+<h3>This is heading 3</h3><br />
+<h2>This is heading 4</h2>
+<h5>This is heading 5</h5>
+<h6>This is heading 6</h6>
+
+<p>This is a paragraph</p>
+
+<a href="https://www.w3school.com">This is Link</a>
+ <img src="w3schools.jpg" alt="W3Schools.com" width="104" height="142"> 
+ 
+<p style="color:red;">This is a red paragaraph</p>
+<p style="color:blue;">This is a pink paragraph</p>
+<p title="I am a tooltip">This is a paragraph</p>
+
+<h1 style="color:red;">This is Style 1</h1>
+<h2 style="color:blue;">This is Style 2</h2>
+<h3 style="color:orange;">This is Style 3</h3>
+
+<p><b>this text is bold</b></p>
+<p><i>this is itelic</i></p>
+
+<p><strong>this is strong</strong></p>
+<p><em>this is Emphasized</em></p>
+<p><mark>this is mark</mark></p>
+<p><small>this is small</small></p>
+<p>My favorite color is <del>blue</del> red.</p>
+<p>My favorite color is <del>blue</del> <ins>red</ins>.</p>
+<p>This is <sub>subscripted</sub> text.</p>
+
+<p>This is <sup>superscripted</sup> text.</p>
+<bdo dir="rtl">This line will be written from right to left</bdo>
+
+<!-- This is a comment -->
+
+<p>This is a paragraph.</p>
+
+<!-- Remember to add more information here --> 
+
+<p><a href="mailto:someone@example.com">Send email</a></p>
+
+<button onclick="document.location='default.asp'">HTML Tutorial</button>
+
+<p>Book Mark</p>
+<p><a href="#C4">Jump to Chapter 4</a></p>
+<p><a href="#C10">Jump to Chapter 10</a></p>
+
+<h2>Chapter 1</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 2</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 3</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2 id="C4">Chapter 4</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 5</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 6</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 7</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 8</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 9</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2 id="C10">Chapter 10</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 11</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 12</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 13</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 14</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 15</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 16</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 17</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 18</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 19</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 20</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 21</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 22</h2>
+<p>This chapter explains ba bla bla</p>
+
+<h2>Chapter 23</h2>
+<p>This chapter explains ba bla bla</p>
+<p>Images</p>
+<img src="pic_trulli.jpg" alt="Italian Trulli">
+<!------------------map--------------------------->
+<h2>Image Maps</h2>
+<p>Click on the computer, the phone, or the cup of coffee to go to a new page and read more about the topic:</p>
+
+<img src="workplace.jpg" alt="Workplace" usemap="#workmap" width="400" height="379">
+
+<map name="workmap">
+  <area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.htm">
+  <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
+  <area shape="circle" coords="337,300,44" alt="Cup of coffee" href="coffee.htm">
+</map>
+
+<h2>A basic HTML table</h2>
+
+<table style="width:100%">
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+</table>
+
+<p>Table Demo</p>
+<table>
+<tr>
+	<th>Student First Name</th>
+    <th>Student Last Name</th>
+</tr>
+<tr>
+	<td>Sumit</td>
+    <td>Sharma</td>
+</tr>
+<tr>
+	<td>Sumit</td>
+    <td>Sharma</td>
+</tr>
+</table>
+
+<p>Html List</p>
+ <ul>
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ul> 
+
+<h2>A Description List</h2>
+
+<dl>
+  <dt>Coffee</dt>
+  <dd>- black hot drink</dd>
+  <dt>Milk</dt>
+  <dd>- white cold drink</dd>
+</dl>
+<h2>An ordered HTML list</h2>
+
+<ol>
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ol>  
+
+<p>Div tag</p>
+<div style="background-color:black;color:white;padding:20px;">
+  <h2>London</h2>
+  <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+</div> 
+
+<p>Class Attribute</p>
+<div class="city">
+  <h2>London</h2>
+  <p>London is the capital of England.</p>
+</div>
+
+<h1 id="myHeader">HTML Id using in this line for css</h1>
+
+<h2>HTML Iframes</h2>
+<p>You can use the height and width attributes to specify the size of the iframe:</p>
+
+<iframe src="demo_iframe.htm" height="200" width="300" title="Iframe Example"></iframe>
+
+<h2>Using a Full URL File Path</h2>
+<img src="https://www.w3schools.com/images/picture.jpg" alt="Mountain" style="width:300px">
+
+</html>
+
+
