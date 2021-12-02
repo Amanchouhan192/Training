@@ -1,0 +1,78 @@
+<html>
+
+<head>
+	<style>
+	.button {
+		background-color: #4c6baf;
+		border: none;
+		color: white;
+		padding: 16px 50px;
+		margin: 10px 2px;
+		cursor: pointer;
+	}
+	
+	.blog_fields {
+		padding-left: 300px;
+	}
+	
+	.Title {
+		padding-right: 30px;
+		padding-left: 30px;
+	}
+	
+	.Content {
+		padding-right: 20px;
+		padding-top: 10px;
+	}
+	
+	.Content_text {
+		padding-left: 0px;
+	}
+	
+	.status {
+		padding-right: 20px;
+		padding-top: 10px;
+	}
+	
+	.select {
+		padding-left: 300px;
+		border: none;
+		margin: 10px 2px;
+	}
+	</style>
+</head>
+
+<body>
+	<h>Welcome User</h>
+	<br />
+	<div class="blog_fields">
+		<div style="text-align: right;"> <a href="welcome.html">Home</a> <a href="login.html">Logout</a>
+			<br /> </div>
+		<table>
+			<div class="Title">
+				<label for="textarea">Title</label>
+				<input placeholder="Write Title.." style="height:50px; width:600px;"></input>
+			</div>
+			<div class="Content">
+				<label class="Content_text" for="textarea">Content</label>
+				<textarea placeholder="Write something.." style="height:300px; width:600px;"></textarea>
+			</div>
+	</div>
+	<div class="status">
+		<label for="status">Status</label>
+		<div class="select">
+			<select>
+				<option value="Draft">Draft</option>
+				<option value="Publish">Publish</option>
+			</select>
+		</div>
+		<br /> </div>
+	<div style="margin-left:270px;">
+		<button class="button"><a href="show.html">Save</a></button>
+	</div>
+	</tr>
+	</table>
+	</div>
+</body>
+
+</html>
