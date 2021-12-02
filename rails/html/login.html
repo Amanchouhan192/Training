@@ -1,18 +1,60 @@
-<div style="text-align: center;">
-    <div style="text-align: right;">
-      <a href="index.html">Home</a>
-      <a href="signup.html">Sign Up</a>
-      <br />
-    </div>
-    <h>Login</h>
-    <br />
-    <form action="welcome.html">
-      <label for="email">Email:</label>
-      <input type="text" placeholder="Email">
-      <br>
-      <label for="pwd">Password:</label>
-      <input type="password" placeholder="Password">
-      <br />
-      <input type="submit" value="Submit">
-    </form>
-  </div>
+<html>
+
+<head>
+	<style>
+	.div1 {
+		text-align: center;
+		padding: 10px;
+	}
+	
+	.form {
+		padding: 10px;
+	}
+	
+	.email {
+		padding-right: 50px;
+	}
+	
+	.pwd {
+		padding: 10px;
+		padding-right: 15px;
+	}
+	
+	.input_field {
+		width: 20%;
+		padding: 12px 20px;
+		margin: 10px 0;
+		box-sizing: border-box;
+	}
+	
+	.button {
+		background-color: #4c6baf;
+		border: none;
+		color: white;
+		padding: 16px 50px;
+		margin: 10px 2px;
+		cursor: pointer;
+	}
+	</style>
+</head>
+
+<body>
+	<div class="div1">
+		<div style="text-align: right;"> <a href="index.html">Home</a> <a href="signup.html">Sign Up</a>
+			<br /> </div>
+		<h>Login</h>
+		<br />
+		<div class="form">
+			<form action="welcome.html">
+				<label class="email" for="email">Email:</label>
+				<input class="input_field" type="text" placeholder="Email">
+				<br>
+				<label class="pwd" for="pwd">Password:</label>
+				<input class="input_field" type="password" placeholder="Password">
+				<br />
+				<input class="button" type="submit" value="Submit"> </form>
+		</div>
+	</div>
+</body>
+
+</html>
