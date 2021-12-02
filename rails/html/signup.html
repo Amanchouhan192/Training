@@ -1,42 +1,81 @@
-<div style="text-align: center;">
-    <div style="text-align: right;">
-      <a href="index.html">Home</a>
-      <a href="login.html">Login</a>
-      <br />
-    </div>
-    <h>Sign Up</h>
-    <div style="text-align:center; padding: auto;">
-      <form action="welcome.html">
-        <label for="name">Name:</label>
-        <input type="text" placeholder="User Name">
-        <br>
-        <label for="email">Email:</label>
-        <input type="email" placeholder="Email">
-        <br />
-        <label for="pwd">Password:</label>
-        <input type="password" placeholder="Password">
-        <br />
-        <label for="pwd">Confirm Password:</label>
-        <input type="password" placeholder="Confirm Password">
-        <br>
-        <label for="gender">Gender</label>
-        <input type="radio">
-        <label for="html">Male</label>
-        <input type="radio">
-        <label for="css">Female</label>
-        <br>
-        <label for="phone">Phone:</label>
-        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Phone Number">
-        <br />
-        <label for="age">Age:</label>
-        <select>
-          <option value="10-18">10-18</option>
-          <option value="18-25">18-25</option>
-          <option value="25-50">25-50</option>
-          <option value="50-100">50-100</option>
-        </select>
-        <br />
-        <input type="submit" value="Submit">
-      </form>
-    </div>
-  </div>
+<html>
+
+<head>
+	<style>
+	.input_field {
+		width: 20%;
+		padding: 10px 10px;
+		margin: 2px 2px;
+		box-sizing: border-box;
+	}
+	
+	.button {
+		background-color: #4c6baf;
+		border: none;
+		color: white;
+		padding: 16px 50px;
+		margin: 10px 2px;
+		cursor: pointer;
+	}
+	
+	.confirm_pwd {
+		padding-right: 5px;
+	}
+	
+	.form {
+		padding: 10px;
+	}
+	</style>
+</head>
+
+<body>
+	<div style="text-align: center;">
+		<div style="text-align: right;"> <a href="index.html">Home</a> <a href="login.html">Login</a>
+			<br /> </div>
+		<h>Sign Up</h>
+		<div style="text-align:center; padding: auto;">
+			<form class="form" action="welcome.html">
+				<div class="row">
+					<label for="name">Name:</label>
+					<input class="input_field" type="text" placeholder="User Name"> </div>
+				<br>
+				<div class="row">
+					<label for="email">Email:</label>
+					<input class="input_field" type="email" placeholder="Email"> </div>
+				<br />
+				<div class="row">
+					<label for="pwd">Password:</label>
+					<input class="input_field" type="password" placeholder="Password"> </div>
+				<br />
+				<div class="row">
+					<label class="confirm_pwd" for="pwd">Confirm Password:</label>
+					<input class="input_field" type="password" placeholder="Confirm Password"> </div>
+				<br>
+				<div class="row">
+					<label for="gender">Gender :</label>
+					<input type="radio">
+					<label for="html">Male</label>
+					<input type="radio">
+					<label for="css">Female</label>
+				</div>
+				<br>
+				<div class="row">
+					<label for="phone">Phone:</label>
+					<input class="input_field" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Phone Number"> </div>
+				<br />
+				<div class="row">
+					<label for="age">Age:</label>
+					<select>
+						<option value="10-18">10-18</option>
+						<option value="18-25">18-25</option>
+						<option value="25-50">25-50</option>
+						<option value="50-100">50-100</option>
+					</select>
+				</div>
+				<br />
+				<input class="button" type="submit" value="Submit"> </form>
+		</div>
+	</div>
+</body>
+
+</html>
