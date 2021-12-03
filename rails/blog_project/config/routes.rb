@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   #get 'user/new',to: 'user#new'     #show new page after login i.e sfter  the user logged in 
   get '/user/new',to: 'user#new'
 
-  get 'user/signup',to: 'user#signup' #show the signup form for enter user datails
+  get '/user/new',to: 'user#new' #show the signup form for enter user datails
  post '/user/create',to: 'user#create' #signup form post rquest for enter detail into database
 
  post '/user/logout',to: 'user#logout' # for logout the user from the current session
