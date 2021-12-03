@@ -1,9 +1,9 @@
-<br /><%= link_to("<< Back to List",'/user/index', :class => 'back-link') %>
+<br /><%= link_to("<< Back to List",'/post/welcome', :class => 'back-link') %>
 
 <div class="blogs edit">
   <h2>Update Blog</h2>
   
-  <%= form_for @blogpost, url: "/post/edit/#{@blogpost.id}" ,:method => 'patch' do |f| %>
+  <%= form_for @post, url: "/post/edit/#{@post.id}" ,:method => 'patch' do |f| %>
      
   <tr>
     <th>Title :</th>
