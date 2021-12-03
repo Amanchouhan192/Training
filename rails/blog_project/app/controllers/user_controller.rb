@@ -3,11 +3,10 @@ class UserController < ApplicationController
   def index
   end
 
+  def show
+  end
   def new
     @user = User.new
-    if session[:user_id] == nil
-      redirect_to '/user/login'         #for checking user is not logged in id is nil
-    end
   end
   
   def create  #for signup things
@@ -19,7 +18,7 @@ class UserController < ApplicationController
       redirect_to '/post/welcome'   #this is redirecting to the new.html.erb page
     else
         #if save fails ,redisplay the form so user can fix problem.
-      render('new') 
+      render('/post/welcome') 
     end
   
   end
