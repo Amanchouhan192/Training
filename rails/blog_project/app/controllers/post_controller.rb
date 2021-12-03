@@ -7,7 +7,7 @@ class PostController < ApplicationController
       @posts = Post.all
     end
     def show
-        @post = Post.find_by(params[:id])
+        @post = Post.find(params[:id])
     end
     
     def new
@@ -20,10 +20,10 @@ class PostController < ApplicationController
         #save the object
         if @post.save 
           #if save succeeds,redirect to the next index action
-          redirect_to '/user/new'
+          redirect_to '/post/welcome'
         else
           #if save fails ,redisplay the form so user can fix problem.
-          render('/user/new')
+          render('/post/welcome')
         end
     
     
@@ -38,7 +38,7 @@ class PostController < ApplicationController
     def update
         @post = Post.find(params[:id])
         if @post.update(blog_params)
-          redirect_to blogs_new_path(@posts)
+          redirect_to '/post/welcome'
         else
           render('edit')
         end
