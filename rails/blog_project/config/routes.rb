@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root to: 'user#index'
+  root to: 'home#index'
 
+  get 'home/index',to: 'home#index'
   get 'user/index', to: 'user#index' # this will show  user index file
   get '/user/login',to: 'user#login' # show login page 
 
@@ -27,5 +28,7 @@ Rails.application.routes.draw do
 
  get 'post/edit' ,to: 'post#edit'
  post 'post/edit' ,to: 'post#update'
+
+ get 'post/welcome' ,to: 'post#welcome'
  
 end

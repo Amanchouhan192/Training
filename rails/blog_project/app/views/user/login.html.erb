@@ -1,18 +1,29 @@
 <br /><br />
-
-<%= link_to("Home ",{:action =>'index'}) %> <br />
+<div class="navigate_links">
+<%= link_to("Home ",'/home/index') %> 
 <%= link_to("Signup ",{:action =>'signup'}) %> <br />
-<h>Login</h>
-<%= form_tag '/user/login_create' do %>
-    <div class="mb-3">
-      <label>Email</label>
-      <%= text_field_tag "user[email]", "", class: "form-control", placeholder: "Email"  %>
+</div>
+<div class="login_form_body">
+<h class="login_title">Login</h>
+<div class="form_body">
+ <% flash.each do |name,msg| %>
+    <div class='alert alert-<%= name %>' >
+        <%= msg %>
     </div>
-    <div class="mb-3">
-      <label>password</label>
-        <%= password_field_tag "user[password]", "", class: "form-control" ,placeholder: "password" %>
+  <% end %>
+<%= form_tag '/user/login_create' do %>
+    <div class="email">
+      <label>Email</label>
+      <%= text_field_tag "user[email]", "", class: "form-control",required: true, placeholder: "Email"  %>
+    </div>
+    <div class="pwd">
+        <label>password</label>
+        <%= password_field_tag "user[password]", "", class: "password",required: true, placeholder: "password" %>
       </div>
-    <div class="mb-3">
-        <%= submit_tag "Log In"  %>
+    <div>
+        <%= submit_tag "Log In",class: 'button' %>
+        
     </div>
 <% end %>
+</div>
+</div>

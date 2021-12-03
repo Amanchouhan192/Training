@@ -1,45 +1,48 @@
 <br />
-
-<%= link_to("Home ",{:action =>'index'}) %> <br />
+<div class="navigate_links">
+<%= link_to("Home ",'/home/index') %> 
 <%= link_to("Login ",{:action =>'login'}) %> <br />
+</div>
+<div class="signup_form_body">
+<h class="signup_title" >Sign Up</h><br />
 
-<h>Sign Up</h><br />
-
-<%= form_for User.new,:url=>"/user/create", remote: true do |f| %>
+<%=  form_for User.new,:url=>"/user/create", remote: true do |f| %>
   <div class="mb-3">
     <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" ,placeholder: "User Name" %>
+    <%= f.text_field :name, class: "form-control",required: true ,placeholder: "User Name" %>
   </div>
   <div class="mb-3">
     <%= f.label :email %>
-    <%= f.text_field :email, class: "form-control", placeholder: "Email"  %>
+    <%= f.text_field :email, class: "form-control",required: true, placeholder: "Email"  %>
   </div>
-  <div class="mb-3">
+  <div class="pwd">
     <%= f.label :password %>
-    <%= f.password_field :password, class: "form-control" ,placeholder: "password" %>
+    <%= f.password_field :password, class: "form-control",required: true ,placeholder: "password" %>
   </div>
   
-  <div class="mb-3">
-    <%= f.label :confirm_password %>
-    <%= f.password_field :password_confirmation, class: "form-control" ,placeholder: "confirm password" %>
+  <div style="padding-right:100px">
+    <%= f.label :confirm_password ,class:"confirm_passwrod_label" %>
+    <%= f.password_field :password_confirmation, class: "form-control",required: true ,placeholder: "confirm password" %>
+  </div>
+  <div class="gender">
+    <%= f.label :gender,class:"label_gender" %>
+    <%= f.radio_button :gender, 'Male' ,required: true %>Male
+    <%= f.radio_button :gender, 'Female',required: true %>Female<br />
   </div>
   <div class="mb-3">
-    <%= f.label :gender %>
-    <%= f.radio_button :gender, 'Male' %>Male
-    <%= f.radio_button :gender, 'Female' %>Female<br />
-  </div>
-  <div class="mb-3">
-    <div class="form-group">
+    <div class="age">
         <%= f.label :age %>
-        <%= f.select :age, options_for_select(%w[10-18 18-20 20-25 25-30 30-35 35-40 40+]), class: "form-control" %>
+        <%= f.select :age, options_for_select(%w[10-18 18-20 20-25 25-30 30-35 35-40 40+]), class: "form-control",required: true %>
      </div>
   
   </div>
   <div class="mb-3">
     <%= f.label :phone %>
-    <%= f.text_field :phone , class: "form-control"%>
+    <%= f.text_field :phone , class: "form-control",required: true %>
   </div>
   <div class="mb-3">
-     <%= f.submit("Sign Up") %>
+     <%= f.submit "Sign Up" ,:class => 'button' %>
   </div>
 <% end %>
+</div>
+
