@@ -22,13 +22,9 @@
 
 }
 .form-control{
-    width: 30%;
-    padding: 12px 10px;
+    padding: 12px 25px;
     margin: 10px 20px;
     box-sizing: border-box;
-}
-.pwd{
-	padding-right: 20px;
 }
 .email{
     padding-left: 30px;
@@ -40,7 +36,7 @@
     padding-left: 500px;
 }
 .pwd{
-	padding-right: 100px; 
+    
 }
 .signup_title{
     margin: 10px 100px;
@@ -56,19 +52,19 @@
     margin: 10px 150px;
 }
 .gender{
-    padding-left: 70px;
     margin: 10px 0px;
 }
 .age{
-    padding-left: 50px;
     margin: 10px 20px;
-}
-.confirm_passwrod_label{
-   text-align: left;
-   padding-right: 10px;
 }
 .label_gender{
     padding-right: 10px;
-    margin-right: 40px;
+    margin-right: 6px;
    
+}
+.new_user{
+    label{
+        width:155px;
+        display: inline-block;
+    }
 }
