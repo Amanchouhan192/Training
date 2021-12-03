@@ -33,8 +33,6 @@ class PostController < ApplicationController
         @post = Post.find(params[:id])
     end
     
-
-    
     def update
         @post = Post.find(params[:id])
         if @post.update(blog_params)
@@ -50,8 +48,8 @@ class PostController < ApplicationController
     
     def destroy
         @post = Post.find(params[:id])
-        @Post.destroy
-        redirect_to @post
+        @post.destroy
+        redirect_to '/post/welcome'
         render 'delete'
     end
     
