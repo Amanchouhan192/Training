@@ -1,27 +1,8 @@
 <br /><%= link_to("<< Back to List",'/post/welcome', :class => 'back-link') %>
 
-<div class="post show">
-  <h2></h2>
-
-  <table summary="Blog detail view">
-    <tr>
-      <th></th>
-      <td class="title_of_blog"><%= @post.title %></td>
-    </tr>
-    <div>
-    <tr>
-      <th></th>
-      <td  class='body_of_blog'><p><%= @post.body %></td></p></td>
-    </tr>
-    </div>
-    <tr>
-      <th>Created :</th>
-      <td><%= @post.created_at %></dt>
-    </tr>
-    <tr>
-      <th>Updated :</th>
-      <td><%= @post.updated_at %></td>
-    </tr>
+<div class="post_show">
+  
+  <h class="title_of_blog"><%= @post.title %><h>
+  <p class="body_of_blog"><%= @post.body %></p>
   </table>
-
 </div>
