@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <br />
+    <br />
+    <div class="navigate_links"><%= link_to("Home ",'/home/index') %> <%= link_to("Signup ",{:action =>'new'}) %> <br /></div>
+    <div class="login_form_body">
+    <% flash.each do |name,msg| %>
+        <div class="alert alert-<%= name %>">
+          <%= msg %>
+        </div>
+        <% end %><br />
+      <h class="login_title">Login</h>
+      <div class="form_body">
+        <%= form_tag '/user/login_create' do %>
+        <div class="email">
+          <label>Email</label>
+          <%= text_field_tag "user[email]", "", class: "form-control",required: true, placeholder: "Email" %>
+        </div>
+        <div class="pwd">
+          <label>password</label>
+          <%= password_field_tag "user[password]", "", class: "password",required: true, placeholder: "password" %>
+        </div>
+        <div>
+          <%= submit_tag "Log In",class: 'button' %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>
