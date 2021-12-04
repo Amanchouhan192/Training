@@ -1,3 +1,67 @@
 // Place all the styles related to the User controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.header{
+    padding-right: 80px;
+    padding-left: 80px;
+}
+.login_form_body{
+    padding-left: 500px;
+}
+.navigate_links{
+    text-align: right;
+}
+.button{
+    background-color: #4c6baf;
+    border: none;
+	color: white;
+	padding: 16px 50px;
+    padding-left: 30px;
+	margin: 10px 100px;
+	cursor: pointer;
+
+}
+.form-control{
+    padding: 12px 25px;
+    margin: 10px 20px;
+    box-sizing: border-box;
+}
+.email{
+    padding-left: 30px;
+}
+.login_title{
+    margin: 10px 100px;
+}
+.signup_form_body{
+    padding-left: 500px;
+}
+.signup_title{
+    margin: 10px 100px;
+}
+
+.password{
+    width: 33%;
+    padding: 12px 10px;
+    margin: 10px 20px;
+    box-sizing: border-box;
+}
+.login_title{
+    margin: 10px 150px;
+}
+.gender{
+    margin: 10px 0px;
+}
+.age{
+    margin: 10px 20px;
+}
+.label_gender{
+    padding-right: 10px;
+    margin-right: 6px;
+   
+}
+.new_user{
+    label{
+        width:155px;
+        display: inline-block;
+    }
+}

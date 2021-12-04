@@ -5,8 +5,12 @@
         <br />
         <div class="navigate_links"><%= link_to("Home ",'/home/index') %> <%= link_to("Login ","#") %> <br /></div>
         <div class="signup_form_body">
+            <% flash.each do |name,msg| %>
+                <div class="alert alert-<%= name %>">
+                     <%= msg %>
+                </div>
+            <% end %> <br  />
             <h class="signup_title">Sign Up</h><br />
-
             <%= form_for @user,:url=>"/user/create", method:'post' do |f| %>
             <div class="mb-3">
                 <%= f.label :name %> <%= f.text_field :name, class: "form-control",required: true ,placeholder: "User Name" %>
@@ -28,7 +32,7 @@
                 </div>
             </div>
             <div class="mb-3">
-                <%= f.label :phone %> <%= f.text_field :phone , class: "form-control",required: true %>
+                <%= f.label :phone %> <%= f.text_field :phone , class: "form-control",required: true, placeholder:"Phone" %>
             </div>
             <div class="mb-3">
                 <%= f.submit "Sign Up" ,:class => 'button' %>
