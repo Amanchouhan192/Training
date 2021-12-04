@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/index',to: 'home#index'
 
-  get 'user/new',to: 'user#new'
-  #post 'user/new',to: 'user#new'
+  #for signup things get for see the signup credentials
+  # post is for create new entry
+  get '/user/new',to: 'user#new'
+  post '/user/create',to: 'user#create'
 
  
 end
