@@ -12,6 +12,30 @@ class UserController < ApplicationController
     end
   end
 
+  def login_create
+    @user = User.find_by(email: params[:user][:email]) 
+    if @user.present?
+        if @user.password == params[:user][:password]
+            session[:user_id] = @user.id  
+            redirect_to '/post/index'
+        end
+   else
+       redirect_to '/user/login' ,danger: "Invalid email or password!"
+   end
+  end
+
+  def signup
+    if session[:user_id] != nil
+        redirect_to '/post/index'
+    end
+  end
+
+  def login
+    if session[:user_id] != nil
+        redirect_to '/post/index'
+    end
+  end
+
   private
 
   def user_params
