@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   get '/user/new',to: 'user#new'
   post '/user/create',to: 'user#create'
 
+  #for after user logged in he can see the welcome page
+  get '/post/index',to: 'post#index'
+
  
 end
