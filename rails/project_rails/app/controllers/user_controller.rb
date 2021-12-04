@@ -12,12 +12,14 @@ class UserController < ApplicationController
     end
   end
 
-  def login_create
+  def login_check
     @user = User.find_by(email: params[:user][:email]) 
     if @user.present?
-        if @user.password == params[:user][:password]
+        if @user.password === params[:user][:password]
             session[:user_id] = @user.id  
             redirect_to '/post/index'
+        else
+            redirect_to '/user/login' ,danger: "Invalid Password!"
         end
    else
        redirect_to '/user/login' ,danger: "Invalid email or password!"
@@ -35,6 +37,11 @@ class UserController < ApplicationController
         redirect_to '/post/index'
     end
   end
+
+  def logout     
+    session[:user_id] = nil         
+    redirect_to '/user/login' 
+  end  
 
   private
 
