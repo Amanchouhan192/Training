@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   get '/post/index',to: 'post#index'
 
   get '/user/login', to: 'user#login'
-  post '/user/login_create', to: 'user#login_create'
+  post '/user/login_check', to: 'user#login_check'
+
+  # for logout the user from the current session
+  post '/user/logout',to: 'user#logout' 
 
  
 end
