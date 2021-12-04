@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   #for after user logged in he can see the welcome page
   get '/post/index',to: 'post#index'
 
-  get '/user/login',to: 'user#login'
+  get '/user/login', to: 'user#login'
+  post '/user/login_create', to: 'user#login_create'
 
  
 end
