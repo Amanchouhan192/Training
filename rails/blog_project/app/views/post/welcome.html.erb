@@ -3,9 +3,9 @@
 <head><style></style></head>
 <body>
 <br />
-<h>Welcome <h><%= current_user.name %></h><br />
+<%# <h>Welcome <h><%= current_user.name %></h><br /> 
 <div class="navigate_links">
-<%= link_to "Logout", "/user/logout", method: 'post' %>
+<%= link_to "Logout", "/user/logout", method:'post' %>
 <%= link_to("Create Blog",'/post/new',:class => 'action new') %>
 </div>
 <dev class="blogs_index">

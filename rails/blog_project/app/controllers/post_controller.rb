@@ -25,8 +25,6 @@ class PostController < ApplicationController
           #if save fails ,redisplay the form so user can fix problem.
           render('/post/welcome')
         end
-    
-    
     end
     
     def edit

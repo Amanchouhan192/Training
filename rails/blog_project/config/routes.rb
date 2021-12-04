@@ -30,5 +30,9 @@ Rails.application.routes.draw do
  post 'post/edit' ,to: 'post#update'
 
  get 'post/welcome' ,to: 'post#welcome'
+
+ get '/post/delete',to: 'post#delete'
+ post 'post/delete',to: 'post#delete'
+
  
 end

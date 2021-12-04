@@ -6,7 +6,7 @@
 <div class="signup_form_body">
 <h class="signup_title" >Sign Up</h><br />
 
-<%=  form_for User.new,:url=>"/user/create", remote: true do |f| %>
+<%=  form_for @user,:url=>"/user/create", method:'post' do |f| %>
   <div class="mb-3">
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control",required: true ,placeholder: "User Name" %>
