@@ -13,7 +13,7 @@
     <% end %><br />
       <h class="login_title">Login</h>
       <div class="form_body">
-        <%= form_tag '/user/login_create' do %>
+        <%= form_tag '/user/login_check' do %>
         <div class="email">
           <label>Email</label>
           <%= text_field_tag "user[email]", "", class: "form-control",required: true, placeholder: "Email" %>
