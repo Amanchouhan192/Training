@@ -6,11 +6,6 @@
     <br />
     <div class="navigate_links"><%= link_to("Home ",'/home/index') %> <%= link_to("Signup ",{:action =>'new'}) %> <br /></div>
     <div class="login_form_body">
-    <% flash.each do |name,msg| %>
-        <div class="alert alert-<%= name %>">
-          <%= msg %>
-        </div>
-    <% end %><br />
       <h class="login_title">Login</h>
       <div class="form_body">
         <%= form_tag '/user/login_check' do %>
