@@ -15,7 +15,7 @@ class UserController < ApplicationController
   def login_check
     @user = User.find_by(email: params[:user][:email]) 
     if @user.present?
-        if @user.password === params[:user][:password]
+        if @user.password == params[:user][:password]
             session[:user_id] = @user.id  
             redirect_to '/post/index'
         else
