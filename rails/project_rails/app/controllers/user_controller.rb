@@ -19,10 +19,10 @@ class UserController < ApplicationController
             session[:user_id] = @user.id  
             redirect_to '/post/index'
         else
-            redirect_to '/user/login' ,danger: "Invalid Password!"
+            redirect_to '/user/login' ,danger: "Invalid Email or Password!"
         end
    else
-       redirect_to '/user/login' ,danger: "Invalid email or password!"
+       redirect_to '/user/login' ,danger: "Invalid Email or Password!"
    end
   end
 
