@@ -8,7 +8,7 @@ class UserController < ApplicationController
     if @user.save
         redirect_to '/user/new',success: "User Ragistered Successfully!"
     else
-        redirect_to '/user/new' ,danger: "Invalid Email or Phone Number you entered!"
+        redirect_to '/user/new' ,danger: "Invalid Email or Phone Number you entered! or Password mismatch!"
     end
   end
 
