@@ -6,12 +6,7 @@
         <div class="navigate_links"><%= link_to("Home ",'/home/index') %> <%= link_to("Login ",'/user/login') %> <br /></div>
         <div class="signup_form_body">
           <div>
-            <% flash.each do |name,msg| %>
-                <div class="alert alert-<%= name %>">
-                     <%= msg %>
-                </div>
-            <% end %> 
-            </div><br  />
+          </div><br  />
             <h class="signup_title">Sign Up</h><br />
             <%= form_for @user,:url=>"/user/create", method:'post' do |f| %>
             <div class="mb-3">
@@ -21,7 +16,7 @@
                 <%= f.label :email %> <%= f.text_field :email, class: "form-control",required: true, placeholder: "Email" %>
             </div>
             <div class="pwd">
-                <%= f.label :password %> <%= f.password_field :password, class: "form-control",required: true ,placeholder: "password" %>
+                <%= f.label :password %> <%= f.password_field :password, class: "form-control",required: true ,placeholder: "must be (6-10) character long" %>
             </div>
 
             <div style="padding-right: 100px;">
