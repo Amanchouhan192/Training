@@ -28,7 +28,7 @@ class UserController < ApplicationController
       if @user.present?
           if @user.password == params[:user][:password]
               session[:user_id] = @user.id  
-              redirect_to '/post/welcome'
+              redirect_to '/post/index'
           end
      else
          redirect_to '/user/login' ,danger: "Invalid email or password!"
@@ -38,13 +38,13 @@ class UserController < ApplicationController
 
   def signup
       if session[:user_id] != nil
-          redirect_to '/post/welcome'
+          redirect_to '/post/index'
       end
   end
 
   def login
       if session[:user_id] != nil
-          redirect_to '/post/welcome'
+          redirect_to '/post/index'
       end
   end
 
