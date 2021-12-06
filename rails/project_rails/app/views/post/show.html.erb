@@ -1,2 +1,8 @@
-<h1>Post#show</h1>
-<p>Find me in app/views/post/show.html.erb</p>
+<br /><%= link_to("<< Back to List",'/post/index', :class => 'back-link') %>
+
+<div class="post_show">
+  
+  <h class="title_of_blog"><%= @post.title %><h>
+  <p class="body_of_blog"><%= @post.body %></p>
+  </table>
+</div>
