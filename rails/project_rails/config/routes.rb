@@ -16,5 +16,11 @@ Rails.application.routes.draw do
   # for logout the user from the current session
   post '/user/logout',to: 'user#logout' 
 
+  get '/post/new',to: 'post#new'
+  post '/post/create',to: 'post#create'
+
+  #for show the content of the blog
+  get '/post/show',to: 'post#show' 
+
  
 end
