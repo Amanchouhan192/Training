@@ -5,7 +5,31 @@
         <br />
             <h>Welcome <h><%= current_user.name %></h><br />
             <div class="navigate_links">
-                <%= link_to "Logout", "/user/logout", method:'post' %>
-            </div>
-        </body>
+<%= link_to "Logout", "/user/logout", method:'post' %>
+<%= link_to("Create Blog",'/post/new',:class => 'action new') %>
+</div>
+<dev class="blogs_index">
+
+  <table class="listing" summary="Blog list">
+   <tr class="header">
+     <th class="table_heading">No.</th>
+     <th class="table_heading"></th>
+     <th class="table_heading">Blog List</th>
+     <th class="table_heading"></th>
+     <th class="table_heading">Actions</th>
+   </tr>
+   <% @posts.each do |post| %></td>
+   <tr> 
+    <td class="table_data"><%= post.id %><td>
+    <td class="table_data"><%= post.title %><td> 
+    <td class="actions">
+        <%= link_to("View", {:action => 'show',:id => post.id}, :class => 'action_show') %>
+        <%= link_to("Edit", "#" , :class => 'action_edit') %>
+        <%= link_to("Delete", "#" , :class => 'action_delete') %>
+    </td>
+    </tr>
+    <% end %>
+ </table>
+</div>
+</body>
 </html>
