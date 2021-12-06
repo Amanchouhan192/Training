@@ -1,40 +1,39 @@
-<!DOCTYPE html>
-<html>
-    <head></head>
-    <body>
-        <br />
-        <div class="navigate_links"><%= link_to("Home ",'/home/index') %> <%= link_to("Login ",'/user/login') %> <br /></div>
-        <div class="signup_form_body">
-          <div>
-          </div><br  />
-            <h class="signup_title">Sign Up</h><br />
-            <%= form_for @user,:url=>"/user/create", method:'post' do |f| %>
-            <div class="mb-3">
-                <%= f.label :name %> <%= f.text_field :name, class: "form-control",required: true ,placeholder: "User Name" %>
-            </div>
-            <div class="mb-3">
-                <%= f.label :email %> <%= f.text_field :email, class: "form-control",required: true, placeholder: "Email" %>
-            </div>
-            <div class="pwd">
-                <%= f.label :password %> <%= f.password_field :password, class: "form-control",required: true ,placeholder: "must be (6-10) character long" %>
-            </div>
+<br />
+<div class="navigate_links"><%= link_to("Home ",'/home/index') %> <%= link_to("Login ",'/user/login') %> <br /></div>
+<div class="signup_form_body">
+  <br  />
+  <h class="signup_title">Sign Up</h>
+  <br />
+  <%= form_for @user,:url=>"/user/create", method:'post' do |f| %>
+    <div class="validation_errors" >
+    <% if @user.errors.any? %>
+        <%= render partial: "shared/errors_msg" %>
+    <% end %>
+    </div>
+  <div class="mb-3">
+    <%= f.label :name %> <%= f.text_field :name, class: "form-control" ,placeholder: "User Name" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :email %> <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+  </div>
+  <div class="pwd">
+    <%= f.label :password %> <%= f.password_field :password, class: "form-control" ,placeholder: "must be (6-10) character long" %>
+  </div>
+  <div style="padding-right: 100px;">
+    <%= f.label :confirm_password ,class:"confirm_passwrod_label" %> <%= f.password_field :password_confirmation, class: "form-control" ,placeholder: "confirm password" %>
+  </div>
+  <div class="gender"><%= f.label :gender,class:"label_gender" %> <%= f.radio_button :gender, 'Male' %>Male <%= f.radio_button :gender, 'Female',required: true %>Female<br /></div>
+  <div class="mb-3">
+    <div class="age">
+      <%= f.label :age %> <%= f.select :age, options_for_select(%w[10-18 18-20 20-25 25-30 30-35 35-40 40+]), class: "form-control" %>
+    </div>
+  </div>
+  <div class="mb-3">
+    <%= f.label :phone %> <%= f.text_field :phone , class: "form-control", placeholder:"Phone" %>
+  </div>
+  <div class="mb-3">
+    <%= f.submit "Sign Up" ,:class => 'button' %>
+  </div>
+  <% end %>
+</div>
 
-            <div style="padding-right: 100px;">
-                <%= f.label :confirm_password ,class:"confirm_passwrod_label" %> <%= f.password_field :password_confirmation, class: "form-control",required: true ,placeholder: "confirm password" %>
-            </div>
-            <div class="gender"><%= f.label :gender,class:"label_gender" %> <%= f.radio_button :gender, 'Male' ,required: true %>Male <%= f.radio_button :gender, 'Female',required: true %>Female<br /></div>
-            <div class="mb-3">
-                <div class="age">
-                    <%= f.label :age %> <%= f.select :age, options_for_select(%w[10-18 18-20 20-25 25-30 30-35 35-40 40+]), class: "form-control",required: true %>
-                </div>
-            </div>
-            <div class="mb-3">
-                <%= f.label :phone %> <%= f.text_field :phone , class: "form-control",required: true, placeholder:"Phone" %>
-            </div>
-            <div class="mb-3">
-                <%= f.submit "Sign Up" ,:class => 'button' %>
-            </div>
-            <% end %>
-        </div>
-    </body>
-</html>
