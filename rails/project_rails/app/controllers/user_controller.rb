@@ -8,8 +8,9 @@ class UserController < ApplicationController
     if @user.save
         redirect_to '/user/new',success: "User Ragistered Successfully!"
     else
-        redirect_to '/user/new' ,danger: "Invalid Email or Phone Number you entered! or Password mismatch!"
-    end
+       #redirect_to '/user/new' ,danger: "Invalid Email or Phone Number you entered! or Password mismatch!"
+       render 'new'
+      end
   end
 
   def login_check
@@ -24,12 +25,6 @@ class UserController < ApplicationController
    else
        redirect_to '/user/login' ,danger: "Invalid Email or Password!"
    end
-  end
-
-  def signup
-    if session[:user_id] != nil
-        redirect_to '/post/index'
-    end
   end
 
   def login
@@ -48,6 +43,5 @@ class UserController < ApplicationController
   def user_params
     params.require(:user).permit(:name,:email,:password, :password_confirmation,:gender,:age,:phone)
   end
-
-
+  
 end
