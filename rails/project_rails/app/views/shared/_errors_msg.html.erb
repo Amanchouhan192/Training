@@ -1,4 +1,4 @@
-<div id="error_explanation">
+<div class="red">
     <h2><%= pluralize(@user.errors.count, "error") %> prohibited this User from being saved:</h2>
     <ul>
     <% @user.errors.full_messages.each do |msg| %>
