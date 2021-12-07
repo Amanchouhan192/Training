@@ -1,8 +1,22 @@
-<br /><%= link_to("<< Back to List",'/post/index', :class => 'back-link') %>
+<br /><%= link_to("Home",'/post/index', :class => 'back-link') %>
 
 <div class="post_show">
   
-  <h class="title_of_blog"><%= @post.title %><h>
+  <h3 class="title_of_blog"><%= @post.title %></h3>
+  <p>Written By :<h><%= current_user.name %></p>
+  <p>
+  Created On :<%= @post.created_at.strftime("%B %d %Y") %>
+  </p>
   <p class="body_of_blog"><%= @post.body %></p>
-  </table>
+  <br>
+    <h2><%= @post.comments.count %> Comments</h2>
+        <%= render @post.comments %> 
+        <h3>Add Comments: </h3>
+        <%= render 'comments/form' %> 
+  <br>
+   <div>
+   <%= link_to("Edit", {:action => 'edit',:id => @post.id}, :class => 'action_edit') %>
+   <%= link_to("Delete",{:action => 'delete',:id => @post.id}, :class => 'action_delete') %>
+   </div>
+
 </div>
