@@ -10,28 +10,28 @@
         <%= render partial: "shared/errors_msg" %>
     <% end %>
     </div>
-  <div class="mb-3">
+  <div class="mb-3 flex items-center">
     <%= f.label :name %> <%= f.text_field :name, class: "form-control" ,placeholder: "User Name" %>
   </div>
-  <div class="mb-3">
+  <div class="mb-3 flex items-center">
     <%= f.label :email %> <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
   </div>
-  <div class="pwd">
+  <div class="pwd flex items-center">
     <%= f.label :password %> <%= f.password_field :password, class: "form-control" ,placeholder: "must be (6-10) character long" %>
   </div>
-  <div style="padding-right: 100px;">
+  <div class="flex items-center">
     <%= f.label :confirm_password ,class:"confirm_passwrod_label" %> <%= f.password_field :password_confirmation, class: "form-control" ,placeholder: "confirm password" %>
   </div>
-  <div class="gender"><%= f.label :gender,class:"label_gender" %> <%= f.radio_button :gender, 'Male' %>Male <%= f.radio_button :gender, 'Female',required: true %>Female<br /></div>
-  <div class="mb-3">
-    <div class="age">
+  <div class="gender flex items-center"><%= f.label :gender,class:"label_gender" %> <%= f.radio_button :gender, 'Male' %>Male <%= f.radio_button :gender, 'Female',required: true %>Female<br /></div>
+  <div class="mb-3 flex items-center">
+    <div class="age flex items-center">
       <%= f.label :age %> <%= f.select :age, options_for_select(%w[10-18 18-20 20-25 25-30 30-35 35-40 40+]), class: "form-control" %>
     </div>
   </div>
-  <div class="mb-3">
+  <div class="mb-3 flex items-center">
     <%= f.label :phone %> <%= f.text_field :phone , class: "form-control", placeholder:"Phone" %>
   </div>
-  <div class="mb-3">
+  <div class="mb-3 flex items-center">
     <%= f.submit "Sign Up" ,:class => 'button' %>
   </div>
   <% end %>
