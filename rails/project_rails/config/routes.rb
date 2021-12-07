@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'home#index'
   get 'home/index',to: 'home#index'
 
@@ -31,5 +32,18 @@ Rails.application.routes.draw do
   get '/post/:id/delete',to: 'post#delete'
   delete '/post/:id',to: 'post#destroy'
 
- 
+  get '/post/show/:id',to: 'post#show'
+
+  resources :posts do
+    resources :comments
+  end
+=begin
+get 'comments/index'
+  get 'comments/new'
+  get 'comments/create'
+  get 'comments/show'
+  get 'comments/update'
+  get 'comments/delete'
+  get 'comments/destroy'
+=end
 end
