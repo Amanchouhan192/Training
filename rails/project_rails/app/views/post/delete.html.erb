@@ -2,7 +2,6 @@
 
 <div class="Blogs delete">
   <h2>Delete Blog</h2>
-  <%= params[:id] %>
   <%= form_for @post, url:"/post/#{params[:id]}", method: 'delete' do |f| %>
  
     <p><%= @post.title %></p>
