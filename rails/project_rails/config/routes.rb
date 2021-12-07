@@ -20,7 +20,16 @@ Rails.application.routes.draw do
   post '/post/create',to: 'post#create'
 
   #for show the content of the blog
-  get '/post/show',to: 'post#show' 
+  get '/post/show',to: 'post#show'
+  
+  patch 'post/edit/:id' ,to: 'post#update'
+
+  get 'post/edit' ,to: 'post#edit'
+  post 'post/edit' ,to: 'post#update'
+
+  #get '/post/delete',to: 'post#delete'
+  get '/post/:id/delete',to: 'post#delete'
+  delete '/post/:id',to: 'post#destroy'
 
  
 end
