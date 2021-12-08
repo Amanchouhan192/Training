@@ -1,0 +1,418 @@
+----------------------------------------------------validation practice------------------------------------------------
+Person.all
+  Person Load (0.7ms)  SELECT "people".* FROM "people"
+ => [] 
+3.0.2 :009 > Person.create(name: nil).valid?
+ => false 
+3.0.2 :010 > Perosn.create(name:"Aman").valid?
+(irb):10:in `<main>': uninitialized constant Perosn (NameError)
+Did you mean?  Person
+3.0.2 :011 > Person.create(name:"Aman").valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Person Create (1.1ms)  INSERT INTO "people" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Aman"], ["created_at", "2021-12-08 04:47:46.229847"], ["updated_at", "2021-12-08 04:47:46.229847"]]
+  TRANSACTION (27.4ms)  COMMIT
+ => true 
+3.0.2 :012 > 
+p = Person.create(name: "Rahul")
+  TRANSACTION (0.7ms)  BEGIN
+  Person Create (0.7ms)  INSERT INTO "people" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Rahul"], ["created_at", "2021-12-08 04:48:59.545782"], ["updated_at", "2021-12-08 04:48:59.545782"]]
+  TRANSACTION (21.9ms)  COMMIT
+ => 
+#<Person:0x00005562d63570f8
+... 
+3.0.2 :013 > p.new_record?
+ => false 
+3.0.2 :014 > 
+ p = Person.new(name: "Pankaj")
+ => 
+#<Person:0x00005562d65de3f8
+... 
+3.0.2 :015 > p.valid?
+ => true 
+3.0.2 :016 > p.new_record?
+ => true 
+3.0.2 :017 > p.save
+  TRANSACTION (0.8ms)  BEGIN
+  Person Create (0.8ms)  INSERT INTO "people" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Pankaj"], ["created_at", "2021-12-08 04:50:09.405039"], ["updated_at", "2021-12-08 04:50:09.405039"]]
+  TRANSACTION (28.5ms)  COMMIT
+ => true 
+3.0.2 :018 > p.new_record?
+ => false 
+3.0.2 :019 > 
+p = Person.new(name:"Rohan")
+ => 
+#<Person:0x00005562d4922cf0
+... 
+3.0.2 :024 > p.save!
+  TRANSACTION (0.8ms)  BEGIN
+  Person Create (1.0ms)  INSERT INTO "people" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Rohan"], ["created_at", "2021-12-08 04:53:45.009930"], ["updated_at", "2021-12-08 04:53:45.009930"]]
+  TRANSACTION (43.1ms)  COMMIT
+ => true 
+3.0.2 :025 > p = Person.new(name:nil)
+ => 
+#<Person:0x00005562d6290390
+... 
+3.0.2 :026 > p.save!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: Name can't be blank (ActiveRecord::RecordInvalid)
+3.0.2 :027 > p.save.errors
+(irb):27:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :028 > p.save
+ => false 
+3.0.2 :029 > 
+p.save(validate: false)
+  TRANSACTION (0.4ms)  BEGIN
+  Person Create (0.7ms)  INSERT INTO "people" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2021-12-08 05:01:51.802355"], ["updated_at", "2021-12-08 05:01:51.802355"]]
+  TRANSACTION (22.8ms)  COMMIT
+ => true 
+p = Person.new
+ => 
+#<Person:0x00005562d6395e48
+... 
+3.0.2 :046 > p.errors.size
+ => 0 
+3.0.2 :047 > p.errors.objects.first.full_message
+(irb):47:in `<main>': undefined method `full_message' for nil:NilClass (NoMethodError)
+3.0.2 :048 > p.valid?
+ => false 
+3.0.2 :049 > p.errors.objects.first.full_messages
+(irb):49:in `<main>': undefined method `full_messages' for #<ActiveModel::Error attribute=name, type=blank, options={}> (NoMethodError)
+Did you mean?  full_message
+3.0.2 :050 > p.errors.objects.first.full_message
+ => "Name can't be blank" 
+ 
+ p
+ => 
+#<Person:0x00005562d4cac150
+ id: nil,
+ name: nil,
+ created_at: nil,
+ updated_at: nil> 
+3.0.2 :062 > p.invalid?
+ => true 
+3.0.2 :063 > p.valid?
+ => false 
+3.0.2 :064 > 
+Person.create!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: Name can't be blank (ActiveRecord::RecordInvalid)
+3.0.2 :065 > 
+ Person.new.errors[:name].any?
+ => false 
+3.0.2 :067 > Person.create.errors[:name].any?
+ => true 
+3.0.2 :068 > 
+
+ p = Person.new(name:nil)
+ => #<Person:0x000055eecb51b110 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :007 > p.errors
+ => #<ActiveModel::Errors:0x00007feedc0ff1e0 @base=#<Person:0x000055eecb51b110 id: nil, name: nil, created_at: nil, updated_at: nil>, @errors=[]> 
+3.0.2 :008 > p.errors.error[:name]
+(irb):8:in `<main>': undefined method `error' for #<ActiveModel::Errors:0x00007feedc0ff1e0 @base=#<Person id: nil, name: nil, created_at: nil, updated_at: nil>, @errors=[]> (NoMethodError)
+Did you mean?  errors
+3.0.2 :009 > p.errors.errors[:name]
+(irb):9:in `<main>': no implicit conversion of Symbol into Integer (TypeError)
+3.0.2 :010 > p.errors[:name]
+ => [] 
+3.0.2 :011 > p
+ => #<Person:0x000055eecb51b110 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :012 > p.valid?
+ => false 
+3.0.2 :013 > p.errors[:name]
+ => ["can't be blank"] 
+3.0.2 :014 > 
+ p = Person.new(name:nil)
+ => #<Person:0x000055eecb51b110 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :007 > p.errors
+ => #<ActiveModel::Errors:0x00007feedc0ff1e0 @base=#<Person:0x000055eecb51b110 id: nil, name: nil, created_at: nil, updated_at: nil>, @errors=[]> 
+3.0.2 :008 > p.errors.error[:name]
+(irb):8:in `<main>': undefined method `error' for #<ActiveModel::Errors:0x00007feedc0ff1e0 @base=#<Person id: nil, name: nil, created_at: nil, updated_at: nil>, @errors=[]> (NoMethodError)
+Did you mean?  errors
+3.0.2 :009 > p.errors.errors[:name]
+(irb):9:in `<main>': no implicit conversion of Symbol into Integer (TypeError)
+3.0.2 :010 > p.errors[:name]
+ => [] 
+3.0.2 :011 > p
+ => #<Person:0x000055eecb51b110 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :012 > p.valid?
+ => false 
+3.0.2 :013 > p.errors[:name]
+ => ["can't be blank"] 
+3.0.2 :014 > p = Person.new
+ => #<Person:0x00007feedc12d220 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :015 > p.valid?
+ => false 
+3.0.2 :016 > p.errors.where(:name)
+ => [#<ActiveModel::Error attribute=name, type=blank, options={}>] 
+3.0.2 :017 > 
+ p = Person.new
+ => #<Person:0x00007feedc44c618 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.2 :031 > p.valid?
+ => false 
+3.0.2 :032 > p.errors
+ => 
+#<ActiveModel::Errors:0x000055eecbcc4218
+ @base=#<Person:0x00007feedc44c618 id: nil, name: nil, created_at: nil, updated_at: nil>,
+ @errors=[#<ActiveModel::Error attribute=name, type=blank, options={}>]> 
+3.0.2 :033 > p.errors.where(:name)
+ => [#<ActiveModel::Error attribute=name, type=blank, options={}>] 
+3.0.2 :034 > p.errors.where(:name).last
+ => #<ActiveModel::Error attribute=name, type=blank, options={}> 
+3.0.2 :035 > p.attribute
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:466:in `method_missing': private method `attribute' called for #<Person id: nil, name: nil, created_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  attributes
+               attributes=
+3.0.2 :036 > p.attributes
+ => {"id"=>nil, "name"=>nil, "created_at"=>nil, "updated_at"=>nil} 
+3.0.2 :037 > 
+
+Person.touch_all
+  Person Update All (47.7ms)  UPDATE "people" SET "updated_at" = $1  [["updated_at", "2021-12-08 12:44:37.319803"]]
+ => 6 
+3.0.2 :050 > Person.all
+  Person Load (0.9ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x00007feed4004928
+  id: 1,
+  name: "Aman",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>,
+ #<Person:0x00007feed4004860
+  id: 2,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>,
+ #<Person:0x00007feed4004798
+  id: 3,
+  name: "Pankaj",
+  created_at: Wed, 08 Dec 2021 04:50:09.405039000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>,
+ #<Person:0x00007feed40046d0
+  id: 4,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>,
+ #<Person:0x00007feed4004608
+  id: 5,
+  name: "Rohan",
+  created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>,
+ #<Person:0x00007feed4004540
+  id: 6,
+  name: nil,
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>] 
+3.0.2 :051 > 
+
+ Person.update_all(name: 'Karan')
+  Person Update All (18.7ms)  UPDATE "people" SET "name" = $1  [["name", "Karan"]]
+ => 6 
+3.0.2 :053 > Person
+ => Person(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :054 > Person.all
+  Person Load (1.0ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x00007feed003ff40
+  id: 1,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>,
+ #<Person:0x00007feed003fe78
+  id: 2,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>,
+ #<Person:0x00007feed003fdb0
+  id: 3,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:50:09.405039000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>,
+ #<Person:0x00007feed003fce8
+  id: 4,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>,
+ #<Person:0x00007feed003fc20
+  id: 5,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>,
+ #<Person:0x00007feed003fb58
+  id: 6,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:44:37.319803000 UTC +00:00>] 
+3.0.2 :055 > 
+Person.update(name: 'Rahul')
+  Person Load (0.9ms)  SELECT "people".* FROM "people"
+  TRANSACTION (0.5ms)  BEGIN
+  Person Update (0.7ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Rahul"], ["updated_at", "2021-12-08 12:59:54.337460"], ["id", 1]]
+  TRANSACTION (6.0ms)  COMMIT
+  TRANSACTION (0.5ms)  BEGIN
+  Person Update (1.2ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Rahul"], ["updated_at", "2021-12-08 12:59:54.374005"], ["id", 2]]
+  TRANSACTION (2.9ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (1.1ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Rahul"], ["updated_at", "2021-12-08 12:59:54.382659"], ["id", 3]]
+  TRANSACTION (3.2ms)  COMMIT
+  TRANSACTION (0.4ms)  BEGIN
+  Person Update (0.7ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Rahul"], ["updated_at", "2021-12-08 12:59:54.390771"], ["id", 4]]
+  TRANSACTION (21.0ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (0.5ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Rahul"], ["updated_at", "2021-
+  TRANSACTION (21.8ms)  COMMIT
+  TRANSACTION (0.4ms)  BEGIN
+12-08 12:59:54.441066"], ["id", 6]]
+  TRANSACTION (4.0ms)  COMMIT
+ => 
+[#<Person:0x000055eecabc4300
+  id: 1,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.337460000 UTC +00:00>,
+ #<Person:0x000055eecabbbf48
+  id: 2,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.374005000 UTC +00:00>,
+ #<Person:0x000055eecabbba20
+  id: 3,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:50:09.405039000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.382659000 UTC +00:00>,
+ #<Person:0x000055eecabbb660
+  id: 4,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.390771000 UTC +00:00>,
+ #<Person:0x000055eecabbaf30
+  id: 5,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.415918000 UTC +00:00>,
+ #<Person:0x000055eecabba620
+  id: 6,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+3.0.2 :056 > Person.update(name: 'Rahul').find(1)
+  Person Load (0.7ms)  SELECT "people".* FROM "people"
+ => #<Enumerator: ...> 
+3.0.2 :057 > Person.all
+  Person Load (1.0ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x00007feedc176dd0
+  id: 1,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.337460000 UTC +00:00>,
+ #<Person:0x00007feedc176c68
+  id: 2,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.374005000 UTC +00:00>,
+ #<Person:0x00007feedc176ba0
+  id: 3,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:50:09.405039000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.382659000 UTC +00:00>,
+ #<Person:0x00007feedc176ad8
+  id: 4,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.390771000 UTC +00:00>,
+  id: 5,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.415918000 UTC +00:00>,
+ #<Person:0x00007feedc176948
+  id: 6,
+  name: "Rahul",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 12:59:54.441066000 UTC +00:00>] 
+3.0.2 :058 > Person.update(name: 'Karan').find(1)
+  Person Load (0.5ms)  SELECT "people".* FROM "people"
+  TRANSACTION (0.5ms)  BEGIN
+  Person Update (0.6ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Karan"], ["updated_at", "2021-12-08 13:00:31.830937"], ["id", 1]]
+  TRANSACTION (18.2ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (0.7ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Karan"], ["updated_at", "2021-12-08 13:00:31.853848"], ["id", 2]]
+  TRANSACTION (3.1ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (0.5ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Karan"], ["updated_at", "2021-12-08 13:00:31.861356"], ["id", 3]]
+  TRANSACTION (5.1ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (0.6ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Karan"], ["updated_at", "2021-12-08 13:00:31.869988"], ["id", 4]]
+  TRANSACTION (4.4ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (0.5ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Karan"], ["updated_at", "2021-12-08 13:00:31.877703"], ["id", 5]]
+  TRANSACTION (5.4ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (1.6ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Karan"], ["updated_at", "2021-12-08 13:00:31.886368"], ["id", 6]]
+  TRANSACTION (10.6ms)  COMMIT
+ => #<Enumerator: ...> 
+3.0.2 :059 > Person.all
+  Person Load (1.0ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x000055eecbc06060
+  id: 1,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 13:00:31.830937000 UTC +00:00>,
+ #<Person:0x000055eecbc05f98
+  id: 2,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 13:00:31.853848000 UTC +00:00>,
+ #<Person:0x000055eecbc05ed0
+  id: 3,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:50:09.405039000 UTC +00:00,
+  updated_at: Wed, 08 Dec 2021 13:00:31.861356000 UTC +00:00>,
+ #<Person:0x000055eecbc05e08
+
+---------------------------------------Model Velidations-------------------------------------------------------------------------
+class User < ApplicationRecord
+  validates :name, :email, presence: true 
+  #validates :name, :email, presence: { strict: true }
+  validates :email, uniqueness: true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,message: "must be a valid email address", on: :create }
+  validates_format_of :phone, :with =>  /\d[0-9]\)*\z/ , :message => "Only positive number without spaces are allowed"
+  validates :phone,:presence => true,:numericality => true, :length => { :minimum => 10, :maximum => 10 }
+  validates :password, :confirmation => true, :length => { in: 6..10}
+  validates :password_confirmation, presence: true
+
+  #validates :age ,numericality {:message => "age should be greater then 15" }
+  #validates :email, inclusion: {in: %w{berylsystems}, message: "User be berylsystems employee"}
+
+  #acceptance validation
+  #validates_acceptance_of :agreement, :allow_nil => false, :accept => true, :on => :create
+  #validates :agreement, acceptance: true
+  #validates :agreement, acceptance: { accept: true }
+  #validates_acceptance_of :agreement, accept: true
+  #validates :agreement, acceptance: {accept: true} , on: :create, allow_nil: false
+  #validates :agreement, inclusion: {in: [true]}
+
+  #validation for age 
+  #validates :age, numericality: { message: "%{value} seems wrong must be an positive integer" }
+  #validates_numericality_of :age, :greater_than_or_equal_to => 15 
+  #validates_numericality_of :age, :less_than => 100
+  #exclusion validation
+  validates :email, exclusion: { in: %w[p@berylsystems.com] }
+
+  #format
+  validates :address, format: { with: /\A[a-zA-Z]+\z/,message: "only allows letters" }
+
+  #inclusion
+  validates :address, inclusion: { in: %w(delhi faridabad mumbai),message: "%{value} This state citizens are not allowed!" }
+  
+  # age custom validation
+  validate :age_validation_custom
+  def age_validation_custom
+    if validates_numericality_of :age, :greater_than_or_equal_to => 15 
+       validates_numericality_of :age, :less_than => 100
+    else
+      validates :age, numericality: { message: "%{value} seems wrong must be an positive integer" }
+    end
+  end
+
+end
+
+
+
