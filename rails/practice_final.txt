@@ -1,0 +1,1095 @@
+------------------------------------------------Association With Validation--------------------------------------------------------
+================================================Belongs To and Has_many======================================================
+person = Person.where(name:"Pankaj",address:"Delhi").order(create_at: :desc)
+  Person Load (53.4ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 AND "people"."address" = $2 ORDER BY "create_at" DESC  [["name", "Pankaj"], ["address", "Delhi"]]
+  Person Load (0.6ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 AND "people"."address" = $2 ORDER BY "people"."created_at" DESC  [["name", "Pankaj"], ["address", "Delhi"]]
+[#<Person:0x0000564e058baa48
+... 
+3.0.2 :010 > person
+ => 
+  id: 6,
+  name: "Pankaj",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000564e058ba930
+  id: 1,
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  address: "Delhi">] 
+3.0.2 :011 > p1 = P	
+
+
+3.0.2 :011 > p1 = Person.find_by(1)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/relation/query_methods.rb:1097:in `build_where_clause': Unsupported argument type: 1 (Integer) (ArgumentError)
+3.0.2 :012 > p1 = Person.find(1)
+  Person Load (0.5ms)  SELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Person:0x0000564e0557bc60
+... 
+3.0.2 :013 > p1
+ => 
+#<Person:0x0000564e0557bc60
+ id: 1,
+ name: "Pankaj",
+ created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ address: "Delhi"> 
+3.0.2 :014 > p1.name = "Gourav"
+ => "Gourav" 
+3.0.2 :015 > p1.save
+  TRANSACTION (0.6ms)  BEGIN
+  Person Update (23.7ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Gourav"], ["updated_at", "2021-12-09 09:44:29.178950"], ["id", 1]]
+  TRANSACTION (7.2ms)  COMMIT
+ => true 
+3.0.2 :016 > Person.all
+  Person Load (0.8ms)  SELECT "people".* FROM "people"
+[#<Person:0x0000564e0625adf0
+  id: 2,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  address: "Faridabad">,
+ #<Person:0x0000564e0625ab20
+  id: 3,
+  name: "Karan",
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Punjab">,
+ #<Person:0x0000564e0625aa58
+  id: 5,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ #<Person:0x0000564e0625a990
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Mumbai">,
+ #<Person:0x0000564e0625a8c8
+  name: "Pankaj",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000564e0625a800
+  id: 1,
+  name: "Gourav",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:44:29.178950000 UTC +00:00,
+  address: "Delhi">] 
+3.0.2 :017 > p2 = Person.find_by(id:1)
+  Person Load (0.6ms)  SELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Person:0x0000564e065abb80
+... 
+3.0.2 :018 > p2 = Person.find_by(id:2)
+  Person Load (0.7ms)  SELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => 
+#<Person:0x0000564e066eaf50
+... 
+3.0.2 :019 > p2
+ => 
+#<Person:0x0000564e066eaf50
+ id: 2,
+ name: "Karan",
+ created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ address: "Faridabad"> 
+3.0.2 :020 > p2.name="Rishabh"
+ => "Rishabh" 
+3.0.2 :021 > p2.save
+  TRANSACTION (0.5ms)  BEGIN
+  Person Update (0.9ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Rishabh"], ["updated_at", "2021-12-09 09:45:47.778642"], ["id", 2]]
+  TRANSACTION (22.4ms)  COMMIT
+ => true 
+3.0.2 :022 > Person.all
+  Person Load (1.1ms)  SELECT "people".* FROM "people"
+[#<Person:0x0000564e05778d38
+  id: 3,
+  created_at: Wed, 08 Dec 2021 04:50:09.405039000 UTC +00:00,
+  address: "Punjab">,
+ #<Person:0x0000564e05778bf8
+  id: 5,
+  name: "Karan",
+  address: "Keral">,
+ #<Person:0x0000564e05778a90
+  id: 4,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Mumbai">,
+  id: 6,
+  name: "Pankaj",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000564e057786a8
+  id: 1,
+  name: "Gourav",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:44:29.178950000 UTC +00:00,
+ #<Person:0x0000564e057784a0
+  id: 2,
+  name: "Rishabh",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:45:47.778642000 UTC +00:00,
+  address: "Faridabad">] 
+3.0.2 :023 > p = Person.find_by(name:"Rahul")
+  Person Load (0.8ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 LIMIT $2  [["name", "Rahul"], ["LIMIT", 1]]
+ => nil 
+3.0.2 :024 > p
+ => nil 
+3.0.2 :025 > p = Person.find_by(name:"Karan")
+  Person Load (0.6ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 LIMIT $2  [["name", "Karan"], ["LIMIT", 1]]
+ => 
+#<Person:0x0000564e06589ee0
+... 
+3.0.2 :026 > 
+3.0.2 :027 > p
+ => 
+#<Person:0x0000564e06589ee0
+ id: 3,
+ name: "Karan",
+ created_at: Wed, 08 Dec 2021 04:50:09.405039000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ address: "Punjab"> 
+3.0.2 :028 > p.destroy
+  TRANSACTION (0.6ms)  BEGIN
+  Person Destroy (0.7ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 3]]
+  TRANSACTION (23.5ms)  COMMIT
+ => 
+#<Person:0x0000564e06589ee0
+ id: 3,
+ created_at: Wed, 08 Dec 2021 04:50:09.405039000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ address: "Punjab"> 
+3.0.2 :029 > Person.all
+ => 
+[#<Person:0x0000564e04994848
+  id: 5,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Keral">,
+  id: 4,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ #<Person:0x0000564e049945a0
+  id: 6,
+  name: "Pankaj",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000564e04994348
+  id: 1,
+  name: "Gourav",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:44:29.178950000 UTC +00:00,
+  address: "Delhi">,
+  id: 2,
+  name: "Rishabh",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:45:47.778642000 UTC +00:00,
+  address: "Faridabad">] 
+3.0.2 :030 > p = Person.find_by(name:"Karan")
+  Person Load (0.8ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 LIMIT $2  [["name", "Karan"], ["LIMIT", 1]]
+ => 
+#<Person:0x0000564e061dda08
+... 
+ => 
+#<Person:0x0000564e061dda08
+ id: 5,
+ name: "Karan",
+ created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ address: "Keral"> 
+  Person Load (0.8ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 LIMIT $2  [["name", "Karan"], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `where' for #<Person id: 5, name: "Karan", created_at: "2021-12-08 04:53:45.009930000 +0000", updated_at: "2021-12-09 05:36:07.815073000 +0000", address: "Keral"> (NoMethodError)
+3.0.2 :033 > p = Person.find_by(name:"Karan")
+  Person Load (1.0ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 LIMIT $2  [["name", "Karan"], ["LIMIT", 1]]
+ => 
+#<Person:0x0000564e058a1188
+... 
+3.0.2 :034 > p
+ => 
+#<Person:0x0000564e058a1188
+ id: 5,
+ name: "Karan",
+ created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ address: "Keral"> 
+3.0.2 :035 > p.destroy
+  TRANSACTION (0.7ms)  BEGIN
+  Person Destroy (1.1ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 5]]
+  TRANSACTION (19.5ms)  COMMIT
+ => 
+#<Person:0x0000564e058a1188
+ id: 5,
+ name: "Karan",
+ created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+ address: "Keral"> 
+ => 
+ id: 5,
+ name: "Karan",
+ created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+ address: "Keral"> 
+  Person Load (0.9ms)  SELECT "people".* FROM "people"
+[#<Person:0x0000564e0635b2b8
+  id: 4,
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  address: "Mumbai">,
+  id: 6,
+  name: "Pankaj",
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Delhi">,
+  id: 1,
+  name: "Gourav",
+  updated_at: Thu, 09 Dec 2021 09:44:29.178950000 UTC +00:00,
+ #<Person:0x0000564e0635b060
+  id: 2,
+  name: "Rishabh",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:45:47.778642000 UTC +00:00,
+  address: "Faridabad">] 
+3.0.2 :038 > p = Person.new(name:nil)
+ => #<Person:0x0000564e066c80e0 id: nil, name: nil, created_at: nil, updated_at: nil, address: nil> 
+3.0.2 :039 > p.valid?
+ => false 
+(irb):40:in `<main>': undefined method `message' for #<ActiveModel::Errors:0x0000564e06826d38 @base=#<Person id: nil, name: nil, created_at: nil, updated_at: nil, address: nil>, @errors=[#<ActiveModel::Error attribute=name, type=blank, options={}>]> (NoMethodError)
+Did you mean?  messages
+3.0.2 :041 > p.errors.messages
+ => {:name=>["can't be blank"]} 
+3.0.2 :042 > p.errors.size
+ => 1 
+3.0.2 :043 > p.errors.full_message
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/errors.rb:513:in `full_message': wrong number of arguments (given 0, expected 2) (ArgumentError)
+ => ["Name can't be blank"] 
+3.0.2 :045 > Book.all
+3.0.2 :046 > reload!
+Reloading...
+3.0.2 :047 > Book.all
+  Book Load (1.2ms)  SELECT "books".* FROM "books"
+ => [] 
+3.0.2 :048 > Author.all
+  Author Load (1.2ms)  SELECT "authors".* FROM "authors"
+3.0.2 :049 > Author
+3.0.2 :050 > Author.create(name:"J k Rowlling")
+  TRANSACTION (0.3ms)  BEGIN
+  Author Create (1.8ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "J k Rowlling"], ["created_at", "2021-12-09 11:15:16.092679"], ["updated_at", "2021-12-09 11:15:16.092679"]]
+  TRANSACTION (23.5ms)  COMMIT
+#<Author:0x0000564e06551d38
+ name: "J k Rowlling",
+ created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00> 
+  TRANSACTION (0.5ms)  BEGIN
+  Author Create (0.8ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Chetan Bhagat"], ["created_at", "2021-12-09 11:15:34.070222"], ["updated_at", "2021-12-09 11:15:34.070222"]]
+ => 
+ id: 2,
+ created_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00,
+3.0.2 :052 > relaod!
+(irb):52:in `<main>': undefined method `relaod!' for main:Object (NoMethodError)
+3.0.2 :053 > reload!
+ => true 
+3.0.2 :054 > Author.create(name:"A P j Abdul Kalam").valid?
+  Author Create (0.6ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "A P j Abdul Kalam"], ["created_at", "2021-12-09 11:17:40.298843"], ["updated_at", "2021-12-09 11:17:40.298843"]]
+  TRANSACTION (13.2ms)  COMMIT
+ => true 
+3.0.2 :055 > Author.create(name:"").valid?
+3.0.2 :056 > Author.create(name:"Robin Sharma").valid?
+  Author Create (0.5ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Robin Sharma
+  TRANSACTION (26.1ms)  COMMIT
+ => true 
+3.0.2 :057 > Author.create(name:"").valid?
+ => false 
+3.0.2 :058 > Author.create(name:"").erorrs.size
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `erorrs' for #<Author id: nil, name: "", created_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  errors
+3.0.2 :059 > a = Author.create(name:"").erorrs.size
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `erorrs' for #<Author id: nil, name: "", created_at: nil, updated_at: nil> (NoMethodError)
+Did you mean?  errors
+3.0.2 :060 > a = Author.create(name:"")
+ => #<Author:0x0000564e07531528 id: nil, name: "", created_at: nil, updated_at: nil> 
+3.0.2 :061 > a.valid?
+ => false 
+3.0.2 :062 > a.errors.size
+ => 1 
+3.0.2 :063 > a.errors.full_message
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/errors.rb:513:in `full_message': wrong number of arguments (given 0, expected 2) (ArgumentError)
+3.0.2 :064 > a.errors.full_messages
+ => ["Name can't be blank"] 
+3.0.2 :065 > reload!
+Reloading...
+ => true 
+3.0.2 :066 > a = Author.create(name:"Rabindranath Tagore").valid?
+  Author Create (0.4ms)  INSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Rabindranath
+  TRANSACTION (12.3ms)  COMMIT
+ => true 
+3.0.2 :067 > a
+ => true 
+3.0.2 :068 > a.validate!
+(irb):68:in `<main>': undefined method `validate!' for true:TrueClass (NoMethodError)
+3.0.2 :069 > Author.all
+  Author Load (1.0ms)  SELECT "authors".* FROM "authors"
+ => 
+[#<Author:0x0000564e07549cb8
+  id: 1,
+  created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00>,
+ #<Author:0x0000564e07549ba0
+  id: 2,
+  name: "Chetan Bhagat",
+  created_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00>,
+ #<Author:0x0000564e07549ad8
+  name: "A P j Abdul Kalam",
+  created_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00>,
+ #<Author:0x0000564e07549a10
+  id: 4,
+  name: "Robin Sharma",
+  created_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00>,
+ #<Author:0x0000564e07549948
+  id: 5,
+  name: "Rabindranath Tagore",
+  updated_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00>] 
+3.0.2 :070 > Book
+ => Book(id: integer, title: string, created_at: datetime, updated_at: datetime, author_id: integer) 
+3.0.2 :071 > b1 = Book.create(title:"Harry potter Deathly Hollows Part 1",author_id:1).valid?
+  TRANSACTION (0.6ms)  BEGIN
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Book Exists? (0.9ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "Harry potter Deathly Hollows Part 1"], ["LIMIT", 1]]
+  Book Create (1.6ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Harry potter Deathly Hollows Part 1"], ["created_at", "2021-12-09 11:24:52.598938"], ["updated_at", "2021-12-09 11:24:52.598938"], ["author_id", 1]]
+  Book Exists? (0.7ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Harry potter Deathly Hollows Part 1"], ["id", 1], ["LIMIT", 1]]
+ => true 
+3.0.2 :072 > Book.all
+  Book Load (0.9ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x0000564e04f68da0
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :073 > b1 = Book.create(title:"Harry potter Deathly Hollows Part 2",author_id:1).valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Author Load (0.4ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Book Exists? (0.7ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "Harry potter Deathly Hollows Part 2"], ["LIMIT", 1]]
+  Book Create (0.8ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Harry potter Deathly Hollows Part 2"], ["created_at", "2021-12-09 11:25:23.421419"], ["updated_at", "2021-12-09 11:25:23.421419"], ["author_id", 1]]
+  TRANSACTION (28.5ms)  COMMIT
+  Book Exists? (0.8ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Harry potter Deathly Hollows Part 2"], ["id", 2], ["LIMIT", 1]]
+ => true 
+3.0.2 :074 > b2 = Book.create(title:"Harry potter and The Chamber of Secrets",author_id:1).valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.4ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+, ["LIMIT", 1]]
+  Book Create (0.7ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title"
+hor_id", 1]]
+  TRANSACTION (11.5ms)  COMMIT
+  Book Exists? (0.5ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Harry potter and The Chamber of Secrets"], ["id", 3], ["LIMIT", 1]]
+ => true 
+3.0.2 :075 > Author.all
+  Author Load (0.9ms)  SELECT "authors".* FROM "authors"
+ => 
+[#<Author:0x0000564e06857230
+  id: 1,
+  name: "J k Rowlling",
+  created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00>,
+ #<Author:0x0000564e06857168
+  id: 2,
+  name: "Chetan Bhagat",
+  created_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00>,
+ #<Author:0x0000564e06857078
+  id: 3,
+  name: "A P j Abdul Kalam",
+  updated_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00>,
+ #<Author:0x0000564e06856fb0
+  id: 4,
+  name: "Robin Sharma",
+  created_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00>,
+ #<Author:0x0000564e06856ec0
+  id: 5,
+  name: "Rabindranath Tagore",
+  updated_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00>] 
+3.0.2 :076 > Author.find_by(name:"J k Rowlling").books.name
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."name" = $1 LIMIT $2  [["name", "J k Rowlling"], ["LIMIT", 1]]
+ => "Book" 
+3.0.2 :077 > Author.find_by(name:"J k Rowlling").books
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."name" = $1 LIMIT $2  [["name", "J k Rowlling"], ["LIMIT", 1]]
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 1]]
+ => 
+[#<Book:0x0000564e068735c0
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x0000564e06873110
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+ #<Book:0x0000564e06872fa8
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :078 > b3 = Book.create(title:"Two States",author_id:2).valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Author Load (0.4ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Exists? (0.5ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "Two States"], ["LIMIT", 1]]
+  Book Create (0.6ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Two States"], ["created_at", "2021-12-09 11:28:07.199249"], ["updated_at", "2021-12-09 11:28:07.199249"], ["author_id", 2]]
+  TRANSACTION (22.8ms)  COMMIT
+  Book Exists? (0.6ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Two States"], ["id", 4], ["LIMIT", 1]]
+ => true 
+3.0.2 :079 > b3 = Book.create(title:"Three Idiots",author_id:2).valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Exists? (0.7ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "Three Idiots"], ["LIMIT", 1]]
+  Book Create (1.0ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Three Idiots"], ["created_at", "2021-12-09 11:28:21.468057"], ["updated_at", "2021-12-09 11:28:21.468057"], ["author_id", 2]]
+  TRANSACTION (29.0ms)  COMMIT
+  Book Exists? (0.6ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Three Idiots"], ["id", 5], ["LIMIT", 1]]
+ => true 
+3.0.2 :080 > b3 = Book.create(title:"Half Girlfriend",author_id:2).valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Exists? (0.6ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "Half Girlfriend"], ["LIMIT", 1]]
+  Book Create (0.9ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Half Girlfriend"], ["created_at", "2021-12-09 11:28:46.714454"], ["updated_at", "2021-12-09 11:28:46.714454"], ["author_id", 2]]
+  TRANSACTION (18.7ms)  COMMIT
+  Book Exists? (0.6ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Half Girlfriend"], ["id", 6], ["LIMIT", 1]]
+ => true 
+3.0.2 :081 > Author.find(2).books
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 2]]
+ => 
+[#<Book:0x0000564e06970bf8
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x0000564e06970a90
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x0000564e069708d8
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2>] 
+3.0.2 :082 > 
+Book.find(1).author.name
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => "J k Rowlling" 
+3.0.2 :003 > Author.all
+ => 
+[#<Author:0x0000564e03ec8b58
+  id: 1,
+  name: "J k Rowlling",
+  created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00>,
+ #<Author:0x0000564e03ec89f0
+  id: 2,
+  name: "Chetan Bhagat",
+  updated_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00>,
+ #<Author:0x0000564e03ec3a18
+  id: 3,
+  name: "A P j Abdul Kalam",
+  created_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00>,
+ #<Author:0x0000564e03ec3798
+  id: 4,
+  name: "Robin Sharma",
+  created_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00>,
+  id: 5,
+  name: "Rabindranath Tagore",
+  created_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00>] 
+3.0.2 :004 > Book.create(title:"Fings of Fire",author_id:3).valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Book Exists? (1.1ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "Fings of Fire"], ["LIMIT", 1]]
+  Book Create (1.8ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title"
+  TRANSACTION (23.3ms)  COMMIT
+  Book Exists? (0.7ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Fings of Fire"], ["id", 7], ["LIMIT", 1]]
+ => true 
+3.0.2 :005 > Book.create(title:"The Greateness Guide",author_id:4).valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  Book Exists? (0.6ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "The Greateness Guide"], ["LIMIT", 1]]
+  Book Create (0.9ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title"
+  TRANSACTION (11.0ms)  COMMIT
+  Book Exists? (0.6ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "The Greateness Guide"], ["id", 8], ["LIMIT", 1]]
+ => true 
+3.0.2 :006 > Book.create(title:"Family wisdom From The Monk Who sold his ferrari",author_id:4).valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  Book Exists? (0.8ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "Family wisdom From The Monk Who sold his ferrari"], ["LIMIT", 1]]
+, "Family wisdom From The Monk Who sold his ferrari"], ["created_at", "2021-12-09 12:00:47.469954"], ["updated_at", "2021-12-09 12:00:47.469954"], ["author_id", 4]]
+  TRANSACTION (21.6ms)  COMMIT
+  Book Exists? (0.8ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Family wisdom From The Monk Who sold his ferrari"], ["id", 9], ["LIMIT", 1]]
+ => true 
+3.0.2 :007 > Book.create(title:"Kabuliwala",author_id:5).valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Exists? (0.6ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "Kabuliwala"], ["LIMIT", 1]]
+  Book Create (0.9ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Kabuliwala"], ["created_at", "2021-12-09 12:01:55.803346"], ["updated_at", "2021-12-09 12:01:55.803346"], ["author_id", 5]]
+  TRANSACTION (20.2ms)  COMMIT
+  Book Exists? (0.7ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Kabuliwala"], ["id", 10], ["LIMIT", 1]]
+ => true 
+3.0.2 :008 > Book.create(title:"Gora",author_id:5).valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Exists? (0.5ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "Gora"], ["LIMIT", 1]]
+  Book Create (0.8ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Gora"], ["created_at", "2021-12-09 12:02:21.555010"], ["updated_at", "2021-12-09 12:02:21.555010"], ["author_id", 5]]
+  TRANSACTION (20.4ms)  COMMIT
+  Book Exists? (1.3ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Gora"], ["id", 11], ["LIMIT", 1]]
+ => true 
+3.0.2 :009 > Book.create(title:"Gitanjali",author_id:5).valid?
+  TRANSACTION (0.6ms)  BEGIN
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Exists? (0.7ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2  [["title", "Gitanjali"], ["LIMIT", 1]]
+  Book Create (0.9ms)  INSERT INTO "books" ("title", "created_at", "updated_at", "author_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Gitanjali"], ["created_at", "2021-12-09 12:02:37.765190"], ["updated_at", "2021-12-09 12:02:37.765190"], ["author_id", 5]]
+  TRANSACTION (19.7ms)  COMMIT
+  Book Exists? (0.7ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Gitanjali"], ["id", 12], ["LIMIT", 1]]
+ => true 
+3.0.2 :010 > Book.all
+  Book Load (1.0ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x0000564e058f5f80
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x0000564e058f5da0
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x0000564e058f5c38
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x0000564e058f5b48
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x0000564e058f5a30
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x0000564e058f5940
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+ #<Book:0x0000564e058f5850
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+ #<Book:0x0000564e058f5760
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x0000564e058f5670
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x0000564e058f5558
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x0000564e058f5418
+  id: 11,
+  title: "Gora",
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x0000564e058f4f40
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `bookS' for #<Author id: 1, name: "J k Rowlling", created_at: "2021-12-09 11:15:16.092679000 +0000", updated_at: "2021-12-09 11:15:16.092679000 +0000"> (NoMethodError)
+Did you mean?  books=
+3.0.2 :012 > Author.find(1).books
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 1]]
+[#<Book:0x0000564e0638ca98
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x0000564e0638c4f8
+  id: 2,
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x0000564e0638c368
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :013 > Book.find(1).author
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Author:0x0000564e0649b150
+ id: 1,
+ name: "J k Rowlling",
+ created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00> 
+3.0.2 :014 > Book.find(2).author
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Author:0x0000564e062dd908
+ id: 1,
+ name: "J k Rowlling",
+ created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00> 
+  Book Load (0.9ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => 
+#<Author:0x0000564e06455470
+ id: 2,
+ name: "Chetan Bhagat",
+ created_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00> 
+3.0.2 :016 > Author.all
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors"
+ => 
+[#<Author:0x0000564e06547c48
+  id: 1,
+  name: "J k Rowlling",
+  created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00>,
+ #<Author:0x0000564e06547b80
+  id: 2,
+  name: "Chetan Bhagat",
+  created_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00>,
+ #<Author:0x0000564e06547ab8
+  id: 3,
+  name: "A P j Abdul Kalam",
+  created_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00>,
+ #<Author:0x0000564e065479f0
+  id: 4,
+  name: "Robin Sharma",
+  created_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00>,
+ #<Author:0x0000564e06547928
+  id: 5,
+  name: "Rabindranath Tagore",
+  created_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00>] 
+3.0.2 :017 > Book.all
+  Book Load (1.1ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x0000564e065b4208
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x0000564e065b4118
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x0000564e065b4050
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x0000564e065aff50
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x0000564e065afe88
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x0000564e065afdc0
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x0000564e065afcf8
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>,
+ #<Book:0x0000564e065afc30
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x0000564e065afb68
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x0000564e065afaa0
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x0000564e065af9d8
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x0000564e065af910
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :018 > 
+
+==============================Has_one and Belongs To with validations======================================================
+ reload!
+ => true 
+  Account Load (1.6ms)  SELECT "accounts".* FROM "accounts"
+3.0.2 :029 > rload!
+(irb):29:in `<main>': undefined method `rload!' for main:Object (NoMethodError)
+               load
+3.0.2 :030 > reload!
+ => true 
+3.0.2 :031 > Supplier.all
+ => [] 
+3.0.2 :032 > s = Supplier.creat(name:"Rohan Raj").valid?
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `creat' for Supplier:Class (NoMethodError)
+Did you mean?  create
+3.0.2 :033 > s = Supplier.create(name:"Rohan Raj").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Supplier Create (0.9ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Rohan Raj"], ["created_at", "2021-12-09 12:48:49.165172"], ["updated_at", "2021-12-09 12:48:49.165172"]]
+  TRANSACTION (29.3ms)  COMMIT
+3.0.2 :034 > s = Supplier.create(name:"").valid?
+ => false 
+3.0.2 :035 > s.errors.full_messages
+(irb):35:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :036 > s.errors.full_message
+3.0.2 :037 > s.errors
+(irb):37:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :038 > s.errors.message
+(irb):38:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :039 > 
+3.0.2 :040 > 
+3.0.2 :041 > 
+3.0.2 :042 > s.errors.size
+(irb):42:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :043 > relaod!
+(irb):43:in `<main>': undefined method `relaod!' for main:Object (NoMethodError)
+Did you mean?  reload!
+3.0.2 :044 > relaod!
+(irb):44:in `<main>': undefined method `relaod!' for main:Object (NoMethodError)
+Did you mean?  reload!
+3.0.2 :045 > reload!
+Reloading...
+ => true 
+3.0.2 :046 > s = Supplier.create(name:"Brijesh").valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Supplier Create (0.6ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Brijesh"], ["created_at", "2021-12-09 12:52:04.320746"], ["updated_at", "2021-12-09 12:52:04.320746"]]
+ => true 
+3.0.2 :047 > s = Supplier.create(name:"Krishna").valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Supplier Create (1.0ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Krishna"], ["created_at", "2021-12-09 12:52:18.445292"], ["updated_at", "2021-12-09 12:52:18.445292"]]
+ => true 
+  TRANSACTION (0.4ms)  BEGIN
+  Supplier Create (0.8ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Dharmendra"], ["created_at", "2021-12-09 12:52:32.249108"], ["updated_at", "2021-12-09 12:52:32.249108"]]
+  TRANSACTION (20.5ms)  COMMIT
+ => true 
+3.0.2 :049 > Supplier.all
+  Supplier Load (1.2ms)  SELECT "suppliers".* FROM "suppliers"
+ => 
+[#<Supplier:0x0000564e0707dd38
+  id: 1,
+  name: "Rohan Raj",
+  created_at: Thu, 09 Dec 2021 12:48:49.165172000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:48:49.165172000 UTC +00:00>,
+ #<Supplier:0x0000564e0707dc20
+  id: 2,
+  name: "Brijesh",
+  created_at: Thu, 09 Dec 2021 12:52:04.320746000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:52:04.320746000 UTC +00:00>,
+ #<Supplier:0x0000564e0707db58
+  id: 3,
+  name: "Krishna",
+  created_at: Thu, 09 Dec 2021 12:52:18.445292000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:52:18.445292000 UTC +00:00>,
+ #<Supplier:0x0000564e0707da90
+  id: 4,
+  name: "Dharmendra",
+  created_at: Thu, 09 Dec 2021 12:52:32.249108000 UTC +00:00,
+3.0.2 :050 > s = Supplier.create(name:"Arbinder Singh").valid?
+  TRANSACTION (0.6ms)  BEGIN
+  Supplier Create (1.0ms)  INSERT INTO "suppliers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Arbinder Singh"], ["created_at", "2021-12-09 12:53:03.165317"], ["updated_at", "2021-12-09 12:53:03.165317"]]
+  TRANSACTION (23.7ms)  COMMIT
+ => true 
+3.0.2 :051 > Supplier
+3.0.2 :052 > Supplier.all
+  Supplier Load (0.9ms)  SELECT "suppliers".* FROM "suppliers"
+[#<Supplier:0x0000564e064b83b8
+  id: 1,
+  created_at: Thu, 09 Dec 2021 12:48:49.165172000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:48:49.165172000 UTC +00:00>,
+  id: 2,
+  name: "Brijesh",
+  updated_at: Thu, 09 Dec 2021 12:52:04.320746000 UTC +00:00>,
+ #<Supplier:0x0000564e064b81d8
+  name: "Krishna",
+  updated_at: Thu, 09 Dec 2021 12:52:18.445292000 UTC +00:00>,
+ #<Supplier:0x0000564e064b8110
+  id: 4,
+  name: "Dharmendra",
+  created_at: Thu, 09 Dec 2021 12:52:32.249108000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:52:32.249108000 UTC +00:00>,
+ #<Supplier:0x0000564e064b8020
+  id: 5,
+  name: "Arbinder Singh",
+  created_at: Thu, 09 Dec 2021 12:53:03.165317000 UTC +00:00,
+3.0.2 :053 > Account.all
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/bootsnap-1.9.3/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:23:in `require': /home/beryl/Desktop/Training/rails/project_rails/app/models/account.rb:5: syntax error, unexpected ':', expecting '}' (SyntaxError)
+...ount_num ,uniqueness { message: "Account Number Already Exis...
+...                              ^
+/home/beryl/Desktop/Training/rails/project_rails/app/models/account.rb:5: syntax error, unexpected '}', expecting `end'
+...ccount Number Already Exists!"}
+...                              ^
+3.0.2 :054 > Account.all
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined local variab
+3.0.2 :055 > Account.all
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined local variable or method `account_number_custom_validation' for Account:Class (NameError)
+3.0.2 :056 > reload!
+Reloading...
+ => true 
+3.0.2 :057 > Account.all
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined local variable or method `account_number_custom_validation' for Account:Class (NameError)
+3.0.2 :058 > Account.all
+ => [] 
+3.0.2 :059 > Account
+ => Account(id: integer, account_num: string, supplier_id: integer, created_at: datetime, updated_at: datetime) 
+3.0.2 :060 > a = Account.create(account_num: "12345",supplier_id:1).valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Supplier Load (0.3ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Exists? (0.7ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12345"], ["LIMIT", 1]]
+id"  [["account_num", "12345"], ["supplier_id", 1], ["created_at", "2021-12-09 12:57:16.614684"], ["updated_at", "2021-12-09 12:57:16.614684"]]
+  Account Exists? (0.8ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 AND "accounts"."id" != $2 LIMIT $3  [["account_n
+ => true 
+  TRANSACTION (0.6ms)  BEGIN
+  Account Exists? (0.8ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12787"], ["LIMIT", 1
+  Account Create (1.1ms)  INSERT INTO "accounts" ("account_num", "supplier_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "
+  TRANSACTION (26.7ms)  COMMIT
+  Account Exists? (0.5ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 AND "accounts"."id" != $2 LIMIT $3  [["account_num", "12787"], ["id", 2], ["LIMIT", 1]]
+ => true 
+3.0.2 :062 > a = Account.create(account_num: "12788",supplier_id:3).valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Account Exists? (0.9ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12788"], ["LIMIT", 1]]
+  Account Create (1.2ms)  INSERT INTO "accounts" ("account_num", "supplier_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "
+  TRANSACTION (21.8ms)  COMMIT
+  Account Exists? (0.8ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 AND "accounts"."id" != $2 LIMIT $3  [["account_num", "12788"], ["id", 3], ["LIMIT", 1]]
+ => true 
+  TRANSACTION (0.4ms)  BEGIN
+  Account Exists? (0.6ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12788"], ["LIMIT", 1]]
+  TRANSACTION (0.5ms)  ROLLBACK
+  Account Exists? (0.7ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12788"], ["LIMIT", 1]]
+ => false 
+3.0.2 :064 > a.errors.full_messages
+(irb):64:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :065 > a.errors.full_message
+(irb):65:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+(irb):66:in `<main>': undefined method `error' for false:FalseClass (NoMethodError)
+3.0.2 :067 > a.valid?
+(irb):67:in `<main>': undefined method `valid?' for false:FalseClass (NoMethodError)
+3.0.2 :068 > a.errors.full_messages
+(irb):68:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :069 > a.errors
+(irb):69:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :070 > a1 = Account.create(account_num: "12788",supplier_id:4)
+  TRANSACTION (0.5ms)  BEGIN
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+]]
+  TRANSACTION (0.5ms)  ROLLBACK
+ => #<Account:0x0000564e06128360 id: nil, account_num: "12788", supplier_id: 4, created_at: nil, updated_at: nil> 
+3.0.2 :071 > a1.valid?
+  Account Exists? (1.1ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12788"], ["LIMIT", 1]]
+ => false 
+3.0.2 :072 > a1.errors.message
+pplier_id: 4, created_at: nil, updated_at: nil>, @errors=[#<ActiveModel::Error attribute=account_num, type=taken, options={:value=>"12788"}>]> 
+Did you mean?  messages
+3.0.2 :073 > a1.errors.messages
+ => {:account_num=>["has already been taken"]} 
+3.0.2 :074 > a1 = Account.create(account_num: "12790",supplier_id:4)
+  TRANSACTION (0.5ms)  BEGIN
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+]]
+  Account Create (1.1ms)  INSERT INTO "accounts" ("account_num", "supplier_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["account_num", "12790"], ["supplier_id", 4], ["created_at", "2021-12-09 13:05:24.076578"], ["updated_at", "2021-12-09 13:05:24.076578"]]
+ => 
+#<Account:0x0000564e070643d8
+... 
+3.0.2 :075 > a1 = Account.create(account_num: "12734",supplier_id:5).valid?
+  Supplier Load (0.5ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Account Exists? (0.7ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12734"], ["LIMIT", 1]]
+  Account Create (0.9ms)  INSERT INTO "accounts" ("account_num", "supplier_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["account_num", "12734"], ["supplier_id", 5], ["created_at", "2021-12-09 13:05:45.366121"], ["updated_at", "2021-12-09 13:05:45.366121"]]
+  TRANSACTION (24.6ms)  COMMIT
+  Account Exists? (0.5ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 AND "accounts"."id" != $2 LIMIT $3  [["account_num", "12734"], ["id", 5], ["LIMIT", 1]]
+ => true 
+3.0.2 :076 > a1 = Account.create(account_num: "12900",supplier_id:6).valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Supplier Load (0.3ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+  Account Exists? (0.5ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12900"], ["LIMIT", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+  Account Exists? (0.6ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12900"], ["LIMIT", 1]]
+ => false 
+3.0.2 :077 > a1.errors.messages
+(irb):77:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :078 > a1 = Account.create(account_num: "12900",supplier_id:6)
+  TRANSACTION (0.4ms)  BEGIN
+  Supplier Load (0.4ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+  Account Exists? (0.6ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12900"], ["LIMIT", 1]]
+  TRANSACTION (0.3ms)  ROLLBACK
+ => #<Account:0x0000564e06c9ae28 id: nil, account_num: "12900", supplier_id: 6, created_at: nil, updated_at: nil> 
+3.0.2 :079 > a1.valid?
+  Account Exists? (1.2ms)  SELECT 1 AS one FROM "accounts" WHERE "accounts"."account_num" = $1 LIMIT $2  [["account_num", "12900"], ["LIMIT", 1]]
+ => false 
+3.0.2 :080 > a1.errors.message
+(irb):80:in `<main>': undefined method `message' for #<ActiveModel::Errors:0x0000564e06c9a8b0 @base=#<Account id: nil, account_num: "12900", supplier_id: 6, created_at: nil, updated_at: nil>, @errors=[#<ActiveModel::Error attribute=supplier, type=blank, options={:message=>:required}>, #<ActiveModel::Error attribute=supplier, type=blank, options={:message=>:required}>]> (NoMethodError)
+Did you mean?  messages
+3.0.2 :081 > a1.errors.messages
+ => {:supplier=>["must exist", "must exist"]} 
+3.0.2 :082 > 
+
+3.0.2 :001 > Supplier.find(1).accounts
+  Supplier Load (0.6ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `accounts' for #<Supplier id: 1, name: "Rohan Raj", created_at: "2021-12-09 12:48:49.165172000 +0000", updated_at: "2021-12-09 12:48:49.165172000 +0000"> (NoMethodError)
+Did you mean?  account
+               account=
+3.0.2 :002 > Supplier.find(1).account
+  Supplier Load (1.0ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Account Load (0.8ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."supplier_id" = $1 LIMIT $2  [["supplier_id", 1], ["LIMIT", 1]]
+ => 
+#<Account:0x0000564e064c3d80
+ id: 1,
+ account_num: "12345",
+ supplier_id: 1,
+ created_at: Thu, 09 Dec 2021 12:57:16.614684000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 12:57:16.614684000 UTC +00:00> 
+3.0.2 :003 > Account.find(1).supplier
+  Account Load (0.9ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Supplier Load (0.8ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+ id: 1,
+ name: "Rohan Raj",
+ created_at: Thu, 09 Dec 2021 12:48:49.165172000 UTC +00:00,
+3.0.2 :004 > Account.find(3).supplier.name
+  Account Load (1.0ms)  SELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Supplier Load (0.9ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+3.0.2 :005 > Supplier.all
+  Supplier Load (0.8ms)  SELECT "suppliers".* FROM "suppliers"
+ => 
+  id: 1,
+  name: "Rohan Raj",
+  created_at: Thu, 09 Dec 2021 12:48:49.165172000 UTC +00:00,
+ #<Supplier:0x0000564e0537f948
+  id: 2,
+  created_at: Thu, 09 Dec 2021 12:52:04.320746000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:52:04.320746000 UTC +00:00>,
+ #<Supplier:0x0000564e0537f5d8
+  id: 3,
+  name: "Krishna",
+  created_at: Thu, 09 Dec 2021 12:52:18.445292000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:52:18.445292000 UTC +00:00>,
+ #<Supplier:0x0000564e0537f218
+  id: 4,
+  name: "Dharmendra",
+  created_at: Thu, 09 Dec 2021 12:52:32.249108000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:52:32.249108000 UTC +00:00>,
+ #<Supplier:0x0000564e0537edb8
+  id: 5,
+  name: "Arbinder Singh",
+  created_at: Thu, 09 Dec 2021 12:53:03.165317000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:53:03.165317000 UTC +00:00>] 
+3.0.2 :006 > Supplier.find(name:"krishna").account.account_num
+  Supplier Load (0.8ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", nil], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/relation/finder_methods.rb:357:in `raise_record_not_found_exception!': Couldn't find Supplier with 'id'={:name=>"krishna"} (ActiveRecord::RecordNotFound)
+3.0.2 :007 > Supplier.find(name:"krishna").account.account_num.find(3)
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", nil], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/relation/finder_methods.rb:357:in `raise_record_not_found_exception!': Couldn't find Supplier with 'id'={:name=>"krishna"} (ActiveRecord::RecordNotFound)
+3.0.2 :008 > Supplier.find(name:"krishna").account
+  Supplier Load (0.6ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", nil], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/relation/finder_methods.rb:357:in `raise_record_not_found_exception!': Couldn't find Supplier with 'id'={:name=>"krishna"} (ActiveRecord::RecordNotFound)
+3.0.2 :009 > Supplier.find(name:"krishna")
+  Supplier Load (0.7ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = $1 LIMIT $2  [["id", nil], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/relation/finder_methods.rb:357:in `raise_record_not_found_exception!': Couldn't find Supplier with 'id'={:name=>"krishna"} (ActiveRecord::RecordNotFound)
+3.0.2 :010 > Supplier.find_by(name:"krishna")
+  Supplier Load (0.9ms)  SELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."name" = $1 LIMIT $2  [["name", "krishna"], ["LIMIT", 1]]
+ => nil 
+3.0.2 :011 > Supplier.all
+  Supplier Load (1.1ms)  SELECT "suppliers".* FROM "suppliers"
+ => 
+[#<Supplier:0x0000564e057697e8
+  id: 1,
+  name: "Rohan Raj",
+  created_at: Thu, 09 Dec 2021 12:48:49.165172000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:48:49.165172000 UTC +00:00>,
+ #<Supplier:0x0000564e057695b8
+  id: 2,
+  name: "Brijesh",
+  created_at: Thu, 09 Dec 2021 12:52:04.320746000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:52:04.320746000 UTC +00:00>,
+ #<Supplier:0x0000564e05769400
+  id: 3,
+  name: "Krishna",
+  created_at: Thu, 09 Dec 2021 12:52:18.445292000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:52:18.445292000 UTC +00:00>,
+ #<Supplier:0x0000564e05769220
+  id: 4,
+  name: "Dharmendra",
+  created_at: Thu, 09 Dec 2021 12:52:32.249108000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:52:32.249108000 UTC +00:00>,
+ #<Supplier:0x0000564e05769018
+  id: 5,
+  name: "Arbinder Singh",
+  created_at: Thu, 09 Dec 2021 12:53:03.165317000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:53:03.165317000 UTC +00:00>] 
+3.0.2 :012 > 
+
+
+
