@@ -1,0 +1,135 @@
+Doubts:
+
+1. running of :
+	Person.where("administrator = 1").order("created_on DESC").find(1)
+	
+2.s = Student.eager_load(:teachers)
+s = Student.eager_load(:teachers)
+  SQL (1.1ms)  SELECT "students"."id" AS t0_r0, "students"."lname" AS t0_r1, "students"."fname" AS t0_r2, "students"."created_at" AS t0_r3, "students"."updated_at" AS t0_r4, "students"."gender" AS t0_r5, "students"."email" AS t0_r6, "students"."stud_id" AS t0_r7, "teachers"."id" AS t1_r0, "teachers"."teacher_name" AS t1_r1, "teachers"."created_at" AS t1_r2, "teachers"."updated_at" AS t1_r3 FROM "students" LEFT OUTER JOIN "students_teachers" ON "students_teachers"."student_id" = "students"."id" LEFT OUTER JOIN "teachers" ON "teachers"."id" = "students_teachers"."teacher_id"
+
+(Object doesn't support #inspect)
+
+
+3.extending(*modules, &block) 
+4.Using a block
+
+5.extract_associated
+
+
+6. > Employee.having('salary>35000').group(:id)
+  Employee Load (1.0ms)  SELECT "employees".* FROM "employees" GROUP BY "employees"."id" HAVING (salary>35000)
+(Object doesn't support #inspect)
+ =>  
+ 
+ 7.includes(*args) 
+ 
+ 8.joins 
+ 
+ 9. one to one raltion 
+ 10.controller data problem
+ 
+
+
+-----------------------------------------------------------------
+class PostController < ApplicationController
+    def index
+        @posts = Post.all
+    end
+    
+    def show
+        @post = Post.find(params[:id])
+    end
+    
+    def blog_new
+        @post = Post.new
+    end
+    
+    def create_blog
+      #Instantiate a new object using form paramete
+        @post = Post.new(blog_params) # mass assignment 
+        #save the object
+        if @post.save 
+          #if save succeeds,redirect to the next index action
+          redirect_to '/user/new'
+        else
+          #if save fails ,redisplay the form so user can fix problem.
+          render('/user/new')
+        end
+    
+    
+    end
+    
+    def edit
+        @blogpost = Post.find(params[:id])
+    end
+    
+
+    
+    def update
+        @blogpost = Post.find(params[:id])
+        if @blogpost.update(blog_params)
+          redirect_to blogs_new_path(@blogposts)
+        else
+          render('edit')
+        end
+    end
+    
+    def blog_delete
+        @post = Post.find(params[:id])
+    end 
+    
+    def blog_destroy
+        @post = Post.find(params[:id])
+        @Post.destroy
+        redirect_to @post
+        render 'delete'
+    end
+    
+    private 
+    
+    def blog_params
+        params.require(:post).permit(:title,:body)
+    end
+end
+----------------------------------------------------
+beryl@beryl-HP-ProBook-6460b:~/Desktop/Training/rails/blog_project$ rails routes
+                                  Prefix Verb   URI Pattern                                                                                       Controller#Action
+                                    root GET    /                                                                                                 user#index
+                              user_index GET    /user/index(.:format)                                                                             user#index
+                              user_login GET    /user/login(.:format)                                                                             user#login
+                                user_new GET    /user/new(.:format)                                                                               user#new
+                                         GET    /user/new(.:format)                                                                               user#new
+                             user_signup GET    /user/signup(.:format)                                                                            user#signup
+                             user_create POST   /user/create(.:format)                                                                            user#create
+                             user_logout POST   /user/logout(.:format)                                                                            user#logout
+                       user_login_create POST   /user/login_create(.:format)                                                                      user#login_create
+                                post_new GET    /post/new(.:format)                                                                               post#new
+                             post_create POST   /post/create(.:format)                                                                            post#create
+                               post_show GET    /post/show(.:format)                                                                              post#show
+           rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
+              rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create
+           rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                           action_mailbox/ingresses/sendgrid/inbound_emails#create
+     rails_mandrill_inbound_health_check GET    /rails/action_mailbox/mandrill/inbound_emails(.:format)                                           action_mailbox/ingresses/mandrill/inbound_emails#health_check
+           rails_mandrill_inbound_emails POST   /rails/action_mailbox/mandrill/inbound_emails(.:format)                                           action_mailbox/ingresses/mandrill/inbound_emails#create
+            rails_mailgun_inbound_emails POST   /rails/action_mailbox/mailgun/inbound_emails/mime(.:format)                                       action_mailbox/ingresses/mailgun/inbound_emails#create
+          rails_conductor_inbound_emails GET    /rails/conductor/action_mailbox/inbound_emails(.:format)                                          rails/conductor/action_mailbox/inbound_emails#index
+                                         POST   /rails/conductor/action_mailbox/inbound_emails(.:format)                                          rails/conductor/action_mailbox/inbound_emails#create
+       new_rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/new(.:format)                                      rails/conductor/action_mailbox/inbound_emails#new
+      edit_rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/:id/edit(.:format)                                 rails/conductor/action_mailbox/inbound_emails#edit
+           rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#show
+                                         PATCH  /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#update
+                                         PUT    /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#update
+                                         DELETE /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#destroy
+new_rails_conductor_inbound_email_source GET    /rails/conductor/action_mailbox/inbound_emails/sources/new(.:format)                              rails/conductor/action_mailbox/inbound_emails/sources#new
+   rails_conductor_inbound_email_sources POST   /rails/conductor/action_mailbox/inbound_emails/sources(.:format)                                  rails/conductor/action_mailbox/inbound_emails/sources#create
+   rails_conductor_inbound_email_reroute POST   /rails/conductor/action_mailbox/:inbound_email_id/reroute(.:format)                               rails/conductor/action_mailbox/reroutes#create
+                      rails_service_blob GET    /rails/active_storage/blobs/redirect/:signed_id/*filename(.:format)                               active_storage/blobs/redirect#show
+                rails_service_blob_proxy GET    /rails/active_storage/blobs/proxy/:signed_id/*filename(.:format)                                  active_storage/blobs/proxy#show
+                                         GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                                        active_storage/blobs/redirect#show
+               rails_blob_representation GET    /rails/active_storage/representations/redirect/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations/redirect#show
+         rails_blob_representation_proxy GET    /rails/active_storage/representations/proxy/:signed_blob_id/:variation_key/*filename(.:format)    active_storage/representations/proxy#show
+                                         GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format)          active_storage/representations/redirect#show
+                      rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                                       active_storage/disk#show
+               update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                               active_storage/disk#update
+                    rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                                    active_storage/direct_uploads#create
+

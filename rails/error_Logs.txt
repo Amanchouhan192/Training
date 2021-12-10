@@ -20,6 +20,7 @@ Run `bundle install` to install missing gems.
 	solution : 1. run :	sudo apt-get install libpq-dev
 	           2. run :	bundle install // bcs project already created no need to create again simple install webpacker as shown below
 		   3. run :	rails webpacker:install
+		   
 		   4. run : 	rails server // it will start running
 2.not able to connect with the database :
 	command  : rails db:create
@@ -128,3 +129,18 @@ belongs_to :city, optional: true
 solution : not known yet
  
 
+
+
+----------------------------------------------------
+<div class="mb-3">
+    <%= f.label :confirm_password %>
+    <%= f.password_field :password_confirmation, class: "form-control" ,placeholder: "confirm password" %>
+  </div>
+  
+<div class="mb-3">
+    <div class="form-group">
+        <%= f.label :age %>
+        <%= f.select :age, options_for_select(%w[10-18 18-20 20-25 25-30 30-35 35-40 40+]), class: "form-control" %>
+     </div>
+  
+</div>

@@ -1,2 +1,27 @@
-<h1>Pages#new</h1>
-<p>Find me in app/views/pages/new.html.erb</p>
+<div class="subjects show">
+  <h2>Create Subject</h2>
+  
+  <%= form_for(@employee, :url => pages_path, :method => 'post') do |f| %>
+ 
+    <table summary="Employee form field">
+    <tr>
+    <th>First Name :</th>
+    <td><%= f.text_field(:fname) %></td>
+    <th>Last Name :</th><br />
+    <td><%= f.text_field(:lname) %></td>
+    <th>Email :</th>
+    <td><%= f.text_field(:email) %></td>
+    <th>Department Name :</th>
+    <td><%= f.text_field(:dept) %></td>
+    <th>Salary :</th>
+    <td><%= f.text_field(:salary) %></td>
+    <th>Gender :</th>
+    <td><%= f.text_field(:gender) %></td>
+    <th>Department ID:</th>
+    <td><%= f.text_field(:department_id) %></td>
+  </tr>
+    <div class="form-buttons">
+        <%= f.submit("Create Subject") %>
+    </div>
+      <% end %>
+</div>

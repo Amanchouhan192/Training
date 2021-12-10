@@ -29,6 +29,7 @@ person = Person.where(name:"Pankaj",address:"Delhi").order(create_at: :desc)
 3.0.2 :013 > p1
  => 
 #<Person:0x0000564e0557bc60
+
  id: 1,
  name: "Pankaj",
  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
@@ -1090,6 +1091,29 @@ Did you mean?  account
   created_at: Thu, 09 Dec 2021 12:53:03.165317000 UTC +00:00,
   updated_at: Thu, 09 Dec 2021 12:53:03.165317000 UTC +00:00>] 
 3.0.2 :012 > 
+------------------------------------------------Models With Validation and Associated with each other----------------------------
 
+class Account < ApplicationRecord
+    belongs_to :supplier
+    validates :account_num ,presence: true
+    validates :account_num ,uniqueness: true
+end
 
+class Author < ApplicationRecord
+    has_many :books
+    validates :name , presence: true
+
+end
+class Book < ApplicationRecord
+    belongs_to :author
+    validates :title , presence: true
+    validates :title , uniqueness: { message: "Book Title already exist!"}
+
+end
+
+class Supplier < ApplicationRecord
+    has_one :account
+    validates :name ,presence: true
+end
+--------------------------------------Has_many through with validation----------------------------------------------------------------
 

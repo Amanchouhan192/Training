@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		function SayHello() {
+			// body...
+			alert("Script In Head Tag");
+		}
+		var myVar = "global Variable"
+		function CallingVar() {
+			// body...
+			var myVar = "Local Variable"
+			document.write(myVar);
+		}
+	</script>
+	<meta charset="utf-8">
+	<title>Learning javascript</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function ScriptInBody() {
+			// body...
+			alert("Script In Body Tag");
+		}
+	
+	var a = 33;
+	var b = 10;
+	var c = "Test";
+	var result = 0;
+	var linebreak = "<br />"
+
+	document.write("operator=======")
+	document.write(linebreak);
+	document.write("a + b = ");
+	result =  a + b;
+	document.write(result);
+	document.write(linebreak);
+
+	document.write("a - b = ");
+	result = b - a ;
+	document.write(result);
+	document.write(linebreak);
+
+	document.write("a*b = ");
+	result = a*b
+	document.write(result);
+	document.write(linebreak);
+
+	document.write("a/b = ");
+	result = a/b;
+	document.write(result);
+	document.write(linebreak);
+
+	document.write("a%b = ");
+	result = a%b;
+	document.write(result);
+	document.write(linebreak);
+
+	document.write("++a = ");
+	result = ++a;
+	document.write(result);
+	document.write(linebreak);
+
+	document.write("--b = ");
+	result = --b;
+	document.write(result);
+	document.write(linebreak);
+
+	var age = 11;
+	if(age >18)
+	{
+		document.write("<b>Qualifies for driving!!</b>");
+	}
+	else{
+		document.write("<b>Does not Qualifies for driving</b>")
+	}
+
+	document.write(linebreak);
+
+	var grade = 'A';
+    document.write("Entering switch block<br />");
+        switch (grade) {
+            case 'A': document.write("Good job<br />");
+            break;
+            
+            case 'B': document.write("Pretty good<br />");
+            break;
+            
+            case 'C': document.write("Passed<br />");
+            break;
+            
+            case 'D': document.write("Not so good<br />");
+            break;
+            
+            case 'F': document.write("Failed<br />");
+            break;
+            
+            default:  document.write("Unknown grade<br />");
+            }
+
+    document.write(linebreak);
+    document.write("do while loop-------------");
+    document.write(linebreak);
+    var count = 0;
+    do{
+    		document.write("Current Count : " + count + "<br />");
+            count++;
+        }while (count < 5);
+    document.write ("Loop stopped!");
+
+    document.write("-------------------for loop------------------------------");
+    document.write(linebreak);
+    for (var i = 0;i<5;i++){
+    	document.write("for loop count :" + i);
+    	document.write(linebreak);
+    }
+	</script>
+  
+	
+	<p>==================================================================</p>
+
+	<input type="button" value="ScriptInBodyTag" onclick="ScriptInBody()"></input>
+	<input type="button" value="check var" onclick="CallingVar() "></input>
+	<p>This is a web page body</p>
+	<input type="button"  name="SayHello" onclick="SayHello()" value="sayhello">
+
+	
+</body>
+</html>
