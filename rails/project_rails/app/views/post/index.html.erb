@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-  <html>
-    <head><style></style></head>
-        <body>
-        <br />
-            <h>Welcome <h><%= current_user.name %></h><br />
-            <div class="navigate_links">
+<br /><h>Welcome <h><%= current_user.name %></h><br />
+<div class="navigate_links">
 <%= link_to "Logout", "/user/logout", method:'post' %>
 <%= link_to("Create Blog",'/post/new',:class => 'action new') %>
 </div>
@@ -19,10 +14,10 @@
      <th class="table_heading">Actions</th>
    </tr>
    <% i = 1 %>
-   <% @posts.each do |post| %></td>
+   <% @posts.each do |post| %>
    <tr> 
-    <td class="table_data"><%= i %><td>
-    <td class="table_data"><%= post.title %><td>
+    <td class="table_data"><%= i %></td>
+    <td class="table_data"><%= post.title %></td>
     <% i = i + 1 %> 
     <td class="actions">
         <%= link_to("View", {:action => 'show',:id => post.id}, :class => 'action_show') %>
@@ -32,6 +27,5 @@
     </tr>
     <% end %>
  </table>
-</div>
-</body>
-</html>
+ </div>
+
