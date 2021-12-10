@@ -414,5 +414,49 @@ class User < ApplicationRecord
 
 end
 
+ Person.where( address: 'Delhi' ).update_all( name: 'Pankaj' )
+  Person Update All (25.4ms)  UPDATE "people" SET "name" = $1 WHERE "people"."address" = $2  [["name", "Pankaj"], ["address", "Delhi"]]
+ => 2 
+3.0.2 :029 > Person.all
+  Person Load (1.1ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x000055c72e4f1cd0
+  id: 2,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:15:28.458779000 UTC +00:00,
+  address: "Faridabad">,
+ #<Person:0x000055c72e4f1c08
+  id: 3,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:50:09.405039000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:16:37.132446000 UTC +00:00,
+  address: "Punjab">,
+ #<Person:0x000055c72e4f1b40
+  id: 5,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:53:45.009930000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:18:04.984858000 UTC +00:00,
+  address: "Keral">,
+ #<Person:0x000055c72e4f1a78
+  id: 4,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:18:08.547799000 UTC +00:00,
+  address: "Mumbai">,
+ #<Person:0x000055c72e4f19b0
+  id: 1,
+  name: "Pankaj",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:15:21.918529000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x000055c72e4f18e8
+  id: 6,
+  name: "Pankaj",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:18:51.374943000 UTC +00:00,
+  address: "Delhi">] 
+3.0.2 :030 > 
+
 
 
