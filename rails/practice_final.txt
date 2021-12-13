@@ -1116,4 +1116,1971 @@ class Supplier < ApplicationRecord
     validates :name ,presence: true
 end
 --------------------------------------Has_many through with validation----------------------------------------------------------------
+3.0.2 :010 > Patient
+ => Patient(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+ => Appointment(id: integer, appointment_data: datetime, patient_id: integer, physician_id: integer, created_at: datetime, updated_at: datetime) 
+3.0.2 :012 > Physician
+ => Physician(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :013 > p = Patient.create(name:"").valid?
+3.0.2 :014 > p = Patient.create(name:"Karan").valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Create (87.7ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Karan"], ["created_at", "2021-12-10 06:53:10.430128"], ["updated_at", "2021-12-10 06:53:10.430128"]]
+  TRANSACTION (33.1ms)  COMMIT
+3.0.2 :015 > p = Patient.create(name:"Pooja").valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Create (0.9ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Pooja"], ["created_at", "2021-12-10 06:53:20.480672"], ["updated_at", "2021-12-10 06:53:20.480672"]]
+  TRANSACTION (28.3ms)  COMMIT
+3.0.2 :016 > p = Patient.create(name:"Ram").valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Create (0.8ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Ram"], ["created_at", "2021-12-10 06:53:26.325162"], ["updated_at", "2021-12-10 06:53:26.325162"]]
+  TRANSACTION (26.2ms)  COMMIT
+ => true 
+3.0.2 :017 > p = Patient.create(name:"Aman").valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Create (1.0ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Aman"], ["created_at", "2021-12-10 06:53:34.033750"], ["updated_at", "2021-12-10 06:53:34.033750"]]
+  TRANSACTION (26.6ms)  COMMIT
+ => true 
+3.0.2 :018 > p = Patient.create(name:"Bhawna").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Patient Create (0.5ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Bhawna"], ["created_at", "2021-12-10 06:53:44.377171"], ["updated_at", "2021-12-10 06:53:44.377171"]]
+  TRANSACTION (25.6ms)  COMMIT
+ => true 
+3.0.2 :019 > p = Patient.create(name:"Preeti").valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Create (0.7ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Preeti"], ["created_at", "2021-12-10 06:53:51.981341"], ["updated_at", "2021-12-10 06:53:51.981341"]]
+  TRANSACTION (21.4ms)  COMMIT
+ => true 
+3.0.2 :020 > p = Patient.create(name:"Prithvi").valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Patient Create (0.8ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Prithvi"], ["created_at", "2021-12-10 06:54:04.225051"], ["updated_at", "2021-12-10 06:54:04.225051"]]
+  TRANSACTION (27.7ms)  COMMIT
+ => true 
+3.0.2 :021 > p = Patient.create(name:"Sharansh").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Patient Create (0.6ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Sharansh"], ["created_at", "2021-12-10 06:54:12.200443"], ["updated_at", "2021-12-10 06:54:12.200443"]]
+  TRANSACTION (20.2ms)  COMMIT
+ => true 
+3.0.2 :022 > Patient.all
+  Patient Load (1.0ms)  SELECT "patients".* FROM "patients"
+ => 
+[#<Patient:0x000055b5fa52c708
+  id: 1,
+  name: "Karan",
+  updated_at: Fri, 10 Dec 2021 06:53:10.430128000 UTC +00:00>,
+ #<Patient:0x000055b5fa52c5c8
+  id: 2,
+  name: "Pooja",
+  created_at: Fri, 10 Dec 2021 06:53:20.480672000 UTC +00:00,
+ #<Patient:0x000055b5fa52c500
+  id: 3,
+  name: "Ram",
+  created_at: Fri, 10 Dec 2021 06:53:26.325162000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:53:26.325162000 UTC +00:00>,
+  id: 4,
+  name: "Aman",
+  created_at: Fri, 10 Dec 2021 06:53:34.033750000 UTC +00:00,
+ #<Patient:0x000055b5fa52c370
+  id: 5,
+  name: "Bhawna",
+  created_at: Fri, 10 Dec 2021 06:53:44.377171000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:53:44.377171000 UTC +00:00>,
+ #<Patient:0x000055b5fa52c2a8
+  id: 6,
+  name: "Preeti",
+  created_at: Fri, 10 Dec 2021 06:53:51.981341000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:53:51.981341000 UTC +00:00>,
+ #<Patient:0x000055b5fa52c1e0
+  id: 7,
+  name: "Prithvi",
+  created_at: Fri, 10 Dec 2021 06:54:04.225051000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:54:04.225051000 UTC +00:00>,
+ #<Patient:0x000055b5fa52c118
+  id: 8,
+  name: "Sharansh",
+  created_at: Fri, 10 Dec 2021 06:54:12.200443000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:54:12.200443000 UTC +00:00>] 
+3.0.2 :023 > p = Patient.create(name:"Rahul").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Patient Create (0.6ms)  INSERT INTO "patients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Rahul"], ["created_at", "2021-12-10 06:54:57.969681"], ["updated_at", "2021-12-10 06:54:57.969681"]]
+  TRANSACTION (13.1ms)  COMMIT
+ => true 
+  TRANSACTION (0.4ms)  BEGIN
+, ["created_at", "2021-12-10 06:55:07.182779"], ["updated_at", "2021-12-10 06:55:07.182779"]]
+  TRANSACTION (26.3ms)  COMMIT
+ => true 
+3.0.2 :025 > Person.al
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `al' for Person:Class (NoMethodError)
+Did you mean?  all
+3.0.2 :026 > Person.all
+  Person Load (41.4ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x000055b5f9799a78
+  id: 4,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Mumbai">,
+ #<Person:0x000055b5f98d8e70
+  id: 6,
+  name: "Pankaj",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x000055b5f98d8ad8
+  id: 1,
+  name: "Gourav",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:44:29.178950000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x000055b5f98d88a8
+  id: 2,
+  name: "Rishabh",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:45:47.778642000 UTC +00:00,
+  address: "Faridabad">] 
+3.0.2 :027 > Patient
+ => Patient(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :028 > Patient.all
+  Patient Load (1.2ms)  SELECT "patients".* FROM "patients"
+ => 
+[#<Patient:0x000055b5fa50fc48
+  id: 1,
+  name: "Karan",
+  created_at: Fri, 10 Dec 2021 06:53:10.430128000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:53:10.430128000 UTC +00:00>,
+ #<Patient:0x000055b5fa50fb80
+  id: 2,
+  name: "Pooja",
+  created_at: Fri, 10 Dec 2021 06:53:20.480672000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:53:20.480672000 UTC +00:00>,
+ #<Patient:0x000055b5fa50fab8
+  id: 3,
+  name: "Ram",
+  updated_at: Fri, 10 Dec 2021 06:53:26.325162000 UTC +00:00>,
+ #<Patient:0x000055b5fa50f9f0
+  name: "Aman",
+  updated_at: Fri, 10 Dec 2021 06:53:34.033750000 UTC +00:00>,
+ #<Patient:0x000055b5fa50f928
+  id: 5,
+  name: "Bhawna",
+  created_at: Fri, 10 Dec 2021 06:53:44.377171000 UTC +00:00,
+ #<Patient:0x000055b5fa50f860
+  id: 6,
+  name: "Preeti",
+  created_at: Fri, 10 Dec 2021 06:53:51.981341000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:53:51.981341000 UTC +00:00>,
+  id: 7,
+  name: "Prithvi",
+  created_at: Fri, 10 Dec 2021 06:54:04.225051000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:54:04.225051000 UTC +00:00>,
+ #<Patient:0x000055b5fa50f6d0
+  name: "Sharansh",
+  created_at: Fri, 10 Dec 2021 06:54:12.200443000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:54:12.200443000 UTC +00:00>,
+ #<Patient:0x000055b5fa50f608
+  id: 9,
+  created_at: Fri, 10 Dec 2021 06:54:57.969681000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:54:57.969681000 UTC +00:00>,
+ #<Patient:0x000055b5fa50f540
+  id: 10,
+  name: "Tarushee",
+  updated_at: Fri, 10 Dec 2021 06:55:07.182779000 UTC +00:00>] 
+3.0.2 :029 > Physician.all
+  Physician Load (1.2ms)  SELECT "physicians".* FROM "physicians"
+ => [] 
+3.0.2 :030 > phy = Physician.create(name:"").valid?
+3.0.2 :031 > phy = Physician.create(name:"Dr Sunita Goyal").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Physician Create (1.0ms)  INSERT INTO "physicians" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Dr Sunita Goyal"], ["created_at", "2021-12-10 06:56:42.769026"], ["updated_at", "2021-12-10 06:56:42.769026"]]
+  TRANSACTION (23.0ms)  COMMIT
+ => true 
+3.0.2 :032 > phy = Physician.create(name:"Dr Rajeev Khanna").valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Physician Create (1.0ms)  INSERT INTO "physicians" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Dr Rajeev Khanna"], ["created_at", "2021-12-10 06:56:53.920967"], ["updated_at", "2021-12-10 06:56:53.920967"]]
+  TRANSACTION (48.0ms)  COMMIT
+ => true 
+3.0.2 :033 > phy = Physician.create(name:"Dr Babita Bhardwaj").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Physician Create (0.5ms)  INSERT INTO "physicians" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Dr Babita Bhardwaj"], ["created_at", "2021-12-10 06:57:24.433740"], ["updated_at", "2021-12-10 06:57:24.433740"]]
+  TRANSACTION (13.9ms)  COMMIT
+ => true 
+3.0.2 :034 > phy = Physician.create(name:"Dr Vasudev Sharma").valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Physician Create (0.8ms)  INSERT INTO "physicians" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Dr Vasudev Sharma"], ["created_at", "2021-12-10 06:57:37.605051"], ["updated_at", "2021-12-10 06:57:37.605051"]]
+  TRANSACTION (27.2ms)  COMMIT
+ => true 
+3.0.2 :035 > phy = Physician.create(name:"Dr Shefali Verma").valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Physician Create (0.8ms)  INSERT INTO "physicians" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "Dr Shefali Verma"], ["created_at", "2021-12-10 06:57:53.325630"], ["updated_at", "2021-12-10 06:57:53.325630"]]
+  TRANSACTION (24.8ms)  COMMIT
+ => true 
+3.0.2 :036 > phy = Physician.create(name:"Dr Sashwat Sharma").valid?
+  TRANSACTION (0.6ms)  BEGIN
+  created_at: Fri, 10 Dec 2021 06:56:42.769026000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:56:42.769026000 UTC +00:00>,
+ #<Physician:0x000055b5fa62c1f8
+  id: 2,
+  name: "Dr Rajeev Khanna",
+  created_at: Fri, 10 Dec 2021 06:56:53.920967000 UTC +00:00,
+ #<Physician:0x000055b5fa62c130
+  id: 3,
+  created_at: Fri, 10 Dec 2021 06:57:24.433740000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:57:24.433740000 UTC +00:00>,
+  id: 4,
+  name: "Dr Vasudev Sharma",
+  updated_at: Fri, 10 Dec 2021 06:57:37.605051000 UTC +00:00>,
+ #<Physician:0x000055b5fa627ef0
+  name: "Dr Shefali Verma",
+  created_at: Fri, 10 Dec 2021 06:57:53.325630000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:57:53.325630000 UTC +00:00>,
+ #<Physician:0x000055b5fa627e28
+  id: 6,
+  name: "Dr Sashwat Sharma",
+  created_at: Fri, 10 Dec 2021 06:58:13.630809000 UTC +00:00,
+3.0.2 :038 > ap = App
+ApplicationCable
+ApplicationHelper
+ApplicationJob
+ApplicationMailer
+Appointment
+ => Appointment(id: integer, appointment_data: datetime, patient_id: integer, physician_id: integer, created_at: datetime, updated_at: datetime
+3.0.2 :039 > ⏎                                                                                                                                 
+Running via Spring preloader in process 27113
+Loading development environment (Rails 6.1.4.1)
+Reloading...
+ => true 
+3.0.2 :002 > Appointment.all
+ => [] 
+ => Appointment(id: integer, appointment_date: datetime, patient_id: integer, physician_id: integer, created_at: datetime, updated_at: datetime) 
+Reloading...
+3.0.2 :005 > ap = Appointment.create(appointment_date:"2021-12-28",patient_id:1,physician_id:1).valid?
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/bootsnap-1.9.3/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:23:in `require': /home/beryl/Desktop/Training/rails/project_rails/app/models/appointment.rb:6: syntax error, unexpected ',', expecting '.' or &. or :: or '[' (SyntaxError)
+    validates ,:patient_id,presence:true
+                          ^
+/home/beryl/Desktop/Training/rails/project_rails/app/models/appointment.rb:7: syntax error, unexpected ',', expecting '.' or &. or :: or '['
+    validates ,:physician_id,presence:true
+                            ^
+3.0.2 :006 > ap = Appointment.create(appointment_date:"2021-12-28",patient_id:1,physician_id:1).valid?
+ => false 
+3.0.2 :007 > ap.valid?
+(irb):7:in `<main>': undefined method `valid?' for false:FalseClass (NoMethodError)
+3.0.2 :008 > ap = Appointment.create(appointment_date:"2021-12-28",patient_id:1,physician_id:1)
+ => 
+#<Appointment:0x000055b5f9b75980
+... 
+3.0.2 :009 > ap.valid?
+ => false 
+3.0.2 :010 > ap.errors.size
+ => 2 
+3.0.2 :011 > ap.errors.messages
+ => {:patients=>["must exist"], :physicians=>["must exist"]} 
+3.0.2 :012 > reload!
+Reloading...
+ => true 
+3.0.2 :013 > ap = Appointment.create(appointment_date:"2021-12-28",patient_id:1,physician_id:1)
+ => 
+#<Appointment:0x000055b5faa53420
+... 
+3.0.2 :014 > ap.valid?
+ => false 
+3.0.2 :015 > ap.errors.full_message
+ expected 2) (ArgumentError)
+3.0.2 :016 > ap.errors.full_messages
+3.0.2 :017 > Physician.all
+  Physician Load (1.4ms)  SELECT "physicians".* FROM "physicians"
+ => 
+[#<Physician:0x000055b5fa5183c0
+  id: 1,
+  name: "Dr Sunita Goyal",
+  created_at: Fri, 10 Dec 2021 06:56:42.769026000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:56:42.769026000 UTC +00:00>,
+ #<Physician:0x000055b5fa4f8ea8
+  id: 2,
+  created_at: Fri, 10 Dec 2021 06:56:53.920967000 UTC +00:00,
+ #<Physician:0x000055b5fa4f8de0
+  id: 3,
+  name: "Dr Babita Bhardwaj",
+  created_at: Fri, 10 Dec 2021 06:57:24.433740000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:57:24.433740000 UTC +00:00>,
+ #<Physician:0x000055b5fa4f8d18
+  id: 4,
+  name: "Dr Vasudev Sharma",
+  created_at: Fri, 10 Dec 2021 06:57:37.605051000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:57:37.605051000 UTC +00:00>,
+  id: 5,
+  name: "Dr Shefali Verma",
+  created_at: Fri, 10 Dec 2021 06:57:53.325630000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:57:53.325630000 UTC +00:00>,
+ #<Physician:0x000055b5fa4f8b88
+  id: 6,
+  name: "Dr Sashwat Sharma",
+  created_at: Fri, 10 Dec 2021 06:58:13.630809000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:58:13.630809000 UTC +00:00>] 
+3.0.2 :018 > reload!
+ => true 
+3.0.2 :019 > ap = Appointment.create(appointment_date:"2021-12-28",patient_id:1,physician_id:1)
+  TRANSACTION (0.4ms)  BEGIN
+  Patient Load (0.9ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Appointment Create (46.2ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-28 00:00:00"], ["patient_id", 1], ["physician_id", 1], ["created_at", "2021-12-10 07:17:16.089081"], ["updated_at", "2021-12-10 07:17:16.089081"]]
+  TRANSACTION (13.2ms)  COMMIT
+ => 
+... 
+3.0.2 :020 > ap.valid?
+ => true 
+3.0.2 :021 > ap = Appointment.create(appointment_date:"2021-12-23",patient_id:2,physician_id:1)
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Load (0.7ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Physician Load (0.6ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Appointment Create (0.8ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-23 00:00:00"], ["patient_id", 2], ["physician_id", 1], ["created_at", "2021-12-10 07:24:48.281233"], ["updated_at", "2021-12-10 07:24:48.281233"]]
+ => 
+#<Appointment:0x000055b5fa6e2048
+... 
+3.0.2 :022 > ap = Appointment.create(appointment_date:"2021-12-23",patient_id:3,physician_id:2)
+  TRANSACTION (0.3ms)  BEGIN
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Appointment Create (0.6ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-23 00:00:00"], ["patient_id", 3], ["physician_id", 2], ["created_at", "2021-12-10 07:24:57.552721"], ["updated_at", "2021-12-10 07:24:57.552721"]]
+ => 
+#<Appointment:0x000055b5fa9b2a70
+... 
+3.0.2 :023 > ap = Appointment.create(appointment_date:"2021-12-23",patient_id:4,physician_id:2)
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Load (0.8ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  Physician Load (0.8ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Appointment Create (1.1ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-23 00:00:00"], ["patient_id", 4], ["physician_id", 2], ["created_at", "2021-12-10 07:25:05.325743"], ["updated_at", "2021-12-10 07:25:05.325743"]]
+ => 
+#<Appointment:0x000055b5f98aee40
+... 
+3.0.2 :024 > ap = Appointment.create(appointment_date:"2021-12-24",patient_id:5,physician_id:2)
+  TRANSACTION (0.4ms)  BEGIN
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Appointment Create (0.8ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-24 00:00:00"], ["patient_id", 5], ["physician_id", 2], ["created_at", "2021-12-10 07:25:13.217933"], ["updated_at", "2021-12-10 07:25:13.217933"]]
+ => 
+#<Appointment:0x000055b5fa6027b8
+... 
+3.0.2 :025 > ap = Appointment.create(appointment_date:"2021-12-24",patient_id:6,physician_id:3)
+  TRANSACTION (0.3ms)  BEGIN
+  Patient Load (0.4ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+  Physician Load (0.4ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Appointment Create (0.5ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-24 00:00:00"], ["patient_id", 6], ["physician_id", 3], ["created_at", "2021-12-10 07:25:20.261556"], ["updated_at", "2021-12-10 07:25:20.261556"]]
+ => 
+#<Appointment:0x000055b5fa8b8e58
+... 
+3.0.2 :026 > ap = Appointment.create(appointment_date:"2021-12-24",patient_id:6,physician_id:3)
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+  Physician Load (0.6ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Appointment Create (0.6ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-24 00:00:00"], ["patient_id", 6], ["physician_id", 3], ["created_at", "2021-12-10 07:25:23.309624"], ["updated_at", "2021-12-10 07:25:23.309624"]]
+ => 
+#<Appointment:0x000055b5fa9f8cf0
+... 
+3.0.2 :027 > ap = Appointment.create(appointment_date:"2021-12-25",patient_id:7,physician_id:5)
+  TRANSACTION (0.3ms)  BEGIN
+  Patient Load (0.6ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 7], ["LIMIT", 1]]
+  Physician Load (0.7ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Appointment Create (0.9ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-25 00:00:00"], ["patient_id", 7], ["physician_id", 5], ["created_at", "2021-12-10 07:25:35.597673"], ["updated_at", "2021-12-10 07:25:35.597673"]]
+ => 
+#<Appointment:0x000055b5fa474888
+... 
+3.0.2 :028 > ap = Appointment.create(appointment_date:"2021-12-21",patient_id:6,physician_id:5)
+  TRANSACTION (0.4ms)  BEGIN
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-21 00:00:00"], ["patient_id", 6], ["physician_id", 5], ["created_at", "2021
+  TRANSACTION (21.6ms)  COMMIT
+ => 
+#<Appointment:0x000055b5fa7b0d30
+... 
+3.0.2 :029 > ap = Appointment.create(appointment_date:"2021-12-20",patient_id:2,physician_id:4)
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Physician Load (0.6ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  Appointment Create (0.9ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-20 00:00:00"], ["patient_id", 2], ["physician_id", 4], ["created_at", "2021
+  TRANSACTION (23.0ms)  COMMIT
+ => 
+#<Appointment:0x000055b5f97ac1a0
+... 
+3.0.2 :030 > ap = Appointment.create(appointment_date:"2021-12-27",patient_id:1,physician_id:5)
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Load (0.4ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Appointment Create (1.0ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-27 00:00:00"], ["patient_id", 1], ["physician_id", 5], ["created_at", "2021
+  TRANSACTION (15.7ms)  COMMIT
+ => 
+#<Appointment:0x000055b5fa7d8268
+... 
+3.0.2 :031 > ap = Appointment.create(appointment_date:"2021-12-29",patient_id:4,physician_id:7)
+  TRANSACTION (0.4ms)  BEGIN
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+  Physician Load (0.6ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 7], ["LIMIT", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+ => 
+... 
+3.0.2 :032 > ap.errors.messages
+ => {:physician=>["must exist"]} 
+3.0.2 :033 > ap = Appointment.create(appointment_date:"2021-12-01",patient_id:8,physician_id:5)
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 8], ["LIMIT", 1]]
+  Physician Load (0.4ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Appointment Create (0.9ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-01 00:00:00"], ["patient_id", 8], ["physician_id", 5], ["created_at", "2021-12-10 07:27:12.519421"], ["updated_at", "2021-12-10 07:27:12.519421"]]
+  TRANSACTION (25.6ms)  COMMIT
+ => 
+#<Appointment:0x000055b5fa86bb08
+... 
+3.0.2 :034 > ap = Appointment.create(appointment_date:"2021-12-01",patient_id:9,physician_id:3)
+  TRANSACTION (0.3ms)  BEGIN
+  Patient Load (0.3ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 9], ["LIMIT", 1]]
+  Physician Load (0.3ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Appointment Create (0.6ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-01 00:00:00"], ["patient_id", 9], ["physician_id", 3], ["created_at", "2021-12-10 07:27:23.053077"], ["updated_at", "2021-12-10 07:27:23.053077"]]
+  TRANSACTION (17.4ms)  COMMIT
+ => 
+#<Appointment:0x000055b5f9a22f88
+... 
+3.0.2 :035 > ap = Appointment.create(appointment_date:"2021-12-03",patient_id:3,physician_id:5)
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Load (0.4ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Physician Load (0.4ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Appointment Create (0.7ms)  INSERT INTO "appointments" ("appointment_date", "patient_id", "physician_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["appointment_date", "2021-12-03 00:00:00"], ["patient_id", 3], ["physician_id", 5], ["created_at", "2021-12-10 07:27:44.356890"], ["updated_at", "2021-12-10 07:27:44.356890"]]
+  TRANSACTION (142.5ms)  COMMIT
+ => 
+#<Appointment:0x000055b5faa12f10
+... 
+3.0.2 :036 > Appointment.all
+  Appointment Load (0.9ms)  SELECT "appointments".* FROM "appointments"
+ => 
+[#<Appointment:0x000055b5f8e3cc28
+  id: 1,
+  appointment_date: Tue, 28 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 1,
+  physician_id: 1,
+  created_at: Fri, 10 Dec 2021 07:17:16.089081000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:17:16.089081000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e3c890
+  id: 2,
+  appointment_date: Thu, 23 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 2,
+  physician_id: 1,
+  created_at: Fri, 10 Dec 2021 07:24:48.281233000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:24:48.281233000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e3c4f8
+  id: 3,
+  appointment_date: Thu, 23 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 3,
+  physician_id: 2,
+  created_at: Fri, 10 Dec 2021 07:24:57.552721000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:24:57.552721000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e3c0c0
+  id: 4,
+  appointment_date: Thu, 23 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 4,
+  physician_id: 2,
+  created_at: Fri, 10 Dec 2021 07:25:05.325743000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:25:05.325743000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e2bbf8
+  id: 5,
+  appointment_date: Fri, 24 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 5,
+  physician_id: 2,
+  created_at: Fri, 10 Dec 2021 07:25:13.217933000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:25:13.217933000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e2b888
+  id: 6,
+  appointment_date: Fri, 24 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 6,
+  physician_id: 3,
+  created_at: Fri, 10 Dec 2021 07:25:20.261556000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:25:20.261556000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e2b630
+  id: 7,
+  appointment_date: Fri, 24 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 6,
+  physician_id: 3,
+  created_at: Fri, 10 Dec 2021 07:25:23.309624000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:25:23.309624000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e2b2c0
+  id: 8,
+  appointment_date: Sat, 25 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 7,
+  physician_id: 5,
+  created_at: Fri, 10 Dec 2021 07:25:35.597673000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:25:35.597673000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e2a410
+  id: 9,
+  appointment_date: Tue, 21 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 6,
+  physician_id: 5,
+  updated_at: Fri, 10 Dec 2021 07:25:42.601010000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e29e98
+  id: 10,
+  appointment_date: Mon, 20 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 2,
+  physician_id: 4,
+  created_at: Fri, 10 Dec 2021 07:25:52.808448000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:25:52.808448000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e29ad8
+  id: 11,
+  appointment_date: Mon, 27 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 1,
+  physician_id: 5,
+  created_at: Fri, 10 Dec 2021 07:26:04.558437000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:26:04.558437000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e29920
+  id: 12,
+  patient_id: 8,
+  physician_id: 5,
+  created_at: Fri, 10 Dec 2021 07:27:12.519421000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:27:12.519421000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e295b0
+  id: 13,
+  patient_id: 9,
+  physician_id: 3,
+  updated_at: Fri, 10 Dec 2021 07:27:23.053077000 UTC +00:00>,
+ #<Appointment:0x000055b5f8e29470
+  id: 14,
+  appointment_date: Fri, 03 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 3,
+  physician_id: 5,
+  created_at: Fri, 10 Dec 2021 07:27:44.356890000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 07:27:44.356890000 UTC +00:00>] 
+3.0.2 :037 > Patient.find(1).appointments
+  Patient Load (0.6ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Appointment Load (0.5ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."patient_id" = $1  [["patient_id", 1]]
+ => 
+[#<Appointment:0x000055b5f84744e8
+  id: 1,
+  patient_id: 1,
+  created_at: Fri, 10 Dec 2021 07:17:16.089081000 UTC +00:00,
+ #<Appointment:0x000055b5f844f3f0
+  appointment_date: Mon, 27 Dec 2021 00:00:00.000000000 UTC +00:00,
+  patient_id: 1,
+  physician_id: 5,
+  updated_at: Fri, 10 Dec 2021 07:26:04.558437000 UTC +00:00>] 
+3.0.2 :038 > Patient.find(1).physician.name
+  Patient Load (0.6ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ician' for #<Patient id: 1, name: "Karan", created_at: "2021-12-10 06:53:10.430128000 +0000", updated_at: "2021-12-10 06:53:10.430128000 +0000"> (NoMethodError)
+Did you mean?  physicians
+3.0.2 :039 > Patient.find(1).physicians.name
+  Patient Load (1.0ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+3.0.2 :040 > Patient.find(1).physicians
+  Patient Load (0.4ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" INNER JOIN "appointments" ON "physicians"."id" = "appointments"."physician_id" WHERE "appointments"."patient_id" = $1  [["patient_id", 1]]
+ => 
+[#<Physician:0x000055b5f9a30520
+  name: "Dr Sunita Goyal",
+  created_at: Fri, 10 Dec 2021 06:56:42.769026000 UTC +00:00,
+ #<Physician:0x000055b5f9a30368
+  id: 5,
+  name: "Dr Shefali Verma",
+  created_at: Fri, 10 Dec 2021 06:57:53.325630000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:57:53.325630000 UTC +00:00>] 
+3.0.2 :041 > Appointments.find(1).physicians
+(irb):41:in `<main>': uninitialized constant Appointments (NameError)
+3.0.2 :042 > Appointments.find(1).physician
+(irb):42:in `<main>': uninitialized constant Appointments (NameError)
+3.0.2 :043 > Appointments.find(1).physician.name
+(irb):43:in `<main>': uninitialized constant Appointments (NameError)
+3.0.2 :044 > Appointment.find(1).physician.name
+  Appointment Load (0.8ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => "Dr Sunita Goyal" 
+3.0.2 :045 > Appointment.find(3).physician.name
+  Appointment Load (0.8ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Physician Load (0.4ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => "Dr Rajeev Khanna" 
+  Appointment Load (1.1ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."id" = $1 LIMIT $2  [["id", 10], ["LIMIT", 1]]
+  Physician Load (0.5ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+3.0.2 :047 > Appointment.find(10).appointment_date
+  Appointment Load (1.3ms)  SELECT "appointments".* FROM "appointments" WHERE "appointments"."id" = $1 LIMIT $2  [["id", 10], ["LIMIT", 1]]
+ => Mon, 20 Dec 2021 00:00:00.000000000 UTC +00:00 
+3.0.2 :048 > Physician.find(2).patient.name
+  Physician Load (0.9ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `pati
+7000 +0000"> (NoMethodError)
+Did you mean?  patients
+               patients=
+3.0.2 :049 > Physician.find(2).patients.name
+ => "Patient" 
+3.0.2 :050 > Physician.find(2).patients
+  Physician Load (0.6ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Patient Load (0.8ms)  SELECT "patients".* FROM "patients" INNER JOIN "appointments" ON "patients"."id" = "appointments"."patient_id" WHERE "a
+ => 
+[#<Patient:0x000055b5f81cf030
+  id: 3,
+  name: "Ram",
+  updated_at: Fri, 10 Dec 2021 06:53:26.325162000 UTC +00:00>,
+ #<Patient:0x000055b5f81ce9c8
+  id: 4,
+  name: "Aman",
+  updated_at: Fri, 10 Dec 2021 06:53:34.033750000 UTC +00:00>,
+ #<Patient:0x000055b5f81cd9d8
+  id: 5,
+  name: "Bhawna",
+  created_at: Fri, 10 Dec 2021 06:53:44.377171000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:53:44.377171000 UTC +00:00>] 
+3.0.2 :051 > Physician.find(2).name
+  Physician Load (0.6ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => "Dr Rajeev Khanna" 
+3.0.2 :052 > Physician.find(3).patient.where(id:2)
+  Physician Load (0.8ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `patient' for #<Physician id: 3, name: "Dr Babita Bhardwaj", created_at: "2021-12-10 06:57:24.433740000 +0000", updated_at: "2021-12-10 06:57:24.433740000 +0000"> (NoMethodError)
+Did you mean?  patients
+               patients=
+3.0.2 :053 > Physician.find(3).patients.where(id:2)
+  Physician Load (0.6ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Patient Load (0.7ms)  SELECT "patients".* FROM "patients" INNER JOIN "appointments" ON "patients"."id" = "appointments"."patient_id" WHERE "appointments"."physician_id" = $1 AND "patients"."id" = $2  [["physician_id", 3], ["id", 2]]
+ => [] 
+3.0.2 :054 > Physician.find(3).patients.where(id:1)
+  Physician Load (0.7ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Patient Load (0.8ms)  SELECT "patients".* FROM "patients" INNER JOIN "appointments" ON "patients"."id" = "appointments"."patient_id" WHERE "appointments"."physician_id" = $1 AND "patients"."id" = $2  [["physician_id", 3], ["id", 1]]
+ => [] 
+3.0.2 :055 > Physician.find(3).patients.where(id:5)
+  Physician Load (0.7ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Patient Load (0.7ms)  SELECT "patients".* FROM "patients" INNER JOIN "appointments" ON "patients"."id" = "appointments"."patient_id" WHERE "appointments"."physician_id" = $1 AND "patients"."id" = $2  [["physician_id", 3], ["id", 5]]
+ => [] 
+3.0.2 :056 > Physician.find(3).patients.where(id:5)
+  Physician Load (0.8ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Patient Load (0.8ms)  SELECT "patients".* FROM "patients" INNER JOIN "appointments" ON "patients"."id" = "appointments"."patient_id" WHERE "appointments"."physician_id" = $1 AND "patients"."id" = $2  [["physician_id", 3], ["id", 5]]
+ => [] 
+3.0.2 :057 > Physician.find(3).patients
+  Physician Load (0.6ms)  SELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Patient Load (0.9ms)  SELECT "patients".* FROM "patients" INNER JOIN "appointments" ON "patients"."id" = "appointments"."patient_id" WHERE "appointments"."physician_id" = $1  [["physician_id", 3]]
+ => 
+[#<Patient:0x000055b5f9791eb8
+  id: 6,
+  name: "Preeti",
+  created_at: Fri, 10 Dec 2021 06:53:51.981341000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:53:51.981341000 UTC +00:00>,
+ #<Patient:0x000055b5f9791b20
+  id: 6,
+  name: "Preeti",
+  created_at: Fri, 10 Dec 2021 06:53:51.981341000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:53:51.981341000 UTC +00:00>,
+ #<Patient:0x000055b5f9791850
+  id: 9,
+  name: "Rahul",
+  created_at: Fri, 10 Dec 2021 06:54:57.969681000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 06:54:57.969681000 UTC +00:00>] 
+3.0.2 :058 > 
+
+=============================================================Actice Query Practice==============================================
+
+
+3.0.2 :002 > Student.all
+  Student Load (157.8ms)  SELECT "students".* FROM "students"
+ => 
+  id: 1,
+  name: "Priya",
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+  id: 2,
+  name: "Soniya",
+  created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c86b8a70
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c86b89a8
+  id: 4,
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c86b88e0
+  id: 5,
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>] 
+3.0.2 :003 > student = Student.find(2)
+  Student Load (0.7ms)  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => 
+#<Student:0x00005558c88e9ee8
+3.0.2 :004 > student
+ => 
+#<Student:0x00005558c88e9ee8
+ id: 2,
+ created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+ updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00> 
+3.0.2 :005 > student = Student.find([1,5]);
+  Student Load (1.3ms)  SELECT "students".* FROM "students" WHERE "students"."id" IN ($1, $2)  [["id", 1], ["id", 5]]
+ => 
+[#<Student:0x00005558c67393c0
+... 
+3.0.2 :006 > student
+ => 
+[#<Student:0x00005558c67393c0
+  id: 1,
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+ #<Student:0x00005558c6738218
+  id: 5,
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>] 
+3.0.2 :007 > student = Student.take
+  Student Load (0.6ms)  SELECT "students".* FROM "students" LIMIT $1  [["LIMIT", 1]]
+ => 
+#<Student:0x00005558c7d6f4f0
+3.0.2 :008 > student
+ => 
+#<Student:0x00005558c7d6f4f0
+ id: 1,
+ created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+ updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00> 
+3.0.2 :009 > student = Student.take(2)
+  Student Load (0.6ms)  SELECT "students".* FROM "students" LIMIT $1  [["LIMIT", 2]]
+ => 
+[#<Student:0x00005558c867a108
+3.0.2 :010 > student
+ => 
+[#<Student:0x00005558c867a108
+  id: 1,
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+ #<Student:0x00005558c8679d70
+  id: 2,
+  name: "Soniya",
+  created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>] 
+3.0.2 :011 > student = Student.take!
+  Student Load (0.7ms)  SELECT "students".* FROM "students" LIMIT $1  [["LIMIT", 1]]
+ => 
+#<Student:0x00005558c884b298
+... 
+3.0.2 :012 > student
+ => 
+#<Student:0x00005558c884b298
+ id: 1,
+ created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+ updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00> 
+3.0.2 :013 > student = Student.first
+  Student Load (0.4ms)  SELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1  [["LIMIT", 1]]
+#<Student:0x00005558c8afaf20
+... 
+3.0.2 :014 > student
+ => 
+#<Student:0x00005558c8afaf20
+ id: 1,
+ created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+ updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00> 
+3.0.2 :015 > student = Student.first(3)
+  Student Load (0.8ms)  SELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1  [["LIMIT", 3]]
+[#<Student:0x00005558c786c228
+... 
+3.0.2 :016 > student
+ => 
+[#<Student:0x00005558c786c228
+  id: 1,
+  name: "Priya",
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+ #<Student:0x00005558c786c070
+  id: 2,
+  name: "Soniya",
+  created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c7863d58
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>] 
+3.0.2 :017 > student = Student.last
+  Student Load (0.4ms)  SELECT "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT $1  [["LIMIT", 1]]
+ => 
+#<Student:0x00005558c8750aa0
+... 
+3.0.2 :018 > student
+ => 
+#<Student:0x00005558c8750aa0
+ id: 5,
+ name: "Niharika",
+ created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+ updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00> 
+3.0.2 :019 > student = Student.last(3)
+  Student Load (1.0ms)  SELECT "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT $1  [["LIMIT", 3]]
+ => 
+[#<Student:0x00005558c89227c0
+... 
+3.0.2 :020 > student
+ => 
+[#<Student:0x00005558c89227c0
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c8922888
+  id: 4,
+  name: "Vijay",
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c8922950
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>] 
+3.0.2 :021 > 
+
+ student = Student.order(:name).last
+  Student Load (0.6ms)  SELECT "students".* FROM "students" ORDER BY "students"."name" DESC LIMIT $1  [["LIMIT", 1]]
+ => 
+#<Student:0x00005558c8591ca0
+... 
+ => 
+#<Student:0x00005558c8591ca0
+ id: 4,
+ name: "Vijay",
+ updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00> 
+3.0.2 :031 > Student
+ => Student(id: integer, name: string, created_at: datetime, updated_at: datetime) 
+3.0.2 :032 > Student.all
+  Student Load (0.6ms)  SELECT "students".* FROM "students"
+ => 
+  id: 1,
+  name: "Priya",
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+ #<Student:0x00005558c87e2bd0
+  id: 2,
+  name: "Soniya",
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c87e2b08
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c87e2a40
+  id: 4,
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c87e2978
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>] 
+  Student Load (0.4ms)  SELECT "students".* FROM "students" ORDER BY "students"."name" DESC LIMIT $1  [["LIMIT", 1]]
+ => 
+[#<Student:0x00005558c898b2e8
+3.0.2 :034 > student
+ => 
+[#<Student:0x00005558c898b2e8
+  name: "Vijay",
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+3.0.2 :035 > Student.find_by name:'Niharika'
+  Student Load (0.7ms)  SELECT "students".* FROM "students" WHERE "students"."name" = $1 LIMIT $2  [["name", "Niharika"], ["LIMIT", 1]]
+ => 
+#<Student:0x00005558c7994bf0
+ id: 5,
+ name: "Niharika",
+ created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+ updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00> 
+3.0.2 :036 > Student.where(name:'Niharika').last
+  Student Load (0.4ms)  SELECT "students".* FROM "students" WHERE "students"."name" = $1 ORDER BY "students"."id" DESC LIMIT $2  [["name", "Niharika"], ["LIMIT", 1]]
+ => 
+#<Student:0x00005558c87ba860
+ id: 5,
+ name: "Niharika",
+ created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+ updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00> 
+3.0.2 :037 > Student.where(name:'Niharika').take
+  Student Load (0.7ms)  SELECT "students".* FROM "students" WHERE "students"."name" = $1 LIMIT $2  [["name", "Niharika"], ["LIMIT", 1]]
+ => 
+#<Student:0x00005558c88d3968
+ id: 5,
+ name: "Niharika",
+ created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+ updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00> 
+3.0.2 :038 > Student.where(name:'does not exist').take!
+  Student Load (0.5ms)  SELECT "students".* FROM "students" WHERE "students"."name" = $1 LIMIT $2  [["name", "does not exist"], ["LIMIT", 1]]
+
+3.0.2 :042 > 
+Student.all.each do |student|
+3.0.2 :048 >   student.name
+3.0.2 :049 > end
+  Student Load (0.7ms)  SELECT "students".* FROM "students"
+ => 
+[#<Student:0x00005558c79cec10
+  id: 1,
+  name: "Priya",
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+ #<Student:0x00005558c79cea30
+  id: 2,
+  name: "Soniya",
+  created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c79ce878
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c79ce710
+  id: 4,
+  name: "Vijay",
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c79ce5a8
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>] 
+3.0.2 :050 > 
+3.0.2 :091 > author = Author.all
+  Author Load (142.7ms)  SELECT "authors".* FROM "authors"
+ => 
+[#<Author:0x00005558c8732c08
+... 
+3.0.2 :092 > author
+ => 
+  id: 1,
+  name: "J k Rowlling",
+  updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00>,
+ #<Author:0x00005558c87738e8
+  name: "Chetan Bhagat",
+  created_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00>,
+ #<Author:0x00005558c8773820
+  id: 3,
+  name: "A P j Abdul Kalam",
+  created_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00>,
+ #<Author:0x00005558c8773758
+  id: 4,
+  name: "Robin Sharma",
+  created_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00>,
+ #<Author:0x00005558c8773690
+  id: 5,
+  name: "Rabindranath Tagore",
+  created_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00>] 
+3.0.2 :093 > author = Author.first
+  Author Load (2.0ms)  SELECT "authors".* FROM "authors" ORDER BY "authors"."id" ASC LIMIT $1  [["LIMIT", 1]]
+#<Author:0x00005558c8b38618
+... 
+3.0.2 :094 > author
+ => 
+ id: 1,
+ name: "J k Rowlling",
+ created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00> 
+3.0.2 :095 > Book.where(author:'J k Rowlling')
+  Book Load (23.4ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", nil]]
+ => [] 
+3.0.2 :096 > Book.where(Author:'J k Rowlling')
+(Object doesn't support #inspect)
+ =>  
+3.0.2 :097 > Book.where(author:author)
+  Book Load (22.0ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 1]]
+ => 
+[#<Book:0x00005558c8891c20
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c88c9e40
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c88c9d78
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :098 > author = Author.first
+  Author Load (0.9ms)  SELECT "authors".* FROM "authors" ORDER BY "authors"."id" ASC LIMIT $1  [["LIMIT", 1]]
+ => 
+#<Author:0x00005558c8a2a3c0
+... 
+3.0.2 :099 > Book.where(author:author)
+  Book Load (0.9ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 1]]
+ => 
+[#<Book:0x00005558c8ad8128
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c8ad8038
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c8b43f18
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :100 > Author.joins(:books).where(books: { author: author })
+  Author Load (56.7ms)  SELECT "authors".* FROM "authors" INNER JOIN "books" ON "books"."author_id" = "authors"."id" WHERE "books"."author_id" = $1  [["author_id", 1]]
+ => 
+[#<Author:0x00005558c8731088
+  id: 1,
+  name: "J k Rowlling",
+  created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00>,
+ #<Author:0x00005558c8730fc0
+  id: 1,
+  name: "J k Rowlling",
+  created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00>,
+ #<Author:0x00005558c8730ef8
+  id: 1,
+  name: "J k Rowlling",
+  created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00>] 
+3.0.2 :101 > 
+
+ Book.where(created_at: (Time.now.midnight-1.day)..Time.now.midnight)
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."created_at" BETWEEN $1 AND $2  [["created_at", "2021-12-11 18:30:00"], ["crea
+3.0.2 :107 > 
+3.0.2 :108 > 
+3.0.2 :109 > Book.where.not(Author:'J k Rowlling')
+(Object doesn't support #inspect)
+ =>  
+3.0.2 :110 > Book.where.not(author:'J k Rowlling')
+  Book Load (0.3ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" != $1  [["author_id", nil]]
+ => [] 
+3.0.2 :111 > author = Author.all
+  Author Load (1.1ms)  SELECT "authors".* FROM "authors"
+ => 
+[#<Author:0x00005558c8710ef0
+... 
+3.0.2 :112 > Book.where.not(author:'J k Rowlling')
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" != $1  [["author_id", nil]]
+ => [] 
+3.0.2 :113 > Book.where(author:'J k Rowlling')
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", nil]]
+ => [] 
+3.0.2 :114 > Customer.where(last_name: 'Smith').or(Customer.where(orders_count: [1,3,5]))
+(irb):114:in `<main>': uninitialized constant Customer (NameError)
+3.0.2 :115 > Author.where(name: 'J k Rowlling').or(Book.where(name:'Harry potter Deathly Hollows Part 2'))
+(Object doesn't support #inspect)
+ =>  
+3.0.2 :116 > Author.where(name: 'J k Rowlling').or(Author.where(id:1))
+  Author Load (0.4ms)  SELECT "authors".* FROM "authors" WHERE ("authors"."name" = $1 OR "authors"."id" = $2)  [["name", "J k Rowlling"], ["id", 1]]
+ => 
+[#<Author:0x00005558c88cb3d0
+  id: 1,
+  name: "J k Rowlling",
+  created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00>] 
+3.0.2 :121 > Book.order(:created_at)
+  Book Load (27.9ms)  SELECT "books".* FROM "books" ORDER BY "books"."created_at" ASC
+ => 
+[#<Book:0x00005558c6e2b0c0
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c6e2ac10
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c6e2a8a0
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c6e2a670
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c6e2a300
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c6e29e28
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+ #<Book:0x00005558c6e29748
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>,
+ #<Book:0x00005558c6e291f8
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c6e28fa0
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c6e288e8
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c6e28640
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c6e28398
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :122 > Book.order("created_at")
+  Book Load (0.9ms)  SELECT "books".* FROM "books" ORDER BY created_at
+ => 
+[#<Book:0x00005558c88fb5a8
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c88fb4e0
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c88fb3c8
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c88fb300
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c88fb170
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c88faf90
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+ #<Book:0x00005558c88faec8
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>,
+ #<Book:0x00005558c88fae00
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c88fad38
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c88fac70
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c88faba8
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c88faae0
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :123 > Book.order(created_at: :desc)
+  Book Load (1.0ms)  SELECT "books".* FROM "books" ORDER BY "books"."created_at" DESC
+ => 
+[#<Book:0x00005558c8810828
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c8810760
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c8810698
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c88105d0
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c8810508
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c8810440
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+ #<Book:0x00005558c8810378
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c88102b0
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c8810198
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c88100d0
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c8810008
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c880bf58
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :124 > Student.order(name: :asc,created_at: :desc)
+  Student Load (0.7ms)  SELECT "students".* FROM "students" ORDER BY "students"."name" ASC, "students"."created_at" DESC
+ => 
+[#<Student:0x00005558c88910b8
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c8890ff0
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>,
+ #<Student:0x00005558c8890f28
+  id: 1,
+  name: "Priya",
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+ #<Student:0x00005558c8890e60
+  id: 2,
+  name: "Soniya",
+  created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c8890d98
+  id: 4,
+  name: "Vijay",
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>] 
+3.0.2 :125 > 
+3.0.2 :131 > Student.order(name: :asc)
+  Student Load (1.1ms)  SELECT "students".* FROM "students" ORDER BY "students"."name" ASC
+ => 
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c87635d8
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>,
+ #<Student:0x00005558c8763510
+  id: 1,
+  name: "Priya",
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+  id: 2,
+  name: "Soniya",
+  created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c8763380
+  id: 4,
+  name: "Vijay",
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>] 
+3.0.2 :132 > Student.select(:name)
+  Student Load (0.9ms)  SELECT "students"."name" FROM "students"
+ => 
+3.0.2 :133 > Book.select(:name)
+  Book Load (0.9ms)  SELECT "name" FROM "books"
+(Object doesn't support #inspect)
+ =>  
+3.0.2 :134 > Book.select(:title)
+  Book Load (0.9ms)  SELECT "books"."title" FROM "books"
+ => 
+[#<Book:0x00005558c8809438 id: nil, title: "Harry potter Deathly Hollows Part 1">,
+ #<Book:0x00005558c8809370 id: nil, title: "Harry potter Deathly Hollows Part 2">,
+ #<Book:0x00005558c88092a8 id: nil, title: "Harry potter and The Chamber of Secrets">,
+ #<Book:0x00005558c88091e0 id: nil, title: "Two States">,
+ #<Book:0x00005558c8809118 id: nil, title: "Three Idiots">,
+ #<Book:0x00005558c8809050 id: nil, title: "Half Girlfriend">,
+ #<Book:0x00005558c8808f88 id: nil, title: "Fings of Fire">,
+ #<Book:0x00005558c8808ec0 id: nil, title: "The Greateness Guide">,
+ #<Book:0x00005558c8808df8 id: nil, title: "Family wisdom From The Monk Who sold his ferrari">,
+ #<Book:0x00005558c8808d30 id: nil, title: "Kabuliwala">,
+ #<Book:0x00005558c8808c68 id: nil, title: "Gora">,
+ #<Book:0x00005558c8808ba0 id: nil, title: "Gitanjali">] 
+3.0.2 :135 > Student.select(:name).distinct
+  Student Load (0.9ms)  SELECT DISTINCT "students"."name" FROM "students"
+ => 
+[#<Student:0x00005558c7112f90 id: nil, name: "Soniya">,
+ #<Student:0x00005558c7112a18 id: nil, name: "Vijay">,
+ #<Student:0x00005558c7111d20 id: nil, name: "Khushboo">,
+ #<Student:0x00005558c7111550 id: nil, name: "Priya">,
+ #<Student:0x00005558c7111078 id: nil, name: "Niharika">] 
+3.0.2 :136 > query =  Student.select(:name).distinct
+  Student Load (0.9ms)  SELECT DISTINCT "students"."name" FROM "students"
+ => 
+[#<Student:0x00005558c87e9e80 id: nil, name: "Soniya">,
+... 
+3.0.2 :137 > qu
+
+query
+quit
+3.0.2 :137 > query.distinct(false)
+  Student Load (0.5ms)  SELECT "students"."name" FROM "students"
+ => 
+[#<Student:0x00005558c89b9df0 id: nil, name: "Priya">,
+ #<Student:0x00005558c89b9d28 id: nil, name: "Soniya">,
+ #<Student:0x00005558c89b9c60 id: nil, name: "Khushboo">,
+ #<Student:0x00005558c89b9b98 id: nil, name: "Vijay">,
+ #<Student:0x00005558c89b9ad0 id: nil, name: "Niharika">] 
+3.0.2 :138 > 
+ Student.limit(3).offset(2)
+  Student Load (0.6ms)  SELECT "students".* FROM "students" LIMIT $1 OFFSET $2  [["LIMIT", 3], ["OFFSET", 2]]
+ => 
+[#<Student:0x00005558c8802020
+  id: 3,
+  name: "Khushboo",
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c8801f58
+  id: 4,
+  name: "Vijay",
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c8801e90
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>] 
+3.0.2 :145 > Student.select("created_at").group("created_at")
+  Student Load (1.0ms)  SELECT "students"."created_at" FROM "students" GROUP BY "students"."created_at"
+ => 
+[#<Student:0x00005558c73321e0 id: nil, created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>,
+ #<Student:0x00005558c7331b50 id: nil, created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c73318a8 id: nil, created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c7331740 id: nil, created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c7331650 id: nil, created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>] 
+3.0.2 :146 > Book.where('id>4').limit(20).order('id desc').unscope(:order)
+  Book Load (1.1ms)  SELECT "books".* FROM "books" WHERE (id>4) LIMIT $1  [["LIMIT", 20]]
+ => 
+[#<Book:0x00005558c87ab8b0
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c87ab7e8
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c87ab720
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>,
+ #<Book:0x00005558c87ab630
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c87ab568
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c87ab4a0
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c87ab3d8
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c87ab310
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :147 > 
+
+Student.limit(3).offset(2)
+  Student Load (0.6ms)  SELECT "students".* FROM "students" LIMIT $1 OFFSET $2  [["LIMIT", 3], ["OFFSET", 2]]
+ => 
+[#<Student:0x00005558c8802020
+  id: 3,
+  name: "Khushboo",
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c8801f58
+  id: 4,
+  name: "Vijay",
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c8801e90
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>] 
+3.0.2 :145 > Student.select("created_at").group("created_at")
+  Student Load (1.0ms)  SELECT "students"."created_at" FROM "students" GROUP BY "students"."created_at"
+ => 
+[#<Student:0x00005558c73321e0 id: nil, created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>,
+ #<Student:0x00005558c7331b50 id: nil, created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c73318a8 id: nil, created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c7331740 id: nil, created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c7331650 id: nil, created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>] 
+3.0.2 :146 > Book.where('id>4').limit(20).order('id desc').unscope(:order)
+  Book Load (1.1ms)  SELECT "books".* FROM "books" WHERE (id>4) LIMIT $1  [["LIMIT", 20]]
+ => 
+[#<Book:0x00005558c87ab8b0
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c87ab7e8
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+ #<Book:0x00005558c87ab720
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>,
+ #<Book:0x00005558c87ab630
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c87ab568
+  id: 9,
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c87ab4a0
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c87ab3d8
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c87ab310
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :147 > Book.select(:title).reselect(:created_at)
+  Book Load (1.0ms)  SELECT "books"."created_at" FROM "books"
+ => 
+[#<Book:0x00005558c87c85c8 id: nil, created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00>,
+ #<Book:0x00005558c87c8500 id: nil, created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00>,
+ #<Book:0x00005558c87c8438 id: nil, created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00>,
+ #<Book:0x00005558c87c8370 id: nil, created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00>,
+ #<Book:0x00005558c87c82a8 id: nil, created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00>,
+ #<Book:0x00005558c87c81e0 id: nil, created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00>,
+ #<Book:0x00005558c87c8118 id: nil, created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00>,
+ #<Book:0x00005558c87c8050 id: nil, created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00>,
+ #<Book:0x00005558c87c3f50 id: nil, created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00>,
+ #<Book:0x00005558c87c3e88 id: nil, created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00>,
+ #<Book:0x00005558c87c3dc0 id: nil, created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00>,
+ #<Book:0x00005558c87c3cf8 id: nil, created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00>] 
+3.0.2 :148 > Book.all
+  Book Load (1.0ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005558c89d3408
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c89d3340
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c89d3278
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c89d3188
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c89d30c0
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c89d2ff8
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+ #<Book:0x00005558c89d2f30
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>,
+ #<Book:0x00005558c89d2e68
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c89d2da0
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c89d2cd8
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c89d2be8
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c89d2b20
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :149 > Author.find(5)
+  Author Load (0.9ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+ => 
+#<Author:0x00005558c87724e8
+ id: 5,
+ name: "Rabindranath Tagore",
+ created_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00> 
+3.0.2 :150 > Author.find(5).books
+  Author Load (1.1ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Load (0.9ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 5]]
+ => 
+[#<Book:0x00005558c888b5c8
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c8883918
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c8883760
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :151 > 
+
+Student.order(name: :asc)
+  Student Load (1.1ms)  SELECT "students".* FROM "students" ORDER BY "students"."name" ASC
+ => 
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c87635d8
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>,
+ #<Student:0x00005558c8763510
+  id: 1,
+  name: "Priya",
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+  id: 2,
+  name: "Soniya",
+  created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c8763380
+  id: 4,
+  name: "Vijay",
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>] 
+3.0.2 :132 > Student.select(:name)
+  Student Load (0.9ms)  SELECT "students"."name" FROM "students"
+ => 
+3.0.2 :133 > Book.select(:name)
+  Book Load (0.9ms)  SELECT "name" FROM "books"
+(Object doesn't support #inspect)
+ =>  
+3.0.2 :134 > Book.select(:title)
+  Book Load (0.9ms)  SELECT "books"."title" FROM "books"
+ => 
+ #<Book:0x00005558c8808ec0 id: nil, title: "The Greateness Guide">,
+ #<Book:0x00005558c8808df8 id: nil, title: "Family wisdom From The Monk Who sold his ferrari">,
+ #<Book:0x00005558c8808d30 id: nil, title: "Kabuliwala">,
+ #<Book:0x00005558c8808c68 id: nil, title: "Gora">,
+ #<Book:0x00005558c8808ba0 id: nil, title: "Gitanjali">] 
+3.0.2 :135 > Student.select(:name).distinct
+  Student Load (0.9ms)  SELECT DISTINCT "students"."name" FROM "students"
+ => 
+[#<Student:0x00005558c7112f90 id: nil, name: "Soniya">,
+ #<Student:0x00005558c7112a18 id: nil, name: "Vijay">,
+ #<Student:0x00005558c7111d20 id: nil, name: "Khushboo">,
+ #<Student:0x00005558c7111550 id: nil, name: "Priya">,
+ #<Student:0x00005558c7111078 id: nil, name: "Niharika">] 
+3.0.2 :136 > query =  Student.select(:name).distinct
+  Student Load (0.9ms)  SELECT DISTINCT "students"."name" FROM "students"
+ => 
+[#<Student:0x00005558c87e9e80 id: nil, name: "Soniya">,
+3.0.2 :137 > qu
+
+query
+quit
+3.0.2 :137 > query.distinct(false)
+  Student Load (0.5ms)  SELECT "students"."name" FROM "students"
+ => 
+[#<Student:0x00005558c89b9df0 id: nil, name: "Priya">,
+ #<Student:0x00005558c89b9d28 id: nil, name: "Soniya">,
+ #<Student:0x00005558c89b9c60 id: nil, name: "Khushboo">,
+ #<Student:0x00005558c89b9b98 id: nil, name: "Vijay">,
+ #<Student:0x00005558c89b9ad0 id: nil, name: "Niharika">] 
+3.0.2 :138 > 
+3.0.2 :139 > 
+3.0.2 :140 > 
+3.0.2 :141 > 
+3.0.2 :142 > 
+3.0.2 :143 > 
+3.0.2 :144 > Student.limit(3).offset(2)
+  Student Load (0.6ms)  SELECT "students".* FROM "students" LIMIT $1 OFFSET $2  [["LIMIT", 3], ["OFFSET", 2]]
+ => 
+[#<Student:0x00005558c8802020
+  id: 3,
+  name: "Khushboo",
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c8801f58
+  id: 4,
+  name: "Vijay",
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c8801e90
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>] 
+3.0.2 :145 > Student.select("created_at").group("created_at")
+  Student Load (1.0ms)  SELECT "students"."created_at" FROM "students" GROUP BY "students"."created_at"
+ => 
+[#<Student:0x00005558c73321e0 id: nil, created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>,
+ #<Student:0x00005558c7331b50 id: nil, created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c73318a8 id: nil, created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c7331740 id: nil, created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c7331650 id: nil, created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>] 
+3.0.2 :146 > Book.where('id>4').limit(20).order('id desc').unscope(:order)
+  Book Load (1.1ms)  SELECT "books".* FROM "books" WHERE (id>4) LIMIT $1  [["LIMIT", 20]]
+ => 
+[#<Book:0x00005558c87ab8b0
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c87ab7e8
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+ #<Book:0x00005558c87ab720
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>,
+ #<Book:0x00005558c87ab630
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c87ab568
+  id: 9,
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c87ab4a0
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c87ab3d8
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c87ab310
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :147 > Book.select(:title).reselect(:created_at)
+  Book Load (1.0ms)  SELECT "books"."created_at" FROM "books"
+ => 
+[#<Book:0x00005558c87c85c8 id: nil, created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00>,
+ #<Book:0x00005558c87c8500 id: nil, created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00>,
+ #<Book:0x00005558c87c8438 id: nil, created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00>,
+ #<Book:0x00005558c87c8370 id: nil, created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00>,
+ #<Book:0x00005558c87c82a8 id: nil, created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00>,
+ #<Book:0x00005558c87c81e0 id: nil, created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00>,
+ #<Book:0x00005558c87c8118 id: nil, created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00>,
+ #<Book:0x00005558c87c8050 id: nil, created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00>,
+ #<Book:0x00005558c87c3f50 id: nil, created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00>,
+ #<Book:0x00005558c87c3e88 id: nil, created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00>,
+ #<Book:0x00005558c87c3dc0 id: nil, created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00>,
+ #<Book:0x00005558c87c3cf8 id: nil, created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00>] 
+3.0.2 :148 > Book.all
+  Book Load (1.0ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005558c89d3408
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c89d3340
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c89d3278
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005558c89d3188
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c89d30c0
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005558c89d2ff8
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+ #<Book:0x00005558c89d2f30
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>,
+ #<Book:0x00005558c89d2e68
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c89d2da0
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005558c89d2cd8
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c89d2be8
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+ #<Book:0x00005558c89d2b20
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :149 > Author.find(5)
+  Author Load (0.9ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+ => 
+#<Author:0x00005558c87724e8
+ id: 5,
+ name: "Rabindranath Tagore",
+ created_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00> 
+3.0.2 :150 > Author.find(5).books
+  Author Load (1.1ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Load (0.9ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1  [["author_id", 5]]
+ => 
+[#<Book:0x00005558c888b5c8
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c8883918
+  id: 11,
+  title: "Gora",
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005558c8883760
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :151 > Student.order(:id).reverse_order
+  Student Load (1.2ms)  SELECT "students".* FROM "students" ORDER BY "students"."id" DESC
+ => 
+[#<Student:0x00005558c88139b0
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>,
+ #<Student:0x00005558c88138c0
+  id: 4,
+  name: "Vijay",
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c88137a8
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c88136e0
+  id: 2,
+  name: "Soniya",
+  created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c88135f0
+  id: 1,
+  name: "Priya",
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>] 
+3.0.2 :152 > Student.order(:id)
+  Student Load (1.1ms)  SELECT "students".* FROM "students" ORDER BY "students"."id" ASC
+ => 
+[#<Student:0x00005558c8a21c20
+  id: 1,
+  name: "Priya",
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+ #<Student:0x00005558c8a21b58
+  id: 2,
+  name: "Soniya",
+  created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x00005558c8a21a90
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x00005558c8a219c8
+  id: 4,
+  name: "Vijay",
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x00005558c8a21900
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>] 
+
+
+
 
