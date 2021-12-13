@@ -1247,4 +1247,164 @@ employee_management_system=# select * from employee where eid in (select eid fro
  Jenifer        | kapoor        | MALE   | 1995-08-24    | krish@gmail.com |  35000 | 8   | ACCOUNTS | 104AC
 (4 rows)
 
+employee_management_system=# select emp_first_name from employee where salary  IN (select salary from employee where salary>20000);
+ emp_first_name 
+----------------
+ Aman
+ Ankansha
+ Kunal
+ Neha
+ kiran
+ Pawan
+ Thomas
+ Brijesh
+ Karan
+ Shefali
+ Akansha
+ Jenifer
+(12 rows)
+
+employee_management_system=# select * from employee where salary > (select Avg(salary) from employee);
+ emp_first_name | emp_last_name | gender | date_of_birth |      email      | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------+--------+-----+----------+------------
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com |  50000 | 4   | HR       | 102HR
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com |  35000 | 7   | SALES    | 103SL
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com  |  35000 | 12  | IT       | 101IT
+ Jenifer        | kapoor        | MALE   | 1995-08-24    | krish@gmail.com |  35000 | 8   | ACCOUNTS | 104AC
+(4 rows)
+
+employee_management_system=# select * from employee where Age(date_of_birth) > (select Age(date_of_birth) from empl);
+ERROR:  relation "empl" does not exist
+LINE 1: ... Age(date_of_birth) > (select Age(date_of_birth) from empl);
+                                                                 ^
+employee_management_system=# select * from employee where Age(date_of_birth) > (select Age(date_of_birth) from employee where gender='FEMALE' and salary>20000);
+ERROR:  more than one row returned by a subquery used as an expression
+employee_management_system=# select * from employee where Age(date_of_birth) > (select Age(date_of_birth) from employee where gender='FEMALE');ERROR:  more than one row returned by a subquery used as an expression
+employee_management_system=# select * from employee where Age(date_of_birth) > (select Avg( Age(date_of_birth)) from employee);
+ emp_first_name | emp_last_name | gender | date_of_birth |      email       | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+------------------+--------+-----+----------+------------
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com  |  35000 | 7   | SALES    | 103SL
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com   |  25000 | 10  | RESEARCH | 103RE
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com   |  35000 | 12  | IT       | 101IT
+ Jenifer        | kapoor        | MALE   | 1995-08-24    | krish@gmail.com  |  35000 | 8   | ACCOUNTS | 104AC
+(5 rows)
+
+employee_management_system=# select Age(date_of_birth) as Age from employee where Age(date_of_birth) > (select Avg( Age(date_of_birth)) from employee);
+           age            
+--------------------------
+ 27 years 5 mons 23 days
+ 31 years 7 mons 23 days
+ 29 years 8 mons 23 days
+ 25 years 11 mons 15 days
+ 26 years 3 mons 20 days
+(5 rows)
+
+employee_management_system=# select Age(date_of_birth) as Age from employee;
+           age            
+--------------------------
+ 23 years 11 mons 16 days
+ 23 years 15 days
+ 22 years 2 mons 23 days
+ 22 years 3 mons 2 days
+ 23 years 11 mons 16 days
+ 22 years 11 mons 20 days
+ 27 years 5 mons 23 days
+ 31 years 7 mons 23 days
+ 29 years 8 mons 23 days
+ 22 years 11 mons 16 days
+ 25 years 11 mons 15 days
+ 23 years 7 mons 22 days
+ 26 years 3 mons 20 days
+(13 rows)
+
+employee_management_system=# select Avg(date_of_birth) as Age from employee;
+ERROR:  function avg(date) does not exist
+LINE 1: select Avg(date_of_birth) as Age from employee;
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+employee_management_system=# select Avg(Age(date_of_birth)) as Age from employee;
+              age               
+--------------------------------
+ 25 years 31 days 20:18:27.7056
+(1 row)
+
+employee_management_system=# 
+
+employee_management_system=# select Avg(Age(date_of_birth)) as Age from employee;
+              age               
+--------------------------------
+ 25 years 31 days 20:18:27.7056
+(1 row)
+
+employee_management_system=# SELECT CURRENT_TIME;
+     current_time      
+-----------------------
+ 11:23:13.233525+05:30
+(1 row)
+
+employee_management_system=# SELECT CURRENT_DATE;
+ current_date 
+--------------
+ 2021-12-13
+(1 row)
+
+employee_management_system=# SELECT CURRENT_TIMESTAMP;
+        current_timestamp         
+----------------------------------
+ 2021-12-13 11:23:53.783437+05:30
+(1 row)
+
+employee_management_system=# SELECT CURRENT_TIMESTAMP(2);
+      current_timestamp       
+------------------------------
+ 2021-12-13 11:24:15.83+05:30
+(1 row)
+
+employee_management_system=# SELECT LOCALTIMESTAMP;
+      localtimestamp       
+---------------------------
+ 2021-12-13 11:25:23.05677
+(1 row)
+
+employee_management_system=# 
+
+employee_management_system=# select count(*) from employee where emp_first_name='Aman';
+ count 
+-------
+     1
+(1 row)
+
+employee_management_system=# select count(*) from employee where emp_first_name='Akansha';
+ count 
+-------
+     1
+(1 row)
+
+employee_management_system=#
+employee_management_system=# select max(salary) as Salary from employee ;
+ salary 
+--------
+  50000
+(1 row)
+employee_management_system=# select MIN(salary) ,MAX(salary) from employee ;
+  min  |  max  
+-------+-------
+ 20000 | 50000
+(1 row)
+employee_management_system=# select sum(salary) from employee;
+  sum   
+--------
+ 405000
+(1 row)
+employee_management_system=# select ARRAY_AGG(salary) from employee;
+                                    array_agg                                    
+---------------------------------------------------------------------------------
+ {30000,30000,20000,50000,25000,30000,35000,30000,25000,30000,35000,30000,35000}
+(1 row)
+employee_management_system=# select ARRAY_AGG(emp_first_name) from employee;
+                                          array_agg                                           
+----------------------------------------------------------------------------------------------
+ {Aman,Ankansha,Niharika,Kunal,Neha,kiran,Pawan,Thomas,Brijesh,Karan,Shefali,Akansha,Jenifer}
+(1 row)
 
