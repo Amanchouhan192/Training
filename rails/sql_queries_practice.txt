@@ -1,0 +1,1250 @@
+===================sql queries practice=========================================
+ sudo su postgres
+postgres@beryl-HP-ProBook-6460b:/home/beryl$ psql
+psql (12.9 (Ubuntu 12.9-0ubuntu0.20.04.1))
+Type "help" for help.
+
+postgres=# \c project_rails_development ;
+You are now connected to database "project_rails_development" as user "postgres".
+project_rails_development=# \dt
+                 List of relations
+ Schema |         Name         | Type  |   Owner   
+--------+----------------------+-------+-----------
+ public | account_histories    | table | amanrails
+ public | accounts             | table | amanrails
+ public | appointments         | table | amanrails
+ public | ar_internal_metadata | table | amanrails
+ public | authors              | table | amanrails
+ public | books                | table | amanrails
+ public | comments             | table | amanrails
+ public | patients             | table | amanrails
+ public | people               | table | amanrails
+ public | physicians           | table | amanrails
+ public | posts                | table | amanrails
+ public | schema_migrations    | table | amanrails
+ public | student_teachers     | table | amanrails
+ public | students             | table | amanrails
+ public | suppliers            | table | amanrails
+ public | teachers             | table | amanrails
+ public | users                | table | amanrails
+(17 rows)
+
+project_rails_development=# select * from authors;
+ id |        name         |         created_at         |         updated_at         
+----+---------------------+----------------------------+----------------------------
+  1 | J k Rowlling        | 2021-12-09 11:15:16.092679 | 2021-12-09 11:15:16.092679
+  2 | Chetan Bhagat       | 2021-12-09 11:15:34.070222 | 2021-12-09 11:15:34.070222
+  3 | A P j Abdul Kalam   | 2021-12-09 11:17:40.298843 | 2021-12-09 11:17:40.298843
+  4 | Robin Sharma        | 2021-12-09 11:18:05.297458 | 2021-12-09 11:18:05.297458
+  5 | Rabindranath Tagore | 2021-12-09 11:22:51.225179 | 2021-12-09 11:22:51.225179
+(5 rows)
+
+project_rails_development=# \c employee_management_system ;
+You are now connected to database "employee_management_system" as user "postgres".
+employee_management_system=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | clientprojects   | table | postgres
+ public | clients          | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+ public | through          | table | postgres
+(7 rows)
+
+employee_management_system=# select * from clients;
+ clientid |   clientname    
+----------+-----------------
+ AMZN     | Amazon AWS
+ JUNG     | Junglee games
+ ALAI     | All AI
+ GGLE     | Google
+ PLAY     | Play with store
+(5 rows)
+
+employee_management_system=# select * from clientprojects;
+ project_id | client_id | cpid 
+------------+-----------+------
+ 1001       | AMZN      | 1
+ 1002       | ALAI      | 2
+ 1005       | GGLE      | 5
+ 1006       | AMZN      | 6
+ 1004       | GGLE      | 8
+ 1003       | JUNG      | 7
+(6 rows)
+
+employee_management_system=# select * from employees;;
+ERROR:  relation "employees" does not exist
+LINE 1: select * from employees;
+                      ^
+employee_management_system=# select * from employees;
+ERROR:  relation "employees" does not exist
+LINE 1: select * from employees;
+                      ^
+employee_management_system=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(10 rows)
+
+employee_management_system=# select * from departments;
+ dept_id | dept_name 
+---------+-----------
+ 101IT   | IT
+ 102HR   | HR
+ 103SL   | SALES
+ 104AC   | ACCOUNTS
+ 103RE   | RESEARCH
+(5 rows)
+
+employee_management_system=# select * from project;
+ project_id |   project_name   
+------------+------------------
+       1001 | web_project
+       1002 | Machine Learning
+       1003 | Android
+       1005 | funds analysis
+       1006 | Cloud service
+       1004 | mutual funds
+(6 rows)
+
+employee_management_system=# select * from project_assigned;
+ eid | project_id 
+-----+------------
+ 1   |       1001
+ 2   |       1002
+ 3   |       1003
+ 4   |       1005
+ 5   |       1003
+ 6   |       1006
+ 7   |       1001
+ 8   |       1004
+ 9   |       1004
+ 10  |       1001
+(10 rows)
+
+employee_management_system=# select * from through;
+ eid | project_id | eidpk 
+-----+------------+-------
+ 1   |       1001 | 1
+ 1   |       1002 | 2
+ 2   |       1001 | 3
+ 2   |       1003 | 4
+ 3   |       1002 | 5
+ 3   |       1003 | 6
+ 5   |       1004 | 7
+ 5   |       1005 | 8
+ 6   |       1004 | 9
+ 10  |       1001 | 10
+ 7   |       1006 | 11
+ 8   |       1004 | 12
+ 9   |       1006 | 13
+(13 rows)
+
+employee_management_system=# select * from employee ;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(10 rows)
+
+employee_management_system=# select distinct salary where dept = IT;
+ERROR:  column "salary" does not exist
+LINE 1: select distinct salary where dept = IT;
+                        ^
+employee_management_system=# select distinct employee.salary where employee.dept = IT;
+ERROR:  missing FROM-clause entry for table "employee"
+LINE 1: select distinct employee.salary where employee.dept = IT;
+                        ^
+employee_management_system=# select distinct salary from employee where dept = IT;
+ERROR:  column "it" does not exist
+LINE 1: select distinct salary from employee where dept = IT;
+                                                          ^
+employee_management_system=# select distinct salary from employee where dept = "IT";
+ERROR:  column "IT" does not exist
+LINE 1: select distinct salary from employee where dept = "IT";
+                                                          ^
+employee_management_system=# select distinct salary from employee;
+ salary 
+--------
+  35000
+  30000
+  50000
+  25000
+  20000
+(5 rows)
+
+employee_management_system=# select distinct gender ,salary from employee;
+ gender | salary 
+--------+--------
+ FEMALE |  30000
+ MALE   |  35000
+ MALE   |  50000
+ MALE   |  25000
+ FEMALE |  20000
+ FEMALE |  25000
+ MALE   |  30000
+(7 rows)
+
+employee_management_system=# select distinct salary from employee where salary >30000;
+ salary 
+--------
+  35000
+  50000
+(2 rows)
+
+employee_management_system=# select distinct salary from employee where salary >30000;
+ salary 
+--------
+  35000
+  50000
+(2 rows)
+
+employee_management_system=# select salary from employee where salary >30000;
+ salary 
+--------
+  50000
+  35000
+  35000
+(3 rows)
+
+employee_management_system=# select distinct emp_first_name from employee;
+ emp_first_name 
+----------------
+ Neha
+ Niharika
+ Aman
+ Pawan
+ kiran
+ Kunal
+ Ankansha
+ Thomas
+ krshna
+ Brijesh
+(10 rows)
+
+employee_management_system=# select distinct column from employee ;
+ERROR:  syntax error at or near "column"
+LINE 1: select distinct column from employee ;
+                        ^
+employee_management_system=# select distinct name from employee ;
+ERROR:  column "name" does not exist
+LINE 1: select distinct name from employee ;
+                        ^
+employee_management_system=# select distinct dept from employee ;
+   dept   
+----------
+ SALES
+ ACCOUNTS
+ HR
+ RESEARCH
+ IT
+(5 rows)
+
+employee_management_system=# select distinct count(dept) from employee ;
+ count 
+-------
+    10
+(1 row)
+
+employee_management_system=# select distinct count(*) from employee ;
+ count 
+-------
+    10
+(1 row)
+
+employee_management_system=# select * from employe
+employee_management_system-# ^C
+employee_management_system=# select * from employee ;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(10 rows)
+
+
+employee_management_system=# select emp_first_name from employee group by emp_first_name,eid having salary > 30000 order by eid asc;
+ emp_first_name 
+----------------
+ Kunal
+ Pawan
+ krshna
+(3 rows)
+
+employee_management_system=# select emp_first_name from employee group by emp_first_name,eid having salary > 30000 order by eid asc;
+ emp_first_name 
+----------------
+ Kunal
+ Pawan
+ krshna
+(3 rows)
+
+employee_management_system=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(10 rows)
+
+
+employee_management_system=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(10 rows)
+
+
+employee_management_system=# select emp_first_name from employee group by emp_first_name having count(salary)<2;
+ emp_first_name 
+----------------
+ Neha
+ Niharika
+ Aman
+ Pawan
+ kiran
+ Kunal
+ Ankansha
+ Thomas
+ krshna
+ Brijesh
+(10 rows)
+
+employee_management_system=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(10 rows)
+
+                ^
+employee_management_system=# \d employee;
+                         Table "public.employee"
+     Column     |          Type          | Collation | Nullable | Default 
+----------------+------------------------+-----------+----------+---------
+ emp_first_name | character varying(50)  |           | not null | 
+ emp_last_name  | character varying(50)  |           | not null | 
+ gender         | character varying(7)   |           | not null | 
+ date_of_birth  | date                   |           | not null | 
+ email          | character varying(150) |           |          | 
+ salary         | integer                |           |          | 
+ eid            | character varying(10)  |           | not null | 
+ dept           | character varying(10)  |           |          | 
+ dept_id_fk     | character varying      |           |          | 
+Indexes:
+    "employee_pkey" PRIMARY KEY, btree (eid)
+Foreign-key constraints:
+    "employee_dept_id_fk_fkey" FOREIGN KEY (dept_id_fk) REFERENCES departments(dept_id)
+    "employee_eid_fkey" FOREIGN KEY (eid) REFERENCES employee(eid)
+Referenced by:
+    TABLE "employee" CONSTRAINT "employee_eid_fkey" FOREIGN KEY (eid) REFERENCES employee(eid)
+
+                                                             ^
+employee_management_system=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+(10 rows)
+
+
+employee_management_system=# INSERT INTO employee (emp_first_name,emp_last_name,gender,date_of_birth,email,salary,eid,dept,dept_id_fk)
+VALUES ('Karan','Khanna','MALE','1998-12-28','karan@gmail.com',30000,11,'IT','101IT');
+INSERT 0 1
+employee_management_system=# INSERT INTO employee (emp_first_name,emp_last_name,gender,date_of_birth,email,salary,eid,dept,dept_id_fk)
+VALUES ('Shefali','Saini','FEMALE','1995-12-29','shef@gmail.com',35000,12,'IT','101IT');
+INSERT 0 1
+employee_management_system=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT       | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT       | 101IT
+(12 rows)
+
+employee_management_system=# WITH ct1 as ( select * from employee)
+employee_management_system-# select * from ct1;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT       | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT       | 101IT
+(12 rows)
+
+employee_management_system=# WITH ct1 as ( select emp_first_name from employee where salary > 30000)
+select * from ct1;
+ emp_first_name 
+----------------
+ Kunal
+ Pawan
+ krshna
+ Shefali
+(4 rows)
+
+employee_management_system=# WITH ct1 as ( select emp_first_name from employee where salary > 30000 and dept='IT')
+select * from ct1;
+ emp_first_name 
+----------------
+ Shefali
+(1 row)
+
+employee_management_system=#    
+
+employee_management_system=# WITH sum_of_salary_with_name_group as (select emp_first_name ,sum(salary) from employee group by emp_first_name ) select * from sum_of_salary_with_name_group;
+ emp_first_name |  sum  
+----------------+-------
+ Karan          | 30000
+ Shefali        | 35000
+ Neha           | 25000
+ Niharika       | 20000
+ Aman           | 30000
+ Pawan          | 35000
+ kiran          | 30000
+ Kunal          | 50000
+ Ankansha       | 30000
+ Thomas         | 30000
+ krshna         | 35000
+ Brijesh        | 25000
+(12 rows)
+
+employee_management_system=# WITH sum_of_salary_with_name_group as (select emp_first_name ,sum(salary) from employee group by emp_first_name ) select * from sum_of_salary_with_name_group order by emp_first_name DESC;
+ emp_first_name |  sum  
+----------------+-------
+ Thomas         | 30000
+ Shefali        | 35000
+ Pawan          | 35000
+ Niharika       | 20000
+ Neha           | 25000
+ Kunal          | 50000
+ krshna         | 35000
+ kiran          | 30000
+ Karan          | 30000
+ Brijesh        | 25000
+ Ankansha       | 30000
+ Aman           | 30000
+(12 rows)
+employee_management_system=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT       | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT       | 101IT
+(12 rows)
+
+employee_management_system=# select emp_first_name from employee order by id desc;
+ERROR:  column "id" does not exist
+LINE 1: select emp_first_name from employee order by id desc;
+                                                     ^
+HINT:  Perhaps you meant to reference the column "employee.eid".
+employee_management_system=# select emp_first_name from employee order by emp_first_name desc;
+ emp_first_name 
+----------------
+ Thomas
+ Shefali
+ Pawan
+ Niharika
+ Neha
+ Kunal
+ krshna
+ kiran
+ Karan
+ Brijesh
+ Ankansha
+ Aman
+(12 rows)
+
+employee_management_system=# select eid, emp_first_name ,emp_last_name ,salary from employee order by eid asc;
+ eid | emp_first_name | emp_last_name | salary 
+-----+----------------+---------------+--------
+ 1   | Aman           | Chouhan       |  30000
+ 10  | Brijesh        | Yadav         |  25000
+ 11  | Karan          | Khanna        |  30000
+ 12  | Shefali        | Saini         |  35000
+ 2   | Ankansha       | sharma        |  30000
+ 3   | Niharika       | kumari        |  20000
+ 4   | Kunal          | kumar         |  50000
+ 5   | Neha           | Nagar         |  25000
+ 6   | kiran          | sharma        |  30000
+ 7   | Pawan          | khanna        |  35000
+ 8   | krshna         | kapoor        |  35000
+ 9   | Thomas         | smith         |  30000
+(12 rows)
+
+employee_management_system=# 
+
+employee_management_system=# with cte as (select emp_first_name,salary from employee group by emp_first_name,salary  order by emp_first_name ,salary asc)select * from cte;
+ emp_first_name | salary 
+----------------+--------
+ Aman           |  30000
+ Ankansha       |  30000
+ Brijesh        |  25000
+ Karan          |  30000
+ kiran          |  30000
+ krshna         |  35000
+ Kunal          |  50000
+ Neha           |  25000
+ Niharika       |  20000
+ Pawan          |  35000
+ Shefali        |  35000
+ Thomas         |  30000
+(12 rows)
+employee_management_system=# select * from employee order by emp_first_name,salary  asc;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT       | 101IT
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT       | 101IT
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+(12 rows)
+
+employee_management_system=# select * from employee LIMIT 5 OFFSET 4;
+ emp_first_name | emp_last_name | gender | date_of_birth |      email       | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+------------------+--------+-----+----------+------------
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com   |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com  |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com  |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com  |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com |  30000 | 9   | ACCOUNTS | 103SL
+(5 rows)
+
+employee_management_system=# select * from employee LIMIT 2 OFFSET 2;
+ emp_first_name | emp_last_name | gender | date_of_birth |       email        | salary | eid | dept | dept_id_fk 
+----------------+---------------+--------+---------------+--------------------+--------+-----+------+------------
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com |  20000 | 3   | IT   | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com    |  50000 | 4   | HR   | 102HR
+(2 rows)
+
+employee_management_system=# select * from employee LIMIT 5 OFFSET 4;
+ emp_first_name | emp_last_name | gender | date_of_birth |      email       | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+------------------+--------+-----+----------+------------
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com   |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com  |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com  |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com  |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com |  30000 | 9   | ACCOUNTS | 103SL
+(5 rows)
+
+employee_management_system=# 
+employee_management_system=# select email from employee where email LIKE  '%ran%';
+      email      
+-----------------
+ kiran@gmail.com
+ karan@gmail.com
+(2 rows)
+
+postgres=# \c employee_management_system ;
+You are now connected to database "employee_management_system" as user "postgres".
+employee_management_system=# \dt
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | clientprojects   | table | postgres
+ public | clients          | table | postgres
+ public | departments      | table | postgres
+ public | employee         | table | postgres
+ public | project          | table | postgres
+ public | project_assigned | table | postgres
+ public | through          | table | postgres
+(7 rows)
+
+employee_management_system=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT       | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT       | 101IT
+(12 rows)
+
+employee_management_system=# INSERT INTO employee (emp_first_name,emp_last_name,gender,date_of_birth,email,salary,eid,dept,dept_id_fk) VALUES ('Akansha','Sharma','FEMALE','1998-04-21','akanshas@gmail.com',30000,13,'SALES','103SL');
+INSERT 0 1
+employee_management_system=# select * from employee ;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT       | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT       | 101IT
+ Akansha        | Sharma        | FEMALE | 1998-04-21    | akanshas@gmail.com    |  30000 | 13  | SALES    | 103SL
+(13 rows)
+
+employee_management_system=# select emp_first_name ,salary from employee where salary>20000 group by emp_first_name ,salary ;
+ emp_first_name | salary 
+----------------+--------
+ Akansha        |  30000
+ Aman           |  30000
+ Ankansha       |  30000
+ Brijesh        |  25000
+ Karan          |  30000
+ kiran          |  30000
+ krshna         |  35000
+ Kunal          |  50000
+ Neha           |  25000
+ Pawan          |  35000
+ Shefali        |  35000
+ Thomas         |  30000
+(12 rows)
+
+employee_management_system=# select emp_first_name from employee where like '%a';
+ERROR:  type "like" does not exist
+LINE 1: select emp_first_name from employee where like '%a';
+                                                  ^
+employee_management_system=# select emp_first_name from employee like '%a';
+ERROR:  syntax error at or near "like"
+LINE 1: select emp_first_name from employee like '%a';
+                                            ^
+employee_management_system=# select emp_first_name from employee emp_first_name like '%a';
+ERROR:  syntax error at or near "like"
+LINE 1: ...elect emp_first_name from employee emp_first_name like '%a';
+                                                             ^
+employee_management_system=# select emp_first_name from employee emp_first_name LIKE '%a';
+ERROR:  syntax error at or near "LIKE"
+LINE 1: ...elect emp_first_name from employee emp_first_name LIKE '%a';
+                                                             ^
+employee_management_system=# select emp_first_name from employee where  emp_first_name LIKE '%a';
+ emp_first_name 
+----------------
+ Ankansha
+ Niharika
+ Neha
+ krshna
+ Akansha
+(5 rows)
+
+employee_management_system=# select * from employee where emp_first_name like '%aw%'
+employee_management_system-# ^C
+employee_management_system=# select * from employee where emp_first_name like '%aw%';
+ emp_first_name | emp_last_name | gender | date_of_birth |      email      | salary | eid | dept  | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------+--------+-----+-------+------------
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com |  35000 | 7   | SALES | 103SL
+(1 row)
+
+employee_management_system=# 
+employee_management_system=# 
+employee_management_system=# 
+employee_management_system=# select * from employee LIMIT 4 OFFSET 4;
+ emp_first_name | emp_last_name | gender | date_of_birth |      email      | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------+--------+-----+----------+------------
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com  |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com |  35000 | 8   | ACCOUNTS | 104AC
+(4 rows)
+
+employee_management_system=# select * from employee where emp_first_name like '_eh_';
+ emp_first_name | emp_last_name | gender | date_of_birth |     email      | salary | eid | dept  | dept_id_fk 
+----------------+---------------+--------+---------------+----------------+--------+-----+-------+------------
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com |  25000 | 5   | SALES | 103SL
+(1 row)
+
+employee_management_system=# delete from employee where eid = 1;
+ERROR:  operator does not exist: character varying = integer
+LINE 1: delete from employee where eid = 1;
+                                       ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+employee_management_system=# UPDATE employee set emp_first_name='Jenifer' where eid = 8;
+ERROR:  operator does not exist: character varying = integer
+LINE 1: UPDATE employee set emp_first_name='Jenifer' where eid = 8;
+                                                               ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+employee_management_system=# UPDATE employee set emp_first_name='Jenifer' where eid=8;
+ERROR:  operator does not exist: character varying = integer
+LINE 1: UPDATE employee set emp_first_name='Jenifer' where eid=8;
+                                                              ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+employee_management_system=# UPDATE employee set emp_first_name='Jenifer' where eid ='8';
+UPDATE 1
+employee_management_system=# select * from employee ;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT       | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT       | 101IT
+ Akansha        | Sharma        | FEMALE | 1998-04-21    | akanshas@gmail.com    |  30000 | 13  | SALES    | 103SL
+ Jenifer        | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+(13 rows)
+
+employee_management_system=# select * from employee where (salary >20000 and gender='FEMALE') OR dept='IT';
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid | dept  | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+-------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT    | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT    | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT    | 101IT
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES | 103SL
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT    | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT    | 101IT
+ Akansha        | Sharma        | FEMALE | 1998-04-21    | akanshas@gmail.com    |  30000 | 13  | SALES | 103SL
+(8 rows)
+
+employee_management_system=# select * from employee where (salary >20000 and gender='FEMALE') AND dept='IT';
+ emp_first_name | emp_last_name | gender | date_of_birth |       email       | salary | eid | dept | dept_id_fk 
+----------------+---------------+--------+---------------+-------------------+--------+-----+------+------------
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com |  30000 | 2   | IT   | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com    |  35000 | 12  | IT   | 101IT
+(2 rows)
+
+employee_management_system=# SELECT COUNT(*) FROM employee ;
+ count 
+-------
+    13
+(1 row)
+
+employee_management_system=# SELECT COUNT(*) as Records FROM employee ; 
+ records 
+---------
+      13
+
+employee_management_system=# select * from employee;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT       | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT       | 101IT
+(12 rows)
+
+employee_management_system=# INSERT INTO employee (emp_first_name,emp_last_name,gender,date_of_birth,email,salary,eid,dept,dept_id_fk) VALUES ('Akansha','Sharma','FEMALE','1998-04-21','akanshas@gmail.com',30000,13,'SALES','103SL');
+INSERT 0 1
+employee_management_system=# select * from employee ;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT       | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT       | 101IT
+ Akansha        | Sharma        | FEMALE | 1998-04-21    | akanshas@gmail.com    |  30000 | 13  | SALES    | 103SL
+(13 rows)
+
+employee_management_system=# select emp_first_name ,salary from employee where salary>20000 group by emp_first_name ,salary ;
+ emp_first_name | salary 
+----------------+--------
+ Akansha        |  30000
+ Aman           |  30000
+ Ankansha       |  30000
+ Brijesh        |  25000
+ Karan          |  30000
+ kiran          |  30000
+ krshna         |  35000
+ Kunal          |  50000
+ Neha           |  25000
+ Pawan          |  35000
+ Shefali        |  35000
+ Thomas         |  30000
+(12 rows)
+
+employee_management_system=# select emp_first_name from employee where like '%a';
+ERROR:  type "like" does not exist
+LINE 1: select emp_first_name from employee where like '%a';
+                                                  ^
+employee_management_system=# select emp_first_name from employee like '%a';
+ERROR:  syntax error at or near "like"
+LINE 1: select emp_first_name from employee like '%a';
+                                            ^
+employee_management_system=# select emp_first_name from employee emp_first_name like '%a';
+ERROR:  syntax error at or near "like"
+LINE 1: ...elect emp_first_name from employee emp_first_name like '%a';
+                                                             ^
+employee_management_system=# select emp_first_name from employee emp_first_name LIKE '%a';
+ERROR:  syntax error at or near "LIKE"
+LINE 1: ...elect emp_first_name from employee emp_first_name LIKE '%a';
+                                                             ^
+employee_management_system=# select emp_first_name from employee where  emp_first_name LIKE '%a';
+ emp_first_name 
+----------------
+ Ankansha
+ Niharika
+ Neha
+ krshna
+ Akansha
+(5 rows)
+
+employee_management_system=# select * from employee where emp_first_name like '%aw%'
+employee_management_system-# ^C
+employee_management_system=# select * from employee where emp_first_name like '%aw%';
+ emp_first_name | emp_last_name | gender | date_of_birth |      email      | salary | eid | dept  | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------+--------+-----+-------+------------
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com |  35000 | 7   | SALES | 103SL
+(1 row)
+
+employee_management_system=# 
+employee_management_system=# 
+employee_management_system=# 
+employee_management_system=# select * from employee LIMIT 4 OFFSET 4;
+ emp_first_name | emp_last_name | gender | date_of_birth |      email      | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------+--------+-----+----------+------------
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com  |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com |  35000 | 7   | SALES    | 103SL
+ krshna         | kapoor        | MALE   | 1995-08-24    | krish@gmail.com |  35000 | 8   | ACCOUNTS | 104AC
+(4 rows)
+
+employee_management_system=# select * from employee where emp_first_name like '_eh_';
+ emp_first_name | emp_last_name | gender | date_of_birth |     email      | salary | eid | dept  | dept_id_fk 
+----------------+---------------+--------+---------------+----------------+--------+-----+-------+------------
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com |  25000 | 5   | SALES | 103SL
+(1 row)
+
+employee_management_system=# delete from employee where eid = 1;
+ERROR:  operator does not exist: character varying = integer
+LINE 1: delete from employee where eid = 1;
+                                       ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+employee_management_system=# UPDATE employee set emp_first_name='Jenifer' where eid = 8;
+ERROR:  operator does not exist: character varying = integer
+LINE 1: UPDATE employee set emp_first_name='Jenifer' where eid = 8;
+                                                               ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+employee_management_system=# UPDATE employee set emp_first_name='Jenifer' where eid=8;
+ERROR:  operator does not exist: character varying = integer
+LINE 1: UPDATE employee set emp_first_name='Jenifer' where eid=8;
+                                                              ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+employee_management_system=# UPDATE employee set emp_first_name='Jenifer' where eid ='8';
+UPDATE 1
+employee_management_system=# select * from employee ;
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+----------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT       | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT       | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT       | 101IT
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com       |  50000 | 4   | HR       | 102HR
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES    | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES    | 103SL
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com       |  35000 | 7   | SALES    | 103SL
+ Thomas         | smith         | MALE   | 1990-04-20    | thomas@gmail.com      |  30000 | 9   | ACCOUNTS | 103SL
+ Brijesh        | Yadav         | MALE   | 1992-03-21    | brij@gmail.com        |  25000 | 10  | RESEARCH | 103RE
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT       | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT       | 101IT
+ Akansha        | Sharma        | FEMALE | 1998-04-21    | akanshas@gmail.com    |  30000 | 13  | SALES    | 103SL
+ Jenifer        | kapoor        | MALE   | 1995-08-24    | krish@gmail.com       |  35000 | 8   | ACCOUNTS | 104AC
+(13 rows)
+
+employee_management_system=# select * from employee where (salary >20000 and gender='FEMALE') OR dept='IT';
+ emp_first_name | emp_last_name | gender | date_of_birth |         email         | salary | eid | dept  | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------------+--------+-----+-------+------------
+ Aman           | Chouhan       | MALE   | 1997-12-28    | amanchouhan@gmail.com |  30000 | 1   | IT    | 101IT
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com     |  30000 | 2   | IT    | 101IT
+ Niharika       | kumari        | FEMALE | 1999-09-20    | niharika@gmail.com    |  20000 | 3   | IT    | 101IT
+ Neha           | Nagar         | FEMALE | 1997-12-28    | neha@gmail.com        |  25000 | 5   | SALES | 103SL
+ kiran          | sharma        | FEMALE | 1998-12-24    | kiran@gmail.com       |  30000 | 6   | SALES | 103SL
+ Karan          | Khanna        | MALE   | 1998-12-28    | karan@gmail.com       |  30000 | 11  | IT    | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com        |  35000 | 12  | IT    | 101IT
+ Akansha        | Sharma        | FEMALE | 1998-04-21    | akanshas@gmail.com    |  30000 | 13  | SALES | 103SL
+(8 rows)
+
+employee_management_system=# select * from employee where (salary >20000 and gender='FEMALE') AND dept='IT';
+ emp_first_name | emp_last_name | gender | date_of_birth |       email       | salary | eid | dept | dept_id_fk 
+----------------+---------------+--------+---------------+-------------------+--------+-----+------+------------
+ Ankansha       | sharma        | FEMALE | 1998-11-28    | akansha@gmail.com |  30000 | 2   | IT   | 101IT
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com    |  35000 | 12  | IT   | 101IT
+(2 rows)
+
+employee_management_system=# SELECT COUNT(*) FROM employee ;
+ count 
+-------
+    13
+(1 row)
+
+employee_management_system=# SELECT COUNT(*) as Records FROM employee ; 
+ records 
+---------
+      13
+(1 row)
+
+employee_management_system=# 
+employee_management_system=# 
+employee_management_system=# 
+employee_management_system=# 
+employee_management_system=# 
+employee_management_system=# SELECT CURRENT_TIMESTAMP;
+        current_timestamp         
+----------------------------------
+ 2021-12-12 14:33:52.318276+05:30
+(1 row)
+
+employee_management_system=# select * from departments ;
+ dept_id | dept_name 
+---------+-----------
+ 101IT   | IT
+ 102HR   | HR
+ 103SL   | SALES
+ 104AC   | ACCOUNTS
+ 103RE   | RESEARCH
+(5 rows)
+
+employee_management_system=# select emp_first_name,salary ,dept from employee CROSS JOIN departments;
+employee_management_system=# select emp_first_name,salary ,dept from employee CROSS JOIN departments on employee.dept_id;
+
+employee_management_system=# select emp_first_name,salary ,dept from employee CROSS JOIN departments on employee.dept_id_fk = departments.dept_id;
+ERROR:  syntax error at or near "on"
+LINE 1: ...salary ,dept from employee CROSS JOIN departments on employe...
+                                                             ^
+employee_management_system=# select emp_first_name,salary ,dept from employee CROSS JOIN departments ON employee.dept_id_fk = departments.dept_id;
+ERROR:  syntax error at or near "ON"
+LINE 1: ...salary ,dept from employee CROSS JOIN departments ON employe...
+                                                             ^
+employee_management_system=# select emp_first_name,salary ,dept from employee CROSS JOIN on departments WHERE  employee.dept_id_fk = departments.dept_id;
+ERROR:  syntax error at or near "on"
+LINE 1: ..._first_name,salary ,dept from employee CROSS JOIN on departm...
+                                                             ^
+employee_management_system=# select emp_first_name,salary ,dept from employee CROSS JOIN  departments WHERE employee.dept_id_fk = departments.dept_id;
+ emp_first_name | salary |   dept   
+----------------+--------+----------
+ Aman           |  30000 | IT
+ Ankansha       |  30000 | IT
+ Niharika       |  20000 | IT
+ Kunal          |  50000 | HR
+ Neha           |  25000 | SALES
+ kiran          |  30000 | SALES
+ Pawan          |  35000 | SALES
+ Thomas         |  30000 | ACCOUNTS
+ Brijesh        |  25000 | RESEARCH
+ Karan          |  30000 | IT
+ Shefali        |  35000 | IT
+ Akansha        |  30000 | SALES
+ Jenifer        |  35000 | ACCOUNTS
+(13 rows)
+
+
+                                               ^
+employee_management_system=# select count(*) FROM employee where dept='IT' ;
+ count 
+-------
+     5
+(1 row)
+
+employee_management_system=# select employee.emp_first_name as Employees_Are_Eligible from employee INNER JOIN project_assigned ON project_assigned.eid = employee.eid INNER JOIN project ON project.project_id = project_assigned.project_id INNER JOIN departments ON departments.dept_id = employee.dept_id_fk where employee.salary>20000 and employee.gender='FEMALE' and project.project_name='Machine Learning';
+ employees_are_eligible 
+------------------------
+ Ankansha
+(1 row)
+
+employee_management_system=# select employee.emp_first_name as Employees_Are_Eligible,project.project_name from employee 
+INNER JOIN project_assigned ON project_assigned.eid = employee.eid 
+INNER JOIN project ON project.project_id = project_assigned.project_id 
+INNER JOIN departments ON departments.dept_id = employee.dept_id_fk
+where employee.salary>20000 and employee.gender='FEMALE' and project.project_name='Machine Learning';
+ employees_are_eligible |   project_name   
+------------------------+------------------
+ Ankansha               | Machine Learning
+(1 row)
+
+employee_management_system=# select employee.emp_first_name as Employees_Are_Eligible,project.project_name,employee.salary  from employee INNER JOIN project_assigned ON project_assigned.eid = employee.eid INNER JOIN project ON project.project_id = project_assigned.project_id INNER JOIN departments ON departments.dept_id = employee.dept_id_fk where employee.salary>20000 and employee.gender='FEMALE' and project.project_name='Machine Learning';
+ employees_are_eligible |   project_name   | salary 
+------------------------+------------------+--------
+ Ankansha               | Machine Learning |  30000
+(1 row)
+
+employee_management_system=# WITH cte as (select employee.emp_first_name,departments.dept_name from employee INNER JOIN departments on employee.dept_id_fk = departments.dept_id) select * from cte;
+ emp_first_name | dept_name 
+----------------+-----------
+ Aman           | IT
+ Ankansha       | IT
+ Niharika       | IT
+ Kunal          | HR
+ Neha           | SALES
+ kiran          | SALES
+ Pawan          | SALES
+ Thomas         | SALES
+ Brijesh        | RESEARCH
+ Karan          | IT
+ Shefali        | IT
+ Akansha        | SALES
+ Jenifer        | ACCOUNTS
+(13 rows)
+
+employee_management_system=# WITH cte as (select employee.emp_first_name,departments.dept_name from employee INNER JOIN departments on employee.dept_id_fk = departments.dept_id) select * from cte;
+ emp_first_name | dept_name 
+----------------+-----------
+ Aman           | IT
+ Ankansha       | IT
+ Niharika       | IT
+ Kunal          | HR
+ Neha           | SALES
+ kiran          | SALES
+ Pawan          | SALES
+ Thomas         | SALES
+ Brijesh        | RESEARCH
+ Karan          | IT
+ Shefali        | IT
+ Akansha        | SALES
+ Jenifer        | ACCOUNTS
+(13 rows)
+
+
+employee_management_system=# WITH projects_count_with_employee_name as (select employee.emp_first_name ,count(project) as Count from employee INNER JOIN project_assigned on  project_assigned.eid = employee.eid INNER JOIN through on through.eid = project_assigned.eid INNER JOIN project on project.project_id= project_assigned.project_id GROUP BY employee.eid) select * from projects_count_with_employee_name;
+ emp_first_name | count 
+----------------+-------
+ Aman           |     2
+ Thomas         |     1
+ Jenifer        |     1
+ kiran          |     1
+ Niharika       |     2
+ Brijesh        |     1
+ Ankansha       |     2
+ Pawan          |     1
+ Neha           |     2
+(9 rows)
+
+
+employee_management_system=# WITH projects_count_with_employee_name as (select employee.emp_first_name ,count(project) from employee  INNER JOIN  project_assigned on  project_assigned.eid = employee.eid INNER JOIN through on through.eidpk = project_assigned.eid INNER JOIN project on project.project_id= project_assigned.project_id GROUP BY employee.eid) select * from projects_count_with_employee_name;
+ emp_first_name | count 
+----------------+-------
+ Aman           |     1
+ Thomas         |     1
+ Kunal          |     1
+ Jenifer        |     1
+ kiran          |     1
+ Niharika       |     1
+ Brijesh        |     1
+ Ankansha       |     1
+ Pawan          |     1
+ Neha           |     1
+(10 rows)
+
+employee_management_system=# WITH projects_count_with_employee_name as (select employee.emp_first_name ,count(project) from employee  INNER JOIN  project_assigned on  project_assigned.eid = employee.eid INNER JOIN through on through.eid = project_assigned.eid INNER JOIN project on project.project_id= project_assigned.project_id GROUP BY employee.eid) select * from projects_count_with_employee_name;
+ emp_first_name | count 
+----------------+-------
+ Aman           |     2
+ Thomas         |     1
+ Jenifer        |     1
+ kiran          |     1
+ Niharika       |     2
+ Brijesh        |     1
+ Ankansha       |     2
+ Pawan          |     1
+ Neha           |     2
+(9 rows)
+
+
+employee_management_system=# WITH projects_count_with_employee_name as (select employee.emp_first_name,project.project_name ,count(project) from employee  INNER JOIN  project_assigned on  project_assigned.eid = employee.eid INNER JOIN through on through.eid = project_assigned.eid INNER JOIN project on project.project_id= project_assigned.project_id GROUP BY employee.eid,project.project_name) select * from projects_count_with_employee_name;
+ emp_first_name |   project_name   | count 
+----------------+------------------+-------
+ Jenifer        | mutual funds     |     1
+ Neha           | Android          |     2
+ kiran          | Cloud service    |     1
+ Thomas         | mutual funds     |     1
+ Pawan          | web_project      |     1
+ Brijesh        | web_project      |     1
+ Niharika       | Android          |     2
+ Ankansha       | Machine Learning |     2
+ Aman           | web_project      |     2
+(9 rows)
+
+employee_management_system=# WITH projects_count_with_employee_name as (select employee.emp_first_name,project.project_name ,count(project) from employee  INNER JOIN  project_assigned on  project_assigned.eid = employee.eid INNER JOIN through on through.eidpk = project_assigned.eid INNER JOIN project on project.project_id= project_assigned.project_id GROUP BY employee.eid,project.project_name) select * from projects_count_with_employee_name;
+ emp_first_name |   project_name   | count 
+----------------+------------------+-------
+ Jenifer        | mutual funds     |     1
+ Neha           | Android          |     1
+ kiran          | Cloud service    |     1
+ Thomas         | mutual funds     |     1
+ Pawan          | web_project      |     1
+ Brijesh        | web_project      |     1
+ Kunal          | funds analysis   |     1
+ Niharika       | Android          |     1
+ Ankansha       | Machine Learning |     1
+ Aman           | web_project      |     1
+(10 rows)
+
+employee_management_system=# WITH projects_count_with_employee_name as (select employee.emp_first_name,project.project_name ,count(project) from employee  INNER JOIN  project_assigned on  project_assigned.eid = employee.eid INNER JOIN through on through.project_id = project_assigned.project_id INNER JOIN project on project.project_id= project_assigned.project_id GROUP BY employee.eid,project.project_name) select * from projects_count_with_employee_name;
+ emp_first_name |   project_name   | count 
+----------------+------------------+-------
+ Jenifer        | mutual funds     |     3
+ Neha           | Android          |     2
+ kiran          | Cloud service    |     2
+ Thomas         | mutual funds     |     3
+ Pawan          | web_project      |     3
+ Brijesh        | web_project      |     3
+ Kunal          | funds analysis   |     1
+ Niharika       | Android          |     2
+ Ankansha       | Machine Learning |     2
+ Aman           | web_project      |     3
+(10 rows)
+
+employee_management_system=# WITH projects_count_with_employee_name as (select employee.emp_first_name,project.project_name  from employee  INNER JOIN  project_assigned on  project_assigned.eid = employee.eid INNER JOIN through on through.project_id = project_assigned.project_id INNER JOIN project on project.project_id= project_assigned.project_id GROUP BY employee.eid,project.project_name) select * from projects_count_with_employee_name;
+ emp_first_name |   project_name   
+----------------+------------------
+ Jenifer        | mutual funds
+ Neha           | Android
+ kiran          | Cloud service
+ Thomas         | mutual funds
+ Pawan          | web_project
+ Brijesh        | web_project
+ Kunal          | funds analysis
+ Niharika       | Android
+ Ankansha       | Machine Learning
+ Aman           | web_project
+(10 rows)
+
+employee_management_system=# WITH projects_count_with_employee_name as (select employee.emp_first_name,project.project_name  from employee  INNER JOIN  project_assigned on  project_assigned.eid = employee.eid INNER JOIN through on through.project_id = project_assigned.project_id INNER JOIN project on project.project_id= project_assigned.project_id GROUP BY employee.eid,project.project_name) select * from projects_count_with_employee_name;
+ emp_first_name |   project_name   
+----------------+------------------
+ Jenifer        | mutual funds
+ Neha           | Android
+ kiran          | Cloud service
+ Thomas         | mutual funds
+ Pawan          | web_project
+ Brijesh        | web_project
+ Kunal          | funds analysis
+ Niharika       | Android
+ Ankansha       | Machine Learning
+ Aman           | web_project
+(10 rows)
+
+employee_management_system=# WITH projects_count_with_employee_name as (select employee.emp_first_name,project.project_name  from employee  INNER JOIN  project_assigned on  project_assigned.eid = employee.eid INNER JOIN through on through.eidpk = project_assigned.eid INNER JOIN project on project.project_id= project_assigned.project_id where employee.emp_first_name='Aman' GROUP BY employee.eid,project.project_name) select * from projects_count_with_employee_name;
+ emp_first_name | project_name 
+----------------+--------------
+ Aman           | web_project
+(1 row)
+
+employee_management_system=# select e.emp_first_name ,p.project_name from employee as e,departments as d,project_assigned as pa,project as p,through as t where pa.eid = e.eid and t.eidpk = pa.eid and p.project_id=pa.project_id and e.emp_first_name='Aman' group by e.eid,p.project_name;
+ emp_first_name | project_name 
+----------------+--------------
+ Aman           | web_project
+(1 row)
+
+employee_management_system=# select * from employee where eid in (select eid from employee where salary >30000);
+ emp_first_name | emp_last_name | gender | date_of_birth |      email      | salary | eid |   dept   | dept_id_fk 
+----------------+---------------+--------+---------------+-----------------+--------+-----+----------+------------
+ Kunal          | kumar         | MALE   | 1999-09-11    | kunal@gmail.com |  50000 | 4   | HR       | 102HR
+ Pawan          | khanna        | MALE   | 1994-06-20    | pawan@gmail.com |  35000 | 7   | SALES    | 103SL
+ Shefali        | Saini         | FEMALE | 1995-12-29    | shef@gmail.com  |  35000 | 12  | IT       | 101IT
+ Jenifer        | kapoor        | MALE   | 1995-08-24    | krish@gmail.com |  35000 | 8   | ACCOUNTS | 104AC
+(4 rows)
+
+
