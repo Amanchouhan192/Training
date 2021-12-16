@@ -5,6 +5,11 @@
   <h class="signup_title">Employee Sign Up</h>
   <br />
   <%= form_for @employee,:url=> "/employee/create", method:'post' do |f| %>
+  <div class="validation_errors" >
+    <% if @employee.errors.any? %>
+        <%= render partial: "shared/errors_msg" %>
+    <% end %>
+  </div>
   <div class="mb-3 flex items-center">
     <%= f.label :name %> <%= f.text_field :name, class: "form-control" ,placeholder: "Employee Name" %>
   </div>
@@ -12,7 +17,7 @@
     <%= f.label :email %> <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
   </div>
   <div class="mb-3 flex items-center">
-    <%= f.label :ID %> <%= f.text_field :email, class: "form-control", placeholder: "Employee ID" %>
+    <%= f.label :ID %> <%= f.text_field :emp_id, class: "form-control", placeholder: "Employee ID" %>
   </div>
   <div class="gender flex items-center"><%= f.label :gender,class:"label_gender" %> <%= f.radio_button :gender, 'Male', checked: "checked" %>Male <%= f.radio_button :gender, 'Female',required: true %>Female<br /></div>
   <div class="mb-3 flex items-center">
