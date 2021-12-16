@@ -1,4 +1,8 @@
 class Employee < ApplicationRecord
+
+  #Associations
+  belongs_to :department
+
   validates :name, :email, presence: true 
   validates :name, format: { with: /\A[a-zA-Z]+\z/,message: "Should Be Valid Name" ,length: {minimum: 6}}
 
