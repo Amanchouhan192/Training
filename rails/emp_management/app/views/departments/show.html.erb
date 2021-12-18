@@ -1,0 +1,25 @@
+<br /><h>Welcome <h></h><br />
+<dev class="blogs_index">
+
+  <table class="listing" summary="">
+   <tr class="header">
+     <th class="table_heading">No.</th>
+     <th class="table_heading">Name</th>
+     <th class="table_heading">Salary</th>
+     <th class="table_heading">Gender</th>
+     <th class="table_heading">Department</th>
+   </tr>
+   <% i = 1 %>
+   <% @employees.each do |employee| %>
+   <tr> 
+    <td class="table_data"><%= i %></td>
+    <td class="table_data"><%= employee.name %></td>
+    <td class="table_data"><%= employee.salary %></td>
+    <td class="table_data"><%= employee.gender %></td>
+    <td class="table_data"><%= employee.department %></td>
+    <% i = i + 1 %> 
+    </tr>
+    <% end %>
+ </table>
+ </div>
+
