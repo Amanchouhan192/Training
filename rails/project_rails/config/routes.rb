@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :departments
+  #root 'home#index'
+
   root 'home#index'
   get 'home/index',to: 'home#index'
 

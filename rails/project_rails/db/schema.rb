@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_10_095757) do
+ActiveRecord::Schema.define(version: 2021_12_17_105828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,23 @@ ActiveRecord::Schema.define(version: 2021_12_10_095757) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customers_phones", id: false, force: :cascade do |t|
+    t.bigint "phone_id", null: false
+    t.bigint "customer_id", null: false
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -77,6 +94,14 @@ ActiveRecord::Schema.define(version: 2021_12_10_095757) do
     t.string "address"
   end
 
+  create_table "phones", force: :cascade do |t|
+    t.string "name"
+    t.string "model_number"
+    t.string "company"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "physicians", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -88,6 +113,8 @@ ActiveRecord::Schema.define(version: 2021_12_10_095757) do
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "student_teachers", force: :cascade do |t|
@@ -133,4 +160,5 @@ ActiveRecord::Schema.define(version: 2021_12_10_095757) do
   add_foreign_key "accounts", "suppliers"
   add_foreign_key "books", "authors"
   add_foreign_key "comments", "posts"
+  add_foreign_key "posts", "users"
 end

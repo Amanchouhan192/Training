@@ -11,7 +11,7 @@ class UserController < ApplicationController
 			#redirect_to '/user/new' ,danger: "Invalid Email or Phone Number you entered! or Password mismatch!"
 		    render 'new'
 		end
-end
+    end
 
 	def login_check
 		@user = User.find_by(email: params[:user][:email]) 
@@ -20,10 +20,9 @@ end
 				session[:user_id] = @user.id  
 				redirect_to '/post/index'
 			else
-				redirect_to '/user/login' ,danger: "Invalid Email or Password!"
+				render '/user/login' ,danger: "Invalid Email or Password!"
 			end
-		else
-			render 'login'
+	
 		end
 	end
 
