@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'employee/new',to: 'employee#new'
 
   get '/departments/index',to: 'departments#index'
+
+  get '/departments/show',to: 'departments#show'
   
   post 'employee/create', to: 'employee#create'
 end

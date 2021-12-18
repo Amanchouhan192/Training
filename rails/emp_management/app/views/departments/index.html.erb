@@ -1,1 +1,24 @@
-<h>This is departments index page</h>
+<br />
+<h>Employee Information</h>
+<div class="">
+  <br  />
+  <h class="">Employee Information</h>
+  <br />
+  <%= form_tag @employees ,:url => '/departments/show' do |f| %>
+    <div class="form-group">
+        <%= f.label :Gender %>
+        <%= f.select :gender, options_for_select(%w[Male Female]), class: "form-control" %>
+  
+        <%= f.label :Department %>
+        <%= f.select :dept, options_for_select(%w[HR IT SALES ACCOUNTS]), class: "form-control" %>
+    </div>
+     
+  <div class="mb-3 flex items-ce cnter">
+    <%= f.submit "Submit" ,:class => 'button' %>
+  </div>
+
+
+
+  <% end %>
+</div>
+

@@ -3083,4 +3083,101 @@ quit
 
 
 
+  Author Load (1.0ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `last_name' for #<Author id: 1, name: "J k Rowlling", created_at: "2021-12-09 11:15:16.092679000 +0000", updated_at: "2021-12-09 11:15:16.092679000 +0000"> (NoMethodError)
+3.0.2 :005 > books.each do |book|
+3.0.2 :006 >   puts book.author.name
+3.0.2 :007 > end
+J k Rowlling
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+J k Rowlling
+Chetan Bhagat
+ => 
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  author_id: 1>,
+ #<Book:0x000055b25f7b24f8
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x000055b25f7b23b8
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x000055b25f7b2278
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>] 
+3.0.2 :008 > 
+3.0.2 :009 > 
+3.0.2 :010 > 
+3.0.2 :011 > 
+3.0.2 :012 > reload!
+Reloading...
+ => true 
+/home/beryl/Desktop/Training/rails/project_rails/app/models/book.rb:6:in `block in <class:Book>': wrong number of arguments (given 0, expected 1) (ArgumentError)
+3.0.2 :014 > reload!
+Reloading...
+ => true 
+3.0.2 :015 > Book.published_date
+/home/beryl/Desktop/Training/rails/project_rails/app/models/book.rb:6:in `block in <class:Book>': wrong number of arguments (given 0, expected 1) (ArgumentError)
+ => 
+[#<Student:0x000055b2606ffca8
+  id: 1,
+  created_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:10.833096000 UTC +00:00>,
+ #<Student:0x000055b26073fd08
+  id: 2,
+  name: "Soniya",
+  created_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:19.284550000 UTC +00:00>,
+ #<Student:0x000055b26073fc40
+  id: 3,
+  name: "Khushboo",
+  created_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:28.377703000 UTC +00:00>,
+ #<Student:0x000055b26073fb78
+  id: 4,
+  name: "Vijay",
+  created_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:37.072052000 UTC +00:00>,
+ #<Student:0x000055b26073fab0
+  id: 5,
+  name: "Niharika",
+  created_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00,
+  updated_at: Fri, 10 Dec 2021 10:13:46.689037000 UTC +00:00>] 
+3.0.2 :017 > Student.order(:id).explain
+  Student Load (1.2ms)  SELECT "students".* FROM "students" ORDER BY "students"."id" ASC
+ => 
+EXPLAIN for: SELECT "students".* FROM "students" ORDER BY "students"."id" ASC
+                                    QUERY PLAN
+----------------------------------------------------------------------------------
+ Index Scan using students_pkey on students  (cost=0.15..62.70 rows=970 width=56)
+(1 row)
+ 
+3.0.2 :018 > books = Book.limit(5).explain
+  Book Load (1.1ms)  SELECT "books".* FROM "books" LIMIT $1  [["LIMIT", 5]]
+ => 
+EXPLAIN for: SELECT "books".* FROM "books" LIMIT $1 [["LIMIT", 5]]
+... 
+3.0.2 :019 > books
+ => 
+EXPLAIN for: SELECT "books".* FROM "books" LIMIT $1 [["LIMIT", 5]]
+                          QUERY PLAN
+---------------------------------------------------------------
+ Limit  (cost=0.00..0.11 rows=5 width=64)
+   ->  Seq Scan on books  (cost=0.00..18.80 rows=880 width=64)
+(2 rows)
+ 
+
 

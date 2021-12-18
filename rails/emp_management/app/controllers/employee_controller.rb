@@ -4,6 +4,7 @@ class EmployeeController < ApplicationController
   end
 
   def index
+    @employees  = Employee.all
   end
 
   def create
