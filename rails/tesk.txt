@@ -1,0 +1,7 @@
+Task Done:
+  1.created project
+  2.integrated with postgres done
+  3.Created Department Model and Its Controller
+  4.Created Employee Model and Its Controller
+  5.Created Employees Action new and create for form
+  6.Employee data is updating on database using form is done.

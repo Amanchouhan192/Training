@@ -1,0 +1,521 @@
+beryl@beryl-HP-ProBook-6460b ~/D/Training (main)> mv newfolder Desktop/
+beryl@beryl-HP-ProBook-6460b ~/D/Training (main)> ls
+Desktop/  Git/  Linux/  Postgresql/  rails/  README.md  ruby/  Vim/
+beryl@beryl-HP-ProBook-6460b ~/D/Training (main)> cd ..
+beryl@beryl-HP-ProBook-6460b ~/Desktop> ls
+ 1598861884286.mp4                          dump/                                  {newfolder/                    rename.txt      Training/
+'Action Controller Exception caught.html'   folder/                               'Problem loading page_files'/   test.rb
+ diwali-meme.png                            jujutsu-kaisen-wallpaper-25408_L.jpg  'Problem loading page.xhtml'   "Today's work"
+beryl@beryl-HP-ProBook-6460b ~/Desktop> cd \{newfolder/
+beryl@beryl-HP-ProBook-6460b ~/D/{newfolder> ls
+ Folder/   new1.txt/   newfolder/   new.html/   new.js/  '{new.txt new1.txt}}'/
+beryl@beryl-HP-ProBook-6460b ~/D/{newfolder> cd ..
+beryl@beryl-HP-ProBook-6460b ~/Desktop> mkdir localfolder
+beryl@beryl-HP-ProBook-6460b ~/Desktop> cd localfolder/
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder> git init
+Initialized empty Git repository in /home/beryl/Desktop/localfolder/.git/
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master)> touch new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master)> vim new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master)> git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	new.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master)> git commit -m "new empty text file created."
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	new.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master) [1]> git push
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master) [128]> git remote add origin main https://github.com/Amanchouhan192
+usage: git remote add [<options>] <name> <url>
+
+    -f, --fetch           fetch the remote branches
+    --tags                import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --track <branch>  branch(es) to track
+    -m, --master <branch>
+                          master branch
+    --mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master) [SIGHUP]> cd ..
+beryl@beryl-HP-ProBook-6460b ~/Desktop> git remote add  localfolder origin main https://github.com/Amanchouhan192
+fatal: not a git repository (or any of the parent directories): .git
+beryl@beryl-HP-ProBook-6460b ~/Desktop [128]> cd localfolder/
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master)> git remote add origin main git@github.com:Amanchouhan192/Test.git
+usage: git remote add [<options>] <name> <url>
+
+    -f, --fetch           fetch the remote branches
+    --tags                import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --track <branch>  branch(es) to track
+    -m, --master <branch>
+                          master branch
+    --mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master) [SIGHUP]> git remote add origin master git@github.com:Amanchouhan192/Test.git
+usage: git remote add [<options>] <name> <url>
+
+    -f, --fetch           fetch the remote branches
+    --tags                import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --track <branch>  branch(es) to track
+    -m, --master <branch>
+                          master branch
+    --mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master) [SIGHUP]> 
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master) [SIGHUP]> 
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master) [SIGHUP]> 
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master) [SIGHUP]> 
+beryl@beryl-HP-ProBook-6460b ~/D/localfolder (master) [SIGHUP]> cd ..
+beryl@beryl-HP-ProBook-6460b ~/Desktop> git clone git@github.com:Amanchouhan192/Test.git
+Cloning into 'Test'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (3/3), done.
+beryl@beryl-HP-ProBook-6460b ~/Desktop> mv localfolder Test/
+beryl@beryl-HP-ProBook-6460b ~/Desktop> ls
+ 1598861884286.mp4                          dump/                                  {newfolder/                    rename.txt  "Today's work"
+'Action Controller Exception caught.html'   folder/                               'Problem loading page_files'/   Test/        Training/
+ diwali-meme.png                            jujutsu-kaisen-wallpaper-25408_L.jpg  'Problem loading page.xhtml'    test.rb
+beryl@beryl-HP-ProBook-6460b ~/Desktop> cd Test/
+beryl@beryl-HP-ProBook-6460b ~/D/Test (main)> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	localfolder/
+
+nothing added to commit but untracked files present (use "git add" to track)
+beryl@beryl-HP-ProBook-6460b ~/D/Test (main)> cd localfolder/
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (master)> ls
+new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (master)> ls -lha
+total 16K
+drwxrwxr-x 3 beryl beryl 4.0K Dec 16 00:36 ./
+drwxrwxr-x 4 beryl beryl 4.0K Dec 16 00:40 ../
+drwxrwxr-x 7 beryl beryl 4.0K Dec 16 00:36 .git/
+-rw-rw-r-- 1 beryl beryl   12 Dec 16 00:36 new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (master)> rm -r .git
+rm: remove write-protected regular file '.git/objects/4b/825dc642cb6eb9a060e54bf8d69288fbee4904'? 
+rm: cannot remove '.git/objects/4b': Directory not empty
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main) [1]> git statsu 
+git: 'statsu' is not a git command. See 'git --help'.
+
+The most similar command is
+	status
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main) [1]> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	./
+
+nothing added to commit but untracked files present (use "git add" to track)
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git push
+Everything up-to-date
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	./
+
+nothing added to commit but untracked files present (use "git add" to track)
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git add .
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   new.txt
+
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git commit -m "new commit for empty test file."
+[main 6ca8e89] new commit for empty test file.
+ 1 file changed, 1 insertion(+)
+ create mode 100644 localfolder/new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 349 bytes | 349.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To github.com:Amanchouhan192/Test.git
+   b3ec6df..6ca8e89  main -> main
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git branch feature1
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git branch feature2
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git branch
+  feature1
+  feature2
+* main
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git checkout feature1
+Switched to branch 'feature1'
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> git status 
+On branch feature1
+nothing to commit, working tree clean
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> ls
+new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> vim new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> git status 
+On branch feature1
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   new.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> git commit -m "add ! mark"
+On branch feature1
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   new.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1) [1]> git add .
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> git status 
+On branch feature1
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   new.txt
+
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> git commit -m "add ! mark"
+[feature1 a20ecdf] add ! mark
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> git push
+fatal: The current branch feature1 has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin feature1
+
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1) [128]> git push origin feature1
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 335 bytes | 167.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+remote: 
+remote: Create a pull request for 'feature1' on GitHub by visiting:
+remote:      https://github.com/Amanchouhan192/Test/pull/new/feature1
+remote: 
+To github.com:Amanchouhan192/Test.git
+ * [new branch]      feature1 -> feature1
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> git status 
+On branch feature1
+nothing to commit, working tree clean
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> git branch
+* feature1
+  feature2
+  main
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git branch
+  feature1
+  feature2
+* main
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git merge feature1
+Updating 6ca8e89..a20ecdf
+Fast-forward
+ localfolder/new.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git status 
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git push
+Total 0 (delta 0), reused 0 (delta 0)
+To github.com:Amanchouhan192/Test.git
+   6ca8e89..a20ecdf  main -> main
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git checkout feature2
+Switched to branch 'feature2'
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git status
+On branch feature2
+nothing to commit, working tree clean
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> vim new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git branch
+  feature1
+* feature2
+  main
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git checkout feature1
+Switched to branch 'feature1'
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> vim new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature1)> git checkout feature2
+Switched to branch 'feature2'
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> vim new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git pull
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> feature2
+
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2) [1]> git pull origin main
+From github.com:Amanchouhan192/Test
+ * branch            main       -> FETCH_HEAD
+Updating 6ca8e89..a20ecdf
+error: Your local changes to the following files would be overwritten by merge:
+	localfolder/new.txt
+Please commit your changes or stash them before you merge.
+Aborting
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2) [1]> git status 
+On branch feature2
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   new.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> vim new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git status 
+On branch feature2
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   new.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git add .
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git commit -m "add Hiiii.."
+[feature2 e0bbfdb] add Hiiii..
+ 1 file changed, 1 insertion(+)
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git status 
+On branch feature2
+nothing to commit, working tree clean
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git branch
+  feature1
+* feature2
+  main
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git push feature2
+fatal: 'feature2' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2) [128]> git push feature2
+fatal: 'feature2' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2) [128]> git push 
+fatal: The current branch feature2 has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin feature2
+
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2) [128]> 
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2) [128]> git push origin feature2
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 340 bytes | 340.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+remote: 
+remote: Create a pull request for 'feature2' on GitHub by visiting:
+remote:      https://github.com/Amanchouhan192/Test/pull/new/feature2
+remote: 
+To github.com:Amanchouhan192/Test.git
+ * [new branch]      feature2 -> feature2
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git status 
+On branch feature2
+nothing to commit, working tree clean
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git pull origin main
+From github.com:Amanchouhan192/Test
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git merge feature2
+Auto-merging localfolder/new.txt
+CONFLICT (content): Merge conflict in localfolder/new.txt
+Automatic merge failed; fix conflicts and then commit the result.
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main|MERGING) [1]> vim new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main|MERGING)> git status 
+On branch main
+Your branch is up to date with 'origin/main'.
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both modified:   new.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main|MERGING)> git merge feature2
+error: Merging is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main|MERGING) [128]> git add .
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main|MERGING)> git commit -m "edits in conflicts resolve"
+[main b4b8abb] edits in conflicts resolve
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git merge feature2
+Already up to date.
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git push origin main
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 379 bytes | 379.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To github.com:Amanchouhan192/Test.git
+   a20ecdf..b4b8abb  main -> main
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> vim new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git add .
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git commit -m "change in text in new file."
+[main f664edd] change in text in new file.
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 380 bytes | 380.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To github.com:Amanchouhan192/Test.git
+   b4b8abb..f664edd  main -> main
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git checkout feature2
+Switched to branch 'feature2'
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git pull origin main
+From github.com:Amanchouhan192/Test
+ * branch            main       -> FETCH_HEAD
+Updating e0bbfdb..f664edd
+Fast-forward
+ localfolder/new.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> vim new.txt
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git add .
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git commit -m "change is happened."
+[feature2 020d738] change is happened.
+ 1 file changed, 2 insertions(+)
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git status 
+On branch feature2
+nothing to commit, working tree clean
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git -ammend new.txt 
+unknown option: -ammend
+usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2) [SIGHUP]> git log
+commit 020d7385ab031ec3903e720384155559290f5e9c (HEAD -> feature2)
+Author: amanchouhan192 <amanchouhan192@gmail.com>
+Date:   Thu Dec 16 01:02:44 2021 +0530
+
+    change is happened.
+
+commit f664edd8420ad3300105f6f500a88814027aef66 (origin/main, origin/HEAD, main)
+Author: amanchouhan192 <amanchouhan192@gmail.com>
+Date:   Thu Dec 16 01:01:19 2021 +0530
+
+    change in text in new file.
+
+commit b4b8abb46a29c5b10c23b66eaac3ac9d41d21ef6
+Merge: a20ecdf e0bbfdb
+Author: amanchouhan192 <amanchouhan192@gmail.com>
+Date:   Thu Dec 16 00:56:10 2021 +0530
+
+    edits in conflicts resolve
+
+commit e0bbfdbe09bd4633af016ace8d4204ed14edcec5 (origin/feature2)
+Author: amanchouhan192 <amanchouhan192@gmail.com>
+Date:   Thu Dec 16 00:51:39 2021 +0530
+
+    add Hiiii..
+
+commit a20ecdf4f019aa2f16c99697dedaa8d9f0ff4523 (origin/feature1, feature1)
+Author: amanchouhan192 <amanchouhan192@gmail.com>
+Date:   Thu Dec 16 00:45:03 2021 +0530
+
+    add ! mark
+
+commit 6ca8e893bd11b116cc664aa7ddd67702c409bf7d
+Author: amanchouhan192 <amanchouhan192@gmail.com>
+Date:   Thu Dec 16 00:43:18 2021 +0530
+
+    new commit for empty test file.
+
+commit b3ec6df5a49fb1eeb455e28813f6c5e69d7d666b
+Author: Am@n Chouh@n <amanchouhan192@gmail.com>
+Date:   Thu Dec 16 00:38:44 2021 +0530
+
+    Initial commit
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git diff 020d73 f664ed
+diff --git a/localfolder/new.txt b/localfolder/new.txt
+index 11ebd00..c499fe0 100644
+--- a/localfolder/new.txt
++++ b/localfolder/new.txt
+@@ -1,5 +1,3 @@
+ Hello world!!!!!!!!
+ Hiiiiiiiiiiiiiiiiiiiiii
+ Changes Happening here!!!!
+-
+-#Use vim
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git status 
+On branch feature2
+nothing to commit, working tree clean
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (feature2)> git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git pull origin feature2
+From github.com:Amanchouhan192/Test
+ * branch            feature2   -> FETCH_HEAD
+Already up to date.
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git status 
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git push
+Everything up-to-date
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> git log --oneline 
+f664edd (HEAD -> main, origin/main, origin/HEAD) change in text in new file.
+b4b8abb edits in conflicts resolve
+e0bbfdb (origin/feature2) add Hiiii..
+a20ecdf (origin/feature1, feature1) add ! mark
+6ca8e89 new commit for empty test file.
+b3ec6df Initial commit
+beryl@beryl-HP-ProBook-6460b ~/D/T/localfolder (main)> 
+

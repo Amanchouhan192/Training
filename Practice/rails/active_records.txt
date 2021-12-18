@@ -1,0 +1,169 @@
+  Person Load (185.4ms)  SELECT "people".* FROM "people"
+ => 
+  id: 4,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Mumbai">,
+  id: 6,
+  name: "Pankaj",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x000055d74756d528
+  id: 1,
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:44:29.178950000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x000055d74756d438
+  name: "Rishabh",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:45:47.778642000 UTC +00:00,
+  address: "Faridabad">] 
+3.0.2 :016 > p = Person.create(name:"Riya",addresss:"Delhi").valid?
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_assignment.rb:51:in `_assign_attribute': unknown attribute 'addresss' for Person. (ActiveModel::UnknownAttributeError)
+  TRANSACTION (0.4ms)  BEGIN
+  Person Create (65.5ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Riya"], ["created_at", "2021-12-17 09:25:35.748092"], ["updated_at", "2021-12-17 09:25:35.748092"], ["address", "Delhi"]]
+  TRANSACTION (70.7ms)  COMMIT
+ => true 
+3.0.2 :018 > r = Person.where(name:"Pankaj",address:"Faridabad").order(created_at: :asc)
+  Person Load (12.8ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 AND "people"."address" = $2 ORDER BY "people"."created_at" ASC  [["name", "Pankaj"], ["address", "Faridabad"]]
+ => [] 
+3.0.2 :019 > r = Person.where(name:"Pankaj",address:"Delhi")
+  Person Load (0.5ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 AND "people"."address" = $2  [["name", "Pankaj"], ["address",
+ => 
+[#<Person:0x000055d746260f48
+... 
+3.0.2 :020 > r
+[#<Person:0x000055d746260f48
+  id: 6,
+  name: "Pankaj",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Delhi">] 
+3.0.2 :021 > r = Person.where(name:"Gourav")
+  Person Load (0.4ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1  [["name", "Gourav"]]
+ => 
+[#<Person:0x000055d74760b890
+... 
+3.0.2 :022 > r
+ => 
+  id: 1,
+  name: "Gourav",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:44:29.178950000 UTC +00:00,
+3.0.2 :023 > Person.create(name:"Gourav",address:"Punjab")
+  TRANSACTION (0.2ms)  BEGIN
+  Person Create (0.5ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Gourav"], ["created_at", "2021-12-17 09:34:21.325460"], ["updated_at", "2021-12-17 09:34:21.325460"], ["address", "Punjab"]]
+  TRANSACTION (40.8ms)  COMMIT
+ => 
+#<Person:0x000055d747abc6f0
+ id: 8,
+ name: "Gourav",
+ created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+ updated_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+ address: "Punjab"> 
+3.0.2 :024 > r = Person.where(name:"Gourav")
+ => 
+[#<Person:0x000055d746a6bb70
+... 
+3.0.2 :025 > r
+[#<Person:0x000055d746a6bb70
+  id: 1,
+  name: "Gourav",
+  created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:44:29.178950000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x000055d746a6ba80
+  name: "Gourav",
+  updated_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+3.0.2 :026 > r = Person.where(name:"Gourav").order(created_at: :desc)
+  Person Load (0.6ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 ORDER BY "people"."created_at" DESC  [["name", "Gourav"]]
+ => 
+... 
+3.0.2 :027 > r
+ => 
+[#<Person:0x000055d747a56d00
+  id: 8,
+  name: "Gourav",
+  created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  address: "Punjab">,
+ #<Person:0x000055d747a56c10
+  id: 1,
+  name: "Gourav",
+  updated_at: Thu, 09 Dec 2021 09:44:29.178950000 UTC +00:00,
+  address: "Delhi">] 
+3.0.2 :028 > p = Person.find_by(name:"Pankaj")
+  Person Load (24.9ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 LIMIT $2  [["name", "Pankaj"], ["LIMIT", 1]]
+ => 
+#<Person:0x000055d747583c88
+... 
+3.0.2 :029 > p
+ => 
+#<Person:0x000055d747583c88
+ name: "Pankaj",
+ created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+ address: "Delhi"> 
+ => "Pankaj" 
+3.0.2 :031 > p.address
+ => "Delhi" 
+  Person Load (1.0ms)  SELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2  [["id", nil], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/relation/finder_methods.rb:357:in `raise_record_not_found_exception!': Couldn't find Person with 'id'={:name=>"Gourav"} (ActiveRecord::RecordNotFound)
+3.0.2 :033 > p
+#<Person:0x000055d747583c88
+ id: 6,
+ name: "Pankaj",
+ created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ address: "Delhi"> 
+3.0.2 :034 > p = Person.find_by(name:"Gourav")
+ => 
+... 
+3.0.2 :035 > p.destroy
+  TRANSACTION (0.3ms)  BEGIN
+  Person Destroy (0.4ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 1]]
+  TRANSACTION (20.1ms)  COMMIT
+ => 
+#<Person:0x000055d746992ed8
+ name: "Gourav",
+ created_at: Wed, 08 Dec 2021 04:47:46.229847000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 09:44:29.178950000 UTC +00:00,
+ address: "Delhi"> 
+3.0.2 :036 > update = Person.find_by(id:1)
+  Person Load (1.0ms)  SELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => nil 
+3.0.2 :037 > update
+ => nil 
+3.0.2 :038 > update = Person.find(id:1)
+  Person Load (0.7ms)  SELECT "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2  [["id", nil], ["LIMIT", 1]]
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/relation/finder_methods.rb:357:in `raise_record_not_found_exception!': Couldn't find Person with 'id'={:id=>1} (ActiveRecord::RecordNotFound)
+3.0.2 :039 > update = Person.find_by(name:"Pankaj")
+  Person Load (0.8ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 LIMIT $2  [["name", "Pankaj"], ["LIMIT", 1]]
+ => 
+#<Person:0x000055d7467e1e68
+... 
+3.0.2 :040 > update
+ => 
+#<Person:0x000055d7467e1e68
+ id: 6,
+ name: "Pankaj",
+ created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ address: "Delhi"> 
+3.0.2 :041 > update.name="Pranjal"
+ => "Pranjal" 
+3.0.2 :042 > update
+ => 
+#<Person:0x000055d7467e1e68
+ id: 6,
+ name: "Pranjal",
+ created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ address: "Delhi"> 
+3.0.2 :043 > update.save
+  TRANSACTION (0.6ms)  BEGIN
+  Person Update (1.2ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Pranjal"], ["updated_at", "2021-12-17 09:53:49.892730"], ["id", 6]]
+  TRANSACTION (12.1ms)  COMMIT
+ => true 
+3.0.2 :044 > 
+
