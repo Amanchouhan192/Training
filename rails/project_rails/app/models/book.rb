@@ -6,7 +6,7 @@ class Book < ApplicationRecord
      #Active Query
      scope :name_by_id, -> { where(id:2) }
      #-> it will print all the books which are out of stock
-     scope :in_print, -> { where(in_print: false) }
+     scope :in_print, -> { where(out_of_print: false) }
      scope :out_of_print, -> { where(out_of_print: true) } 
    
      #chainable
@@ -26,5 +26,7 @@ class Book < ApplicationRecord
      #default_scope { where(out_of_print: false) }
 
      scope :old, -> { where('updated_at < ?', Date.current)}
+
+     enum status: [:shipped, :being_packaged, :complete, :cancelled]
     
 end
