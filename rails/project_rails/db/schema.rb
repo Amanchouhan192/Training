@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_20_054831) do
+ActiveRecord::Schema.define(version: 2021_12_20_085559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2021_12_20_054831) do
     t.bigint "author_id"
     t.boolean "out_of_print", default: false
     t.integer "price"
+    t.string "status"
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
