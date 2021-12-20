@@ -1,0 +1,1741 @@
+ Model Person :
+ 
+ class Person < ApplicationRecord
+    #validates :name  , :email, :phone, presence: { strict: true }
+    validates :name  , :email, :phone, presence: true
+
+    #validates :address, absence: true
+
+    validates :agreement, acceptance: true
+    validates :email, uniqueness: true, on: :create 
+    validates :email, format: { with: /[A-Za-z0-9\-\_\.]+[@]gmail+[\.][A-Za-z]{2,3}/,
+    message: "must be a valid email address Only @gmail.com is valid" }
+    
+    validates :email, confirmation: true
+    validates :email_confirmation, presence: true
+
+    validates :address, exclusion: { in: %w(Mumbai Gaziabad Assam Kerala),
+    message: "%{value} is reserved." }
+
+    validates :address, inclusion: { in: %w(Delhi Faridabad Punjab Gurugram),
+    message: "%{value} is not from Places Delhi Faridabad Punjab Gurugram." }
+
+    validates :phone , :length => { :maximum => 10 ,:minimum => 10}
+    validates_format_of :phone, :with =>  /\d[0-9]\)*\z/ , :message => "Only positive number without spaces are allowed"
+
+    validates :address, inclusion: { in: %w(Delhi Faridabad Punjab Gurugram),
+    message: "%{value} is not from Places Delhi Faridabad Punjab Gurugram." }, allow_blank: true
+
+
+    validates :card_number , :length => { :maximum => 10 ,:minimum => 10}
+    validates :payment_type, inclusion: { in: %w(card netbanking bhim gpay phonepay),
+    message: "%{value} is not from card netbanking bhim gpay phonepay" }
+
+    validates :card_number, presence: true , if: :paid_with_card? 
+
+    def paid_with_card?
+        payment_type == "card"
+    end
+
+    validate :age_validation_custom
+    def age_validation_custom
+    if validates_numericality_of :age, :greater_than_or_equal_to => 15 
+       validates_numericality_of :age, :less_than => 100
+    end
+  end
+end
+
+ 
+ 
+ 
+ Person.all
+  Person Load (56.0ms)  SELECT "people".* FROM "people"
+[#<Person:0x0000562bff663f10
+  id: 4,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+ #<Person:0x0000562bff6c6b10
+  id: 2,
+  name: "Rishabh",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:45:47.778642000 UTC +00:00,
+ #<Person:0x0000562bff6c6980
+  id: 7,
+  created_at: Fri, 17 Dec 2021 09:25:35.748092000 UTC +00:00,
+  address: "Delhi">,
+  id: 8,
+  created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  address: "Punjab">,
+  id: 6,
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  address: "Delhi">] 
+  TRANSACTION (0.6ms)  BEGIN
+  Person Create (65.6ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name"
+  TRANSACTION (26.0ms)  COMMIT
+ => true 
+3.0.2 :003 > p = Person.create(name:"Surbhi",address:nil).valid?
+  TRANSACTION (0.4ms)  BEGIN
+reated_at", "2021-12-18 09:41:51.492093"], ["updated_at", "2021-12-18 09:41:51.492093"]]
+ => true 
+  TRANSACTION (0.4ms)  BEGIN
+reated_at", "2021-12-18 09:42:52.052373"], ["updated_at", "2021-12-18 09:42:52.052373"]]
+  TRANSACTION (25.0ms)  COMMIT
+3.0.2 :005 > reload!
+Reloading...
+3.0.2 :006 > p = Person.create(name:"Surbhi",address:nil).valid?
+3.0.2 :007 > p.errors.messages
+(irb):7:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :008 > p = Person.create(name:"Surbhi",address:nil)
+3.0.2 :009 > p.valid?
+3.0.2 :010 > p.errors.messages
+3.0.2 :011 > p.errors.full_messages
+3.0.2 :012 > p = Person.new(name:nil,address:nil)
+3.0.2 :013 > p.save
+ => false 
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: 
+3.0.2 :015 > p.errors
+ => 
+ @base=#<Person:0x0000562c0023a640 id: nil, name: nil, created_at: nil, updated_at: nil, address: nil>,
+3.0.2 :016 > p.errors.full_messages
+3.0.2 :017 > p = Person.create(name:nil,address:nil)
+ => #<Person:0x0000562bfee650e8 id: nil, name: nil, created_at: nil, updated_at: nil, address: nil> 
+3.0.2 :018 > p.valid?
+ => false 
+3.0.2 :019 > p.save!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/validations.rb:80:in `raise_validation_error': Validation failed: Name can't be blank, Address can't be blank (ActiveRecord::RecordInvalid)
+3.0.2 :020 > p!
+(irb):20:in `<main>': undefined method `p!' for main:Object (NoMethodError)
+Did you mean?  p
+3.0.2 :021 > p
+ => #<Person:0x0000562bfee650e8 id: nil, name: nil, created_at: nil, updated_at: nil, address: nil> 
+3.0.2 :022 > p.create!
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `create!' for #<Person id: nil, name: nil, created_at: nil, updated_at: nil, address: nil> (NoMethodError)
+Did you mean?  created_at
+3.0.2 :023 > p.save
+ => false 
+3.0.2 :024 > p.save
+ => false 
+3.0.2 :025 > p.valid?
+ => false 
+3.0.2 :026 > p.errors.messages
+ => {:name=>["can't be blank"], :address=>["can't be blank"]} 
+3.0.2 :027 > p = Person.find_by(name:nil)
+  Person Load (1.0ms)  SELECT "people".* FROM "people" WHERE "people"."name" IS NULL LIMIT $1  [["LIMIT", 1]]
+ => nil 
+3.0.2 :028 > p
+ => nil 
+3.0.2 :029 > p = Person.find_by(name:"Pankaj")
+  Person Load (0.5ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 LIMIT $2  [["name", "Pankaj"], ["LIMIT", 1]]
+ => nil 
+3.0.2 :030 > p
+ => nil 
+3.0.2 :031 > Person
+ => Person(id: integer, name: string, created_at: datetime, updated_at: datetime, address: string) 
+3.0.2 :032 > Person.all
+  Person Load (1.1ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x0000562c001c0a70
+  id: 4,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Mumbai">,
+ #<Person:0x0000562c001c0958
+  id: 2,
+  name: "Rishabh",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:45:47.778642000 UTC +00:00,
+ #<Person:0x0000562c001c0890
+  id: 7,
+  name: "Riya",
+  created_at: Fri, 17 Dec 2021 09:25:35.748092000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c001c07c8
+  id: 8,
+  name: "Gourav",
+  created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  updated_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  address: "Punjab">,
+  id: 6,
+  name: "Pranjal",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Fri, 17 Dec 2021 09:53:49.892730000 UTC +00:00,
+  address: "Delhi">,
+  id: 9,
+  name: "Shefali",
+  created_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c001c0570
+  id: 10,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:41:51.492093000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 09:41:51.492093000 UTC +00:00,
+  address: nil>,
+ #<Person:0x0000562c001c04a8
+  id: 11,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:42:52.052373000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 09:42:52.052373000 UTC +00:00,
+  address: nil>] 
+3.0.2 :033 > p = Person.find_by(name:"Shefali")
+  Person Load (0.8ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 LIMIT $2  [["name", "Shefali"], ["LIMIT", 1]]
+ => 
+#<Person:0x0000562bfe79b320
+... 
+3.0.2 :034 > p
+ => 
+#<Person:0x0000562bfe79b320
+ id: 9,
+ name: "Shefali",
+ created_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+ updated_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+ address: "Delhi"> 
+3.0.2 :035 > p.update(address:"Faridabad")
+  TRANSACTION (0.5ms)  BEGIN
+  Person Update (1.0ms)  UPDATE "people" SET "updated_at" = $1, "address" = $2 WHERE "people"."id" = $3  [["updated_at", "2021-12-18 10:11:54.237911"], ["address", "Faridabad"], ["id", 9]]
+  TRANSACTION (25.0ms)  COMMIT
+ => true 
+3.0.2 :036 > Person.all
+  Person Load (0.9ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x0000562c00485378
+  id: 4,
+  name: "Karan",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 05:36:07.815073000 UTC +00:00,
+  address: "Mumbai">,
+ #<Person:0x0000562c004852b0
+  id: 2,
+  name: "Rishabh",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 09:45:47.778642000 UTC +00:00,
+ #<Person:0x0000562c004851e8
+  id: 7,
+  name: "Riya",
+  created_at: Fri, 17 Dec 2021 09:25:35.748092000 UTC +00:00,
+  updated_at: Fri, 17 Dec 2021 09:25:35.748092000 UTC +00:00,
+ #<Person:0x0000562c00485120
+  id: 8,
+  name: "Gourav",
+  created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  updated_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  address: "Punjab">,
+ #<Person:0x0000562c00485058
+  name: "Pranjal",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Fri, 17 Dec 2021 09:53:49.892730000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c00484f90
+  id: 10,
+  name: "Surbhi",
+  updated_at: Sat, 18 Dec 2021 09:41:51.492093000 UTC +00:00,
+ #<Person:0x0000562c00484ec8
+  name: "Surbhi",
+  updated_at: Sat, 18 Dec 2021 09:42:52.052373000 UTC +00:00,
+  address: nil>,
+ #<Person:0x0000562c00484e00
+  name: "Shefali",
+  created_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+  address: "Faridabad">] 
+  Person Load (0.7ms)  SELECT "people".* FROM "people" WHERE "people"."name" = $1 AND "people"."address" = $2 ORDER BY "people"."created_at" AS
+ => 
+... 
+ => 
+p.errors.objects.first.fully_completed?
+p.errors.objects.first.fully_rolledback?
+
+p.errors.objects.first.fulfilled?
+p.errors.objects.first.fulfilled_future
+p.errors.objects.first.full?
+p.errors.objects.first.full_backtrace
+p.errors.objects.first.full_backtrace=
+p.errors.objects.first.full_commit!
+p.errors.objects.first.full_digest_path
+p.errors.objects.first.full_gem_path
+p.errors.objects.first.full_gem_path=
+p.errors.objects.first.full_memory_barrier
+p.errors.objects.first.full_message
+p.errors.objects.first.full_messages
+p.errors.objects.first.full_messages_for
+p.errors.objects.first.full_name
+p.errors.objects.first.full_pack
+p.errors.objects.first.full_require_paths
+p.errors.objects.first.full_rollback!
+p.errors.objects.first.full_rollback?
+p.errors.objects.first.full_sanitizer
+p.errors.objects.first.full_sanitizer=
+p.errors.objects.first.full_table_name_prefix
+p.errors.objects.first.full_table_name_suffix
+p.errors.objects.first.full_trace
+p.errors.objects.first.full_unpack
+p.errors.objects.first.full_url_for
+p.errors.objects.first.full_version_string
+p.errors.objects.first.fullpath
+p.errors.objects.first.fullscreen
+p.errors.objects.first.fully_committed?
+p.errors.objects.first.fully_completed?
+p.errors.objects.first.fully_rolledback?
+3.0.2 :050 > p.errors.objects.first.full_messages
+(irb):50:in `<main>': undefined method `full_messages' for #<ActiveModel::Error attribute=name, type=blank, options={}> (NoMethodError)
+Did you mean?  full_message
+3.0.2 :051 > p.errors.objects.first.full_message
+ => "Name can't be blank" 
+  Person Load (1.0ms)  SELECT "people".* FROM "people"
+  TRANSACTION (0.6ms)  BEGIN
+  Person Update (0.8ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2, "address" = $3 WHERE "people"."id" = $4  [["name", "Surbhi"], ["updated_at", "2021-12-18 10:29:01.658473"], ["address", "Delhi"], ["id", 4]]
+  TRANSACTION (24.0ms)  COMMIT
+  TRANSACTION (0.5ms)  BEGIN
+  Person Update (0.7ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2, "address" = $3 WHERE "people"."id" = $4  [["name", "Surbhi"], ["updated_at", "2021-12-18 10:29:01.686734"], ["address", "Delhi"], ["id", 2]]
+  TRANSACTION (2.5ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (0.6ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Surbhi"], ["updated_at", "2021-12-18 10:29:01.694865"], ["id", 7]]
+  TRANSACTION (5.1ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (0.7ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2, "address" = $3 WHERE "people"."id" = $4  [["name", "Surbhi"], ["updated_at", "2021-12-18 10:29:01.703012"], ["address", "Delhi"], ["id", 8]]
+  TRANSACTION (5.0ms)  COMMIT
+  TRANSACTION (0.4ms)  BEGIN
+  Person Update (0.8ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2 WHERE "people"."id" = $3  [["name", "Surbhi"], ["updated_at", "2021-12-18 10:29:01.711397"], ["id", 6]]
+  TRANSACTION (4.7ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (0.5ms)  UPDATE "people" SET "updated_at" = $1, "address" = $2 WHERE "people"."id" = $3  [["updated_at", "2021-12-18 10:29:01.720381"], ["address", "Delhi"], ["id", 10]]
+  TRANSACTION (3.3ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Update (0.5ms)  UPDATE "people" SET "updated_at" = $1, "address" = $2 WHERE "people"."id" = $3  [["updated_at", "2021-12-18 10:29:01.727975"], ["address", "Delhi"], ["id", 11]]
+  TRANSACTION (5.0ms)  COMMIT
+  TRANSACTION (0.4ms)  BEGIN
+  Person Update (0.6ms)  UPDATE "people" SET "name" = $1, "updated_at" = $2, "address" = $3 WHERE "people"."id" = $4  [["name", "Surbhi"], ["updated_at", "2021-12-18 10:29:01.736495"], ["address", "Delhi"], ["id", 9]]
+  TRANSACTION (5.1ms)  COMMIT
+ => 
+[#<Person:0x0000562c0025a878
+... 
+3.0.2 :053 > p
+ => 
+[#<Person:0x0000562c0025a878
+  id: 4,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.658473000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c0025a7b0
+  id: 2,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.686734000 UTC +00:00,
+ #<Person:0x0000562c0025a6e8
+  id: 7,
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:25:35.748092000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.694865000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c0025a620
+  id: 8,
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.703012000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c0025a558
+  id: 6,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.711397000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c0025a490
+  id: 10,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:41:51.492093000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.720381000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c0025a3c8
+  id: 11,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:42:52.052373000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.727975000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c0025a300
+  id: 9,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.736495000 UTC +00:00,
+  address: "Delhi">] 
+3.0.2 :054 > p.reverse
+ => 
+[#<Person:0x0000562c0025a300
+  id: 9,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.736495000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c0025a3c8
+  id: 11,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:42:52.052373000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.727975000 UTC +00:00,
+ #<Person:0x0000562c0025a490
+  id: 10,
+  created_at: Sat, 18 Dec 2021 09:41:51.492093000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.720381000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c0025a558
+  id: 6,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.711397000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c0025a620
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.703012000 UTC +00:00,
+  address: "Delhi">,
+ #<Person:0x0000562c0025a6e8
+  id: 7,
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:25:35.748092000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.694865000 UTC +00:00,
+  address: "Delhi">,
+  id: 2,
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.686734000 UTC +00:00,
+ #<Person:0x0000562c0025a878
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.658473000 UTC +00:00,
+  address: "Delhi">] 
+=
+3.0.2 :058 > p = Person.new(name:"Dikhsa")
+ => #<Person:0x0000562bfffe2c30 id: nil, name: "Dikhsa", created_at: nil, updated_at: nil, address: nil> 
+3.0.2 :059 > p.any?
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `any?' for #<Person id: nil, name: "Dikhsa", created_at: nil, updated_at: nil, address: nil> (NoMethodError)
+3.0.2 :060 > Person.new.errors[:name].any?
+ => false 
+3.0.2 :061 > Person.create.errors[:name].any?
+ => true 
+3.0.2 :062 > 
+Person.all
+  Person Load (0.7ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x0000562bfff61360
+  id: 4,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.658473000 UTC +00:00,
+  address: "Delhi",
+  agreement: false>,
+ #<Person:0x0000562bfffd8f50
+  id: 2,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.686734000 UTC +00:00,
+  address: "Delhi",
+  agreement: false>,
+ #<Person:0x0000562bfffd8e88
+  id: 7,
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:25:35.748092000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.694865000 UTC +00:00,
+  agreement: false>,
+  id: 8,
+  created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  address: "Delhi",
+ #<Person:0x0000562bfffd8cf8
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.711397000 UTC +00:00,
+  address: "Delhi",
+  agreement: false>,
+ #<Person:0x0000562bfffd8c30
+  id: 10,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:41:51.492093000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.720381000 UTC +00:00,
+  address: "Delhi",
+  agreement: false>,
+ #<Person:0x0000562bfffd8b68
+  id: 11,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:42:52.052373000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.727975000 UTC +00:00,
+  address: "Delhi",
+  agreement: false>,
+ #<Person:0x0000562bfffd8aa0
+  id: 9,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.736495000 UTC +00:00,
+  address: "Delhi",
+  agreement: false>] 
+3.0.2 :003 > p = Person.new(name:"Payal",address:"Delhi")
+ => #<Person:0x0000562c005c8910 id: nil, name: "Payal", created_at: nil, updated_at: nil, address: "Delhi", agreement: false> 
+3.0.2 :004 > p.valid?
+ => false 
+3.0.2 :005 > p.errors.messages
+ => {:agreement=>["must be accepted"]} 
+3.0.2 :006 > p = Person.new(name:"Payal",address:"Delhi",agreement:true)
+ => #<Person:0x0000562c000f28c8 id: nil, name: "Payal", created_at: nil, updated_at: nil, address: "Delhi", agreement: true> 
+3.0.2 :007 > p.valid?
+ => true 
+3.0.2 :008 > p.save
+  TRANSACTION (0.5ms)  BEGIN
+  Person Create (1.4ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Payal"], ["created_at", "2021-12-18 11:18:12.708406"], ["updated_at", "2021-12-18 11:18:12.708406"], ["address", "Delhi"], ["agreement", true]]
+  TRANSACTION (21.7ms)  COMMIT
+ => true 
+3.0.2 :009 > 
+
+ => #<Person:0x0000562c005c8910 id: nil, name: "Payal", created_at: nil, updated_at: nil, address: "Delhi", agreement: false> 
+3.0.2 :004 > p.valid?
+ => false 
+ => {:agreement=>["must be accepted"]} 
+ => #<Person:0x0000562c000f28c8 id: nil, name: "Payal", created_at: nil, updated_at: nil, address: "Delhi", agreement: true> 
+ => true 
+  TRANSACTION (0.5ms)  BEGIN
+G "id"  [["name", "Payal"], ["created_at", "2021-12-18 11:18:12.708406"], ["updated_at", "2021-12-18 11:18:12.708406"], ["address", "Delhi"], ["agreement", true]]
+  TRANSACTION (21.7ms)  COMMIT
+ => true 
+3.0.2 :009 > p = Person.create(name:"Anmika",address:"Delhi",agreement:false)
+ => #<Person:0x0000562c001c9eb8 id: nil, name: "Anmika", created_at: nil, updated_at: nil, address: "Delhi", agreement: false> 
+3.0.2 :010 > p.valid?
+ => false 
+ => {:agreement=>["must be accepted"]} 
+ => #<Person:0x0000562bff4cd8b8 id: nil, name: "Anmika", created_at: nil, updated_at: nil, address: nil, agreement: true> 
+3.0.2 :013 > p.valid?
+ => false 
+3.0.2 :014 > p.errors.messages
+ => {:address=>["can't be blank"]} 
+3.0.2 :015 > p = Person.create(name:nil,address:nil,agreement:nil)
+ => #<Person:0x0000562bff608098 id: nil, name: nil, created_at: nil, updated_at: nil, address: nil, agreement: nil> 
+3.0.2 :016 > p.valid?
+ => false 
+3.0.2 :017 > p.errors.objects.first.message
+ => "can't be blank" 
+3.0.2 :018 > p.errors.objects.second.message
+ => "can't be blank" 
+3.0.2 :019 > p.errors.objects.thirs.message
+(irb):19:in `<main>': undefined method `thirs' for [#<ActiveModel::Error attribute=name, type=blank, options={}>, #<ActiveModel::Error attribute=address, type=blank, options={}>]:Array (NoMethodError)
+Did you mean?  third
+3.0.2 :020 > p.errors.objects.third.message
+(irb):20:in `<main>': undefined method `message' for nil:NilClass (NoMethodError)
+3.0.2 :021 > p.errors.objects.third
+ => nil 
+3.0.2 :022 > p.errors.size
+ => 2 
+3.0.2 :023 > p.errors.full_messages
+ => ["Name can't be blank", "Address can't be blank"] 
+3.0.2 :024 > p = Person.create(name:"Kishore",address:"Delhi",agreement:true)
+  TRANSACTION (0.4ms)  BEGIN
+  Person Create (0.9ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Kishore"], ["created_at", "2021-12-18 11:31:14.643547"], ["updated_at", "2021-12-18 11:31:14.643547"], ["address", "Delhi"], ["agreement", true]]
+  TRANSACTION (22.4ms)  COMMIT
+ => 
+#<Person:0x0000562bfff2dce0
+... 
+3.0.2 :025 > p.valid?
+ => true 
+
+  email: nil>,
+ #<Person:0x0000562c0040c478
+  id: 7,
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:25:35.748092000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.694865000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c0040c3b0
+  id: 8,
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.703012000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c0040c2e8
+  id: 6,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.711397000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c0040c220
+  id: 10,
+  name: "Surbhi",
+  updated_at: Sat, 18 Dec 2021 10:29:01.720381000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+ #<Person:0x0000562c0040c158
+  id: 11,
+  created_at: Sat, 18 Dec 2021 09:42:52.052373000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.727975000 UTC +00:00,
+  address: "Delhi",
+  email: nil>,
+ #<Person:0x0000562c0040c090
+  id: 9,
+  created_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c00407fb8
+  name: "Payal",
+  updated_at: Sat, 18 Dec 2021 11:18:12.708406000 UTC +00:00,
+  address: "Delhi",
+  email: nil>,
+  id: 13,
+  name: "Kishore",
+  updated_at: Sat, 18 Dec 2021 11:31:14.643547000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+3.0.2 :009 > p = Person.new(name:"Aman",address:"Delhi",agreement:true,email:"aman@gmail.com")
+ => 
+#<Person:0x0000562c00397b50
+3.0.2 :010 > p.valid?
+ => true 
+3.0.2 :011 > p = Person.new(name:"Aman",address:"Delhi",agreement:true,email:"aman@berylsystems.com")
+ => 
+#<Person:0x0000562c0029c188
+... 
+3.0.2 :012 > p.valid?
+  Person Exists? (1.1ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "aman@berylsystems.com"], ["LIMIT", 1]]
+ => false 
+ => 1 
+3.0.2 :014 > p.errors.message
+(irb):14:in `<main>': undefined method `message' for #<ActiveModel::Errors:0x0000562c0035c870 @base=#<Person id: nil, name: "Aman", created_at:
+invalid, options={:message=>"must be a valid email address", :value=>"aman@berylsystems.com"}>]> (NoMethodError)
+Did you mean?  messages
+ => {:email=>["must be a valid email address"]} 
+3.0.2 :016 > p.errors.full_message
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/errors.rb:513:in `full_message': wrong number of arguments (given 0, expected 2) (ArgumentError)
+3.0.2 :017 > p.errors.full_messages
+ => ["Email must be a valid email address"] 
+3.0.2 :018 > reload!
+ => true 
+3.0.2 :019 > p = Person.new(name:"Aman",address:"Delhi",agreement:true,email:"aman@berylsystems.com")
+ => 
+#<Person:0x0000562c0025e8b0
+... 
+3.0.2 :020 > p.valid?
+  Person Exists? (1.0ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "aman@berylsystems.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :021 > p.errors.messages
+ => {:email=>["must be a valid email address Only @gmail.com is valid"]} 
+3.0.2 :022 > p
+ => 
+#<Person:0x0000562c0025e8b0
+ id: nil,
+ name: "Aman",
+ created_at: nil,
+ updated_at: nil,
+ address: "Delhi",
+ agreement: true,
+ email: "aman@berylsystems.com"> 
+3.0.2 :023 > p = Person.new(name:"Aman",address:"Delhi",agreement:true,email:"aman@gmail.com")
+ => 
+#<Person:0x0000562c00336fd0
+... 
+3.0.2 :024 > p.valid?
+  Person Exists? (1.0ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "aman@gmail.com"], ["LIMIT", 1]]
+ => true 
+3.0.2 :025 > p.save
+  TRANSACTION (0.6ms)  BEGIN
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "aman@gmail.com"], ["LIMIT", 1]]
+  Person Create (1.3ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "Aman"], ["created_at", "2021-12-18 12:06:50.525876"], ["updated_at", "2021-12-18 12:06:50.525876"], ["address", "Delhi"], ["agreement", true], ["email", "aman@gmail.com"]]
+  TRANSACTION (25.3ms)  COMMIT
+ => true 
+3.0.2 :026 > Person.all
+  Person Load (1.0ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x0000562c004620d0
+  id: 4,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.658473000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c00461fb8
+  id: 2,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.686734000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c00461ef0
+  id: 7,
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:25:35.748092000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.694865000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c00461e28
+  id: 8,
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.703012000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c00461d60
+  id: 6,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.711397000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c00461c98
+  id: 10,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:41:51.492093000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.720381000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c00461bd0
+  id: 11,
+  name: "Surbhi",
+  updated_at: Sat, 18 Dec 2021 10:29:01.727975000 UTC +00:00,
+  address: "Delhi",
+  email: nil>,
+ #<Person:0x0000562c00461b08
+  id: 9,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.736495000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562c00461a40
+  id: 12,
+  name: "Payal",
+  created_at: Sat, 18 Dec 2021 11:18:12.708406000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 11:18:12.708406000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: nil>,
+ #<Person:0x0000562c00461978
+  id: 13,
+  name: "Kishore",
+  created_at: Sat, 18 Dec 2021 11:31:14.643547000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 11:31:14.643547000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: nil>,
+ #<Person:0x0000562c004618b0
+  id: 14,
+  name: "Aman",
+  created_at: Sat, 18 Dec 2021 12:06:50.525876000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:06:50.525876000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "aman@gmail.com">] 
+3.0.2 :027 > Person.destroy
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/persistence.rb:325:in `destroy': wrong number of arguments (given 0, expected 1) (ArgumentError)
+3.0.2 :028 > Person.destroy_all
+  Person Load (1.0ms)  SELECT "people".* FROM "people"
+  TRANSACTION (0.4ms)  BEGIN
+  Person Destroy (1.0ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 4]]
+  TRANSACTION (19.8ms)  COMMIT
+  TRANSACTION (0.5ms)  BEGIN
+  Person Destroy (0.8ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 2]]
+  TRANSACTION (4.8ms)  COMMIT
+  TRANSACTION (1.5ms)  BEGIN
+  Person Destroy (0.6ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 7]]
+  TRANSACTION (3.3ms)  COMMIT
+  TRANSACTION (0.5ms)  BEGIN
+  Person Destroy (1.6ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 8]]
+  TRANSACTION (5.0ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Destroy (0.6ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 6]]
+  TRANSACTION (6.0ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Destroy (0.5ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 10]]
+  TRANSACTION (6.2ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Destroy (0.4ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 11]]
+  TRANSACTION (6.2ms)  COMMIT
+  TRANSACTION (0.4ms)  BEGIN
+  Person Destroy (0.7ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 9]]
+  TRANSACTION (5.4ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Person Destroy (0.6ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 12]]
+  TRANSACTION (6.8ms)  COMMIT
+  TRANSACTION (0.4ms)  BEGIN
+  Person Destroy (0.5ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 13]]
+  TRANSACTION (4.0ms)  COMMIT
+  TRANSACTION (0.4ms)  BEGIN
+  Person Destroy (0.7ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 14]]
+  TRANSACTION (6.0ms)  COMMIT
+ => 
+[#<Person:0x0000562bff727618
+  id: 4,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 04:52:25.897590000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.658473000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562bff727258
+  id: 2,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 04:48:59.545782000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.686734000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562bff726ee8
+  id: 7,
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:25:35.748092000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.694865000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562bff726d30
+  id: 8,
+  name: "Surbhi",
+  created_at: Fri, 17 Dec 2021 09:34:21.325460000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.703012000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562bff726970
+  id: 6,
+  name: "Surbhi",
+  created_at: Wed, 08 Dec 2021 05:01:51.802355000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.711397000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562bff726830
+  id: 10,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:41:51.492093000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.720381000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+ #<Person:0x0000562bff7266f0
+  id: 11,
+  name: "Surbhi",
+  updated_at: Sat, 18 Dec 2021 10:29:01.727975000 UTC +00:00,
+  address: "Delhi",
+  email: nil>,
+ #<Person:0x0000562bff726560
+  id: 9,
+  name: "Surbhi",
+  created_at: Sat, 18 Dec 2021 09:41:31.144102000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 10:29:01.736495000 UTC +00:00,
+  address: "Delhi",
+  agreement: false,
+  email: nil>,
+  id: 12,
+  name: "Payal",
+  created_at: Sat, 18 Dec 2021 11:18:12.708406000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 11:18:12.708406000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: nil>,
+ #<Person:0x0000562bff726088
+  id: 13,
+  created_at: Sat, 18 Dec 2021 11:31:14.643547000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 11:31:14.643547000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: nil>,
+ #<Person:0x0000562bff725ef8
+  id: 14,
+  name: "Aman",
+  created_at: Sat, 18 Dec 2021 12:06:50.525876000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "aman@gmail.com">] 
+3.0.2 :029 > Person.all
+  Person Load (1.0ms)  SELECT "people".* FROM "people"
+ => [] 
+3.0.2 :030 > p = Person.create(name:"Aman",address:"Delhi",agreement:true,email:"aman@gmail.com").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Person Exists? (0.4ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "aman@gmail.com"], ["LIMIT", 1]]
+ $6) RETURNING "id"  [["name", "Aman"], ["created_at", "2021-12-18 12:09:48.727432"], ["updated_at", "2021-12-18 12:09:48.727432"], ["address", "Delhi"], ["agreement", true], ["email", "aman@gmail.com"]]
+  TRANSACTION (21.6ms)  COMMIT
+  Person Exists? (1.0ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 AND "people"."id" != $2 LIMIT $3  [["email", "aman@gmail.com"], ["id", 15], ["LIMIT", 1]]
+ => true 
+3.0.2 :031 > p = Person.create(name:"Anamika",address:"Delhi",agreement:true,email:"annu@gmail.com").valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (0.8ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "annu@gmail.com"], ["LIMIT", 1]]
+ $6) RETURNING "id"  [["name", "Anamika"], ["created_at", "2021-12-18 12:10:04.793536"], ["updated_at", "2021-12-18 12:10:04.793536"], ["address", "Delhi"], ["agreement", true], ["email", "annu@gmail.com"]]
+  TRANSACTION (24.3ms)  COMMIT
+  Person Exists? (0.8ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 AND "people"."id" != $2 LIMIT $3  [["email", "annu@gmail.com"], ["id", 16], ["LIMIT", 1]]
+ => true 
+3.0.2 :032 > p = Person.create(name:"Darvesh",address:"Faridabad",agreement:true,email:"darvesh@gmail.com").valid?
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (0.8ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "darvesh@gmail.com"], ["LIMIT", 1]]
+ $6) RETURNING "id"  [["name", "Darvesh"], ["created_at", "2021-12-18 12:10:30.306536"], ["updated_at", "2021-12-18 12:10:30.306536"], ["address", "Faridabad"], ["agreement", true], ["email", "darvesh@gmail.com"]]
+  TRANSACTION (30.6ms)  COMMIT
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 AND "people"."id" != $2 LIMIT $3  [["email", "darvesh@gmail.com"], ["id", 17], ["LIMIT", 1]]
+3.0.2 :033 > p = Person.create(name:"Tariq",address:"Delhi",agreement:true,email:"tarique@gmail.com").valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Person Exists? (0.5ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "tarique@gmail.com"], ["LIMIT", 1]]
+  Person Create (0.6ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "Tariq"], ["created_at", "2021-12-18 12:10:56.167207"], ["updated_at", "2021-12-18 12:10:56.167207"], ["address"
+  TRANSACTION (21.0ms)  COMMIT
+.com"], ["id", 18], ["LIMIT", 1]]
+3.0.2 :034 > p = Person.create(name:"Preet",address:"Faridabad",agreement:true,email:"preet@gmail.com").valid?
+  Person Exists? (0.5ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "preet@gmail.com"], ["LIMIT", 1]]
+  Person Create (0.6ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "Preet"], ["created_at", "2021-12-18 12:11:14.861994"], ["updated_at", "2021-12-18 12:11:14.861994"], ["address", "Faridabad"], ["agreement", true], ["email", "preet@gmail.com"]]
+  TRANSACTION (28.6ms)  COMMIT
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 AND "people"."id" != $2 LIMIT $3  [["email", "preet@gmail.c
+ => true 
+3.0.2 :035 > p = Person.create(name:"Sumit",address:"Faridabad",agreement:true,email:"sumit@gmail.com").valid?
+  Person Exists? (0.8ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "sumit@gmail.com"], ["LIMIT", 1]]
+ $6) RETURNING "id"  [["name", "Sumit"], ["created_at", "2021-12-18 12:13:39.257222"], ["updated_at", "2021-12-18 12:13:39.257222"], ["address", "Faridabad"], ["agreement", true], ["email", "sumit@gmail.com"]]
+  TRANSACTION (18.2ms)  COMMIT
+  Person Exists? (0.6ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 AND "people"."id" != $2 LIMIT $3  [["email", "sumit@gmail.com"], ["id", 20], ["LIMIT", 1]]
+ => true 
+3.0.2 :036 > p = Person.create(name:"Gaurav",address:"Faridabad",agreement:true,email:"gaurav@beryl.com").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Person Exists? (0.4ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "gaurav@beryl.com"], ["LIMIT", 1]]
+  Person Exists? (0.8ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "gaurav@beryl.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :037 > p = Person.create(name:"Gaurav",address:"Faridabad",agreement:true,email:"gaurav@beryl.com").valid?
+  TRANSACTION (0.7ms)  BEGIN
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "gaurav@beryl.com"], ["LIMIT", 1]]
+  TRANSACTION (0.5ms)  ROLLBACK
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "gaurav@beryl.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :038 > p.errors.messages
+(irb):38:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :039 > p.errors.message
+(irb):39:in `<main>': undefined method `errors' for false:FalseClass (NoMethodError)
+3.0.2 :040 > p.valid?
+(irb):40:in `<main>': undefined method `valid?' for false:FalseClass (NoMethodError)
+3.0.2 :041 > p = Person.create(name:"Gaurav",address:"Faridabad",agreement:true,email:"gaurav@beryl.com")
+  TRANSACTION (0.4ms)  BEGIN
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "gaurav@beryl.com"], ["LIMIT", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+ => 
+#<Person:0x0000562c00235078
+... 
+3.0.2 :042 > p.valid?
+  Person Exists? (1.1ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "gaurav@beryl.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :043 > p.errors.messages
+ => {:email=>["must be a valid email address Only @gmail.com is valid"]} 
+3.0.2 :044 > p = Person.create(name:"Gaurav",address:"Faridabad",agreement:true,email:"gaurav@gmail.com")
+  TRANSACTION (0.4ms)  BEGIN
+  Person Exists? (0.4ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "gaurav@gmail.com"], ["LIMIT", 1]]
+  Person Create (0.5ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "Gaurav"], ["created_at", "2021-12-18 12:14:56.109157"], ["updated_at", "2021-12-18 12:14:56.109157"], ["address", "Faridabad"], ["agreement", true], ["email", "gaurav@gmail.com"]]
+  TRANSACTION (22.3ms)  COMMIT
+ => 
+#<Person:0x0000562bff35ca60
+... 
+3.0.2 :045 > Person.all
+  Person Load (0.9ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x0000562bff601540
+  id: 15,
+  name: "Aman",
+  created_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "aman@gmail.com">,
+ #<Person:0x0000562bff601400
+  id: 16,
+  name: "Anamika",
+  created_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "annu@gmail.com">,
+ #<Person:0x0000562bff601248
+  id: 17,
+  name: "Darvesh",
+  updated_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "darvesh@gmail.com">,
+ #<Person:0x0000562bff6010e0
+  id: 18,
+  created_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  agreement: true,
+ #<Person:0x0000562bff600ff0
+  id: 19,
+  name: "Preet",
+  created_at: Sat, 18 Dec 2021 12:11:14.861994000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:11:14.861994000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "preet@gmail.com">,
+ #<Person:0x0000562bff600eb0
+  name: "Sumit",
+  created_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "sumit@gmail.com">,
+ #<Person:0x0000562bff600d70
+  id: 21,
+  name: "Gaurav",
+  created_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "gaurav@gmail.com">] 
+3.0.2 :046 > p = Person.create(name:"Ruchika",address:"Faridabad",agreement:true,email:"gaurav@gmail.com")
+  TRANSACTION (0.3ms)  BEGIN
+  Person Exists? (0.4ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "gaurav@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.6ms)  ROLLBACK
+ => 
+#<Person:0x00007fe97c072b38
+... 
+3.0.2 :047 > p.valid?
+  Person Exists? (1.2ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "gaurav@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :048 > p.errors.messages
+ => {:email=>["has already been taken"]} 
+3.0.2 :049 > p = Person.create(name:"Ruchika",address:"Faridabad",agreement:true,email:"ruchika@gmail.com")
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "ruchika@gmail.com"], ["LIMIT", 1]]
+  Person Create (0.8ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "Ruchika"], ["created_at", "2021-12-18 12:16:33.633990"], ["updated_at", "2021-12-18 12:16:33.633990"], ["address", "Faridabad"], ["agreement", true], ["email", "ruchika@gmail.com"]]
+  TRANSACTION (22.7ms)  COMMIT
+ => 
+#<Person:0x0000562c0018f3a8
+... 
+3.0.2 :050 > Person.where(address:"Faridabad").count
+   (1.3ms)  SELECT COUNT(*) FROM "people" WHERE "people"."address" = $1  [["address", "Faridabad"]]
+ => 5 
+3.0.2 :051 > Person.where(address:"Delhi").count
+   (0.9ms)  SELECT COUNT(*) FROM "people" WHERE "people"."address" = $1  [["address", "Delhi"]]
+ => 3 
+3.0.2 :052 > 
+3.0.2 :060 > Person.all
+  Person Load (1.1ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x0000562c00404ea8
+  id: 15,
+  name: "Aman",
+  created_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "aman@gmail.com">,
+ #<Person:0x0000562c00430760
+  id: 16,
+  name: "Anamika",
+  created_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "annu@gmail.com">,
+ #<Person:0x0000562c00430698
+  id: 17,
+  name: "Darvesh",
+  created_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "darvesh@gmail.com">,
+ #<Person:0x0000562c004305d0
+  id: 18,
+  name: "Tariq",
+  created_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+ #<Person:0x0000562c00430508
+  id: 19,
+  created_at: Sat, 18 Dec 2021 12:11:14.861994000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:11:14.861994000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "preet@gmail.com">,
+ #<Person:0x0000562c00430440
+  id: 20,
+  name: "Sumit",
+  created_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "sumit@gmail.com">,
+ #<Person:0x0000562c00430328
+  id: 21,
+  name: "Gaurav",
+  created_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "gaurav@gmail.com">,
+ #<Person:0x0000562c00430260
+  id: 22,
+  name: "Ruchika",
+  created_at: Sat, 18 Dec 2021 12:16:33.633990000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:16:33.633990000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "ruchika@gmail.com">] 
+3.0.2 :061 > ⏎         
+beryl@beryl-HP-ProBook-6460b ~/D/T/r/project_rails (main)> rails c
+Running via Spring preloader in process 28164
+Loading development environment (Rails 6.1.4.1)
+3.0.2 :001 > reload!
+Reloading...
+ => true 
+3.0.2 :002 > Person.all
+  Person Load (1.5ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x0000562c000a0078
+  id: 15,
+  name: "Aman",
+  created_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "aman@gmail.com">,
+ #<Person:0x0000562c000e3e90
+  id: 16,
+  name: "Anamika",
+  created_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "annu@gmail.com">,
+ #<Person:0x0000562c000e3dc8
+  id: 17,
+  name: "Darvesh",
+  created_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "darvesh@gmail.com">,
+ #<Person:0x0000562c000e3d00
+  id: 18,
+  name: "Tariq",
+  updated_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  agreement: true,
+ #<Person:0x0000562c000e3c38
+  name: "Preet",
+  updated_at: Sat, 18 Dec 2021 12:11:14.861994000 UTC +00:00,
+  agreement: true,
+  email: "preet@gmail.com">,
+ #<Person:0x0000562c000e3b70
+  id: 20,
+  name: "Sumit",
+  created_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+ #<Person:0x0000562c000e3aa8
+  id: 21,
+  created_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+ #<Person:0x0000562c000e39e0
+  name: "Ruchika",
+  updated_at: Sat, 18 Dec 2021 12:16:33.633990000 UTC +00:00,
+  address: "Faridabad",
+  email: "ruchika@gmail.com">] 
+3.0.2 :003 > p = Person.new
+ => #<Person:0x0000562c004528b0 id: nil, name: nil, created_at: nil, updated_at: nil, address: nil, agreement: false, email: nil> 
+3.0.2 :004 > p.email="karan@gmail.com"
+ => "karan@gmail.com" 
+3.0.2 :005 > p.name="karan"
+ => "karan" 
+ => "Delhi" 
+3.0.2 :007 > p.agreement= true
+ => true 
+3.0.2 :008 > p
+ => 
+#<Person:0x0000562c004528b0
+ id: nil,
+ name: "karan",
+ created_at: nil,
+ updated_at: nil,
+ address: "Delhi",
+ agreement: true,
+ email: "karan@gmail.com"> 
+3.0.2 :009 > p.valid?
+  Person Exists? (1.3ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "karan@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :010 > p.save
+  TRANSACTION (0.6ms)  BEGIN
+  Person Exists? (1.0ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "karan@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+ => false 
+3.0.2 :011 > p.errors.messages
+ => {:email_confirmation=>["can't be blank"]} 
+3.0.2 :012 > p.email_confirmation="karan@gmail.com"
+ => "karan@gmail.com" 
+3.0.2 :013 > p.valid?
+  Person Exists? (0.5ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "karan@gmail.com"], ["LIMIT", 1]]
+ => true 
+3.0.2 :014 > p.save!
+  TRANSACTION (1.0ms)  BEGIN
+  Person Exists? (0.8ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "karan@gmail.com"], ["LIMIT", 1]]
+  Person Create (1.2ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "karan"], ["created_at", "2021-12-18 12:38:10.488217"], ["updated_at", "2021-12-18 12:38:10.488217"], ["address", "Delhi"], ["agreement", true], ["email", "karan@gmail.com"]]
+  TRANSACTION (24.0ms)  COMMIT
+ => true 
+3.0.2 :015 > Person.all
+  Person Load (0.9ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x0000562bfffd1188
+  id: 15,
+  name: "Aman",
+  created_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "aman@gmail.com">,
+ #<Person:0x0000562bfffd10c0
+  id: 16,
+  name: "Anamika",
+  created_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "annu@gmail.com">,
+ #<Person:0x0000562bfffd0ff8
+  id: 17,
+  name: "Darvesh",
+  created_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "darvesh@gmail.com">,
+ #<Person:0x0000562bfffd0f30
+  id: 18,
+  name: "Tariq",
+  created_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "tarique@gmail.com">,
+ #<Person:0x0000562bfffd0e68
+  id: 19,
+  name: "Preet",
+  updated_at: Sat, 18 Dec 2021 12:11:14.861994000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "preet@gmail.com">,
+ #<Person:0x0000562bfffd0da0
+  id: 20,
+  name: "Sumit",
+  created_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  agreement: true,
+  email: "sumit@gmail.com">,
+ #<Person:0x0000562bfffd0cd8
+  id: 21,
+  name: "Gaurav",
+  created_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "gaurav@gmail.com">,
+ #<Person:0x0000562bfffd0c10
+  id: 22,
+  name: "Ruchika",
+  created_at: Sat, 18 Dec 2021 12:16:33.633990000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:16:33.633990000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "ruchika@gmail.com">,
+ #<Person:0x0000562bfffd0b48
+  id: 23,
+  name: "karan",
+  created_at: Sat, 18 Dec 2021 12:38:10.488217000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:38:10.488217000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "karan@gmail.com">] 
+3.0.2 :016 > p = Person.create(name:"Pooja",address:"Punjab",agreement:true,email:"pooja@gmail.com",email_confirmation:"pooja@gmail.com")
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "pooja@gmail.com"], ["LIMIT", 1]]
+  Person Create (1.0ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "Pooja"], ["created_at", "2021-12-18 12:40:37.308166"], ["updated_at", "2021-12-18 12:40:37.308166"], ["address", "Punjab"], ["agreement", true], ["email", "pooja@gmail.com"]]
+  TRANSACTION (23.7ms)  COMMIT
+ => 
+#<Person:0x0000562bfe0252d0
+... 
+3.0.2 :017 > p.valid?
+  Person Exists? (1.2ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 AND "people"."id" != $2 LIMIT $3  [["email", "pooja@gmail.com"], ["id", 24], ["LIMIT", 1]]
+ => true 
+
+ agreement: true,
+3.0.2 :016 > p = Person.create(name:"Pooja",address:"Punjab",agreement:true,email:"pooja@gmail.com",email_confirmation:"pooja@gmail.com")
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "pooja@gmail.com"], ["LIMIT", 1]]
+  Person Create (1.0ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "Pooja"], ["created_at", "2021-12-18 12:40:37.308166"], ["updated_at", "2021-12-18 12:40:37.308166"], ["address", "Punjab"], ["agreement", true], ["email", "pooja@gmail.com"]]
+  TRANSACTION (23.7ms)  COMMIT
+ => 
+#<Person:0x0000562bfe0252d0
+... 
+3.0.2 :017 > p.valid?
+om"], ["id", 24], ["LIMIT", 1]]
+ => true 
+3.0.2 :018 > p = Person.create(name:"Pooja",address:"Gaziabad",agreement:true,email:"pooja@gmail.com",email_confirmation:"pooja@gmail.com")
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (0.4ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "pooja@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.6ms)  ROLLBACK
+ => 
+#<Person:0x0000562bff776448
+... 
+3.0.2 :019 > p.valid?
+  Person Exists? (1.2ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "pooja@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :020 > p.errors.messages
+ => {:email=>["has already been taken"]} 
+3.0.2 :021 > reload!
+Reloading...
+ => true 
+3.0.2 :022 > p = Person.create(name:"Pooja",address:"Gaziabad",agreement:true,email:"pooja@gmail.com",email_confirmation:"pooja@gmail.com")
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "pooja@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+ => 
+#<Person:0x0000562c00625818
+... 
+3.0.2 :023 > p.errors.messages
+ => {:email=>["has already been taken"], :address=>["Gaziabad is reserved.", "Gaziabad is not from Places Delhi Faridabad Punjab Gurugram."]} 
+3.0.2 :024 > p = Person.create(name:"Shilpa",address:"Gurugram",agreement:true,email:"shilpa@gmail.com",email_confirmation:"shilpa@gmail.com")
+  TRANSACTION (0.4ms)  BEGIN
+  Person Exists? (0.6ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "shilpa@gmail.com"], ["LIMIT", 1]]
+  Person Create (0.7ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "Shilpa"], ["created_at", "2021-12-18 13:18:30.063397"], ["updated_at", "2021-12-18 13:18:30.063397"], ["address", "Gurugram"], ["agreement", true], ["email", "shilpa@gmail.com"]]
+  TRANSACTION (18.9ms)  COMMIT
+ => 
+#<Person:0x0000562c004ca518
+... 
+3.0.2 :025 > p.valid?
+  Person Exists? (1.6ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 AND "people"."id" != $2 LIMIT $3  [["email", "shilpa@gmail.com"], ["id", 25], ["LIMIT", 1]]
+ => true 
+3.0.2 :026 > 
+3.0.2 :004 > p = Person.create(name:"Simran",address:"Delhi",agreement:true,email:"simran@gmail.com",email_confirmation:"simran@gmail.com",phon
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (1.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "simran@gmail.com"], ["LIMIT", 1]]
+ $6) RETURNING "id"  [["name", "Simran"], ["created_at", "2021-12-18 13:40:54.509735"], ["updated_at", "2021-12-18 13:40:54.509735"], ["address", "Delhi"], ["agreement", true], ["email", "simran@gmail.com"]]
+  TRANSACTION (28.0ms)  COMMIT
+... 
+3.0.2 :005 > reload!
+Reloading...
+ => true 
+3.0.2 :006 > p = Person.create(name:"Simran",address:"Delhi",agreement:true,email:"simran@gmail.com",email_confirmation:"simran@gmail.com",phon
+e:nil)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/bootsnap-1.9.3/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:23:in `require': /home/beryl/Desktop/Training/rails/project_rails/app/models/person.rb:15: syntax error, unexpected ':', expecting '}' (SyntaxError)
+...dates :phone , length {maximum: 10 ,minimum: 10}
+3.0.2 :007 > p = Person.create(name:"Simran",address:"Delhi",agreement:true,email:"simran@gmail.com",email_confirmation:"simran@gmail.com",phon
+e:nil)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/bootsnap-1.9.3/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:23:in `require': /home/beryl/Deskt
+STRING_DBEG or tSTRING_DVAR (SyntaxError)
+...                             ^~
+3.0.2 :008 > reload!
+Reloading...
+ => true 
+3.0.2 :009 > p = Person.create(name:"Simran",address:"Delhi",agreement:true,email:"simran@gmail.com",email_confirmation:"simran@gmail.com",phon
+e:nil)
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "simran@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.6ms)  ROLLBACK
+ => 
+#<Person:0x0000562c00072088
+... 
+3.0.2 :010 > p.valid?
+  Person Exists? (0.8ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "simran@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :011 > p.errors.messages
+ => 
+{:phone=>["can't be blank", "is too short (minimum is 10 characters)", "Only positive number without spaces are allowed"],
+ :email=>["has already been taken"]} 
+3.0.2 :012 > p = Person.create(name:"Rehan",address:"Delhi",agreement:true,email:"rehan@gmail.com",email_confirmation:"rehan@gmail.com",phone:8
+800267436)
+  TRANSACTION (0.3ms)  BEGIN
+  Person Exists? (0.5ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rehan@gmail.com"], ["LIMIT", 1]]
+  Person Create (0.5ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["name", "Rehan"], ["created_at", "2021-12-18 13:44:46.566430"], ["updated_at", "2021-12-18 13:44:46.566430"], ["address", "Delhi"], ["agreement", true], ["email", "rehan@gmail.com"], ["phone", "8800267436"]]
+  TRANSACTION (24.5ms)  COMMIT
+ => 
+#<Person:0x0000562c006171f0
+... 
+3.0.2 :013 > p.valid?
+  Person Exists? (1.4ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 AND "people"."id" != $2 LIMIT $3  [["email", "rehan@gmail.com"], ["id", 27], ["LIMIT", 1]]
+ => true 
+3.0.2 :014 > p.errors.messages
+ => {} 
+3.0.2 :015 > Person.all
+  Person Load (1.0ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x0000562bff4bb7f8
+  id: 15,
+  name: "Aman",
+  created_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "aman@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4bb5c8
+  id: 16,
+  name: "Anamika",
+  created_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "annu@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4bb500
+  id: 17,
+  name: "Darvesh",
+  created_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "darvesh@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4bb438
+  id: 18,
+  name: "Tariq",
+  created_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "tarique@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4bb2d0
+  id: 19,
+  name: "Preet",
+  created_at: Sat, 18 Dec 2021 12:11:14.861994000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:11:14.861994000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "preet@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4bb028
+  id: 20,
+  name: "Sumit",
+  created_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "sumit@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4baee8
+  id: 21,
+  name: "Gaurav",
+  created_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "gaurav@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4badd0
+  id: 22,
+  name: "Ruchika",
+  created_at: Sat, 18 Dec 2021 12:16:33.633990000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:16:33.633990000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "ruchika@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4babc8
+  id: 23,
+  name: "karan",
+  created_at: Sat, 18 Dec 2021 12:38:10.488217000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:38:10.488217000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "karan@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4ba948
+  id: 24,
+  name: "Pooja",
+  created_at: Sat, 18 Dec 2021 12:40:37.308166000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:40:37.308166000 UTC +00:00,
+  address: "Punjab",
+  agreement: true,
+  email: "pooja@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4ba790
+  id: 25,
+  name: "Shilpa",
+  created_at: Sat, 18 Dec 2021 13:18:30.063397000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 13:18:30.063397000 UTC +00:00,
+  address: "Gurugram",
+  agreement: true,
+  email: "shilpa@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4ba470
+  id: 26,
+  name: "Simran",
+  created_at: Sat, 18 Dec 2021 13:40:54.509735000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 13:40:54.509735000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "simran@gmail.com",
+  phone: nil>,
+ #<Person:0x0000562bff4ba308
+  id: 27,
+  name: "Rehan",
+  created_at: Sat, 18 Dec 2021 13:44:46.566430000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 13:44:46.566430000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "rehan@gmail.com",
+  phone: "8800267436">] 
+  
+   => #<Person:0x0000562c00303720 id: nil, name: nil, created_at: nil, updated_at: nil, address: nil, agreement: false, email: nil, phone: ... 
+3.0.2 :020 > p.address="Delhi"
+ => "Delhi" 
+3.0.2 :021 > p.valid?
+  Person Exists? (92.0ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" IS NULL LIMIT $1  [["LIMIT", 1]]
+ => false 
+{:name=>["can't be blank"],
+ :email=>["can't be blank", "must be a valid email address Only @gmail.com is valid"],
+ :phone=>["can't be blank", "is too short (minimum is 10 characters)", "Only positive number without spaces are allowed"],
+ :agreement=>["must be accepted"],
+ :email_confirmation=>["can't be blank"]} 
+3.0.2 :023 > p = Person.create(name:"Rehan",address:nil,agreement:true,email:"rehan@gmail.com",email_confirmation:"rehan@gmail.com",phone:88002
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (35.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rehan@gmail.com"], ["LIMIT", 1]]
+ => 
+... 
+3.0.2 :024 > p.valid?
+  Person Exists? (1.2ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rehan@gmail.com"], ["LIMIT", 1]]
+ => false 
+(irb):25:in `<main>': undefined method `valid?' for #<ActiveModel::Errors:0x0000562bfe860e90 @base=#<Person id: nil, name: "Rehan", created_at:
+ddress, type=blank, options={}>, #<ActiveModel::Error attribute=email, type=taken, options={:value=>"rehan@gmail.com"}>, #<ActiveModel::Error a
+rror)
+3.0.2 :027 > reload!
+Reloading...
+ => true 
+3.0.2 :028 > p = Person.create(name:"Rehan",address:nil,agreement:true,email:"rehan@gmail.com",email_confirmation:"rehan@gmail.com",phone:88002
+67436)
+  TRANSACTION (0.4ms)  BEGIN
+  TRANSACTION (0.5ms)  ROLLBACK
+ => 
+... 
+3.0.2 :029 > p = Person.create(name:"Rehan",address:nil,agreement:true,email:"rehan@gmail.com",email_confirmation:"rehn@gmail.com",phone:880026
+7436)
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rehan@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.5ms)  ROLLBACK
+ => 
+#<Person:0x0000562c00233340
+... 
+3.0.2 :030 > p.valid?
+  Person Exists? (1.4ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rehan@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :031 > p.present?
+ => true 
+3.0.2 :032 > p.errors.messages
+ => 
+{:email=>["has already been taken"],
+ :email_confirmation=>["doesn't match Email"],
+ :address=>[" is not from Places Delhi Faridabad Punjab Gurugram."]} 
+3.0.2 :033 > p.address.valid?
+(irb):33:in `<main>': undefined method `valid?' for nil:NilClass (NoMethodError)
+3.0.2 :034 > p.address
+ => nil 
+3.0.2 :035 > p.present?
+ => true 
+3.0.2 :036 > p = Person.create(name:"Krishna",address:"Faridabad",agreement:true,email:"krishna@gmail.com",email_confirmation:"krishna@gmail.co
+m",phone:8800267436)
+  TRANSACTION (0.4ms)  BEGIN
+  Person Exists? (0.6ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "krishna@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.4ms)  ROLLBACK
+ => 
+#<Person:0x0000562c0007b110
+... 
+3.0.2 :037 > p.valid?
+  Person Exists? (1.3ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "krishna@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :038 > p.errors.messages
+ => {:address=>["must be blank"]} 
+3.0.2 :039 > 
+
+3.0.2 :049 > p = Person.create(name:"Krishna",address:"Gaziabad",agreement:true,email:"k@gmail.com",email_confirmation:"k@gmail.com",phone:8800
+267436)
+  TRANSACTION (0.4ms)  BEGIN
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "k@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.5ms)  ROLLBACK
+ => 
+#<Person:0x0000562c0060db50
+... 
+3.0.2 :050 > p.valid?
+  Person Exists? (1.4ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "k@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :051 > p.errors.messages
+ => {:address=>["Gaziabad is reserved.", "Gaziabad is not from Places Delhi Faridabad Punjab Gurugram."]} 
+3.0.2 :052 > 
+
+ => #<Person:0x0000562c00303720 id: nil, name: nil, created_at: nil, updated_at: nil, address: nil, agreement: false, email: nil, phone: ... 
+3.0.2 :020 > p.address="Delhi"
+ => "Delhi" 
+3.0.2 :021 > p.valid?
+  Person Exists? (92.0ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" IS NULL LIMIT $1  [["LIMIT", 1]]
+ => false 
+{:name=>["can't be blank"],
+ :email=>["can't be blank", "must be a valid email address Only @gmail.com is valid"],
+ :phone=>["can't be blank", "is too short (minimum is 10 characters)", "Only positive number without spaces are allowed"],
+ :agreement=>["must be accepted"],
+ :email_confirmation=>["can't be blank"]} 
+3.0.2 :023 > p = Person.create(name:"Rehan",address:nil,agreement:true,email:"rehan@gmail.com",email_confirmation:"rehan@gmail.com",phone:88002
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (35.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rehan@gmail.com"], ["LIMIT", 1]]
+ => 
+... 
+3.0.2 :024 > p.valid?
+  Person Exists? (1.2ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rehan@gmail.com"], ["LIMIT", 1]]
+ => false 
+(irb):25:in `<main>': undefined method `valid?' for #<ActiveModel::Errors:0x0000562bfe860e90 @base=#<Person id: nil, name: "Rehan", created_at:
+ddress, type=blank, options={}>, #<ActiveModel::Error attribute=email, type=taken, options={:value=>"rehan@gmail.com"}>, #<ActiveModel::Error a
+rror)
+3.0.2 :027 > reload!
+Reloading...
+ => true 
+3.0.2 :028 > p = Person.create(name:"Rehan",address:nil,agreement:true,email:"rehan@gmail.com",email_confirmation:"rehan@gmail.com",phone:88002
+67436)
+  TRANSACTION (0.4ms)  BEGIN
+  TRANSACTION (0.5ms)  ROLLBACK
+ => 
+... 
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rehan@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.5ms)  ROLLBACK
+... 
+3.0.2 :030 > p.valid?
+  Person Exists? (1.4ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rehan@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :031 > p.present?
+ => true 
+3.0.2 :032 > p.errors.messages
+ => 
+{:email=>["has already been taken"],
+3.0.2 :033 > p.address.valid?
+(irb):33:in `<main>': undefined method `valid?' for nil:NilClass (NoMethodError)
+3.0.2 :034 > p.address
+ => nil 
+3.0.2 :035 > p.present?
+ => true 
+m",phone:8800267436)
+  TRANSACTION (0.4ms)  BEGIN
+  TRANSACTION (0.4ms)  ROLLBACK
+... 
+3.0.2 :037 > p.valid?
+  Person Exists? (1.3ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "krishna@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :038 > p.errors.messages
+ => {:address=>["must be blank"]} 
+3.0.2 :039 > 
+3.0.2 :040 > 
+3.0.2 :041 > reload!
+3.0.2 :042 > p = Person.create(name:"Krishna",address:nil,agreement:true,email:"krishsna@gmail.com",email_confirmation:"krishsna@gmail.com",pho
+ne:8800267436)
+  TRANSACTION (0.3ms)  BEGIN
+  Person Exists? (0.4ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "krishsna@gmail.com"], ["LIMIT", 1]]
+  Person Create (12.2ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "agreement", "email", "phone") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "Krishna"], ["created_at", "2021-12-18 19:29:45.359745"], ["updated_at", "2021-12-18 19:29:45.359745"], ["agreement", true], ["email", "krishsna@gmail.com"], ["phone", "8800267436"]]
+  TRANSACTION (42.9ms)  COMMIT
+ => 
+... 
+3.0.2 :043 > p = Person.create(name:"Krishna",address:"Faridabad",agreement:true,email:"krishsna@gmail.com",email_confirmation:"krishsna@gmail.
+com",phone:8800267436)
+  TRANSACTION (0.3ms)  BEGIN
+  Person Exists? (0.6ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "krishsna@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.5ms)  ROLLBACK
+ => 
+#<Person:0x0000562c0033b2d8
+... 
+3.0.2 :044 > p.valid?
+  Person Exists? (1.3ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "krishsna@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :045 > p.errors.messages
+ => {:email=>["has already been taken"]} 
+3.0.2 :046 > p = Person.create(name:"Krishna",address:"Faridabad",agreement:true,email:"krish@gmail.com",email_confirmation:"krish@gmail.com",p
+hone:8800267436)
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (0.8ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "krish@gmail.com"], ["LIMIT", 1]]
+  Person Create (0.9ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "address", "agreement", "email", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["name", "Krishna"], ["created_at", "2021-12-18 19:30:33.776783"], ["updated_at", "2021-12-18 19:30:33.776783"], ["address", "Faridabad"], ["agreement", true], ["email", "krish@gmail.com"], ["phone", "8800267436"]]
+  TRANSACTION (16.3ms)  COMMIT
+ => 
+#<Person:0x0000562c003413b8
+... 
+3.0.2 :047 > p = Person.create(name:"Krishna",address:nil,agreement:true,email:"kh@gmail.com",email_confirmation:"kh@gmail.com",phone:880026743
+6)
+  TRANSACTION (0.4ms)  BEGIN
+  Person Exists? (0.7ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "kh@gmail.com"], ["LIMIT", 1]]
+  Person Create (0.8ms)  INSERT INTO "people" ("name", "created_at", "updated_at", "agreement", "email", "phone") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "Krishna"], ["created_at", "2021-12-18 19:31:03.348073"], ["updated_at", "2021-12-18 19:31:03.348073"], ["agreement", true], ["email", "kh@gmail.com"], ["phone", "8800267436"]]
+  TRANSACTION (22.2ms)  COMMIT
+ => 
+#<Person:0x0000562c0010f220
+... 
+3.0.2 :048 > Person.all
+  Person Load (1.1ms)  SELECT "people".* FROM "people"
+3.0.2 :014 > Person.new.valid?
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/errors.rb:410:in `add': Name can't be blank (ActiveModel::StrictValidationFailed)
+3.0.2 :015 > 
+payment_type:"card").valid?
+d_with_card?' for Person:Class (NoMethodError)
+3.0.2 :006 > reload!
+3.0.2 :007 > p = Person.create(name:"rishabh",address:"Delhi",agreement:true,email:"rishabh@gmail.com",phone:9090090990,card_number:1234567890,
+payment_type:"card").valid?
+  TRANSACTION (0.3ms)  BEGIN
+  Person Exists? (0.9ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rishabh@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.3ms)  ROLLBACK
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `paid
+com", phone: "9090090990", card_number: "1234567890", payment_type: "card"> (NoMethodError)
+Did you mean?  payed_with_card
+Reloading...
+payment_type:"card").valid?
+  TRANSACTION (0.4ms)  BEGIN
+  Person Exists? (0.6ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rishabh@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.3ms)  ROLLBACK
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `paid_with_card?' for #<Person id: nil, name: "rishabh", created_at: nil, updated_at: nil, address: "Delhi", agreement: true, email: "rishabh@gmail.
+Did you mean?  paid_with_card
+3.0.2 :010 > p = Person.create(name:"rishabh",address:"Delhi",agreement:true,email:"rishabh@gmail.com",phone:9090090990,card_number:1234567890,
+  TRANSACTION (0.5ms)  BEGIN
+  Person Exists? (0.8ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rishabh@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.5ms)  ROLLBACK
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `paid_with_card?' for #<Person id: nil, name: "rishabh", created_at: nil, updated_at: nil, address: "Delhi", agreement: true, email: "rishabh@gmail.com", phone: "9090090990", card_number: "1234567890", payment_type: "card"> (NoMethodError)
+Did you mean?  paid_with_card
+3.0.2 :011 > p.valid?
+(irb):11:in `<main>': undefined method `valid?' for nil:NilClass (NoMethodError)
+3.0.2 :012 > reload!
+Reloading...
+ => true 
+3.0.2 :013 > p = Person.create(name:"rishabh",address:"Delhi",agreement:true,email:"rishabh@gmail.com",phone:9090090990,card_number:1234567890,
+payment_type:"card")
+  TRANSACTION (0.3ms)  BEGIN
+  Person Exists? (1.8ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rishabh@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.5ms)  ROLLBACK
+ => 
+#<Person:0x000055b4386a00f8
+... 
+3.0.2 :014 > p.valid?
+  Person Exists? (1.2ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rishabh@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :015 > p.errors.messages
+ => {:email_confirmation=>["can't be blank"]} 
+3.0.2 :016 > p = Person.create(name:"rishabh",address:"Delhi",agreement:true,email:"rishabh@gmail.com",email_confirmation:"rishabh@gmail.com",p
+hone:9090090990,card_number:1234567890,payment_type:nil)
+  TRANSACTION (0.3ms)  BEGIN
+  Person Exists? (0.5ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rishabh@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.5ms)  ROLLBACK
+ => 
+#<Person:0x000055b43902ffb0
+... 
+3.0.2 :017 > p.valid?
+  Person Exists? (0.9ms)  SELECT 1 AS one FROM "people" WHERE "people"."email" = $1 LIMIT $2  [["email", "rishabh@gmail.com"], ["LIMIT", 1]]
+ => false 
+3.0.2 :018 > p.errors.messages
+ => {:payment_type=>[" is not from card netbanking bhim gpay phonepay"]} 
+3.0.2 :019 > 
+
+3.0.2 :033 > p.errors.messages
+ => 
+{:name=>["can't be blank"],
+ :email=>["can't be blank", "must be a valid email address Only @gmail.com is valid"],
+ :phone=>["can't be blank", "is too short (minimum is 10 characters)", "Only positive number without spaces are allowed"],
+ :agreement=>["must be accepted"],
+ :email_confirmation=>["can't be blank"],
+ :address=>[" is not from Places Delhi Faridabad Punjab Gurugram."],
+ :card_number=>["is too short (minimum is 10 characters)"],
+ :payment_type=>[" is not from card netbanking bhim gpay phonepay"]} 
+3.0.2 :034 > p.errors[:name]
+ => ["can't be blank"] 
+3.0.2 :035 > 
+
+

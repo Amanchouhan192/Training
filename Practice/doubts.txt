@@ -1,0 +1,9 @@
+doubts:
+------------------------------------------
+1.skipping validations
+2.validates_associated
+3.:inverse_of (how to use it)
+4.validates_with
+5.validates_each
+6.Combining Validation Conditions
+7.errors.add

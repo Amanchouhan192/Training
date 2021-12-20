@@ -1,0 +1,1747 @@
+beryl@beryl-HP-ProBook-6460b:~$ fish
+Welcome to fish, the friendly interactive shell
+Type `help` for instructions on how to use fish
+beryl@beryl-HP-ProBook-6460b ~> cd Desktop/Training/rails/project_rails/
+beryl@beryl-HP-ProBook-6460b ~/D/T/r/project_rails (main)> rails c
+Running via Spring preloader in process 4949
+Loading development environment (Rails 6.1.4.1)
+3.0.2 :001 > Person.all
+  Person Load (126.1ms)  SELECT "people".* FROM "people"
+ => 
+[#<Person:0x00005613f65f48e8
+  id: 15,
+  name: "Aman",
+  created_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:09:48.727432000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "aman@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e6940
+  id: 16,
+  name: "Anamika",
+  created_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:04.793536000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "annu@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e62d8
+  id: 17,
+  name: "Darvesh",
+  created_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:30.306536000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "darvesh@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e6058
+  id: 18,
+  name: "Tariq",
+  created_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:10:56.167207000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "tarique@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e5d38
+  id: 19,
+  name: "Preet",
+  created_at: Sat, 18 Dec 2021 12:11:14.861994000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:11:14.861994000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "preet@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e5a90
+  id: 20,
+  name: "Sumit",
+  created_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:13:39.257222000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "sumit@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e58b0
+  id: 21,
+  name: "Gaurav",
+  created_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:14:56.109157000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "gaurav@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e5720
+  id: 22,
+  name: "Ruchika",
+  created_at: Sat, 18 Dec 2021 12:16:33.633990000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:16:33.633990000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "ruchika@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e53d8
+  id: 23,
+  name: "karan",
+  created_at: Sat, 18 Dec 2021 12:38:10.488217000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:38:10.488217000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "karan@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e5298
+  id: 24,
+  name: "Pooja",
+  created_at: Sat, 18 Dec 2021 12:40:37.308166000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 12:40:37.308166000 UTC +00:00,
+  address: "Punjab",
+  agreement: true,
+  email: "pooja@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e4e10
+  id: 25,
+  name: "Shilpa",
+  created_at: Sat, 18 Dec 2021 13:18:30.063397000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 13:18:30.063397000 UTC +00:00,
+  address: "Gurugram",
+  agreement: true,
+  email: "shilpa@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e4be0
+  id: 26,
+  name: "Simran",
+  created_at: Sat, 18 Dec 2021 13:40:54.509735000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 13:40:54.509735000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "simran@gmail.com",
+  phone: nil,
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e4a28
+  id: 27,
+  name: "Rehan",
+  created_at: Sat, 18 Dec 2021 13:44:46.566430000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 13:44:46.566430000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "rehan@gmail.com",
+  phone: "8800267436",
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e4820
+  id: 28,
+  name: "Krishna",
+  created_at: Sat, 18 Dec 2021 19:29:45.359745000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 19:29:45.359745000 UTC +00:00,
+  address: nil,
+  agreement: true,
+  email: "krishsna@gmail.com",
+  phone: "8800267436",
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e4690
+  id: 29,
+  name: "Krishna",
+  created_at: Sat, 18 Dec 2021 19:30:33.776783000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 19:30:33.776783000 UTC +00:00,
+  address: "Faridabad",
+  agreement: true,
+  email: "krish@gmail.com",
+  phone: "8800267436",
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e4500
+  id: 30,
+  name: "Krishna",
+  created_at: Sat, 18 Dec 2021 19:31:03.348073000 UTC +00:00,
+  updated_at: Sat, 18 Dec 2021 19:31:03.348073000 UTC +00:00,
+  address: nil,
+  agreement: true,
+  email: "kh@gmail.com",
+  phone: "8800267436",
+  card_number: nil,
+  payment_type: nil>,
+ #<Person:0x00005613f66e4398
+  id: 31,
+  name: "Vijay",
+  created_at: Sun, 19 Dec 2021 08:52:02.231463000 UTC +00:00,
+  updated_at: Sun, 19 Dec 2021 08:52:02.231463000 UTC +00:00,
+  address: "Gurugram",
+  agreement: true,
+  email: "vijay@gmail.com",
+  phone: "8989898989",
+  card_number: nil,
+  payment_type: nil>,
+  id: 32,
+  created_at: Sun, 19 Dec 2021 09:30:05.687735000 UTC +00:00,
+  updated_at: Sun, 19 Dec 2021 09:30:05.687735000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "rishabh@gmail.com",
+  phone: "9090090990",
+  card_number: "1234567890",
+  payment_type: "bhim">,
+ #<Person:0x00005613f66e41e0
+  id: 33,
+  name: "rishabh",
+  created_at: Sun, 19 Dec 2021 09:30:39.077954000 UTC +00:00,
+  updated_at: Sun, 19 Dec 2021 09:30:39.077954000 UTC +00:00,
+  address: "Delhi",
+  agreement: true,
+  email: "r@gmail.com",
+  phone: "9090090990",
+  card_number: "1234567890",
+  payment_type: "card">] 
+3.0.2 :002 > Books.all
+(irb):2:in `<main>': uninitialized constant Books (NameError)
+3.0.2 :003 > Book.all
+  Book Load (59.2ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005613f59d6ac0
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005613f5b6cd58
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005613f5b6cb78
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005613f5b6c880
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005613f5b6c2e0
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005613f5b5b968
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005613f5b5b260
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>,
+ #<Book:0x00005613f5b5b058
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005613f5b5af18
+  id: 9,
+1).author_id_before_type_cast
+1).author_id_came_from_user?
+1).author_id_change
+1).author_id_change_to_be_saved
+1).author_id_changed?
+1).author_id_for_database
+1).author_id_in_database
+1).author_id_previous_change
+1).author_id_previously_changed?
+1).author_id_was
+1).author_id_will_change!
+1).authority
+1).authority_key_identifier
+1).authorization
+1).authorization_mode
+1).authorization_mode=
+1).authorize
+1).authorize_request
+1).authors
+3.0.2 :004 > Book.find(1).authors
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMI
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activemodel-6.1.4.1/lib/active_model/attribute_methods.rb:469:in `method_missing': undefined method `authors' for #<Book
+1:24:52.598938000 +0000", updated_at: "2021-12-09 11:24:52.598938000 +0000", author_id: 1> (NoMethodError)
+               author=
+3.0.2 :005 > Book.find(1).author
+T $2  [["id", 1], ["LIMIT", 1]]
+  Author Load (15.4ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" 
+ => 
+#<Author:0x00005613f7491860
+ name: "J k Rowlling",
+ created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00> 
+3.0.2 :006 > relaod!
+(irb):6:in `<main>': undefined method `relaod!' for main:Object (NoMethodError)
+Did you mean?  reload!
+3.0.2 :007 > reload!
+Reloading...
+ => true 
+(Object doesn't support #inspect)
+ =>  
+3.0.2 :009 > reload!
+ => true 
+3.0.2 :010 > Book.name_of_author
+ =>  
+3.0.2 :011 > reload!
+ => true 
+3.0.2 :012 > Book.name_of_author
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1  [["id", 2]]
+ => 
+[#<Book:0x00005613f7693d48
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :013 > Book.name_by_id
+namic_matchers.rb:22:in `method_missing': undefined method `name_by_id' for Book:Class (NoMethodError)
+3.0.2 :014 > reload!
+ => true 
+3.0.2 :015 > name_by_id
+Object (NameError)
+3.0.2 :016 > Book.name_by_id
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1  [["
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :017 > reload!
+Reloading...
+ => true 
+3.0.2 :018 > Book.created_before
+/home/beryl/Desktop/Training/rails/project_rails/app/models/book.rb:9:in `block in <class:Book>': wrong number of arguments (given 0, expected 1) (ArgumentError)
+3.0.2 :019 > reload!
+Reloading...
+ => true 
+3.0.2 :020 > Book.created_before
+/home/beryl/Desktop/Training/rails/project_rails/app/models/book.rb:9:in `block in <class:Book>': wrong number of arguments (given 0, expected 1) (ArgumentError)
+3.0.2 :021 > Boo
+
+Book
+Bootsnap
+3.0.2 :021 > Book.all
+  Book Load (0.7ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005613f5d1bf78
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005613f5eb2580
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005613f5eb2260
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005613f5eb1f90
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005613f5eb1e28
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005613f5eb1a90
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2>,
+ #<Book:0x00005613f5eb1810
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>,
+ #<Book:0x00005613f5eb1658
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005613f5eb1428
+  id: 9,
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4>,
+ #<Book:0x00005613f5eb11d0
+  id: 10,
+  title: "Kabuliwala",
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005613f5eb0fc8
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5>,
+ #<Book:0x00005613f5eb0dc0
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5>] 
+3.0.2 :022 > Author.find(1).books
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Book Load (1.1ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1 ORDER BY "books"."created_at" DESC  [["author_id", 1]]
+ => 
+[#<Book:0x00005613f709ccc8
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005613f709c980
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1>,
+ #<Book:0x00005613f709c890
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1>] 
+3.0.2 :023 > Author.find(3).books
+  Author Load (1.1ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Book Load (0.9ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1 ORDER BY "books"."created_at" DESC  [["author_id", 3]]
+ => 
+[#<Book:0x00005613f6261ca8
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3>] 
+3.0.2 :024 > Author.all
+  Author Load (1.2ms)  SELECT "authors".* FROM "authors"
+ => 
+[#<Author:0x00005613f588f5e0
+  id: 1,
+  name: "J k Rowlling",
+  created_at: Thu, 09 Dec 2021 11:15:16.092679000 UTC +00:00,
+ #<Author:0x00005613f588f478
+  id: 2,
+  name: "Chetan Bhagat",
+  created_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:15:34.070222000 UTC +00:00>,
+ #<Author:0x00005613f588f248
+  id: 3,
+  name: "A P j Abdul Kalam",
+  created_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:17:40.298843000 UTC +00:00>,
+ #<Author:0x00005613f588f108
+  id: 4,
+  name: "Robin Sharma",
+  created_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:18:05.297458000 UTC +00:00>,
+ #<Author:0x00005613f588efc8
+  id: 5,
+  name: "Rabindranath Tagore",
+  created_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:22:51.225179000 UTC +00:00>] 
+3.0.2 :025 > ⏎                                                                                                                                 beryl@beryl-HP-ProBook-6460b ~/D/T/r/project_rails (main)> rails g migration AddColumnInBook
+Running via Spring preloader in process 5681
+      invoke  active_record
+      create    db/migrate/20211220053508_add_column_in_book.rb
+beryl@beryl-HP-ProBook-6460b ~/D/T/r/project_rails (main)> vim  db/migrate/20211220053508_add_column_in_book.rb
+beryl@beryl-HP-ProBook-6460b ~/D/T/r/project_rails (main)> rails db:migrate
+Running via Spring preloader in process 5808
+== 20211220053508 AddColumnInBook: migrating ==================================
+-- add_column(:books, :out_of_print, :boolean, {:default=>false})
+   -> 0.1946s
+== 20211220053508 AddColumnInBook: migrated (0.1949s) =========================
+
+beryl@beryl-HP-ProBook-6460b ~/D/T/r/project_rails (main)> rails c
+Running via Spring preloader in process 5854
+Loading development environment (Rails 6.1.4.1)
+3.0.2 :001 > Book.all
+  Book Load (0.8ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005613f72d0d00
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false>,
+ #<Book:0x00005613f733cbb8
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false>,
+ #<Book:0x00005613f733caf0
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false>,
+ #<Book:0x00005613f733ca28
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f733c960
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f733c898
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f733c7d0
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  out_of_print: false>,
+ #<Book:0x00005613f733c708
+  id: 8,
+  title: "The Greateness Guide",
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4,
+  out_of_print: false>,
+ #<Book:0x00005613f733c640
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  out_of_print: false>,
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false>,
+ #<Book:0x00005613f733c4b0
+  id: 11,
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false>,
+  id: 12,
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false>] 
+3.0.2 :002 > b = Book.find(1)
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f4ce7e68
+3.0.2 :003 > b
+ => 
+#<Book:0x00005613f4ce7e68
+ id: 1,
+ title: "Harry potter Deathly Hollows Part 1",
+ created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+ author_id: 1,
+ out_of_print: false> 
+3.0.2 :004 > b.out_of_print=true
+ => true 
+3.0.2 :005 > b.save
+  TRANSACTION (0.4ms)  BEGIN
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Book Exists? (1.4ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Harry potter Deathly Hollows Part 1"], ["id", 1], ["LIMIT", 1]]
+  Book Update (1.3ms)  UPDATE "books" SET "updated_at" = $1, "out_of_print" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:37:28.053849"], ["out_of_print", true], ["id", 1]]
+  TRANSACTION (25.8ms)  COMMIT
+ => true 
+3.0.2 :006 > b = Book.find(3)
+  Book Load (1.1ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f730a708
+... 
+3.0.2 :007 > b.out_of_print=true
+ => true 
+3.0.2 :008 > b.save
+  TRANSACTION (0.7ms)  BEGIN
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  Book Exists? (0.7ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Harry potter and The Chamber of Secrets"], ["id", 3], ["LIMIT", 1]]
+  Book Update (0.8ms)  UPDATE "books" SET "updated_at" = $1, "out_of_print" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:37:56.073089"], ["out_of_print", true], ["id", 3]]
+  TRANSACTION (19.9ms)  COMMIT
+ => true 
+3.0.2 :009 > Book.all
+  Book Load (1.2ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005613f757f308
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false>,
+ #<Book:0x00005613f757f240
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f757f178
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f757f0b0
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f757efe8
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3,
+  out_of_print: false>,
+ #<Book:0x00005613f757ef20
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4,
+  out_of_print: false>,
+ #<Book:0x00005613f757ee58
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  out_of_print: false>,
+ #<Book:0x00005613f757ed90
+  id: 10,
+  title: "Kabuliwala",
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false>,
+ #<Book:0x00005613f757ecc8
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false>,
+ #<Book:0x00005613f757ec00
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false>,
+ #<Book:0x00005613f757eb38
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:37:28.053849000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true>,
+ #<Book:0x00005613f757ea70
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:37:56.073089000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true>] 
+3.0.2 :010 > b = Book.all
+  Book Load (1.3ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005613f5cd5708
+... 
+3.0.2 :011 > b
+ => 
+[#<Book:0x00005613f5cd5708
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false>,
+ #<Book:0x00005613f5cd54b0
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f5cd5348
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f5cd50c8
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f5cd4d80
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  author_id: 3,
+  out_of_print: false>,
+ #<Book:0x00005613f5cd4b78
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4,
+  out_of_print: false>,
+ #<Book:0x00005613f5cd4998
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  out_of_print: false>,
+ #<Book:0x00005613f5cd4718
+  id: 10,
+  title: "Kabuliwala",
+  updated_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  out_of_print: false>,
+ #<Book:0x00005613f5cd45d8
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false>,
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  out_of_print: false>,
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:37:28.053849000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true>,
+ #<Book:0x00005613f5cd41a0
+  id: 3,
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:37:56.073089000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true>] 
+  Book Load (0.9ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+#<Book:0x00005613f76c6bd0
+... 
+3.0.2 :013 > b.out_of_print=true
+ => true 
+3.0.2 :014 > b.save
+  TRANSACTION (0.7ms)  BEGIN
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Exists? (1.0ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Two States"], ["id
+  Book Update (0.7ms)  UPDATE "books" SET "updated_at" = $1, "out_of_print" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:38:44.872868"], ["out_of_print", true], ["id", 4]]
+  TRANSACTION (24.3ms)  COMMIT
+ => true 
+3.0.2 :015 > b = Book.find(7)
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 7], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f5cbf6d8
+... 
+3.0.2 :016 > b.out_of_print=true
+ => true 
+3.0.2 :017 > b.save
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Book Exists? (0.8ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Fings of Fire"], ["id", 7], ["LIMIT", 1]]
+  Book Update (0.5ms)  UPDATE "books" SET "updated_at" = $1, "out_of_print" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:38:59.972763"], ["out_of_print", true], ["id", 7]]
+  TRANSACTION (16.5ms)  COMMIT
+ => true 
+3.0.2 :018 > b = Book.find(10)
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 10], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f710bee8
+... 
+3.0.2 :019 > b.out_of_print=true
+ => true 
+3.0.2 :020 > b.save
+  TRANSACTION (0.6ms)  BEGIN
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Exists? (0.9ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Kabuliwala"], ["id", 10], ["LIMIT", 1]]
+  Book Update (1.0ms)  UPDATE "books" SET "updated_at" = $1, "out_of_print" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:39:20.437092"], ["out_of_print", true], ["id", 10]]
+  TRANSACTION (27.9ms)  COMMIT
+ => true 
+3.0.2 :021 > Book.all
+  Book Load (1.2ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005613f73dc398
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false>,
+ #<Book:0x00005613f73dc2d0
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f73dc208
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false>,
+ #<Book:0x00005613f73dc140
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4,
+  out_of_print: false>,
+ #<Book:0x00005613f73dc078
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4,
+  out_of_print: false>,
+ #<Book:0x00005613f73d7f78
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false>,
+ #<Book:0x00005613f73d7e88
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  out_of_print: false>,
+ #<Book:0x00005613f73d7dc0
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true>,
+ #<Book:0x00005613f73d7cf8
+  id: 3,
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:37:56.073089000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true>,
+ #<Book:0x00005613f73d7c30
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:38:44.872868000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true>,
+ #<Book:0x00005613f73d7b68
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:38:59.972763000 UTC +00:00,
+  author_id: 3,
+  out_of_print: true>,
+ #<Book:0x00005613f73d7aa0
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:39:20.437092000 UTC +00:00,
+  author_id: 5,
+  out_of_print: true>] 
+3.0.2 :022 > relaod!
+(irb):22:in `<main>': undefined method `relaod!' for main:Object (NoMethodError)
+Did you mean?  reload!
+3.0.2 :023 > reload!
+Reloading...
+ => true 
+3.0.2 :024 > b = Book.out_of_print
+  Book Load (0.5ms)  SELECT "books".* FROM "books" WHERE "books"."out_of_print" = $1  [["out_of_print", true]]
+ => 
+[#<Book:0x00005613f5119680
+... 
+ => 
+[#<Book:0x00005613f5119680
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  updated_at: Mon, 20 Dec 2021 05:37:28.053849000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true>,
+ #<Book:0x00005613f58b8b98
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:37:56.073089000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true>,
+ #<Book:0x00005613f58b89b8
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:38:44.872868000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true>,
+ #<Book:0x00005613f58b88a0
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:38:59.972763000 UTC +00:00,
+  author_id: 3,
+  out_of_print: true>,
+ #<Book:0x00005613f58b8788
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:39:20.437092000 UTC +00:00,
+  author_id: 5,
+  out_of_print: true>] 
+3.0.2 :026 > author = Book.out_of_print
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."out_of_print" = $1  [["out_of_print", true]]
+ => 
+[#<Book:0x00005613f74462e8
+... 
+3.0.2 :027 > author = Author.first
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" ORDER BY "authors"."id" ASC LIMIT $1  [["LIMIT", 1]]
+#<Author:0x00005613f77d7d30
+... 
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."author_id" = $1 AND "books"."out_of_print" = $2 ORDER BY "books"."created_at"
+ => 
+[#<Book:0x00005613f588c098
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:37:56.073089000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true>,
+ #<Book:0x00005613f58d3150
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:37:28.053849000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true>] 
+3.0.2 :029 > ⏎                                                                                                                                 beryl@beryl-HP-ProBook-6460b ~/D/T/r/project_rails (main)> rails g migration AddColumnInBookTable
+Running via Spring preloader in process 6166
+      invoke  active_record
+      create    db/migrate/20211220054831_add_column_in_book_table.rb
+beryl@beryl-HP-ProBook-6460b ~/D/T/r/project_rails (main)> vim db/migrate/20211220054831_add_column_in_book_table.rb
+beryl@beryl-HP-ProBook-6460b ~/D/T/r/project_rails (main)> rails db:migrate
+Running via Spring preloader in process 6295
+== 20211220054831 AddColumnInBookTable: migrating =============================
+-- add_column(:books, :price, :integer)
+   -> 0.0048s
+== 20211220054831 AddColumnInBookTable: migrated (0.0049s) ====================
+
+beryl@beryl-HP-ProBook-6460b ~/D/T/r/project_rails (main)> rails c
+Running via Spring preloader in process 6385
+Loading development environment (Rails 6.1.4.1)
+3.0.2 :001 > reload!
+Reloading...
+ => true 
+3.0.2 :002 > Books.all
+(irb):2:in `<main>': uninitialized constant Books (NameError)
+3.0.2 :003 > Book.all
+  Book Load (0.8ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005613f59f0df8
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false,
+  price: nil>,
+ #<Book:0x00005613f5b12560
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: nil>,
+ #<Book:0x00005613f5b123f8
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: nil>,
+ #<Book:0x00005613f5b12308
+  id: 8,
+  title: "The Greateness Guide",
+  created_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 11:49:33.405151000 UTC +00:00,
+  author_id: 4,
+  out_of_print: false,
+  price: nil>,
+ #<Book:0x00005613f5b11fe8
+  id: 9,
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  author_id: 4,
+  out_of_print: false,
+  price: nil>,
+ #<Book:0x00005613f5b11e58
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false,
+  price: nil>,
+ #<Book:0x00005613f5b11ca0
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false,
+  price: nil>,
+ #<Book:0x00005613f5b11908
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  updated_at: Mon, 20 Dec 2021 05:37:28.053849000 UTC +00:00,
+  author_id: 1,
+  price: nil>,
+  id: 3,
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:37:56.073089000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true,
+ #<Book:0x00005613f5b10a08
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:38:44.872868000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true,
+  price: nil>,
+ #<Book:0x00005613f5b10490
+  title: "Fings of Fire",
+  updated_at: Mon, 20 Dec 2021 05:38:59.972763000 UTC +00:00,
+  author_id: 3,
+  out_of_print: true,
+  price: nil>,
+ #<Book:0x00005613f5b10148
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  author_id: 5,
+  out_of_print: true,
+  price: nil>] 
+3.0.2 :004 > Book.count
+ => 12 
+ => #<Book:0x00005613f72de4f0 id: nil, title: nil, created_at: nil, updated_at: nil, author_id: nil, out_of_print: false, price: nil> 
+3.0.2 :006 > b
+ => #<Book:0x00005613f72de4f0 id: nil, title: nil, created_at: nil, updated_at: nil, author_id: nil, out_of_print: false, price: nil> 
+3.0.2 :007 > b = Book.find(1)
+  Book Load (0.5ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f649cce8
+... 
+ => 
+#<Book:0x00005613f649cce8
+ id: 1,
+ title: "Harry potter Deathly Hollows Part 1",
+ updated_at: Mon, 20 Dec 2021 05:37:28.053849000 UTC +00:00,
+ author_id: 1,
+ out_of_print: true,
+ price: nil> 
+3.0.2 :009 > b.price=500
+ => 500 
+3.0.2 :010 > b.save
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ly Hollows Part 1"], ["id", 1], ["LIMIT", 1]]
+], ["price", 500], ["id", 1]]
+  TRANSACTION (23.1ms)  COMMIT
+ => true 
+3.0.2 :011 > b = Book.find(2)
+  Book Load (1.1ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f7207f90
+... 
+ => 600 
+3.0.2 :013 > b.save
+  TRANSACTION (0.4ms)  BEGIN
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+ly Hollows Part 2"], ["id", 2], ["LIMIT", 1]]
+  Book Update (0.9ms)  UPDATE "books" SET "updated_at" = $1, "price" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:54:34.087717"], ["price", 600], ["id", 2]]
+  TRANSACTION (21.8ms)  COMMIT
+ => true 
+3.0.2 :014 > b = Book.find(3)
+  Book Load (0.9ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f7437950
+3.0.2 :015 > b
+#<Book:0x00005613f7437950
+ id: 3,
+ title: "Harry potter and The Chamber of Secrets",
+ created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+ updated_at: Mon, 20 Dec 2021 05:37:56.073089000 UTC +00:00,
+ author_id: 1,
+ out_of_print: true,
+ price: nil> 
+ => 600 
+3.0.2 :017 > b.save
+  TRANSACTION (0.7ms)  BEGIN
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+he Chamber of Secrets"], ["id", 3], ["LIMIT", 1]]
+  Book Update (0.9ms)  UPDATE "books" SET "updated_at" = $1, "price" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:54:53.002088"], ["price", 600], ["id", 3]]
+  TRANSACTION (26.7ms)  COMMIT
+ => true 
+3.0.2 :018 > b = Book.find(4)
+  Book Load (1.2ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f66c1a50
+3.0.2 :019 > b
+#<Book:0x00005613f66c1a50
+ id: 4,
+ title: "Two States",
+ created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+ updated_at: Mon, 20 Dec 2021 05:38:44.872868000 UTC +00:00,
+ author_id: 2,
+ out_of_print: true,
+ price: nil> 
+3.0.2 :020 > b.price=700
+3.0.2 :021 > b.save
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Exists? (0.5ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Two States"], ["id", 4], ["LIMIT", 1]]
+  Book Update (0.6ms)  UPDATE "books" SET "updated_at" = $1, "price" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:55:20.796978"], ["price", 700], ["id", 4]]
+  TRANSACTION (25.3ms)  COMMIT
+3.0.2 :022 > b = Book.find(5)
+  Book Load (1.0ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f7264678
+3.0.2 :023 > b
+ => 
+#<Book:0x00005613f7264678
+ id: 5,
+ title: "Three Idiots",
+ created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+ author_id: 2,
+ out_of_print: false,
+3.0.2 :024 > b.price=700
+3.0.2 :025 > b
+ => 
+#<Book:0x00005613f7264678
+ id: 5,
+ title: "Three Idiots",
+ created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+ author_id: 2,
+ price: 700> 
+3.0.2 :026 > b.save
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.8ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+id", 5], ["LIMIT", 1]]
+], ["price", 700], ["id", 5]]
+  TRANSACTION (22.3ms)  COMMIT
+ => true 
+3.0.2 :027 > b = Book.find(6)
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f6419848
+... 
+ => 
+#<Book:0x00005613f6419848
+ id: 6,
+ title: "Half Girlfriend",
+ updated_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+ author_id: 2,
+ out_of_print: false,
+ price: nil> 
+ => 500 
+  TRANSACTION (0.7ms)  BEGIN
+  Author Load (1.0ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  Book Exists? (0.8ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Half Girlfriend"], ["id", 6], ["LIMIT", 1]]
+  Book Update (0.9ms)  UPDATE "books" SET "updated_at" = $1, "price" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:56:24.221579"], ["price", 500], ["id", 6]]
+  TRANSACTION (23.1ms)  COMMIT
+ => true 
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 7], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f71f40f8
+... 
+ => 400 
+  TRANSACTION (0.6ms)  BEGIN
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 3], ["LIMIT", 1]]
+  Book Exists? (1.0ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Fings of Fire"], ["id", 7], ["LIMIT", 1]]
+  Book Update (1.0ms)  UPDATE "books" SET "updated_at" = $1, "price" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:56:44.445414"], ["price", 400], ["id", 7]]
+  TRANSACTION (17.2ms)  COMMIT
+ => true 
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 8], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f74669f8
+... 
+  Book Load (0.5ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 8], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f677a398
+... 
+3.0.2 :036 > b.price=300
+ => 300 
+3.0.2 :037 > b.save
+  TRANSACTION (0.7ms)  BEGIN
+  Author Load (0.7ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+de"], ["id", 8], ["LIMIT", 1]]
+], ["price", 300], ["id", 8]]
+  TRANSACTION (23.8ms)  COMMIT
+ => true 
+3.0.2 :038 > b = Book.find(9)
+  Book Load (1.1ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 9], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f726cbe8
+... 
+ => 500 
+3.0.2 :040 > b.save
+  TRANSACTION (0.6ms)  BEGIN
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 4], ["LIMIT", 1]]
+ The Monk Who sold his ferrari"], ["id", 9], ["LIMIT", 1]]
+], ["price", 500], ["id", 9]]
+  TRANSACTION (22.6ms)  COMMIT
+ => true 
+3.0.2 :041 > b = Book.find(10)
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 10], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f7490118
+... 
+ => 
+#<Book:0x00005613f7490118
+ id: 10,
+ title: "Kabuliwala",
+ updated_at: Mon, 20 Dec 2021 05:39:20.437092000 UTC +00:00,
+ author_id: 5,
+ out_of_print: true,
+ price: nil> 
+3.0.2 :043 > b.price=600
+ => 600 
+3.0.2 :044 > b.save
+  TRANSACTION (0.4ms)  BEGIN
+  Author Load (0.4ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+", 10], ["LIMIT", 1]]
+], ["price", 600], ["id", 10]]
+  TRANSACTION (26.1ms)  COMMIT
+ => true 
+3.0.2 :045 > b = Book.find(11)
+  Book Load (0.9ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 11], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f6f47580
+... 
+3.0.2 :046 > b.price=600
+3.0.2 :047 > b.save
+  TRANSACTION (0.6ms)  BEGIN
+  Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Exists? (0.7ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Gora"], ["id", 11], ["LIMIT", 1]]
+  Book Update (0.8ms)  UPDATE "books" SET "updated_at" = $1, "price" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 05:59:20.258368"], ["price", 600], ["id", 11]]
+  TRANSACTION (11.0ms)  COMMIT
+3.0.2 :048 > b = Book.find(12)
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 12], ["LIMIT", 1]]
+ => 
+#<Book:0x00005613f719f198
+... 
+3.0.2 :049 > b
+ => 
+#<Book:0x00005613f719f198
+ id: 12,
+ title: "Gitanjali",
+ created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+ author_id: 5,
+ out_of_print: false,
+ price: nil> 
+3.0.2 :050 > b.price=400
+ => 400 
+3.0.2 :051 > b
+ => 
+#<Book:0x00005613f719f198
+ id: 12,
+ title: "Gitanjali",
+ created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+ updated_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+ author_id: 5,
+ out_of_print: false,
+ price: 400> 
+3.0.2 :052 > b.save
+  TRANSACTION (0.5ms)  BEGIN
+  Author Load (0.6ms)  SELECT "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2  [["id", 5], ["LIMIT", 1]]
+  Book Exists? (0.7ms)  SELECT 1 AS one FROM "books" WHERE "books"."title" = $1 AND "books"."id" != $2 LIMIT $3  [["title", "Gitanjali"], ["id", 12], ["LIMIT", 1]]
+  Book Update (0.6ms)  UPDATE "books" SET "updated_at" = $1, "price" = $2 WHERE "books"."id" = $3  [["updated_at", "2021-12-20 06:00:15.158711"], ["price", 400], ["id", 12]]
+  TRANSACTION (25.1ms)  COMMIT
+ => true 
+3.0.2 :053 > Book.all
+  Book Load (1.1ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005613f64133f8
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:54:16.739311000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true,
+  price: 500>,
+ #<Book:0x00005613f6413240
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:54:34.087717000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false,
+  price: 600>,
+ #<Book:0x00005613f6413060
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:54:53.002088000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true,
+  price: 600>,
+ #<Book:0x00005613f6412ed0
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:20.796978000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true,
+  price: 700>,
+ #<Book:0x00005613f6412ca0
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:53.711847000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: 700>,
+ #<Book:0x00005613f6412a20
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:56:24.221579000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: 500>,
+ #<Book:0x00005613f6412818
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:56:44.445414000 UTC +00:00,
+  author_id: 3,
+  out_of_print: true,
+  price: 400>,
+ #<Book:0x00005613f6412610
+  id: 8,
+  title: "The Greateness Guide",
+  updated_at: Mon, 20 Dec 2021 05:57:40.162321000 UTC +00:00,
+  author_id: 4,
+  price: 600>,
+ #<Book:0x00005613f6411e18
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:59:20.258368000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false,
+  price: 600>,
+ #<Book:0x00005613f6411c38
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 06:00:15.158711000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false,
+  price: 400>] 
+3.0.2 :054 > Author.books.where("price > 500")
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `books' for Author:Class (NoMethodError)
+3.0.2 :055 > B.where("price > 500")
+
+BEGIN
+Base64
+BasicObject
+BasicSocket
+Benchmark
+BigDecimal
+BigMath
+Bignum
+Bindex
+Binding
+Book
+Bootsnap
+Bundler
+Byebug
+3.0.2 :055 > Book.where("price > 500")
+  Book Load (1.0ms)  SELECT "books".* FROM "books" WHERE (price > 500)
+ => 
+[#<Book:0x00005613f7489bd8
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:54:34.087717000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false,
+  price: 600>,
+ #<Book:0x00005613f7489b10
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  updated_at: Mon, 20 Dec 2021 05:54:53.002088000 UTC +00:00,
+  author_id: 1,
+  price: 600>,
+ #<Book:0x00005613f7489a48
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:20.796978000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true,
+  price: 700>,
+ #<Book:0x00005613f7489980
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:53.711847000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: 700>,
+ #<Book:0x00005613f74898b8
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:59:10.634985000 UTC +00:00,
+  author_id: 5,
+  out_of_print: true,
+  price: 600>,
+ #<Book:0x00005613f74897f0
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  author_id: 5,
+  price: 600>] 
+Reloading...
+ => true 
+  Book Load (0.7ms)  SELECT "books".* FROM "books" WHERE "books"."out_of_print" = $1 AND (price > 500)  [["out_of_print", true]]
+ => 
+[#<Book:0x00005613f725f128
+  id: 3,
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:54:53.002088000 UTC +00:00,
+  out_of_print: true,
+  price: 600>,
+ #<Book:0x00005613f728f710
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:20.796978000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true,
+  price: 700>,
+ #<Book:0x00005613f728f648
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:59:10.634985000 UTC +00:00,
+  author_id: 5,
+  out_of_print: true,
+  price: 600>] 
+3.0.2 :058 > reload!
+Reloading...
+ => true 
+3.0.2 :059 > b = Book.find(params[:id])
+(irb):59:in `<main>': undefined local variable or method `params' for main:Object (NameError)
+3.0.2 :060 > b = Book.find_by(params[:id])
+(irb):60:in `<main>': undefined local variable or method `params' for main:Object (NameError)
+3.0.2 :061 > b = Book.find_by(param[:id])
+(irb):61:in `<main>': undefined local variable or method `param' for main:Object (NameError)
+Did you mean?  to_param
+3.0.2 :062 > b = Book.find_by(:id))
+/home/beryl/.rvm/rubies/ruby-3.0.2/lib/ruby/3.0.0/irb/workspace.rb:116:in `eval': (irb):62: syntax error, unexpected ')', expecting end-of-input (SyntaxError)
+b = Book.find_by(:id))
+                     ^
+3.0.2 :063 > b = Book.find_by(:id)
+/home/beryl/.rvm/gems/ruby-3.0.2/gems/activerecord-6.1.4.1/lib/active_record/relation/query_methods.rb:1097:in `build_where_clause': Unsupported argument type: id (Symbol) (ArgumentError)
+3.0.2 :064 > Book.all
+  Book Load (0.7ms)  SELECT "books".* FROM "books"
+ => 
+[#<Book:0x00005613f7035a78
+  id: 1,
+  title: "Harry potter Deathly Hollows Part 1",
+  created_at: Thu, 09 Dec 2021 11:24:52.598938000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:54:16.739311000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true,
+  price: 500>,
+ #<Book:0x00005613f70750d8
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:54:34.087717000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false,
+  price: 600>,
+ #<Book:0x00005613f7074fc0
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  created_at: Thu, 09 Dec 2021 11:25:51.466349000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:54:53.002088000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true,
+  price: 600>,
+ #<Book:0x00005613f7074ef8
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:20.796978000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true,
+  price: 700>,
+ #<Book:0x00005613f7074d40
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:53.711847000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: 700>,
+ #<Book:0x00005613f7074b38
+  id: 6,
+  title: "Half Girlfriend",
+  created_at: Thu, 09 Dec 2021 11:28:46.714454000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:56:24.221579000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: 500>,
+ #<Book:0x00005613f7074890
+  id: 7,
+  title: "Fings of Fire",
+  created_at: Thu, 09 Dec 2021 11:34:36.935047000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:56:44.445414000 UTC +00:00,
+  author_id: 3,
+  out_of_print: true,
+  price: 400>,
+ #<Book:0x00005613f7074660
+  id: 8,
+  title: "The Greateness Guide",
+  updated_at: Mon, 20 Dec 2021 05:57:40.162321000 UTC +00:00,
+  author_id: 4,
+  price: 300>,
+ #<Book:0x00005613f70744d0
+  title: "Family wisdom From The Monk Who sold his ferrari",
+  created_at: Thu, 09 Dec 2021 12:00:47.469954000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:58:09.548706000 UTC +00:00,
+  author_id: 4,
+  out_of_print: false,
+  price: 500>,
+ #<Book:0x00005613f706ff98
+  id: 10,
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:59:10.634985000 UTC +00:00,
+  author_id: 5,
+  out_of_print: true,
+  price: 600>,
+ #<Book:0x00005613f706fe80
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:59:20.258368000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false,
+  price: 600>,
+ #<Book:0x00005613f706fb38
+  id: 12,
+  title: "Gitanjali",
+  created_at: Thu, 09 Dec 2021 12:02:37.765190000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 06:00:15.158711000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false,
+  price: 400>] 
+3.0.2 :065 > reload!
+Reloading...
+ => true 
+3.0.2 :066 > Book.costs_more_than
+/home/beryl/Desktop/Training/rails/project_rails/app/models/book.rb:14:in `block in <class:Book>': wrong number of arguments (given 0, expected 1) (ArgumentError)
+3.0.2 :067 > Book.costs_more_than(500)
+  Book Load (0.5ms)  SELECT "books".* FROM "books" WHERE (price > 500)
+ => 
+[#<Book:0x00005613f73d66f0
+  id: 2,
+  title: "Harry potter Deathly Hollows Part 2",
+  created_at: Thu, 09 Dec 2021 11:25:23.421419000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:54:34.087717000 UTC +00:00,
+  author_id: 1,
+  out_of_print: false,
+  price: 600>,
+ #<Book:0x00005613f73fd4a8
+  id: 3,
+  title: "Harry potter and The Chamber of Secrets",
+  updated_at: Mon, 20 Dec 2021 05:54:53.002088000 UTC +00:00,
+  author_id: 1,
+  out_of_print: true,
+  price: 600>,
+ #<Book:0x00005613f73fd3e0
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:20.796978000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true,
+  price: 700>,
+ #<Book:0x00005613f73fd318
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:53.711847000 UTC +00:00,
+  author_id: 2,
+  price: 700>,
+ #<Book:0x00005613f73fd250
+  title: "Kabuliwala",
+  created_at: Thu, 09 Dec 2021 12:01:55.803346000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:59:10.634985000 UTC +00:00,
+  author_id: 5,
+  out_of_print: true,
+  price: 600>,
+ #<Book:0x00005613f73fd188
+  id: 11,
+  title: "Gora",
+  created_at: Thu, 09 Dec 2021 12:02:21.555010000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:59:20.258368000 UTC +00:00,
+  author_id: 5,
+  out_of_print: false,
+  price: 600>] 
+3.0.2 :068 > Book.costs_more_than(600)
+  Book Load (1.1ms)  SELECT "books".* FROM "books" WHERE (price > 600)
+ => 
+[#<Book:0x00005613f666a020
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true,
+ #<Book:0x00005613f6669e90
+  id: 5,
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:53.711847000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: 700>] 
+3.0.2 :069 > Book.costs_more_than(700)
+  Book Load (0.6ms)  SELECT "books".* FROM "books" WHERE (price > 700)
+ => [] 
+3.0.2 :070 > Book.costs_more_than(600)
+  Book Load (1.2ms)  SELECT "books".* FROM "books" WHERE (price > 600)
+ => 
+[#<Book:0x00005613f722d240
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:20.796978000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true,
+ #<Book:0x00005613f722d128
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:53.711847000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: 700>] 
+3.0.2 :071 > ralod!
+(irb):71:in `<main>': undefined method `ralod!' for main:Object (NoMethodError)
+Did you mean?  reload!
+3.0.2 :072 > reload!
+Reloading...
+ => true 
+3.0.2 :073 > Book.     scope :costs_more_than_equal_to, ->(amount) { where("price > ?", amount) }
+Creating scope :costs_more_than_equal_to. Overwriting existing method Book.costs_more_than_equal_to.
+ => nil 
+3.0.2 :074 > Book.costs_more_than_equal_to(600)
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE (price > 600)
+ => 
+[#<Book:0x00005613f74052c0
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:20.796978000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true,
+  price: 700>,
+ #<Book:0x00005613f749a528
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:53.711847000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: 700>] 
+3.0.2 :075 > Book.costs_more_than_equal_to(600.10)
+  Book Load (2.3ms)  SELECT "books".* FROM "books" WHERE (price > 600.1)
+ => 
+[#<Book:0x00005613f624e040
+  id: 4,
+  title: "Two States",
+  created_at: Thu, 09 Dec 2021 11:28:07.199249000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:20.796978000 UTC +00:00,
+  author_id: 2,
+  out_of_print: true,
+  price: 700>,
+ #<Book:0x00005613f624dc08
+  id: 5,
+  title: "Three Idiots",
+  created_at: Thu, 09 Dec 2021 11:28:21.468057000 UTC +00:00,
+  updated_at: Mon, 20 Dec 2021 05:55:53.711847000 UTC +00:00,
+  author_id: 2,
+  out_of_print: false,
+  price: 700>] 
+3.0.2 :076 > 
+
