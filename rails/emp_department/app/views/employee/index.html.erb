@@ -1,2 +1,42 @@
-<h1>Employee#index</h1>
-<p>Find me in app/views/employee/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h1>Employee</h1>
+
+<table>
+  <thead>
+   <tr>
+    <th class="table_heading">No.</th>
+    <th class="table_heading"> Name</th>
+    <th class="table_heading"></th>
+    <th class="table_heading">Email</th>
+    <th class="table_heading"></th>
+    <th class="table_heading">Gender</th>
+    <th class="table_heading"></th>
+    <th class="table_heading">Salary</th>
+    <th class="table_heading"></th>
+    <th class="table_heading">Department Name</th>
+
+   
+  </tr>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% i = 1 %>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td class="table_data"><%= i %></td>
+        <% i += 1 %>
+        <td class="table_data"><%= employee.name   %><td> 
+        <td class="table_data"><%= employee.email  %><td>
+        <td class="table_data"><%= employee.gender %><td> 
+        <td class="table_data"><%= employee.salary %><td>
+        <td class="table_data"><%= employee.department.dept%><td>
+        
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
