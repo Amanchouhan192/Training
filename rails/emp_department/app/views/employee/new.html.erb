@@ -6,6 +6,9 @@
   <br />
   <%= form_for @employee,:url=> "/employee/create", method:'post' do |f| %>
   <div class="validation_errors" >
+  <% if @employee.errors.any? %>
+      <%= render partial: "shared/errors_msg" %>
+  <% end %>
   </div>
   <div class="mb-3 flex items-center">
     <%= f.label :name %> <%= f.text_field :name, class: "form-control" ,placeholder: "Employee Name" %>
@@ -18,8 +21,8 @@
     <%= f.label :Salary %> <%= f.text_field :salary , class: "form-control", placeholder:"Salary" %>
   </div>
   <div class="form-group">
-        <%= f.label :Department %>
-        <%#= f.select :dept, options_for_select(%w[HR IT SALES ACCOUNTS]), class: "form-control" %>
+        <%= f.label :department_id %>
+        <%= f.select :department_id , [['select'], Department.order(:id).ids.map {|i| [Department.find(i).dept,i]}].flatten(1) %> 
   </div>
   
   
