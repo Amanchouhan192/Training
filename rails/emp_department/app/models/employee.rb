@@ -3,7 +3,7 @@ class Employee < ApplicationRecord
   belongs_to :department
 
   validates :name, :email, presence: true 
-  validates :name, format: { with: /\A[a-zA-Z]+\z/,message: "Should Be Valid Name" ,length: {minimum: 6}}
+  validates :name, format: { with: /\A[a-zA-Z]+\z/,message: "Should Be Valid Name" ,length: {minimum: 4}}
 
   validates :email, uniqueness: true
   #validates :emp_id, uniqueness: {:message => " Id is already been taken!"}
