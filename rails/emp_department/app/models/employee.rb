@@ -13,5 +13,9 @@ class Employee < ApplicationRecord
   validates_format_of :salary, :with =>  /\d[0-9]\)*\z/ , :message => "Only positive number without spaces are allowed"
 
   validates_numericality_of :salary, :greater_than => 5000 
+
+  #active queries
+  scope :select_it, -> { }
+  
   
 end

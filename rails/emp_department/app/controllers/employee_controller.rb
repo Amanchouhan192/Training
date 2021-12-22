@@ -5,9 +5,7 @@ class EmployeeController < ApplicationController
 
   def new
     @employee  = Employee.new
-  end
-
-  def show
+    @departments = Department.all
   end
 
   def create
@@ -18,18 +16,10 @@ class EmployeeController < ApplicationController
       render 'new'
     end
   end
-
-  def edit
-  end
-
-  def destroy
-  end
-
-  def delete
-  end
-
+  
   private
-  def employee_params
-  params.require(:employee).permit(:name,:email,:gender,:salary,:department_id)
-  end
+
+    def employee_params
+      params.require(:employee).permit(:name, :email, :gender, :salary, :department_id)
+    end
 end
