@@ -1,34 +1,34 @@
 <br />
-
-<div class="signup_form_body">
-  <br  />
-  <h class="signup_title">Employee Sign Up</h>
-  <br />
-  <%= form_for @employee,:url=> "/employee/create", method:'post' do |f| %>
-  <div class="validation_errors" >
-  <% if @employee.errors.any? %>
+<div>
+   <br  />
+   <h>Employee Ragistration Form</h>
+   <br />
+   <%= form_for @employee,:url=> "/employee/create", method:'post' do |f| %>
+   <div>
+      <% if @employee.errors.any? %>
       <%= render partial: "shared/errors_msg" %>
-  <% end %>
-  </div>
-  <div class="mb-3 flex items-center">
-    <%= f.label :name %> <%= f.text_field :name , placeholder: "Employee Name" %>
-  </div>
-  <div class="mb-3 flex items-center">
-    <%= f.label :Email %> <%= f.text_field :email , placeholder: "Email" %>
-  </div>
-  <div class="gender flex items-center"><%= f.label :gender,class:"label_gender" %> <%= f.radio_button :gender, 'Male', checked: "checked" %>Male <%= f.radio_button :gender, 'Female',required: true %>Female<br /></div>
-  <div class="mb-3 flex items-center">
-    <%= f.label :Salary %> <%= f.text_field :salary , placeholder:"Salary" %>
-  </div>
-  <div class="form-group">
-        <%= f.label :department_id %>
-        <%= f.select :department_id , @departments.collect {|d| [d.name, d.id ]} %> 
-  </div>
-  
-  
-  <div class="mb-3 flex items-center">
-    <%= f.submit "Sign Up" , :class => 'button' %>
-  </div>
-  <% end %>
+      <% end %>
+   </div>
+   <div>
+      <%= f.label :name %> <%= f.text_field :name , placeholder: "Employee Name" %>
+   </div>
+   <div>
+      <%= f.label :Email %> <%= f.text_field :email , placeholder: "Email" %>
+   </div>
+   <div>
+        <%= f.label :gender %> <%= f.radio_button :gender, 'Male', checked: "checked" %>Male 
+        <%= f.radio_button :gender, 'Female',required: true %>Female<br />
+   </div>
+   <div>
+      <%= f.label :Salary %> <%= f.text_field :salary , placeholder:"Salary" %>
+   </div>
+   <div>
+      <%= f.label :department_id %>
+      <%= f.select :department_id , @departments.collect{|d| [d.name, d.id]} %> 
+   </div>
+   <div>
+      <%= f.submit "Sign Up" %>
+   </div>
+   <% end %>
 </div>
 
