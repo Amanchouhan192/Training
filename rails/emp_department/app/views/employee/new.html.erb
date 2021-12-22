@@ -11,23 +11,23 @@
   <% end %>
   </div>
   <div class="mb-3 flex items-center">
-    <%= f.label :name %> <%= f.text_field :name, class: "form-control" ,placeholder: "Employee Name" %>
+    <%= f.label :name %> <%= f.text_field :name , placeholder: "Employee Name" %>
   </div>
   <div class="mb-3 flex items-center">
-    <%= f.label :Email %> <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+    <%= f.label :Email %> <%= f.text_field :email , placeholder: "Email" %>
   </div>
   <div class="gender flex items-center"><%= f.label :gender,class:"label_gender" %> <%= f.radio_button :gender, 'Male', checked: "checked" %>Male <%= f.radio_button :gender, 'Female',required: true %>Female<br /></div>
   <div class="mb-3 flex items-center">
-    <%= f.label :Salary %> <%= f.text_field :salary , class: "form-control", placeholder:"Salary" %>
+    <%= f.label :Salary %> <%= f.text_field :salary , placeholder:"Salary" %>
   </div>
   <div class="form-group">
         <%= f.label :department_id %>
-        <%= f.select :department_id , [['select'], Department.order(:id).ids.map {|i| [Department.find(i).dept,i]}].flatten(1) %> 
+        <%= f.select :department_id , @departments.collect {|d| [d.name, d.id ]} %> 
   </div>
   
   
   <div class="mb-3 flex items-center">
-    <%= f.submit "Sign Up" ,:class => 'button' %>
+    <%= f.submit "Sign Up" , :class => 'button' %>
   </div>
   <% end %>
 </div>
