@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to("Add New Employee ",'new') %> |
+<%= link_to("See All Departments ",'/departments') %>
 <h1>Employee</h1>
 
 <table>
@@ -31,7 +33,7 @@
         <td class="table_data"><%= employee.email  %><td>
         <td class="table_data"><%= employee.gender %><td> 
         <td class="table_data"><%= employee.salary %><td>
-        <td class="table_data"><%= employee.department.dept%><td>
+        <td class="table_data"><%= employee.department.name%><td>
         
         
       </tr>
