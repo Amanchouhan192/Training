@@ -1,12 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Departments</h1>
+<h1 class="title">Departments</h1>
 
 <table>
   <thead>
    <tr>
     <th class="table_heading">No.</th>
     <th class="table_heading">Department List</th> 
+    <th class="table_heading"></th> 
+    <th class="table_heading">Actions</th> 
    
   </tr>
     </tr>
@@ -18,7 +20,7 @@
       <tr>
         <td class="table_data"><%= i %></td>
         <% i += 1 %>
-        <td class="table_data"><%= department.dept %><td> 
+        <td class="table_data"><%= department.name %><td> 
         <td><%= link_to 'Show', department %></td>
         <td><%= link_to 'Edit', edit_department_path(department) %></td>
         <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -29,4 +31,5 @@
 
 <br>
 
-<%= link_to 'New Department', new_department_path %>
+<%= link_to 'New Department', new_department_path %> |
+<%= link_to("See Employee Data ",'/employee/index') %>
