@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'survay#index'
+  root 'survey#index'
   get 'survey/index', to: 'survey#index'
   get 'survey/new' ,  to: 'survey#new'
   post '/survey/create' , to: 'survey#create'
