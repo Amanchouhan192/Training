@@ -1,20 +1,63 @@
 <%= form_for(@survey, :url => '/survey/create', :method => 'post') do |f| %>
-    <div class="field">
-        <%= f.label :name %><br />
-        <%= f.text_field :name %>
-    </div>
-    
-    <%= f.fields_for :questions_attributes do |builder| %>
-    <fieldset>
-        <%= builder.label :body, "Question " %><br/>
-        <%= builder.text_area :body %><br />
-        <%= builder.label :_destroy, "Remove Question" %>
-    </fieldset>
-    <% end %>
-    
-  <div class="mb-3 flex items-center">
-    <%= f.submit "Create" ,:class => 'button' %>
-  </div>
-    
-<% end %>
 
+  <div class="field">
+
+      <%= f.label :name %><br />
+
+      <%= f.text_field :name %>
+
+  </div>
+
+  
+
+  <h5>Questions</h5>
+
+  <%= f.fields_for :questions, @survey.questions.new do |ques| %>    
+
+    <div>
+
+    
+      <%= ques.label :body, :class => 'form-control' %>
+      <%#= ques.text_field :body, :class => 'form-control' %>
+      <ul id="list"></ul>
+      <input type="text" id="questionid" />
+      <button onclick="addItem()" class="buttonClass">
+      Add Question</button>
+      <button onclick="removeItem()" class="buttonClass">
+      Remove Question</button>
+      
+
+
+    </div>
+
+  <% end %>
+
+    
+
+  <div class="mb-3 flex items-center">
+
+    <%= f.submit "Create" ,:class => 'button' %>
+
+  </div>
+
+    
+
+<% end %>
+ 
+    <script>
+        function addItem() {
+            var a = document.getElementById("list");
+            var questionid = document.getElementById("questionid");
+            var li = document.createElement("li");
+            li.setAttribute('id', questionid.value);
+            li.appendChild(document.createTextNode(questionid.value));
+            a.appendChild(li);
+        }
+
+        function removeItem() {
+            var a = document.getElementById("list");
+            var questionid = document.getElementById("questionid");
+            var item = document.getElementById(questionid.value);
+            a.removeChild(item);
+        }
+    </script>
