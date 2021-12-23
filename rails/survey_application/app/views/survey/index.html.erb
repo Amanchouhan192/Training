@@ -1,0 +1,27 @@
+<h1>Survey List</h1>
+<dev>
+  <table>
+   <tr>
+     <th>No.</th>
+     <th></th>
+     <th>Survey List</th>
+     <th></th>
+     <th>Actions</th>
+   </tr>
+   <% i = 1 %>
+   <% @surveys.each do |survey| %>
+   <tr> 
+    <td><%= i %></td>
+    <td><%= survey.name%></td>
+    <% i = i + 1 %> 
+    <td class="actions">
+        <%= link_to("View",'#')   %>
+        <%= link_to("Edit",'#')   %>
+        <%= link_to("Delete",'#') %>
+    </td>
+    </tr>
+    <% end %>
+ </table>
+ </div>
+
+
