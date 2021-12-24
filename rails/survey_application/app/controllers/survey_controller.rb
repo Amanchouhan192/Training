@@ -8,7 +8,6 @@ class SurveyController < ApplicationController
   end
 
   def create
-    debugger
     @survey  = Survey.new(survey_params)
     if @survey.save
       redirect_to '/survey/index'
