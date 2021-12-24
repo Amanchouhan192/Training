@@ -1,20 +1,23 @@
 <script>
-        function addItem() {
-            var a = document.getElementById("list");
-            var questionid = document.getElementById("questionid");
-            var li = document.createElement("li");
-            li.setAttribute('id', questionid.value);
-            li.appendChild(document.createTextNode(questionid.value));
-            a.appendChild(li);
-        }
-
-        function removeItem() {
-            var a = document.getElementById("list");
-            var questionid = document.getElementById("questionid");
-            var item = document.getElementById(questionid.value);
-            a.removeChild(item);
-        }
-    </script>
+        var countBox = 2;
+        var boxName = 0;
+        var i = 1;
+        function addInput()
+            {
+                
+                var quest = document.getElementById("questionx"); 
+                document.getElementById('questiony').innerHTML+=`<br />Body <input type="text" id="questionid" name="survey[questions_attributes][${i}][body]"></input><br />`;
+                countBox += 1;
+                i+=1;
+            }
+        function removeInput()
+            {
+                var quest = document.getElementById("questionx"); 
+                document.getElementById('questiony').innerHTML-='<br />Body <input type="text" id="questionid" name="survey[questions_attributes][${i}][body]"></input><br />';
+                countBox-=1;
+                i-=1;
+            }
+</script>
 <%= form_for(@survey, :url => '/survey/create', :method => 'post') do |f| %>
 
   <div class="field">
@@ -29,17 +32,25 @@
 
   <h5>Questions</h5>
 
-  <%= f.fields_for :questions, @survey do |ques| %>    
+  <%= f.fields_for :questions, @surveys do |ques| %>    
 
     <div>
-      <%#= ques.text_field :body, :id="questionid" %>
       <ol id="list"></ol>
       <%= ques.label :body %>
-      <input type="text" , id="questionid" />
+      <%= ques.text_field :body, html:{:id => "questionid"} %>
+
+      <%#= <input type="text" , id="questionid" /> %>
+
+      <button type="button" onclick="addInput()">Add Question</button>
+      <button type="button" onclick="removeInput()">Remove Question</button>
+      <span id="questionx"></span><span id="questiony"></span>
+
       <%#= link_to 'Add Question', :onclick => "addItem();" %>
       <%#= link_to 'Remove Question', :onclick => "removeItem();" %>
-      <a href="javascript:addItem();">Add Question</a>
-      <a href="javascript:removeItem();">Remove Question</a>
+
+
+      <%#= <a href="javascript:addItem();">Add Question</a> %>
+      <%#= <a href="javascript:removeItem();">Remove Question</a> %>
 
     </div>
 
