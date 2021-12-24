@@ -5,6 +5,7 @@ class SurveyController < ApplicationController
 
   def new
     @survey = Survey.new
+    @surveys = @survey.questions.new
   end
 
   def create
@@ -17,6 +18,7 @@ class SurveyController < ApplicationController
   end
 
   def show
+    @survey = Survey.find(params[:id])
   end
 
   def update
