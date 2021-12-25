@@ -2,13 +2,22 @@
         var countBox = 2;
         var boxName = 0;
         var i = 1;
+        var a = 1;
         function addInput()
             {
                 
                 var quest = document.getElementById("questionx"); 
-                document.getElementById('questiony').innerHTML+=`<br />Body <input type="text" id="questionid" name="survey[questions_attributes][${i}][body]"></input><br />`;
+                document.getElementById('questiony').innerHTML+=`<br />
+                <fieldset>Question:<input type="text" id="questionid" name="survey[questions_attributes][${i}][body]">
+                </input>
+                <input type="checkbox" id="questionid" name="survey[questions_attributes][${i}][body]" >
+                Remove Question</input><br /><br />
+                <fieldset>Answer:<input type="text" id="questionid" name="survey[answers][${a}][body]">
+                <input type="checkbox" id="questionid" name="survey[questions_attributes][${i}][body]" >
+                Remove Answer</input></fieldset></fieldset></fieldset>`;
                 countBox += 1;
                 i+=1;
+                a+=1;
             }
         function removeInput()
             {
@@ -17,13 +26,22 @@
                 countBox-=1;
                 i-=1;
             }
+        function addAnswer(){
+                var ans = document.getElementById("ansx"); 
+                document.getElementById('ansy').innerHTML+=`<br /><fieldset id="questionid">
+                Answer:<input type="text" id="answerid" name="survey[answers][${a}][body]">
+                </input><input type="checkbox" id="answerid" name="survey[answers][${a}][body]">
+                Remove Answer</input></fieldset><br />`;
+                countBox += 1;
+                i+=1;
+                a+=1;
+        }
 </script>
 <%= form_for(@survey, :url => '/survey/create', :method => 'post') do |f| %>
 
   <div class="field">
 
       <%= f.label :name %><br />
-
       <%= f.text_field :name %>
 
   </div>
@@ -36,8 +54,9 @@
 
     <div>
       <ol id="list"></ol>
-      <%= ques.label :body %>
-      <%= ques.text_field :body, html:{:id => "questionid"} %>
+      <%= ques.label :Question %>
+      <%#= ques.text_field :body, html:{:id => "questionid"} %>
+      
 
       <%#= <input type="text" , id="questionid" /> %>
 
@@ -45,13 +64,23 @@
       <button type="button" onclick="removeInput()">Remove Question</button>
       <span id="questionx"></span><span id="questiony"></span>
 
+
+      <%= f.fields_for :answers, @answer do |ans| %> 
+
+      <span id="ansx"></span><span id="ansy"></span>
+      <button type="button" onclick="addAnswer()">Add Answer</button>
+      <button type="button" onclick="removeInput()">Remove Answer</button>
+      
+
       <%#= link_to 'Add Question', :onclick => "addItem();" %>
       <%#= link_to 'Remove Question', :onclick => "removeItem();" %>
 
+      <% end %>
+  
 
-      <%#= <a href="javascript:addItem();">Add Question</a> %>
-      <%#= <a href="javascript:removeItem();">Remove Question</a> %>
-
+      <div>
+        
+      </div>
     </div>
 
   <% end %>
