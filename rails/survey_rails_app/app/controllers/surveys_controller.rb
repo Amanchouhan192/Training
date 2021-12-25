@@ -13,6 +13,7 @@ class SurveysController < ApplicationController
   # GET /surveys/new
   def new
     @survey = Survey.new
+    @surveys = @survey.questions.new
   end
 
   # GET /surveys/1/edit
@@ -65,6 +66,6 @@ class SurveysController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def survey_params
-      params.require(:survey).permit(:id,:name)
+      params.require(:survey).permit(:id,:name,questions_attributes: [:id, :body])
     end
 end
