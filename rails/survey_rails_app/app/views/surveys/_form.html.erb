@@ -12,8 +12,8 @@
                 </input>
                 <input type="checkbox" id="questionid" name="survey[questions_attributes][${i}][body]" >
                 Remove Question</input><br /><br />
-                <fieldset>Answer:<input type="text" id="questionid" name="survey[answers][${a}][body]">
-                <input type="checkbox" id="questionid" name="survey[questions_attributes][${i}][body]" >
+                <fieldset>Answer:<input type="text" id="answerid" name="survey[questions_attributes][answers_attributes][${a}][body]">
+                <input type="checkbox" id="" name="" >
                 Remove Answer</input></fieldset></fieldset></fieldset>`;
                 countBox += 1;
                 i+=1;
@@ -64,11 +64,15 @@
       <button type="button" onclick="removeInput()">Remove Question</button>
       <span id="questionx"></span><span id="questiony"></span>
   
-
-      <div>
-        
-      </div>
     </div>
+    <% form.fields_for :answers, @answer do |builder| %>
+      <p>
+        <%= builder.label :content, "Answer" %>
+        <%= builder.text_field :body %>
+        <%= builder.check_box :_destroy %>
+        <%= builder.label :_destroy, "Remove" %>
+      </p>
+    <% end %>
 
   <% end %>
 
