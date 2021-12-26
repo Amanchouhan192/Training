@@ -1,0 +1,11 @@
+<fieldset>
+  <%= form.label :body, "Question" %><br />
+  <%= form.text_area :body %><br />
+  <%= form.check_box :_destroy %>
+  <%= form.label :_destroy, "Remove Question" %>
+  <%= form.fields_for :answers do |builder| %>
+    <%= render 'answer_fields', form: builder %>
+  <% end %>
+  <%#= link_to_add_fields "Add Answer", form, :answers %>
+</fieldset>
+
