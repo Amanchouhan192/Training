@@ -14,13 +14,18 @@ class SurveysController < ApplicationController
   # GET /surveys/new
   def new
     @survey = Survey.new
-    @surveys = @survey.questions.new
-    @answer = @surveys.answers.new
+    #@surveys = @survey.questions.build
+    #@answer = @surveys.answers.build
+    3.times do
+       question = @survey.questions.build
+       4.times { question.answers.build }
+     end
   end
 
 
   # GET /surveys/1/edit
   def edit
+    @survey = Survey.find(params[:id])
   end
 
   # POST /surveys or /surveys.json
