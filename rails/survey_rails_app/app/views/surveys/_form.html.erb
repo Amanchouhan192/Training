@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+  <h>Survey Name:</h>
   <%= form.text_field :name %>
   <%= form.fields_for :questions, @surveys do |ques| %>    
       <%= render 'question_field', form: ques %>
