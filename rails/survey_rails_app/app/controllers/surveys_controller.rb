@@ -8,6 +8,7 @@ class SurveysController < ApplicationController
 
   # GET /surveys/1 or /surveys/1.json
   def show
+    @survey = Survey.find(params[:id])
   end
 
   # GET /surveys/new
