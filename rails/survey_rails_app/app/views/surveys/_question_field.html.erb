@@ -1,6 +1,6 @@
 <fieldset>
   <%= form.label :body, "Question" %><br />
-  <%= form.text_area :body %><br />
+  <%= form.text_area :body %>
   <%= form.check_box :_destroy %>
   <%= form.label :_destroy, "Remove Question" %>
   <%= form.fields_for :answers do |builder| %>
